@@ -1,0 +1,22 @@
+{
+  "name": "weather-app",
+  "version": "0.0.1",
+  "description": "simple data logging server for my weather station. ",
+  "main": "weatherServer.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerosquadron/weatherApp.git"
+  },
+  "author": "Skip McBride",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zerosquadron/weatherApp/issues"
+  },
+  "homepage": "https://github.com/zerosquadron/weatherApp#readme",
+  "dependencies": {
+    "http": "0.0.0"
+  }
+}
