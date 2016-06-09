@@ -4,5 +4,8 @@
 # git
 .git
 
-# Node
+# Node/bower
 node_modules
+bower_components
+
+#
