@@ -4,9 +4,13 @@
 # git
 .git
 
+# data
+data/
+
 # Node/bower
 node_modules
 bower_components
 
 # Build
 build/
+public/

@@ -37,5 +37,9 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "mocha": "^2.5.3"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
 }
