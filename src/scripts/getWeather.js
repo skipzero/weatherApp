@@ -11,7 +11,7 @@
       });
 
       resp.on('error', (error) => {
-        console.log('ERR', error)
+        console.log('ERR', error);
       })
 
       resp.on('end', () => {

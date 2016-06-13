@@ -37,7 +37,7 @@ const stylesPath = {
 }
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['scripts', 'lint'], ['watch'])
+  runSequence(['clean'], ['styles'], ['scripts', 'lint'], ['watch'])
 });
 
 gulp.task('watch', () => {
