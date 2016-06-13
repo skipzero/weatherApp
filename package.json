@@ -6,6 +6,11 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register"
   },
+  "directories": {
+    "test": "test"
+  },
+  "private": true,
+  "keywords": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zerosquadron/weatherApp.git"
@@ -18,7 +23,8 @@
   "homepage": "https://github.com/zerosquadron/weatherApp#readme",
   "dependencies": {
     "http": "0.0.0",
-    "mongodb": "^2.1.18"
+    "expect.js": "^0.3.1",
+    "mocha": "^2.5.3"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -30,16 +36,10 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.3.0",
     "eslint-plugin-react": "^5.1.1",
-    "expect.js": "^0.3.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
-    "mocha": "^2.5.3"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "keywords": []
+  }
 }
