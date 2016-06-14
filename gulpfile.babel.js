@@ -16,8 +16,8 @@ import sourcemaps from 'gulp-sourcemaps';
 import uglify from'gulp-uglify';
 
       // colors for our console output
-const ok          = colors.green.bold;
-const err         = colors.red.bold;
+const ok   = colors.green.bold;
+const err  = colors.red.bold;
 
       //  Our config object to hold paths, etc
 const path = {
@@ -26,19 +26,26 @@ const path = {
   tests: 'test'
 };
 
-const jsPaths = {
+const scriptsPath = {
   src: `${path.src}/scripts/**/*.js`,
   pub: `${path.pub}/scripts`
 }
 
+const stylesPath = {
+  src: `${path.src}/styles/**/*.scss`,
+  pub: `${path.pub}/styles`
+}
+
 gulp.task('default', () => {
-  runSequence(['clean'], ['scripts', 'lint'], ['watch'])
+  runSequence(['clean'], ['styles'], ['scripts', 'lint'], ['watch'])
 });
 
-
+gulp.task('watch', () => {
+  console.log('==  watching fired  ==');
+});
 
 gulp.task('scripts', () => {
-  return gulp.src(jsPaths.src)
+  return gulp.src(scriptsPath.src)
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -47,22 +54,31 @@ gulp.task('scripts', () => {
   	return '\n\n ERROR: ' + error.formatted, error;
   	})))
   .pipe(concat('main.js'))
-  .pipe(gulp.dest(jsPaths.pub));
-})
+  .pipe(gulp.dest(scriptsPath.pub));
+});
 
 gulp.task('lint', () => {
-return gulp.src([path.js + '/*.js', '!node_modules/**'])
+return gulp.src([scriptsPath.src])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
 })
 
 gulp.task('styles', ()=> {
-  return gulp.src(path.src + '/**/*.scss')
-    .pipe()
-    .pipe(gulp.dest(path.pub))
-
-})
+  return gulp.src(stylesPath.src)
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      style: 'compressed',
+      includePaths: [
+        path.styles
+      ]
+    }).on('error', notify.onError((error) => {
+      return '\n\n ERROR: ' + error.formatted, error;
+    })))
+    .pipe(clean())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(stylesPath.pub));
+});
 
 gulp.task('clean', () => {
 	return del([path.pub]).then(paths => {
