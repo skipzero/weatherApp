@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const getWeather = (resp) => {
-    return http.get(getPath,  (resp) => {
+  const getWeather = () => {
+    return http.get(getPath, (resp) => {
       resp.setEncoding('utf8');
 
       resp.on('data', (data) => {
@@ -12,16 +12,16 @@
 
       resp.on('error', (error) => {
         console.log('ERR', error);
-      })
+      });
 
       resp.on('end', () => {
-        let parsed = JSON.parse(body);
+        const parsed = JSON.parse(body);
 
         cb({
-          pdata: parsed
-        })
-      })
-    })
+          pdata: parsed,
+        });
+      });
+    });
   };
   module.exports = getWeather;
 })();
