@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "0.0.1",
   "description": "simple data logging server for my weather station. ",
-  "main": "weatherServer.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register"
   },
@@ -22,9 +22,10 @@
   },
   "homepage": "https://github.com/zerosquadron/weatherApp#readme",
   "dependencies": {
-    "http": "0.0.0",
     "expect.js": "^0.3.1",
-    "mocha": "^2.5.3"
+    "http": "0.0.0",
+    "mocha": "^2.5.3",
+    "socket.io": "^1.4.6"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

@@ -3,7 +3,8 @@
 
   const app         = require('express')();
   const http        = require('http').Server(app);
-  const getWeather  = require('./scripts/getWeather.js')
+  const io          = require('socket.io');
+  const getWeather  = require('./scripts/getWeather.js');
   const getPath 	  = 'http://10.0.0.35';
   const port 			  = 5050;
 

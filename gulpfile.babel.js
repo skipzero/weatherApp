@@ -13,7 +13,7 @@ import plumber from 'gulp-plumber';
 import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from'gulp-uglify';
+import uglify from 'gulp-uglify';
 
       // colors for our console output
 const ok   = colors.green.bold;
@@ -31,13 +31,18 @@ const scriptsPath = {
   pub: `${path.pub}/scripts`
 }
 
+const htmlPath = {
+  src: `${path.src}/html/**/*.html`,
+  pub: `${path.pub}/html`
+}
+
 const stylesPath = {
   src: `${path.src}/styles/**/*.scss`,
   pub: `${path.pub}/styles`
 }
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['styles'], ['scripts', 'lint'], ['watch'])
+  runSequence(['clean'], ['html'], ['styles'], ['scripts', 'lint'], ['watch'])
 });
 
 gulp.task('watch', () => {
@@ -58,11 +63,16 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('lint', () => {
-return gulp.src([scriptsPath.src])
+  return gulp.src([scriptsPath.src])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
 })
+
+gulp.task('html', () => {
+  return gulp.src(htmlPath.src)
+    .pipe(gulp.dest(htmlPath.pub))
+});
 
 gulp.task('styles', ()=> {
   return gulp.src(stylesPath.src)
