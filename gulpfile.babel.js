@@ -20,37 +20,40 @@ const ok   = colors.green.bold;
 const err  = colors.red.bold;
 
       //  Our config object to hold paths, etc
-const path = {
+const basePath = {
   src: 'src',
   pub: 'public',
   tests: 'test'
 };
+const file = {
+  scriptsPath: {
+    src: `${basePath.src}/**/*.js`,
+    pub: `${basePath.pub}/scripts`
+  },
 
-const scriptsPath = {
-  src: `${path.src}/scripts/**/*.js`,
-  pub: `${path.pub}/scripts`
-}
+  htmlPath: {
+    src: `${basePath.src}/**/*.html`,
+    pub: `${basePath.pub}`
+  },
 
-const htmlPath = {
-  src: `${path.src}/html/**/*.html`,
-  pub: `${path.pub}/html`
-}
-
-const stylesPath = {
-  src: `${path.src}/styles/**/*.scss`,
-  pub: `${path.pub}/styles`
+  stylesPath: {
+    src: `${basePath.src}/**/*.scss`,
+    pub: `${basePath.pub}/styles`
+  }
 }
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['html'], ['styles'], ['scripts', 'lint'], ['watch'])
+  runSequence(['clean'], ['scripts'], ['styles'], ['html'], ['watch'])
 });
 
 gulp.task('watch', () => {
-  console.log('==  watching fired  ==');
+  gulp.watch(file.stylesPath.src, ['sass']);
+  gulp.watch([file.scriptsPath.src], ['scripts']);
+  gulp.watch([file.htmlPath.src], ['html']);
 });
 
-gulp.task('scripts', () => {
-  return gulp.src(scriptsPath.src)
+gulp.task('scripts', ['lint'], () => {
+  return gulp.src(file.scriptsPath.src)
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -59,39 +62,39 @@ gulp.task('scripts', () => {
   	return '\n\n ERROR: ' + error.formatted, error;
   	})))
   .pipe(concat('main.js'))
-  .pipe(gulp.dest(scriptsPath.pub));
+  .pipe(gulp.dest(file.scriptsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([scriptsPath.src])
+  return gulp.src([file.scriptsPath.src])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
 })
 
 gulp.task('html', () => {
-  return gulp.src(htmlPath.src)
-    .pipe(gulp.dest(htmlPath.pub))
+  return gulp.src(file.htmlPath.src)
+    .pipe(gulp.dest(file.htmlPath.pub))
 });
 
 gulp.task('styles', ()=> {
-  return gulp.src(stylesPath.src)
+  return gulp.src(file.stylesPath.src)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       includePaths: [
-        path.styles
+        basePath.styles
       ]
     }).on('error', notify.onError((error) => {
       return '\n\n ERROR: ' + error.formatted, error;
     })))
-    .pipe(clean())
+    // .pipe(clean())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(stylesPath.pub));
+    .pipe(gulp.dest(file.stylesPath.pub));
 });
 
 gulp.task('clean', () => {
-	return del([path.pub]).then(paths => {
+	return del([basePath.pub]).then(paths => {
     gutil.log(ok('\nRemoved the following:\n' + paths.join('\n')));
   })
 });
