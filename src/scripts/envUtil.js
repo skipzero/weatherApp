@@ -1,4 +1,4 @@
-require('shelljs/global');
+const exec = require('shelljs/global').exec;
 
 (() => {
   const envIp = () => {

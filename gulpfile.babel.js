@@ -39,7 +39,8 @@ const file = {
   stylesPath: {
     src: `${basePath.src}/**/*.scss`,
     pub: `${basePath.pub}/styles`,
-  }
+  },
+  tests: `${basePath.tests}`,
 }
 
 gulp.task('default', () => {
@@ -100,6 +101,6 @@ gulp.task('clean', () => {
 });
 
 gulp.task('test', () => {
-return gulp.src(path.tests, {read: false})
+return gulp.src(file.tests, {read: false})
   .pipe(mocha({reporter: 'nyan'}));
 });

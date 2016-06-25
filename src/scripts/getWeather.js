@@ -1,5 +1,5 @@
 const http = require('http');
-// const envIp = require('envUtil.js');
+const envIp = require('envIp');
 //
 // console.log('ENV_IP', envIp);
 const getPathHm = 'http://10.0.0.35/';
@@ -26,6 +26,16 @@ let getPath;
     console.log('NodeShell', getPath);
   };
 
+  //  Convert time to minutes for easy reading
+  const timeDelay = (n) => {
+    return n * 1000 * 60;
+  };
+
+  const poll = () => {
+    weather();
+    setTimeout(poll, timeDelay(2));
+  };
+
   const weather = () => {
     return http.get(getPath, (resp) => {
       resp.setEncoding('utf8');
@@ -41,15 +51,6 @@ let getPath;
     });
   };
 
-  //  Convert time to minutes for easy reading
-  const timeDelay = (n) => {
-    return n * 1000 * 60;
-  };
-
-  const poll = () => {
-    weather();
-    setTimeout(poll, timeDelay(2));
-  };
   poll();
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
