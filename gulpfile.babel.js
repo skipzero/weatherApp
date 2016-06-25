@@ -57,10 +57,10 @@ gulp.task('scripts', ['lint'], () => {
     .pipe(babel({
       presets: ['es2015']
     }))
-  .pipe(uglify()
-  	.on('error', notify.onError((error) => {
-  	return '\n\n ERROR: ' + error.formatted, error;
-  	})))
+  // .pipe(uglify()
+  // 	.on('error', notify.onError((error) => {
+  // 	return '\n\n ERROR: ' + error.formatted, error;
+  // 	})))
   .pipe(concat('main.js'))
   .pipe(gulp.dest(file.scriptsPath.pub));
 });
