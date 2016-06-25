@@ -1,6 +1,4 @@
 (() => {
-  'use strict';
-
   const getWeather = (resp) => {
     return http.get(getPath,  (resp) => {
       resp.setEncoding('utf8');
