@@ -6,9 +6,6 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register"
   },
-  "directories": {
-    "test": "tests"
-  },
   "private": true,
   "keywords": [],
   "repository": {

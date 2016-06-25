@@ -1,8 +1,10 @@
-const exec = require('shelljs/global').exec;
+require('shelljs/global');
+let exec;
 
 (() => {
-  const envIp = () => {
-    const bash = '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I';
+  const envUtil = () => {
+    let bash = '/System/Library/PrivateFrameworks/Apple80211.framework';
+    bash += '/Versions/Current/Resources/airport -I';
     let ssid = exec(bash);
     const home = 'home';
     const away = 'away';
@@ -20,8 +22,8 @@ const exec = require('shelljs/global').exec;
     console.log('NodeShell', getPath);
   };
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = envIp;
+    module.exports = envUtil;
   } else {
-    window.envIp = envIp;
+    window.envIp = envUtil;
   }
 })();

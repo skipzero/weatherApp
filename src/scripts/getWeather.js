@@ -1,5 +1,5 @@
 const http = require('http');
-const envIp = require('envIp');
+const envUtil = require('./envUtil');
 //
 // console.log('ENV_IP', envIp);
 const getPathHm = 'http://10.0.0.35/';
@@ -31,11 +31,6 @@ let getPath;
     return n * 1000 * 60;
   };
 
-  const poll = () => {
-    weather();
-    setTimeout(poll, timeDelay(2));
-  };
-
   const weather = () => {
     return http.get(getPath, (resp) => {
       resp.setEncoding('utf8');
@@ -49,6 +44,11 @@ let getPath;
         console.log('data\n', dataParsed, '\n============\n', 'time:', timeDelay(5));
       });
     });
+  };
+
+  const poll = () => {
+    weather();
+    setTimeout(poll, timeDelay(2));
   };
 
   poll();

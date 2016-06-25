@@ -4,4 +4,8 @@ a simple node app using <DB> to store weather data from my ourWeather Station pi
 
 First, install our packages...
 
-`npm install `
+`$ npm install `
+
+Then to start server...
+
+`$ node server.js`
