@@ -25,7 +25,6 @@ let getPath;
     });
     console.log('NodeShell', getPath);
   };
-  console.log('envIp', envIp);
 
   const weather = () => {
     return http.get(getPath, (resp) => {
@@ -41,7 +40,7 @@ let getPath;
       });
     });
   };
-  
+
   //  Convert time to minutes for easy reading
   const timeDelay = (n) => {
     return n * 1000 * 60;

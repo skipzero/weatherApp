@@ -1,8 +1,6 @@
 (() => {
   'use strict';
   const main = require(__dirname + '/public/scripts/main.js')
-  console.log('MAIN', main);
-
   const app = require('express')();
   const http = require('http').Server(app);
   // const getPath = 'http://10.0.0.35';

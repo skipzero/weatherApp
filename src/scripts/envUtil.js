@@ -7,6 +7,7 @@ require('shelljs/global');
     const home = 'home';
     const away = 'away';
     ssid = ssid.split('\n');
+    console.log('window', ssid);
     // ssid = JSON.parse(ssid);
     const getPath = ssid.forEach((cur, i) => {
       if (cur.match('SSID')) {
@@ -19,10 +20,8 @@ require('shelljs/global');
     console.log('NodeShell', getPath);
   };
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    console.log('module', envIp);
     module.exports = envIp;
   } else {
-    console.log('window', envIp);
     window.envIp = envIp;
   }
 })();
