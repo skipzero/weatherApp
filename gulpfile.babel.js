@@ -23,7 +23,7 @@ const err  = colors.red.bold;
 const basePath = {
   src: 'src',
   pub: 'public',
-  tests: 'test'
+  tests: 'test',
 };
 const file = {
   scriptsPath: {
@@ -33,12 +33,12 @@ const file = {
 
   htmlPath: {
     src: `${basePath.src}/**/*.html`,
-    pub: `${basePath.pub}`
+    pub: `${basePath.pub}`,
   },
 
   stylesPath: {
     src: `${basePath.src}/**/*.scss`,
-    pub: `${basePath.pub}/styles`
+    pub: `${basePath.pub}/styles`,
   }
 }
 

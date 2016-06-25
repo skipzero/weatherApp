@@ -10,10 +10,10 @@
   const port = 5050;
 
   app.get('/', (req, res) => {
-    res.sendFile('/public/index.html');
+    res.sendFile(__dirname + '/public/html/index.html')
   });
 
   http.listen(port, () => {
-    console.log(`Server is listening on port: ${port}`);
+    console.log(`Server is listening at on port: ${port}`);
   });
 })();
