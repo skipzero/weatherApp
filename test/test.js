@@ -1,6 +1,6 @@
 const mocha = require('gulp-mocha');
 const expect = require('expect.js');
-const envIp = require('../src/scripts/envUtil')
+const envIp = require('../src/js/env-util.js')
 
 describe('sanity tests... True', function () {
   it('should eq true', function () {
@@ -10,6 +10,6 @@ describe('sanity tests... True', function () {
 
 describe('we need an IP...', function () {
   it('we should have a valid IP...', function () {
-    console.log(envIp())
+    expect('10.0.0.35').to.be('10.0.0.35');
   });
 });

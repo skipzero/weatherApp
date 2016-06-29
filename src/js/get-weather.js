@@ -1,5 +1,5 @@
 const http = require('http');
-const envUtil = require('./envUtil');
+const envUtil = require('src/js/env-util');
 //
 // console.log('ENV_IP', envIp);
 const getPathHm = 'http://10.0.0.35/';
