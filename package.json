@@ -4,7 +4,8 @@
   "description": "simple data logging server for my weather station. ",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -R @ripter/mocha-reporter-blink1"
+    "test": "mocha -R @ripter/mocha-reporter-blink1",
+    "start": "node server.js"
   },
   "private": true,
   "keywords": [],

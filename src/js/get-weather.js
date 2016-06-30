@@ -1,32 +1,15 @@
 const http = require('http');
-const envUtil = require('src/js/env-util');
+const envutil = require('./env-util');
+
 //
 // console.log('ENV_IP', envIp);
-const getPathHm = 'http://10.0.0.35/';
-const getPathWy = 'http://73.162.245.173/';
-let getPath;
-
 (() => {
-  const envIp = () => {
-    const bash = '/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I';
-    let ssid = exec(bash);
-    const home = getPathHm;
-    const away = getPathWy;
-    ssid = ssid.split('\n');
-    // ssid = JSON.parse(ssid);
-    getPath = ssid.forEach((cur, i) => {
-      if (cur.match('SSID')) {
-        if (ssid[i] === 'skippinBrooke') {
-          return home;
-        }
-      }
-      console.log('cur-ssid', cur);
-      return away;
-    });
-    console.log('NodeShell', getPath);
-  };
+  const getPathHm = 'http://10.0.0.35/FullDataString';
+  const getPathWy = 'http://73.162.245.173/';
+  let getPath = getPathHm;
 
   //  Convert time to minutes for easy reading
+  //  takes a number (of mins), returns a number (of miliseconds)
   const timeDelay = (n) => {
     return n * 1000 * 60;
   };
@@ -40,17 +23,16 @@ let getPath;
       });
 
       resp.on('data', (data) => {
-        const dataParsed = JSON.parse(data.variables);
-        console.log('data\n', dataParsed, '\n============\n', 'time:', timeDelay(5));
+        const dataParsed = JSON.parse(data);
+        console.log('data\n', dataParsed, '\n============\n' );
       });
     });
   };
 
   const poll = () => {
     weather();
-    setTimeout(poll, timeDelay(2));
+    setTimeout(poll, timeDelay(.1));
   };
-
   poll();
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

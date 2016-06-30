@@ -26,48 +26,50 @@ const basePath = {
   tests: 'test',
 };
 const file = {
-  scriptsPath: {
-    src: `${basePath.src}/**/*.js`,
-    pub: `${basePath.pub}/scripts`
+  jsPath: {
+    src: `${basePath.src}/js/*.js`,
+    pub: `${basePath.pub}/js`
   },
 
   htmlPath: {
-    src: `${basePath.src}/**/*.html`,
-    pub: `${basePath.pub}`,
+    src: `${basePath.src}/*.html`,
+    pub: `${basePath.pub}/html`,
   },
 
-  stylesPath: {
-    src: `${basePath.src}/**/*.scss`,
-    pub: `${basePath.pub}/styles`,
+  cssPath: {
+    src: `${basePath.src}/css/*.scss`,
+    pub: `${basePath.pub}/css`,
   },
   tests: `${basePath.tests}/*`,
 }
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['scripts'], ['styles'], ['html'], ['watch'])
+  runSequence(['clean'], ['js'], ['css'], ['html'], ['watch'])
 });
 
 gulp.task('watch', () => {
-  gulp.watch(file.stylesPath.src, ['sass']);
-  gulp.watch([file.scriptsPath.src], ['scripts']);
+  gulp.watch(file.cssPath.src, ['css']);
+  gulp.watch([file.jsPath.src], ['js']);
   gulp.watch([file.htmlPath.src], ['html']);
 });
 
-gulp.task('scripts', ['lint'], () => {
-  return gulp.src(file.scriptsPath.src)
+gulp.task('js', ['lint'], () => {
+  return gulp.src(file.jsPath.src)
+  .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))
-  // .pipe(uglify()
-  // 	.on('error', notify.onError((error) => {
-  // 	return '\n\n ERROR: ' + error.formatted, error;
-  // 	})))
+  .pipe(uglify()
+  	.on('error', notify.onError((error) => {
+  	   return '\n\n ERROR: ' + error.formatted, error;
+  	})))
   .pipe(concat('main.js'))
-  .pipe(gulp.dest(file.scriptsPath.pub));
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.scriptsPath.src])
+  return gulp.src([file.jsPath.src])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
@@ -78,8 +80,8 @@ gulp.task('html', () => {
     .pipe(gulp.dest(file.htmlPath.pub))
 });
 
-gulp.task('styles', ()=> {
-  return gulp.src(file.stylesPath.src)
+gulp.task('css', ()=> {
+  return gulp.src(file.cssPath.src)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
@@ -91,7 +93,7 @@ gulp.task('styles', ()=> {
     })))
     // .pipe(clean())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(file.stylesPath.pub));
+    .pipe(gulp.dest(file.cssPath.pub));
 });
 
 gulp.task('clean', () => {
@@ -103,5 +105,7 @@ gulp.task('clean', () => {
 gulp.task('test', () => {
 return gulp.src(file.tests, {read: false})
   .pipe(plumber())
-  .pipe(mocha());
+  .pipe(mocha({
+    report: '@ripter/mocha-reporter-blink1'
+  }));
 });
