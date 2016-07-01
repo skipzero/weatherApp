@@ -32,8 +32,8 @@ const file = {
   },
 
   htmlPath: {
-    src: `${basePath.src}/*.html`,
-    pub: `${basePath.pub}/html`,
+    src: `${basePath.src}/**/*.html`,
+    pub: `${basePath.pub}/`,
   },
 
   cssPath: {

@@ -29,6 +29,6 @@ require('shelljs/global');
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = envutil;
   } else {
-    window.envIp = envutil;
+    window.envutil = envutil;
   }
 })();

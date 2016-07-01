@@ -1,20 +1,25 @@
 const http = require('http');
-const envutil = require('./env-util');
-
+const envutil = require('envutil');
+const convert = require('./converter.js');
 //
 // console.log('ENV_IP', envIp);
 (() => {
-  const getPathHm = 'http://10.0.0.35/FullDataString';
-  const getPathWy = 'http://73.162.245.173/';
-  let getPath = getPathHm;
-
-  //  Convert time to minutes for easy reading
-  //  takes a number (of mins), returns a number (of miliseconds)
-  const timeDelay = (n) => {
-    return n * 1000 * 60;
-  };
-
   const weather = () => {
+    const getPathHm = 'http://10.0.0.35/FullDataString';
+    const getPathWy = 'http://73.162.245.173/';
+    let getPath = getPathHm;
+
+    //  Convert time to minutes for easy reading
+    //  takes a number (of mins), returns a number (of miliseconds)
+    const timeDelay = (n) => {
+      return n * 1000 * 60;
+    };
+
+    const poll = () => {
+      weather();
+      setTimeout(poll, timeDelay());
+    };
+
     return http.get(getPath, (resp) => {
       resp.setEncoding('utf8');
 
@@ -23,15 +28,12 @@ const envutil = require('./env-util');
       });
 
       resp.on('data', (data) => {
-        const dataParsed = JSON.parse(data);
-        console.log('data\n', dataParsed, '\n============\n' );
+        data = JSON.parse(data);
+        data = data.FullDataString.split(',');
+        convert(data);
+        console.log('data\n', data, '\n============\n');
       });
     });
-  };
-
-  const poll = () => {
-    weather();
-    setTimeout(poll, timeDelay(.1));
   };
   poll();
 
