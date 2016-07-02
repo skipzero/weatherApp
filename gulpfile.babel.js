@@ -13,80 +13,99 @@ import plumber from 'gulp-plumber';
 import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from'gulp-uglify';
+import uglify from 'gulp-uglify';
 
       // colors for our console output
 const ok   = colors.green.bold;
 const err  = colors.red.bold;
 
       //  Our config object to hold paths, etc
-const path = {
+const basePath = {
   src: 'src',
   pub: 'public',
-  tests: 'test'
+  tests: 'test',
 };
+const file = {
+  jsPath: {
+    src: `${basePath.src}/js/*.js`,
+    pub: `${basePath.pub}/js`
+  },
 
-const scriptsPath = {
-  src: `${path.src}/scripts/**/*.js`,
-  pub: `${path.pub}/scripts`
-}
+  htmlPath: {
+    src: `${basePath.src}/**/*.html`,
+    pub: `${basePath.pub}/`,
+  },
 
-const stylesPath = {
-  src: `${path.src}/styles/**/*.scss`,
-  pub: `${path.pub}/styles`
+  cssPath: {
+    src: `${basePath.src}/css/*.scss`,
+    pub: `${basePath.pub}/css`,
+  },
+  tests: `${basePath.tests}/*`,
 }
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['styles'], ['scripts', 'lint'], ['watch'])
+  runSequence(['clean'], ['js'], ['css'], ['html'], ['watch'])
 });
 
 gulp.task('watch', () => {
-  console.log('==  watching fired  ==');
+  gulp.watch(file.cssPath.src, ['css']);
+  gulp.watch([file.jsPath.src], ['js']);
+  gulp.watch([file.htmlPath.src], ['html']);
 });
 
-gulp.task('scripts', () => {
-  return gulp.src(scriptsPath.src)
+gulp.task('js', ['lint'], () => {
+  return gulp.src(file.jsPath.src)
+  .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))
   .pipe(uglify()
   	.on('error', notify.onError((error) => {
-  	return '\n\n ERROR: ' + error.formatted, error;
+  	   return '\n\n ERROR: ' + error.formatted, error;
   	})))
   .pipe(concat('main.js'))
-  .pipe(gulp.dest(scriptsPath.pub));
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-return gulp.src([scriptsPath.src])
+  return gulp.src([file.jsPath.src])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
 })
 
-gulp.task('styles', ()=> {
-  return gulp.src(stylesPath.src)
+gulp.task('html', () => {
+  return gulp.src(file.htmlPath.src)
+    .pipe(gulp.dest(file.htmlPath.pub))
+});
+
+gulp.task('css', ()=> {
+  return gulp.src(file.cssPath.src)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       includePaths: [
-        path.styles
+        basePath.styles
       ]
     }).on('error', notify.onError((error) => {
       return '\n\n ERROR: ' + error.formatted, error;
     })))
-    .pipe(clean())
+    // .pipe(clean())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(stylesPath.pub));
+    .pipe(gulp.dest(file.cssPath.pub));
 });
 
 gulp.task('clean', () => {
-	return del([path.pub]).then(paths => {
+	return del([basePath.pub]).then(paths => {
     gutil.log(ok('\nRemoved the following:\n' + paths.join('\n')));
   })
 });
 
 gulp.task('test', () => {
-return gulp.src(path.tests, {read: false})
-  .pipe(mocha({reporter: 'nyan'}));
+return gulp.src(file.tests, {read: false})
+  .pipe(plumber())
+  .pipe(mocha({
+    report: '@ripter/mocha-reporter-blink1'
+  }));
 });
