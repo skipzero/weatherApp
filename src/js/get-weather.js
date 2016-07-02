@@ -1,24 +1,17 @@
 const http = require('http');
-const envutil = require('envutil');
+const envutil = require('./env-util.js');
 const convert = require('./converter.js');
 //
 // console.log('ENV_IP', envIp);
 (() => {
   const weather = () => {
     const getPathHm = 'http://10.0.0.35/FullDataString';
-    const getPathWy = 'http://73.162.245.173/';
-    let getPath = getPathHm;
+    const getPathWy = 'http://73.162.245.173/FullDataString';
+
+    let getPath = getPathWy;
 
     //  Convert time to minutes for easy reading
     //  takes a number (of mins), returns a number (of miliseconds)
-    const timeDelay = (n) => {
-      return n * 1000 * 60;
-    };
-
-    const poll = () => {
-      weather();
-      setTimeout(poll, timeDelay());
-    };
 
     return http.get(getPath, (resp) => {
       resp.setEncoding('utf8');
@@ -28,14 +21,22 @@ const convert = require('./converter.js');
       });
 
       resp.on('data', (data) => {
-        data = JSON.parse(data);
-        data = data.FullDataString.split(',');
         convert(data);
         console.log('data\n', data, '\n============\n');
       });
     });
   };
-  poll();
+
+  const timeDelay = (n) => {
+    return n * 1000 * 60;
+  };
+
+  const poll = () => {
+    weather();
+    setTimeout(poll, timeDelay());
+  };
+
+poll();
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = weather;

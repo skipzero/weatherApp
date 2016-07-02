@@ -1,5 +1,8 @@
 (() => {
   const convert = data => {
+    data = JSON.parse(data);
+    data = data.FullDataString.split(',');
+
     //  The values in the FullDataString are all in metric.
     let weatherData = {
       outTemp: data[0],
@@ -23,7 +26,7 @@
       CurAirQualSens: data[18],
       CurAirQualQual: data[19],
     };
-    console.log('Convert', weatherData)
+    console.log('Convert', weatherData);
   };
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = convert;
