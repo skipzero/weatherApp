@@ -33,7 +33,8 @@
   // });
 
   app.get('/', (req, res) => {
-    console.log(weather());
+    console.log('Weather fired...');
+    weather();
     res.sendFile(__dirname + '/public/index.html');
   });
 

@@ -1,5 +1,5 @@
 const http = require('http');
-const envutil = require('./env-util.js');
+// const envutil = require('./env-util.js');
 const convert = require('./converter.js');
 //
 // console.log('ENV_IP', envIp);
@@ -8,7 +8,7 @@ const convert = require('./converter.js');
     const getPathHm = 'http://10.0.0.35/FullDataString';
     const getPathWy = 'http://73.162.245.173/FullDataString';
 
-    let getPath = getPathWy;
+    let getPath = getPathHm;
 
     //  Convert time to minutes for easy reading
     //  takes a number (of mins), returns a number (of miliseconds)
@@ -33,10 +33,9 @@ const convert = require('./converter.js');
 
   const poll = () => {
     weather();
-    setTimeout(poll, timeDelay());
+    setTimeout(poll, timeDelay(0.5));
   };
-
-poll();
+  poll();
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = weather;
