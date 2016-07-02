@@ -1,7 +1,7 @@
 {
   "name": "weather-app",
   "version": "0.0.1",
-  "description": "simple data logging server for my weather station. ",
+  "description": "'simple' data logging server for my weather station. ",
   "main": "server.js",
   "scripts": {
     "test": "mocha -R @ripter/mocha-reporter-blink1",
@@ -24,7 +24,7 @@
     "gulp": "^3.9.1",
     "mocha": "^2.5.3",
     "mysql": "^2.11.1",
-    "node-mysql": "^0.4.2",
+    "node-mysql": "^0.4.2"
   },
   "devDependencies": {
     "@ripter/mocha-reporter-blink1": "0.0.1",
@@ -52,6 +52,6 @@
     "gulp-util": "^3.0.7",
     "mocha": "^2.5.3",
     "run-sequence": "^1.2.1",
-    "shelljs": "^0.7.0",
+    "shelljs": "^0.7.0"
   }
 }
