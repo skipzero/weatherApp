@@ -1,5 +1,6 @@
 {
   "name": "weather-app",
+  "config": {"port": "5150"},
   "version": "0.0.1",
   "description": "'simple' data logging server for my weather station. ",
   "main": "server.js",
@@ -22,9 +23,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "gulp": "^3.9.1",
-    "mocha": "^2.5.3",
-    "mysql": "^2.11.1",
-    "node-mysql": "^0.4.2"
+    "mocha": "^2.5.3"
   },
   "devDependencies": {
     "@ripter/mocha-reporter-blink1": "0.0.1",
@@ -45,13 +44,13 @@
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
+    "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "mocha": "^2.5.3",
-    "run-sequence": "^1.2.1",
-    "shelljs": "^0.7.0"
+    "run-sequence": "^1.2.1"
   }
 }

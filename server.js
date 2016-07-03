@@ -4,41 +4,35 @@
   const app = require('express')();
   const http = require('http').Server(app);
   const weather = require('./src/js/get-weather.js');
-  const mysql = require('mysql');
+  const fs = require('fs');
+  // const api = require('./src/js/api.js');
 
   // const getPath = 'http://10.0.0.35'; docker porter for mysql: 32769
   // const getPath = 'http://73.162.245.173/';  //  OUtside local network
-  const port = 5150;
-
-  let con = mysql.createConnection({
-    host: 'localhost',
-    port: '32769',
-    user: 'weather',
-    password: 'weather',
-  });
+  const port = 5150
 
   //  static file served from...
   app.use(express.static('public'));
 
-  // con.connect(err => {
-  //   if (err) {
-  //     console.log('Error connecting to DB:', err);
-  //     return;
-  //   }
-  //   console.log('Connection established...');
-  // });
-  //
-  // con.end(err => {
-  //
-  // });
-
-  app.get('/', (req, res) => {
-    console.log('Weather fired...');
+  app.get("/weather",function(req,res){
+    console.log('Res', res)
+    res.send('Getting weathered! ;)')
+    // get data and write it to the file
     weather();
-    res.sendFile(__dirname + '/public/index.html');
   });
 
+  //  Convert time to minutes for easy reading
+  //  takes a number (of mins), returns a number (of miliseconds)
+  const timeDelay = (n) => {
+    return n * 1000 * 60;
+  };
+
+  const poll = () => {
+    weather();
+    setTimeout(poll, timeDelay(0.5));
+  };
+
   http.listen(port, () => {
-    console.log(`Server is listening at on port: ${port}`);
+    console.log(`Server is listening at on port: ${port} \n\n ${weather()}`);
   });
 })();

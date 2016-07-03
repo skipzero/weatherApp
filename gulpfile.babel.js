@@ -1,6 +1,5 @@
 'use strict';
 import babel from 'gulp-babel';
-import clean from 'gulp-clean-css';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
 import del from 'del';
@@ -16,11 +15,12 @@ import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
 
       // colors for our console output
-const ok   = colors.green.bold;
-const err  = colors.red.bold;
+const ok = colors.green.bold;
+const err = colors.red.bold;
 
       //  Our config object to hold paths, etc
 const basePath = {
+  root: './'
   src: 'src',
   pub: 'public',
   tests: 'test',
@@ -60,16 +60,16 @@ gulp.task('js', ['lint'], () => {
       presets: ['es2015']
     }))
   .pipe(uglify()
-  	.on('error', notify.onError((error) => {
-  	   return '\n\n ERROR: ' + error.formatted, error;
-  	})))
+  	.on('error', (err) => {
+      gutil.log(err('ERR:', err))
+    }))
   .pipe(concat('main.js'))
   .pipe(sourcemaps.write())
   .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.jsPath.src])
+  return gulp.src([file.jsPath.src, './gulpfile.babel.js', './api.js'])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
