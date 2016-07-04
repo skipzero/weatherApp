@@ -50,6 +50,7 @@ gulp.task('default', () => {
 gulp.task('watch', () => {
   gulp.watch(file.cssPath.src, ['css']);
   gulp.watch([file.jsPath.src], ['js']);
+  gulp.watch([basePath.root + '/gulpfile.babel.js'])
   gulp.watch([file.htmlPath.src], ['html']);
 });
 

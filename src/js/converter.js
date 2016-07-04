@@ -46,9 +46,22 @@
       CurAirQualSens: dataCon[18],
       CurAirQualQual: dataCon[19],
     };
+    weatherData.engMetric = 1;
+
+    const imperialTemp = n => {
+      return n * 9 / 5 + 32;
+    };
+
+    //  if we switch our measurements to imperial over metric.
+    if (weatherData.engMetric === 1) {
+      weatherData.outTemp = imperialTemp(weatherData.outTemp);
+      weatherData.inTemp = imperialTemp(weatherData.inTemp);
+      // weatherData.barom = weatherData.barom * 0.02953; 
+    }
 
     return weatherData;
   };
+
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = convert;
   } else {
