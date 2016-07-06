@@ -1,4 +1,4 @@
-const exec = require('shelljs/global');
+require('shelljs/global');
 
 (() => {
   const envutil = () => {

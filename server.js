@@ -5,7 +5,7 @@
   const http = require('http').Server(app);
   const weather = require('./src/js/get-weather.js');
   const fs = require('fs');
-  const api = require('./src/js/api.js');
+  const api = require('./api.js');
 
   // const getPath = 'http://10.0.0.35'; docker porter for mysql: 32769
   // const getPath = 'http://73.162.245.173/';  //  OUtside local network

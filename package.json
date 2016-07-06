@@ -1,6 +1,8 @@
 {
   "name": "weather-app",
-  "config": {"port": "5150"},
+  "config": {
+    "port": "5150"
+  },
   "version": "0.0.1",
   "description": "'simple' data logging server for my weather station. ",
   "main": "server.js",
@@ -51,6 +53,7 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "mocha": "^2.5.3",
-    "run-sequence": "^1.2.1"
+    "run-sequence": "^1.2.1",
+    "shelljs": "^0.7.0"
   }
 }

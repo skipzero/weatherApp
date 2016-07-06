@@ -56,7 +56,7 @@
     if (weatherData.engMetric === 1) {
       weatherData.outTemp = imperialTemp(weatherData.outTemp);
       weatherData.inTemp = imperialTemp(weatherData.inTemp);
-      // weatherData.barom = weatherData.barom * 0.02953; 
+      weatherData.barom = (weatherData.barom / 1000.0) * 0.29529980165;
     }
 
     return weatherData;
