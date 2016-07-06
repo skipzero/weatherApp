@@ -49,14 +49,14 @@
     weatherData.engMetric = 1;
 
     const imperialTemp = n => {
-      return n * 9 / 5 + 32;
+      return n * 1.8 + 32;
     };
 
     //  if we switch our measurements to imperial over metric.
     if (weatherData.engMetric === 1) {
       weatherData.outTemp = imperialTemp(weatherData.outTemp);
       weatherData.inTemp = imperialTemp(weatherData.inTemp);
-      // weatherData.barom = weatherData.barom * 0.02953;
+      weatherData.barom = (weatherData.barom / 1000.0) * 0.29529980165;
     }
 
     return weatherData;
