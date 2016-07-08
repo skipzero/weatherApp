@@ -1,9 +1,9 @@
+// const app = require('express');
 (() => {
-  const api = () => {
-    console.log('api');
-  };
+ const api = {
 
-
+ };
+ 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = api;
   } else {
