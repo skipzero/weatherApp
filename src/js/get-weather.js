@@ -33,7 +33,7 @@ const convert = require('./converter.js');
 
   const poll = () => {
     weather();
-    setTimeout(poll, timeDelay(0.5));
+    setTimeout(poll, timeDelay(15));
   };
   poll();
 

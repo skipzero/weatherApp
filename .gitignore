@@ -14,4 +14,4 @@ bower_components
 # Build
 build/
 public/
-db/
+db/*.json
