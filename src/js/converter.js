@@ -60,9 +60,9 @@ const convert = data => {
       weatherData.inTemp = imperialTemp(weatherData.inTemp);
       weatherData.barom = inchesMercury(weatherData.barom);
     }
-  }
+  
 
   return weatherData;
-};
+}
 
 module.exports = convert;
