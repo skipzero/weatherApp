@@ -22,12 +22,19 @@
       date = date.join(' ');
       return date;
     };
-    let i = 0;
-    //  quick easy uid for now...
+
+    let i;
+
+    const getUid = (i) => {
+      if (i >= 0) {
+        return i++;
+      }
+      return i = 0;
+    };
 
     //  The values in the FullDataString are all in metric.
     const weatherData = {
-      uid: i,
+      uid: getUid(i),
       outTemp: dataCon[0],
       outHum: dataCon[1],
       inTemp: dataCon[2],
@@ -59,8 +66,8 @@
     };
 
     const inchesMercury = n => {
-      return ((n  / 1000.0) * 0.29529980165).toFixed(2);
-    }
+      return ((n / 1000.0) * 0.29529980165).toFixed(2);
+    };
 
     //  if we switch our measurements to imperial over metric.
     if (weatherData.engMetric === 1) {
