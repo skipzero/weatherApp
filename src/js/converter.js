@@ -47,15 +47,19 @@ const convert = data => {
   };
   // weatherData.engMetric = 1;
 
-  const imperialTemp = n => {
-    return n * 9 / 5 + 32;
-  };
+    const imperialTemp = n => {
+      return (n * 1.8 + 32).toFixed(2);
+    };
 
-  //  if we switch our measurements to imperial over metric.
-  if (weatherData.engMetric === 1) {
-    weatherData.outTemp = imperialTemp(weatherData.outTemp);
-    weatherData.inTemp = imperialTemp(weatherData.inTemp);
-    // weatherData.barom = weatherData.barom * 0.02953;
+    const inchesMercury = n => {
+      return ((n / 1000.0) * 0.29529980165).toFixed(2);
+    };
+    //  if we switch our measurements to imperial over metric.
+    if (weatherData.engMetric === 1) {
+      weatherData.outTemp = imperialTemp(weatherData.outTemp);
+      weatherData.inTemp = imperialTemp(weatherData.inTemp);
+      weatherData.barom = inchesMercury(weatherData.barom);
+    }
   }
 
   return weatherData;

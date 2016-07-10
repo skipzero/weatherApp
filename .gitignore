@@ -10,6 +10,7 @@ data/
 # Node/bower
 node_modules
 bower_components
+npm-debug.log
 
 # Build
 build/
