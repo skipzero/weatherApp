@@ -1,44 +1,44 @@
-(() => {
-  'use strict';
-  const express = require('express');
-  const app = require('express')();
-  const http = require('http').Server(app);
-  const weather = require('./src/js/get-weather.js');
-  const mysql = require('mysql');
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const weather = require('./src/js/get-weather.js');
+const fs = require('fs');
+const api = require('./api.js');
+const bodyParser = require('body-parser');
 
-  // const getPath = 'http://10.0.0.35'; docker porter for mysql: 32769
-  // const getPath = 'http://73.162.245.173/';  //  OUtside local network
-  const port = 5150;
+const port = 5150;
+const router = express.Router();
 
-  let con = mysql.createConnection({
-    host: 'localhost',
-    port: '32769',
-    user: 'weather',
-    password: 'weather',
-  });
+//  static file served from...
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// app.use('api/', router);
 
-  //  static file served from...
-  app.use(express.static('public'));
+app.get('/weather', (req, res) => {
+  // res.json({ message: weather() });
+  if (res) {
+    fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, data) => {
+      console.log('read', data);
+      res.end(data);
+    })
+  };
+  if (req) {
+    console.log('Requested...');
+  }
+  // get data and write it to the file
+  pollWeather()
+});
+function pollWeather() {
+  setTimeout(() => {
+    weather(weatherData);
+    pollWeather();
+}, 15 * 60 *1000);
+}
+function weatherData (data) {
+  api.write(JSON.stringify(data) + '\n');
+};
 
-  // con.connect(err => {
-  //   if (err) {
-  //     console.log('Error connecting to DB:', err);
-  //     return;
-  //   }
-  //   console.log('Connection established...');
-  // });
-  //
-  // con.end(err => {
-  //
-  // });
-
-  app.get('/', (req, res) => {
-    console.log('Weather fired...');
-    weather();
-    res.sendFile(__dirname + '/public/index.html');
-  });
-
-  http.listen(port, () => {
-    console.log(`Server is listening at on port: ${port}`);
-  });
-})();
+http.listen(port, () => {
+  console.log(`Server is listening at on port: ${port}`);
+});

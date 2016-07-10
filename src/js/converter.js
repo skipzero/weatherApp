@@ -2,6 +2,7 @@
   const convert = data => {
     let dataCon = JSON.parse(data);
     dataCon = dataCon.FullDataString.split(',');
+<<<<<<< HEAD
 
     const compare = (a, b) => {
       if (a.length > b.length) {
@@ -22,9 +23,31 @@
       date = date.join(' ');
       return date;
     };
+=======
+>>>>>>> master
+
+    let i;
+
+    const getUid = (i) => {
+      if (i >= 0) {
+        return i++;
+      }
+      return i = 0;
+    };
+
+    //  convert our date string to be year first.
+    const dateFormatter = stationDate => {
+      let date = stationDate;
+      date = date.split(' ');
+      date[0] = date[0].split('/').sort(compare);
+      date[0] = date[0].join('-');
+      date = date.join(' ');
+      return date;
+    };
 
     //  The values in the FullDataString are all in metric.
     const weatherData = {
+      uid: getUid(i),
       outTemp: dataCon[0],
       outHum: dataCon[1],
       inTemp: dataCon[2],
@@ -46,17 +69,23 @@
       CurAirQualSens: dataCon[18],
       CurAirQualQual: dataCon[19],
     };
+
+    i++;
+
     weatherData.engMetric = 1;
 
     const imperialTemp = n => {
-      return n * 9 / 5 + 32;
+      return (n * 1.8 + 32).toFixed(2);
     };
 
+    const inchesMercury = n => {
+      return ((n / 1000.0) * 0.29529980165).toFixed(2);
+    };
     //  if we switch our measurements to imperial over metric.
     if (weatherData.engMetric === 1) {
       weatherData.outTemp = imperialTemp(weatherData.outTemp);
       weatherData.inTemp = imperialTemp(weatherData.inTemp);
-      // weatherData.barom = weatherData.barom * 0.02953;
+      weatherData.barom = inchesMercury(weatherData.barom);
     }
 
     return weatherData;
