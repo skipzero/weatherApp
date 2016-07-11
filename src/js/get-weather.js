@@ -4,7 +4,6 @@ const convert = require('./converter.js');
 // const api = require('./api.js');
 
 // console.log('ENV_IP', envIp);
-(() => {
   const weather = () => {
     const getPathHm = 'http://10.0.0.35/FullDataString';
     const getPathWy = 'http://73.162.245.173/FullDataString';
