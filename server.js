@@ -17,12 +17,11 @@ app.use(bodyParser.json());
 
 app.get('/weather', (req, res) => {
   // res.json({ message: weather() });
-  if (res) {
-    fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, data) => {
-      console.log('read', data);
-      res.end(data);
-    })
-  };
+  fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, res) => {
+    console.log('read', data);
+    res.end(data);
+  });
+
   if (req) {
     console.log('Requested...');
   }
