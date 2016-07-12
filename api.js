@@ -2,7 +2,17 @@ const fs = require('fs');
 
 const api = {
   read: () => {
+<<<<<<< Updated upstream
     fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', readingData);
+=======
+    fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, data) => {
+      if (err) {
+        console.log('Error:', err);
+      }
+      console.log('Read', data);
+      return data;
+    });
+>>>>>>> Stashed changes
   },
 
   write: (data) => {
