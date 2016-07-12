@@ -17,21 +17,13 @@ app.use(bodyParser.json());
 
 app.get('/weather', (req, res) => {
   // res.json({ message: weather() });
-<<<<<<< Updated upstream
   fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, res) => {
-    console.log('read', data);
-    res.end(data);
-  });
-
-=======
-  if (res) {
     let data = api.read();
     console.log('Data from Resp', data)
     res.json({
       message: data,
     });
-  };
->>>>>>> Stashed changes
+
   if (req) {
     console.log('Requested...');
   }
