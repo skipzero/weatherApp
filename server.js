@@ -26,6 +26,10 @@ app.get('/weather', (req, res) => {
   pollWeather();
 });
 
+app.get('/read', (req, res) => {
+  res.send(api.read('./db/weather.json'))
+});
+
 function toMinutes(n) {
   return n * 60 * 1000;
 };
@@ -34,7 +38,7 @@ function pollWeather() {
   setTimeout(() => {
     weather(weatherData);
     pollWeather();
-  }, toMinutes(2));
+  }, toMinutes(20));
 }
 
 function weatherData (data) {
