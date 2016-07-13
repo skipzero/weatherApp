@@ -1,27 +1,29 @@
 const http = require('http');
 // const envutil = require('./env-util.js');
 const convert = require('./converter.js');
-// const api = require('./api.js');
+const api = require('../../api.js');
 
 // console.log('ENV_IP', envIp);
 const weather = (callback) => {
   const getPathHm = 'http://10.0.0.35/FullDataString';
-  const getPathWy = 'http://73.162.245.173/FullDataString';
+  // const getPathWy = 'http://73.162.245.173/FullDataString';
   const getPath = getPathHm;
 
-  let data = http.get(getPath, (resp) => {
+  http.get(getPath, (resp) => {
     resp.setEncoding('utf8');
 
     resp.on('error', (error) => {
       console.info('ERR', error);
+      return error;
     });
 
     resp.on('data', (data) => {
-      const conData = convert(data);
-      console.log('converted data...', conData);
-      callback(conData);
-      console.log('Writing...', conData);
-      api.write(conData);
+      let respData = data;
+      respData = convert(data);
+      console.log('converted data...', respData);
+      callback(respData);
+      // console.log('Writing...', respData);
+      // api.write(respData);
     });
   });
 };

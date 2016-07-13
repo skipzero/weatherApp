@@ -13,30 +13,32 @@ const router = express.Router();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use('api/', router);
 
 app.get('/weather', (req, res) => {
   // res.json({ message: weather() });
-  fs.readFile(`${__dirname}/db/weather.json`, 'utf-8', (err, res) => {
-    let data = api.read();
-    console.log('Data from Resp', data)
-    res.json({
-      message: data,
-    });
+  res.json({ message: api.read(`./db/weather.json`) });
 
+  // res.send(res);
   if (req) {
     console.log('Requested...');
   }
   // get data and write it to the file
-  pollWeather()
+  pollWeather();
 });
+
+function toMinutes(n) {
+  return n * 60 * 1000;
+};
+
 function pollWeather() {
   setTimeout(() => {
     weather(weatherData);
     pollWeather();
-}, 15 * 60 *1000);
+  }, toMinutes(2));
 }
+
 function weatherData (data) {
+  console.log('Wrting from server...', data);
   api.write(JSON.stringify(data) + ',\n');
 };
 
