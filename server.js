@@ -1,44 +1,54 @@
-(() => {
-  'use strict';
-  const express = require('express');
-  const app = require('express')();
-  const http = require('http').Server(app);
-  const weather = require('./src/js/get-weather.js');
-  const mysql = require('mysql');
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const weather = require('./src/js/get-weather.js');
+const fs = require('fs');
+const api = require('./api.js');
+const bodyParser = require('body-parser');
 
-  // const getPath = 'http://10.0.0.35'; docker porter for mysql: 32769
-  // const getPath = 'http://73.162.245.173/';  //  OUtside local network
-  const port = 5150;
+const port = 5150;
+const router = express.Router();
 
-  let con = mysql.createConnection({
-    host: 'localhost',
-    port: '32769',
-    user: 'weather',
-    password: 'weather',
-  });
+// const path = 'http://10.0.0.35';
+const path = 'http://73.162.245.173';
 
-  //  static file served from...
-  app.use(express.static('public'));
+//  static file served from...
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-  // con.connect(err => {
-  //   if (err) {
-  //     console.log('Error connecting to DB:', err);
-  //     return;
-  //   }
-  //   console.log('Connection established...');
-  // });
-  //
-  // con.end(err => {
-  //
-  // });
+app.get('/weather', (req, res) => {
+  // res.json({ message: weather() });
+  // res.json({ message: api.read(`db/weather.json`) });
 
-  app.get('/', (req, res) => {
-    console.log('Weather fired...');
-    weather();
-    res.sendFile(__dirname + '/public/index.html');
-  });
+  // res.send(res);
+  if (req) {
+    console.log('Requested...');
+  }
+  // get data and write it to the file
+  pollWeather();
+});
 
-  http.listen(port, () => {
-    console.log(`Server is listening at on port: ${port}`);
-  });
-})();
+app.get('/read', (req, res) => {
+  res.send(api.read('db/weather.json'))
+});
+
+function toMinutes(n) {
+  return n * 60 * 1000;
+};
+
+function pollWeather() {
+  setTimeout(() => {
+    weather(weatherData, path);
+    pollWeather();
+  }, toMinutes(2));
+}
+
+function weatherData (data) {
+  console.log('Wrting from server...', data);
+  // api.write(JSON.stringify(data) + ',\n');
+};
+
+http.listen(port, () => {
+  console.log(`Server is listening at on port: ${port}`);
+});

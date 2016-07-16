@@ -5,10 +5,10 @@ require('shelljs/global');
     let ssid = '/System/Library/PrivateFrameworks/Apple80211.framework';
     ssid += '/Versions/Current/Resources/airport -I';
     let myIp = exec(ssid);
-    const home = 'home';
+    // const home = 'home';
 
-    console.log('IFCONF', myIp)
-    const away = 'away';
+    // console.log('IFCONF', myIp)
+    // const away = 'away';
     myIp = myIp.output.split('\n');
 
     myIp.reduce((obj, val) => {
