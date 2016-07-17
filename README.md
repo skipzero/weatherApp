@@ -15,4 +15,4 @@ Then to start server...
 
 Currently it's only logging to the console and serving a simple page. but it's coming along. working on getting db connections working.
 
-I'm also concurrently working on the [MySql branch](https://github.com/zerosquadron/weatherApp/tree/with-MySQL) and am hoping to have a [Mongo branch](https://github.com/zerosquadron/weatherApp/tree/with-Mongodb) started soon.
+I'm also concurrently working on the [MySql branch](https://github.com/zerosquadron/weatherApp/tree/mysql) and am hoping to have a [Mongo branch](https://github.com/zerosquadron/weatherApp/tree/mongodb) started soon.
