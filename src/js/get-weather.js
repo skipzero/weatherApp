@@ -4,12 +4,9 @@ const convert = require('./converter.js');
 const api = require('../../api.js');
 
 // console.log('ENV_IP', envIp);
-const weather = (callback) => {
-  const getPathHm = 'http://10.0.0.35/FullDataString';
-  // const getPathWy = 'http://73.162.245.173/FullDataString';
-  const getPath = getPathHm;
+const weather = (callback, path) => {
 
-  http.get(getPath, (resp) => {
+  http.get(`${path}/FullDataString`, (resp) => {
     resp.setEncoding('utf8');
 
     resp.on('error', (error) => {
@@ -20,7 +17,7 @@ const weather = (callback) => {
     resp.on('data', (data) => {
       let respData = data;
       respData = convert(data);
-      console.log('converted data...', respData);
+      console.log(`converted data... ${respData}`);
       callback(respData);
       // console.log('Writing...', respData);
       // api.write(respData);

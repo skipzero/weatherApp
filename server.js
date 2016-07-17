@@ -9,6 +9,9 @@ const bodyParser = require('body-parser');
 const port = 5150;
 const router = express.Router();
 
+// const path = 'http://10.0.0.35';
+const path = 'http://73.162.245.173';
+
 //  static file served from...
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,7 +19,7 @@ app.use(bodyParser.json());
 
 app.get('/weather', (req, res) => {
   // res.json({ message: weather() });
-  res.json({ message: api.read(`./db/weather.json`) });
+  res.json({ message: api.read(`db/weather.json`) });
 
   // res.send(res);
   if (req) {
@@ -27,7 +30,7 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/read', (req, res) => {
-  res.send(api.read('./db/weather.json'))
+  res.send(api.read('db/weather.json'))
 });
 
 function toMinutes(n) {
@@ -36,9 +39,9 @@ function toMinutes(n) {
 
 function pollWeather() {
   setTimeout(() => {
-    weather(weatherData);
+    weather(weatherData, path);
     pollWeather();
-  }, toMinutes(20));
+  }, toMinutes(2));
 }
 
 function weatherData (data) {
