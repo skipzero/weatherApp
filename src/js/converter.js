@@ -24,7 +24,8 @@ const convert = data => {
 
   //  The values in the FullDataString are all in metric.
   const weatherData = {
-    curDateTime: dateFormatter(dataCon[16]),
+    id: 0,
+    created: dateFormatter(dataCon[16]),
     outTemp: dataCon[0],
     outHum: dataCon[1],
     inTemp: dataCon[2],
@@ -42,11 +43,10 @@ const convert = data => {
     windDirMax: dataCon[14],
     engMetric: dataCon[15],
     station: dataCon[17],
-    CurAirQualSens: dataCon[18],
-    CurAirQualQual: dataCon[19],
+    airQualSens: dataCon[18],
+    airQualQual: dataCon[19],
   };
   // weatherData.engMetric = 1;
-
   const imperialTemp = n => {
     return (n * 1.8 + 32).toFixed(2);
   };
@@ -60,7 +60,6 @@ const convert = data => {
     weatherData.inTemp = imperialTemp(weatherData.inTemp);
     weatherData.barom = inchesMercury(weatherData.barom);
   }
-
   return weatherData;
 };
 
