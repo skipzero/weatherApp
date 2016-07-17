@@ -6,6 +6,7 @@ const fs = require('fs');
 const api = require('./api.js');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const dataReader = require('./src/js/data-reader.js')
 
 const port = 5150;
 // const router = express.Router();
@@ -47,7 +48,15 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/read', (req, res) => {
-  res.send(api.read('db/weather.json'))
+  connection.query('SELECT * FROM `weather`.`data_table` Limit 15,5', (err, data, fields) => {
+    if (err) {
+      console.log(`Error: ${err}`);
+    }
+    data = JSON.stringify(data);
+    res.send(data);
+  });
+  // let data = JSON.stringify(dataReader())
+  // res.send(data);
 });
 
 function toMinutes(n) {
