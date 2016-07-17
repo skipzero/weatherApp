@@ -13,4 +13,10 @@ Then to start server...
 
 `$ npm start`
 
+<<<<<<< HEAD
 I've deployed the app to a cloud based server on digital ocean and have set up the mysql DB there as well. the API will now lbe used from there, ideally. working on the [mysql branch](https://github.com/zerosquadron/weatherApp/tree/with-MySQL) now. have it writing to a mysql db and reading back.
+=======
+Currently it's only logging to the console and serving a simple page. but it's coming along. working on getting db connections working.
+
+I'm also concurrently working on the [MySql branch](https://github.com/zerosquadron/weatherApp/tree/mysql) and am hoping to have a [Mongo branch](https://github.com/zerosquadron/weatherApp/tree/mongodb) started soon.
+>>>>>>> 043e4c3... updated readme links to new repo names
