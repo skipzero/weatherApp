@@ -5,7 +5,6 @@ const api = require('../../api.js');
 
 // console.log('ENV_IP', envIp);
 const weather = (callback, path) => {
-
   http.get(`${path}/FullDataString`, (resp) => {
     resp.setEncoding('utf8');
 

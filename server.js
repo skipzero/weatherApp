@@ -9,8 +9,8 @@ const bodyParser = require('body-parser');
 const port = 5150;
 const router = express.Router();
 
-// const path = 'http://10.0.0.35';
-const path = 'http://73.162.245.173';
+const path = 'http://10.0.0.35';
+// const path = 'http://73.162.245.173';
 
 //  static file served from...
 app.use(express.static('public'));
@@ -38,11 +38,13 @@ function toMinutes(n) {
 };
 
 function pollWeather() {
+  const minutes = toMinutes(15);
   setTimeout(() => {
     weather(weatherData, path);
     pollWeather();
-  }, toMinutes(2));
-}
+    console.log(`polling every ${minutes}...`)
+  }, minutes;
+};
 
 function weatherData (data) {
   console.log('Wrting from server...', data);
