@@ -14,6 +14,9 @@ const port = 5150;
 const path = 'http://10.0.0.35';
 // const path = 'http://73.162.245.173';
 
+//  Set minutes for polling weather station...
+const minutes = 20;
+
 //  static file served from...
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,6 +27,10 @@ let connection = mysql.createConnection({
   host: 'localhost',
   port: '3306',
 });
+
+function getWeatherData(data) {
+  return data;
+}
 
 function query (data) {
   //  see example of escaping (search insert at https://github.com/mysqljs/mysql)
@@ -44,31 +51,35 @@ app.get('/weather', (req, res) => {
     console.log('Requested...');
   }
   // get data and write it to the file
-  pollWeather();
+  // pollWeather(minutes);
 });
 
 app.get('/read', (req, res) => {
-  connection.query('SELECT * FROM `weather`.`data_table` Limit 15,5', (err, data, fields) => {
-    if (err) {
-      console.log(`Error: ${err}`);
-    }
-    data = JSON.stringify(data);
-    res.send(data);
-  });
-  // let data = JSON.stringify(dataReader())
+  // const data = connection.query('SELECT * FROM `weather`.`data_table` order by id desc limit 15', (err, data, fields) => {
+  //   if (err) {
+  //     console.log(`Error: ${err}`);
+  //   }
+  //   data = JSON.stringify(data);
+  // });
   // res.send(data);
+  let data = JSON.stringify(dataReader(connection, getWeatherData));
+  res.send(getWeatherData(data));
 });
+//  Start polling and collecting data...
+pollWeather(minutes);
 
 function toMinutes(n) {
   return n * 60 * 1000;
 };
 
 function pollWeather() {
+  const pollInterval = toMinutes(minutes);
   setTimeout(() => {
     weather(weatherData, path);
     pollWeather();
-  }, toMinutes(2));
-}
+  }, pollInterval);
+  console.log(`\npolling weather every ${minutes} minutes...\n`)
+};
 
 function weatherData (data) {
   console.log('Wrting from server...', data);
