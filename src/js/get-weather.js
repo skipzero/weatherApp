@@ -16,10 +16,8 @@ const weather = (callback, path) => {
     resp.on('data', (data) => {
       let respData = data;
       respData = convert(data);
-      console.log(`converted data... ${respData}`);
+      console.log(`weather data... ${respData}`);
       callback(respData);
-      // console.log('Writing...', respData);
-      // api.write(respData);
     });
   });
 };
