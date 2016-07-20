@@ -4,7 +4,6 @@ const http = require('http').Server(app);
 const weather = require('./src/js/get-weather.js');
 const fs = require('fs');
 const api = require('./api.js');
-const bodyParser = require('body-parser');
 
 const port = 5150;
 const router = express.Router();
@@ -17,6 +16,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//our routes
 app.get('/weather', (req, res) => {
   // res.json({ message: weather() });
   res.json({ message: api.read(`db/weather.json`) });

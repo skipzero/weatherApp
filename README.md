@@ -5,14 +5,14 @@ First, install our packages...
 
 `$ npm install`
 
-This is a simple flatfile verion. Instead of bothering with days of wrestling with mysql for beginners. You'll need to know a little about [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) and Node's [FS Module](https://nodejs.org/api/fs.html#fs_file_system). I highly recommend brushing over the material listed. :)
+This is a simple flat file version, instead of bothering with days of wrestling with mysql for beginners. You'll need to know a little about [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) and Node's [FS Module](https://nodejs.org/api/fs.html#fs_file_system). I highly recommend brushing over the material listed. :)
 
-you'll want to create an empty file and call it `weather.json`. Put it in the db folder for the server to write to.
+you'll want to create an empty file and call it `weather.json`. Put it in the db folder for the server to write to (in the root of the project).
 
 Then to start server...
 
 `$ npm start`
 
-Currently it's only logging to the console and serving a simple page. but it's coming along. working on getting db connections working.
+Currently it's only logging to the console and serving a simple page, but it's coming along. working on the [mysql branch](https://github.com/zerosquadron/weatherApp/tree/with-MySQL) now. have it writing to a mysql db and reading back.
 
 I'm also concurrently working on the [MySql branch](https://github.com/zerosquadron/weatherApp/tree/with-MySQL) and am hoping to have a [Mongo branch](https://github.com/zerosquadron/weatherApp/tree/with-Mongodb) started soon.
