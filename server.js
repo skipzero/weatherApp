@@ -43,28 +43,17 @@ function query (data) {
 };
 
 app.get('/weather', (req, res) => {
-  // res.json({ message: weather() });
   res.send('Hello Weather! :)');
-
-  // res.send(res);
   if (req) {
     console.log('Requested...');
   }
-  // get data and write it to the file
-  // pollWeather(minutes);
 });
 
 app.get('/read', (req, res) => {
-  // const data = connection.query('SELECT * FROM `weather`.`data_table` order by id desc limit 15', (err, data, fields) => {
-  //   if (err) {
-  //     console.log(`Error: ${err}`);
-  //   }
-  //   data = JSON.stringify(data);
-  // });
-  // res.send(data);
   let data = JSON.stringify(dataReader(connection, getWeatherData));
   res.send(getWeatherData(data));
 });
+
 //  Start polling and collecting data...
 pollWeather(minutes);
 
@@ -74,8 +63,8 @@ function toMinutes(n) {
 
 function pollWeather() {
   const pollInterval = toMinutes(minutes);
+  weather(weatherData, path);
   setTimeout(() => {
-    weather(weatherData, path);
     pollWeather();
   }, pollInterval);
   console.log(`\npolling weather every ${minutes} minutes...\n`)
@@ -83,7 +72,6 @@ function pollWeather() {
 
 function weatherData (data) {
   console.log('Wrting from server...', data);
-  // api.write(JSON.stringify(data) + ',\n');
   query(data);
 };
 
