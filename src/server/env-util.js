@@ -19,11 +19,6 @@ require('shelljs/global');
       return objVal;
     }, {});
 
-    // if (cur.match('SSID')) {
-    //   if (ssid[i] === 'skippinBrooke') {
-    //     return home;
-    //   }
-    // }
     console.log('NodeShell', myIp);
   };
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

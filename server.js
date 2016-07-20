@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-const weather = require('./src/js/get-weather.js');
+const weather = require('./src/server/get-weather.js');
 const fs = require('fs');
 const api = require('./api.js');
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
-const dataReader = require('./src/js/data-reader.js')
+const dataReader = require('./src/server/data-reader.js')
 
-const port = 5150;
+const port = 5050;
 // const router = express.Router();
 
 const path = 'http://10.0.0.35';
@@ -19,8 +18,6 @@ const minutes = 20;
 
 //  static file served from...
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 let connection = mysql.createConnection({
   user: 'root',
@@ -38,7 +35,7 @@ function query (data) {
     if (err) {
       console.log('Error:', err);
     };
-    console.log(res);
+    console.log(`Query fn... ${res}`);
   });
 };
 
@@ -51,7 +48,7 @@ app.get('/weather', (req, res) => {
 
 app.get('/read', (req, res) => {
   let data = JSON.stringify(dataReader(connection, getWeatherData));
-  res.send(getWeatherData(data));
+  res.send(data);
 });
 
 //  Start polling and collecting data...

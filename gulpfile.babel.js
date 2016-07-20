@@ -18,7 +18,7 @@ import uglify from 'gulp-uglify';
 const ok = colors.green.bold;
 // const error = colors.red.bold;
 
-      //  Our config object to hold paths, etc
+//  Our config object to hold paths, etc
 const basePath = {
   root: './',
   src: 'src',
@@ -28,6 +28,7 @@ const basePath = {
 const file = {
   jsPath: {
     src: `${basePath.src}/js/*.js`,
+    server: `${basePath.src}/server/**`,
     pub: `${basePath.pub}/js`,
   },
 
