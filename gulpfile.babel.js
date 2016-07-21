@@ -29,6 +29,7 @@ const file = {
   jsPath: {
     src: `${basePath.src}/js/*.js`,
     server: `${basePath.src}/server/**`,
+    models: `${basePath.src}/models/**`,
     pub: `${basePath.pub}/js`,
   },
 
@@ -51,7 +52,7 @@ gulp.task('default', () => {
 gulp.task('watch', () => {
   gulp.watch(file.cssPath.src, ['css']);
   gulp.watch([file.jsPath.src], ['js']);
-  gulp.watch([`${basePath.root}/*.js`], ['lint']);
+  gulp.watch([`${basePath.root}/*.js`, file.jsPath.models], ['lint']);
   gulp.watch([file.htmlPath.src], ['html']);
 });
 
