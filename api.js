@@ -1,30 +1,52 @@
-const fs = require('fs');
+const weather = require('./src/models/dataModel');
 
-function readingData(err, res) {
-  if (err) {
-    console.log('(fn) Read Error:', err);
-    return err;
-  }
-  return res;
-}
+module.exports = {
+  configure: (app) => {
+    app.get('/weather', (req, res) => {
+      weather.get(res);
+    });
 
-function writingData(err, res) {
-  if (err) {
-    console.log('Write Error:', err);
-  }
-  return res;
-}
+    app.post('/weather', (req, res) => {
+      weather.create(req.body, res);
+    });
 
-const api = {
-  read: (path) => {
-    console.log('[API] Reading data...');
-    fs.readFile(path, 'utf-8', readingData);
-  },
+    app.put('/weather', (req, res) => {
+      weather.update(req.body, res);
+    });
 
-  write: (data) => {
-    console.log('[API] Writing data...', data);
-    fs.appendFile('./db/weather.json', data, writingData);
+    app.delete('/weather/:id', (req, res) => {
+      weather.delete(req.params.id, res);
+    });
   },
 };
 
-module.exports = api;
+
+// function readingData(err, res) {
+//   if (err) {
+//     console.log('(fn) Read Error:', err);
+//     return err;
+//   }
+//   return res;
+// }
+//
+// function writingData(err, res) {
+//   if (err) {
+//     console.log('Write Error:', err);
+//   }
+//   console.log('Writing from api/writingData fn')
+//   return res;
+// }
+//
+// const api = {
+//   read: (path) => {
+//     console.log('[API] Reading data...');
+//     // fs.readFile(path, 'utf-8', readingData);
+//   },
+//
+//   write: (data) => {
+//     console.log('[API] Writing data...', data);
+//     // fs.appendFile('./db/weather.json', data, writingData);
+//   },
+// };
+//
+// module.exports = api;

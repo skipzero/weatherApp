@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const connection = require('../server/pool')
+
 function Weather() {
   this.get = res => {
     connection.acquire((err, con) => {
