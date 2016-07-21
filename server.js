@@ -7,11 +7,11 @@ const api = require('./api.js');
 const mysql = require('mysql');
 const dataReader = require('./src/server/data-reader.js')
 
-const port = 5050;
+const port = 5150;
 // const router = express.Router();
 
-const path = 'http://10.0.0.35';
-// const path = 'http://73.162.245.173';
+// const path = 'http://10.0.0.35';
+const path = 'http://73.162.245.173';
 
 //  Set minutes for polling weather station...
 const minutes = 20;
@@ -35,7 +35,7 @@ function query (data) {
     if (err) {
       console.log('Error:', err);
     };
-    console.log(`Query fn... ${res}`);
+    console.log('Query fn...', res);
   });
 };
 
@@ -49,6 +49,7 @@ app.get('/weather', (req, res) => {
 app.get('/read', (req, res) => {
   let data = JSON.stringify(dataReader(connection, getWeatherData));
   res.send(data);
+  res.sendFile(__dirname + 'index.html', data );
 });
 
 //  Start polling and collecting data...
