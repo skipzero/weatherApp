@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 
-function Connection() {
+function Pool () {
   this.pool = null;
-  this.init = () => {
-    this.connection = mysql.createPool({
+  this.init = function () {
+    this.pool = mysql.createPool({
       connectionLimit: 10,
       user: 'root',
       host: 'localhost',
@@ -16,6 +16,6 @@ function Connection() {
       callback(err, connection);
     });
   };
-}
+};
 
-module.exports = new Connection();
+module.exports = new Pool();

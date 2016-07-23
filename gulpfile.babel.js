@@ -1,5 +1,7 @@
 'use strict';
-import babel from 'gulp-babel';
+import browserify from 'browserify';
+// import babel from 'gulp-babel';
+import babelify from 'babelify';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
 import del from 'del';
@@ -13,6 +15,8 @@ import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
+import buffer from 'vinyl-buffer';
+import source from 'vinyl-source-stream';
 
       // colors for our console output
 const ok = colors.green.bold;
@@ -27,7 +31,7 @@ const basePath = {
 };
 const file = {
   jsPath: {
-    src: `${basePath.src}/js/*.js`,
+    src: `${basePath.src}/js/d3example.js`,
     server: `${basePath.src}/server/**`,
     models: `${basePath.src}/models/**`,
     pub: `${basePath.pub}/js`,
@@ -57,18 +61,26 @@ gulp.task('watch', () => {
 });
 
 gulp.task('js', ['lint'], () => {
-  return gulp.src(file.jsPath.src)
-  .pipe(sourcemaps.init())
-  .pipe(babel({
-    presets: ['es2015'],
-  }))
-  .pipe(uglify()
-    .on('error', (err) => {
-      gutil.log(err('ERR:', err));
-    }))
-  .pipe(concat('main.js'))
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest(file.jsPath.pub));
+  const b = browserify({
+    entries: './src/js/d3example.js',
+    debug: true,
+  }).transform(babelify, { presets: ["es2015"] });
+
+  return b.bundle()
+    .pipe(source('./src/js/d3example.js'))
+    .pipe(buffer())
+  // return gulp.src(file.jsPath.src)
+    .pipe(sourcemaps.init())
+    // .pipe(babel({
+    //   presets: ['es2015'],
+    // }))
+    .pipe(uglify()
+      .on('error', (err) => {
+        gutil.log(err('ERR:', err));
+      }))
+    .pipe(concat('main.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {

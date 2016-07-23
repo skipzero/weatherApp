@@ -1,9 +1,9 @@
-const mysql = require('mysql');
-const connection = require('../server/pool')
+const pool = require('../server/pool')
 
 function Weather() {
-  this.get = res => {
-    connection.acquire((err, con) => {
+  this.get = function(res) {
+    pool.acquire((err, con) => {
+      console.log('ACquired', err, con)
       con.query('select * from `weather`.`data_table`', (err, result) => {
         con.release();
         res.send(result);
@@ -11,8 +11,8 @@ function Weather() {
     });
   };
 
-  this.create = (data, res) => {
-    connection.acquire((err, con) => {
+  this.create = function(data, res) {
+    pool.acquire((err, con) => {
       con.query('insert into `weather`.`data_table` set ?', data, (err, result) => {
         con.release();
         if (err) {
@@ -25,7 +25,7 @@ function Weather() {
   };
 
   this.update = (data, res) => {
-    connection.acquire((err, con) => {
+    pool.acquire((err, con) => {
       con.query('update `weather`.`data_table` set ? where id = ?', [data, data.id], (err, result) => {
         con.release();
         if (err) {
@@ -38,7 +38,7 @@ function Weather() {
   };
 
   this.delete = (id, res) => {
-    connection.acquire(function(err, con) {
+    pool.acquire(function(err, con) {
       con.query('delete from `weather`.`data_table` where id = ?', [id], function(err, result) {
         con.release();
         if (err) {

@@ -4,17 +4,17 @@ const http = require('http').Server(app);
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
-const weatherModel = require('./src/models/dataModel');
-// const conPool = require('./src/server/pool');
+// const weatherModel = require('./src/models/dataModel');
+const pool = require('./src/server/pool');
 const weather = require('./src/server/get-weather');
 const api = require('./api');
-const dataReader = require('./src/server/data-reader');
+// const dataReader = require('./src/server/data-reader');
 
 const port = 5150;
 const router = express.Router();
 
-const path = 'http://10.0.0.35';
-// const path = 'http://73.162.245.173';
+// const path = 'http://10.0.0.35';
+const path = 'http://73.162.245.173';
 
 //  Set minutes for polling weather station...
 const minutes = 20;
@@ -25,31 +25,30 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-let connection = mysql.createConnection({
-  user: 'root',
-  host: 'localhost',
-  port: '3306',
-});
+// let connection = mysql.createConnection({
+//   user: 'root',
+//   host: 'localhost',
+//   port: '3306',
+// });
 
 function getWeatherData(data) {
   return data;
 }
-console.log('our connection', connection)
-function query (data) {
-  //  see example of escaping (search insert at https://github.com/mysqljs/mysql)
 
-};
+// function query (data) {
+//   //  see example of escaping (search insert at https://github.com/mysqljs/mysql)
+//
+// };
 
-router.use((req, res, next) => {
-  console.log('Hit our router', res);
-  next();
-});
+// app.use('/api', router);
 
-app.use('/api', router);
+// router.use((req, res, next) => {
+//   console.log('Hit our router', res);
+//   next();
+// });
 
-router.get('/', function(req, res) {
-  const data = pollWeather(minutes);
-  res.sendFile( __dirname + '/public/index.html', data );
+app.get('/', function(req, res) {
+  res.sendFile( __dirname + '/public/index.html');
 });
 
 // app.get('/weather', (req, res) => {
@@ -66,35 +65,35 @@ router.get('/', function(req, res) {
 // });
 //
 
-function toMinutes(n) {
-  return n * 60 * 1000;
-};
+// function toMinutes(n) {
+//   return n * 60 * 1000;
+// };
+//
+// function pollWeather() {
+//   const pollInterval = toMinutes(minutes);
+//   weather(weatherData, path);
+//   setTimeout(() => {
+//     pollWeather();
+//   }, pollInterval);
+//   console.info(`\npolling weather every ${minutes} minutes...\n`)
+// };
 
-function pollWeather() {
-  const pollInterval = toMinutes(minutes);
-  weather(weatherData, path);
-  setTimeout(() => {
-    pollWeather();
-  }, pollInterval);
-  console.info(`\npolling weather every ${minutes} minutes...\n`)
-};
+// function weatherData (data) {
+//   console.log('Wrting from server...', data);
+//   // query(data);
+//   pool.query('INSERT INTO `weather`.`data_table` SET ?', data, (err, res) => {
+//     if (err) {
+//       console.log('Error:', err);
+//     };
+//     console.log('Query fn...', res);
+//   });
+// };
 
-function weatherData (data) {
-  console.log('Wrting from server...', data);
-  // query(data);
-  connection.query('INSERT INTO `weather`.`data_table` SET ?', data, (err, res) => {
-    if (err) {
-      console.log('Error:', err);
-    };
-    console.log('Query fn...', res);
-  });
-};
-
-connection.init;
+pool.init();
 api.configure(app);
 
 //  Start polling and collecting data...
-pollWeather(minutes);
+// pollWeather(minutes);
 
 http.listen(port, () => {
   console.info(`Server is listening at on port: ${port}`);
