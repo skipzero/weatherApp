@@ -13,8 +13,8 @@ const api = require('./api');
 const port = 5150;
 const router = express.Router();
 
-// const path = 'http://10.0.0.35';
-const path = 'http://73.162.245.173';
+const path = 'http://10.0.0.35';
+// const path = 'http://73.162.245.173';
 
 //  Set minutes for polling weather station...
 const minutes = 20;

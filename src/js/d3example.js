@@ -8,17 +8,17 @@ function weatherOnload () {
   console.log('weatherOnload...');
   $.get('/weather')
     .done((data) => {
+      debugger;
       console.log('DATA RETREIVED!!', data);
+
+      // data = JSON.parse(data);
+      data = data.map((curr, i) => {
+        console.log('Map', curr, i);
+        return curr.outTemp;
+      });
+      console.log('d3', data);
       renderChart(data);
     });
-
-  data = JSON.parse(data);
-  data = data.map((curr, i) => {
-    console.log('Map', curr, i);
-    return curr.outTemp;
-  });
-  console.log('d3', data);
-  renderChart(data);
 };
 
 
