@@ -1,7 +1,6 @@
 const http = require('http');
-// const envutil = require('./env-util.js');
-const convert = require('./converter.js');
-const api = require('../../api.js');
+const convert = require('./converter');
+const api = require('../../api');
 
 // console.log('ENV_IP', envIp);
 const weather = (callback, path) => {

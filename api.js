@@ -1,7 +1,7 @@
 const weather = require('./src/models/dataModel');
 
 module.exports = {
-  configure: function (app) {
+  configure: (app) => {
     app.get('/weather', (req, res) => {
       weather.get(res);
     });

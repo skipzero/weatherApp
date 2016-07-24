@@ -64,21 +64,17 @@ gulp.task('js', ['lint'], () => {
   const b = browserify({
     entries: './src/js/d3example.js',
     debug: true,
-  }).transform(babelify, { presets: ["es2015"] });
+  }).transform(babelify, { presets: ['es2015'] });
 
   return b.bundle()
     .pipe(source('./src/js/d3example.js'))
     .pipe(buffer())
   // return gulp.src(file.jsPath.src)
     .pipe(sourcemaps.init())
-    // .pipe(babel({
-    //   presets: ['es2015'],
-    // }))
     .pipe(uglify()
       .on('error', (err) => {
         gutil.log(err('ERR:', err));
       }))
-    .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });

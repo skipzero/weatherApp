@@ -1,14 +1,20 @@
-const mysql = require('mysql');
+const convert = require('./converter');
+const http = require('http');
 
-const dataReader = (connection, callback) => {
-  connection.query('SELECT * FROM `weather`.`data_table` order by id desc limit 15', (err, data, fields) => {
-    if (err) {
-      console.log(`Error: ${err}...`)
-    }
-    data = JSON.stringify(data);
-    callback(data);
-    console.log(`Read Res: ${data}`);
-    console.log(fields);
+//  Reads data from the weather station and passes it to converter module.
+const dataReader = (path, callback) => {
+  http.get(`${path}/FullDataString`, (resp) => {
+    resp.setEncoding('utf8');
+
+    resp.on('error', (error) => {
+      console.info('ERR', error);
+      return error;
+    });
+
+    resp.on('data', (data) => {
+      console.log('Weather Resp', data);
+      callback(convert(data))
+    });
   });
 };
 
