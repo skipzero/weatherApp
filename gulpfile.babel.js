@@ -75,6 +75,7 @@ gulp.task('js', ['lint'], () => {
       .on('error', (err) => {
         gutil.log(err('ERR:', err));
       }))
+    .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });

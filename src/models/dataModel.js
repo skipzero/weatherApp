@@ -3,7 +3,6 @@ const pool = require('../server/pool')
 function Weather() {
   this.get = function(res) {
     pool.acquire((err, con) => {
-      console.log('ACquired', err, con)
       con.query('select * from `weather`.`data_table`', (err, result) => {
         con.release();
         res.send(result);

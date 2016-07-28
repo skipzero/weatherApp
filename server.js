@@ -18,7 +18,7 @@ const path = 'http://10.0.0.35';
 // const path = 'http://73.162.245.173';
 
 //  Set minutes for polling weather station...
-const minutes = 10;
+const minutes = 15;
 const client = new Client();
 
 //  static file served from...
@@ -50,7 +50,7 @@ function pollWeather() {
 function weatherData (data) {
   const postData = JSON.stringify(data);
   const options = {
-    hostname: '127.0.0.1',
+    // hostname: '127.0.0.1',
     path: '/weather',
     method: 'POST',
     port: 5150,
@@ -80,16 +80,6 @@ function weatherData (data) {
 
   post.write(postData);
   post.end();
-
-  // $.post('/weather', JSON.stringify(data), function(data, status) {
-  //   console.log('Post function: wrote data');
-  // })
-  // .done(function(data){
-  //   console.log('DONE! wrote to DB...');
-  // })
-  // .fail((err) => {
-  //   conesole.log('Error: ', err);
-  // });
 };
 
 pool.init();
@@ -99,5 +89,5 @@ api.configure(app);
 pollWeather(minutes);
 
 server.listen(port, () => {
-  console.info(`Server is listening at on port: ${port}`);
+  console.info(`Server is listening on port: ${port}`);
 });
