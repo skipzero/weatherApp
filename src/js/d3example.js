@@ -15,7 +15,7 @@ function renderChart(data) {
     let dots;
     let margin = 100;
     let w = 8;
-    let h = 500;
+    let h = 700;
     let x;
     let y;
     let width = 1100;
@@ -49,13 +49,12 @@ function renderChart(data) {
 
     // safety bars
     const safeties = {
-    low: 70,
-    high: 140,
-    x: x.range()[0],
-    y: (h - margin) - y(140) + .5,
-    width: (width - margin),
-    height: y(140) -  y(70)  + 0.5,
-
+      low: 70,
+      high: 140,
+      x: x.range()[0],
+      y: (h - margin) - y(140) + .5,
+      width: (width - margin),
+      height: y(140) -  y(70)  + 0.5,
     };
 
     const bars = chart.append('g')
