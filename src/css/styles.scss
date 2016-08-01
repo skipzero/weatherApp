@@ -8,11 +8,6 @@ circle {
   fill:   limegreen;
 }
 
-.chart rect {
-	stroke: white;
-    fill: steelblue;
-}
-
 .axis {
     shape-rendering: crispEdges;
 }
@@ -34,7 +29,7 @@ circle {
   opacity: .1;
 }
 
-div.tooltip {	
+div.tooltip {
     position: absolute;
     text-align: center;
     width: 60px;

@@ -7,14 +7,16 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
 const pool = require('./src/server/pool');
-const reader = require('./src/server/data-reader')
+const reader = require('./src/server/dataReader');
+
+const myIp = require('./src/server/getIp')
 // const weather = require('./src/server/get-weather');
 const api = require('./api');
 
 const port = 5150;
 
-// const path = 'http://10.0.0.35';
-const path = 'http://73.162.245.173';
+let path = 'http://10.0.0.35';
+// const path = 'http://73.162.245.173';
 
 //  Set minutes for polling weather station...
 const minutes = 15;
