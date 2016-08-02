@@ -9,6 +9,7 @@ module.exports = {
 
     app.post('/weather', (req, res) => {
       weather.create(req.body, res);
+      console.log('Put weather ID is', res.insertId);
     });
 
     app.put('/weather', (req, res) => {

@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const pool = require('./src/server/pool');
 const reader = require('./src/server/dataReader');
 
-const myIp = require('./src/server/getIp')
+const myIp = require('public-ip')
 // const weather = require('./src/server/get-weather');
 const api = require('./api');
 
@@ -22,36 +22,50 @@ let path = 'http://10.0.0.35';
 const minutes = 15;
 const client = new Client();
 
+//  :::SERVER RELATED CODE HERE:::
 //  static file served from...
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-function getWeatherData(data) {
-  return data;
-};
-
 app.get('/', function(req, res) {
   res.sendFile( __dirname + '/public/index.html');
 });
 
-function toMinutes(n) {
-  return n * 60 * 1000;
+pool.init();
+api.configure(app);
+
+server.listen(port, () => {
+  console.info(`Server is listening on port: ${port}`);
+});
+
+//Find out if we're local or away and use the corrosponding IP.
+function getMyIp(ip) {
+  console.log('My ip is', ip);
+  if (ip === '73.162.245.173') {
+    debugger;
+    return path = 'http://10.0.0.35';
+  }
+  return path = 'http://73.162.245.173';
 };
 
+//Set up a self calling function to run at desirted interval
 function pollWeather() {
-  const pollInterval = toMinutes(minutes);
-  reader(path, weatherData);
+  const time = minutes * 60000;  //Convert our milliseconds to minutes...
+  myIp.v4().then(ip => {
+    console.log('my ip here is:', getMyIp(ip))
+    reader(getMyIp(ip), weatherData);
+  });
+
   setTimeout(() => {
     pollWeather();
-  }, pollInterval);
+  }, time);
   console.info(`\npolling weather every ${minutes} minutes...\n`)
 };
 
 function weatherData (data) {
   const postData = JSON.stringify(data);
   const options = {
-    // hostname: '127.0.0.1',
     path: '/weather',
     method: 'POST',
     port: 5150,
@@ -60,9 +74,7 @@ function weatherData (data) {
       'Content-Length': Buffer.byteLength(postData)
     },
   }
-
-  console.log('Wrting from server...', data);
-
+  
   let post = http.request(options, (res) => {
     console.log(`Status: ${res.statusCode}`);
     console.log(`Headers: ${JSON.stringify(res.headers)}`);
@@ -83,12 +95,5 @@ function weatherData (data) {
   post.end();
 };
 
-pool.init();
-api.configure(app);
-
 //  Start polling and collecting data...
 pollWeather(minutes);
-
-server.listen(port, () => {
-  console.info(`Server is listening on port: ${port}`);
-});
