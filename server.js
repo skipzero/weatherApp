@@ -17,6 +17,7 @@ const port = 5150;
 
 let path = 'http://10.0.0.35';
 // const path = 'http://73.162.245.173';
+let chartData;
 
 //  Set minutes for polling weather station...
 const minutes = 15;
@@ -68,13 +69,13 @@ function weatherData (data) {
   const options = {
     path: '/weather',
     method: 'POST',
-    port: 5150,
+    port: port,
     headers: {
       'Content-Type': 'application/json',
       'Content-Length': Buffer.byteLength(postData)
     },
   }
-  
+
   let post = http.request(options, (res) => {
     console.log(`Status: ${res.statusCode}`);
     console.log(`Headers: ${JSON.stringify(res.headers)}`);

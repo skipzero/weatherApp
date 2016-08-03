@@ -13,10 +13,8 @@ const weather = (callback, path) => {
     });
 
     resp.on('data', (data) => {
-      console.log('Weather Resp', data);
       let respData = data;
       respData = convert(data);
-      console.log(`converted data...  ${respData}`);
       callback(respData);
     });
   });

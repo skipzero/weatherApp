@@ -12,7 +12,6 @@ const dataReader = (path, callback) => {
     });
 
     resp.on('data', (data) => {
-      console.log('Weather Resp', data);
       callback(convert(data))
     });
   });
