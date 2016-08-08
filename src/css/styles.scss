@@ -1,11 +1,13 @@
-.chart {
-    background-color: white;
-}
-
 circle {
   stroke: none;
   stroke-width: 0;
   fill:   limegreen;
+}
+
+svg .line {
+  fill: none;
+  stroke: red;
+  stroke-width: .5px;
 }
 
 .axis {
@@ -17,17 +19,13 @@ circle {
 }
 
 .y.axis line {
-    stroke: black;
+    stroke: steelblue;
 }
 
 .axis text {
     font-size: 12px;
 }
 
-.safety .out-hum {
-  fill: green;
-  opacity: .1;
-}
 
 div.tooltip {
     position: absolute;

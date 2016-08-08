@@ -31,7 +31,7 @@ const basePath = {
 };
 const file = {
   jsPath: {
-    src: `${basePath.src}/js/d3example.js`,
+    src: `${basePath.src}/js/chart.js`,
     server: `${basePath.src}/server/**`,
     models: `${basePath.src}/models/**`,
     pub: `${basePath.pub}/js`,
@@ -62,21 +62,21 @@ gulp.task('watch', () => {
 
 gulp.task('js', ['lint'], () => {
   const b = browserify({
-    entries: './src/js/d3example.js',
+    entries: './src/js/chart.js',
     debug: true,
   }).transform(babelify, { presets: ['es2015'] });
 
   return b.bundle()
-    .pipe(source('./src/js/d3example.js'))
+    .pipe(source('./src/js/chart.js'))
     .pipe(buffer())
   // return gulp.src(file.jsPath.src)
-    .pipe(sourcemaps.init())
-    .pipe(uglify()
-      .on('error', (err) => {
-        gutil.log(err('ERR:', err));
-      }))
+    // .pipe(sourcemaps.init())
+    // .pipe(uglify()
+    //   .on('error', (err) => {
+    //     gutil.log(err('ERR:', err));
+    //   }))
     .pipe(concat('main.js'))
-    .pipe(sourcemaps.write('./'))
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });
 

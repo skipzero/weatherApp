@@ -37,14 +37,13 @@ pool.init();
 api.configure(app);
 
 server.listen(port, () => {
-  console.info(`Server is listening on port: ${port}`);
+  console.log('%c', 'color:#f00; font-size: 24px; fot-weight: bold;', 'Server is listening on port: %d', port);``
 });
 
 //Find out if we're local or away and use the corrosponding IP.
 function getMyIp(ip) {
   console.log('My ip is', ip);
   if (ip === '73.162.245.173') {
-    debugger;
     return path = 'http://10.0.0.35';
   }
   return path = 'http://73.162.245.173';
@@ -77,10 +76,14 @@ function weatherData (data) {
   }
 
   let post = http.request(options, (res) => {
-    console.log(`Status: ${res.statusCode}`);
-    console.log(`Headers: ${JSON.stringify(res.headers)}`);
     res.setEncoding('utf8');
+    res.on('error', err => {
+      console.error(`ERROR: ${err}`);
+    });
+
     res.on('data', (chunk) => {
+      console.log(`Status: ${res.statusCode}`);
+      console.log(`Headers: ${JSON.stringify(res.headers)}`);
       console.log(`Body ${chunk}`);
     });
     res.on('end', () => {

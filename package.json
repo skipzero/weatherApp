@@ -7,7 +7,8 @@
   "description": "'simple' data logging server for my weather station. ",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -R @ripter/mocha-reporter-blink1",
+    "test": "jest",
+    "other-test": "mocha -R @ripter/mocha-reporter-blink1",
     "start": "node server.js"
   },
   "private": true,
@@ -59,6 +60,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
+    "jest-cli": "^14.1.0",
     "mocha": "^2.5.3",
     "run-sequence": "^1.2.1",
     "shelljs": "^0.7.0",
