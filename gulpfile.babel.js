@@ -27,7 +27,7 @@ const basePath = {
   root: './',
   src: 'src',
   pub: 'public',
-  tests: 'test',
+  tests: '__tests__',
 };
 const file = {
   jsPath: {

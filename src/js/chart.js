@@ -15,7 +15,7 @@ function drawGraph() {
   // define the line
   const humidity = d3.line()
     .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.outHum); });
+    .y((d) => { return y(d.inTemp); });
 
   const temp = d3.line()
     .x((d) => { return x(d.created); })
@@ -31,7 +31,7 @@ function drawGraph() {
   d3.json('/weather', (error, data) => {
     if (error) throw error;
 
-    // data = data.slice(260, 285);
+    data = data.slice(800, data.length - 1);
 
       // format the data
     data.forEach((d) => {
@@ -42,7 +42,7 @@ function drawGraph() {
     // Scale the range of the data
     x.domain(d3.extent(data, (d) => { return d.created; }));
 
-    y.domain([0, d3.max(data, (d) => { return d.outHum; })]);
+    y.domain([0, d3.max(data, (d) => { return d.inTemp; })]);
 
     svg.append('path')
       .data([data])

@@ -1,7 +1,6 @@
 const mocha = require('gulp-mocha');
 const expect = require('expect.js');
-const envIp = require('../src/js/env-util.js');
-const weather = require('../src/js/get-weather');
+const weather = require('../src/server/getWeather');
 
 describe('sanity tests... True', function () {
   it('should eq true', function () {
