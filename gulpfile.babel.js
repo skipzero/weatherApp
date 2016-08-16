@@ -68,20 +68,21 @@ gulp.task('js', ['lint'], () => {
 
   return b.bundle()
     .pipe(source('./src/js/chart.js'))
-    .pipe(buffer())
-  // return gulp.src(file.jsPath.src)
-    // .pipe(sourcemaps.init())
-    // .pipe(uglify()
-    //   .on('error', (err) => {
-    //     gutil.log(err('ERR:', err));
-    //   }))
+    .pipe(buffer());
+
+  return gulp.src(file.jsPath.src)
+    .pipe(sourcemaps.init())
+    .pipe(uglify()
+      .on('error', (err) => {
+        gutil.log(err('ERR:', err));
+      }))
     .pipe(concat('main.js'))
-    // .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.jsPath.src, './gulpfile.babel.js', './api.js'])
+  return gulp.src([file.jsPath.src, file.jsPath.server, /* './gulpfile.babel.js',*/ './server.js'])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())

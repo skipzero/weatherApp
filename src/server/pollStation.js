@@ -1,16 +1,23 @@
-const myIp = require('public-ip')
-//Set up a self calling function to run at desirted interval
-function pollWeather() {
-  const time = minutes * 60000;  //Convert our milliseconds to minutes...
-  myIp.v4().then(ip => {
-    console.log('my ip here is:', getMyIp(ip))
-    getData(getMyIp(ip), weatherData);
-  });
+const myIp = require('./myIp');
+
+// const myIp = require('./myIp');
+const getData = require('./getData');
+const weatherData = require('./weatherData');
+
+const ipAway = '73.162.245.173';
+const ipHome = '10.0.0.35';
+
+const pollStation = (min, port) => {
+  const time = min * 60000;  //Convert our milliseconds to minutes...
+
+    console.log(`my ip here is: ${myIp()}`);
+    // getData(myIp(), weatherData);
+    myIp(getData, weatherData, ipHome, ipAway, port);
 
   setTimeout(() => {
-    pollWeather();
+    pollStation(time);
   }, time);
-  console.info(`\npolling weather every ${minutes} minutes...\n`)
+  console.info(`\npolling weather every ${min} minutes...\n`)
 };
 
-module.exports = pollWeather;
+module.exports = pollStation;

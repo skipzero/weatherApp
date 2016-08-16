@@ -16,6 +16,6 @@ function Pool () {
       callback(err, connection);
     });
   };
-};
+}
 
 module.exports = new Pool();
