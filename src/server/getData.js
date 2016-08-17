@@ -1,8 +1,8 @@
 const convert = require('./converter');
 const http = require('http');
 
-//  Reads data from the weather station and passes it to converter module.
-const getData = (path, callback, port) => {
+//  Grabs data from the weather station and passes it to converter module.
+const getData = (path, callback) => {
   http.get(`${path}/FullDataString`, (resp) => {
     resp.setEncoding('utf8');
 
@@ -12,7 +12,7 @@ const getData = (path, callback, port) => {
     });
 
     resp.on('data', (data) => {
-      callback(convert(data), port)
+      callback(convert(data));
     });
   });
 };

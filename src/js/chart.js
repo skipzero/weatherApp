@@ -17,9 +17,9 @@ function drawGraph() {
     .x((d) => { return x(d.created); })
     .y((d) => { return y(d.inTemp); });
 
-  const temp = d3.line()
-    .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.inTemp); })
+  // const temp = d3.line()
+  //   .x((d) => { return x(d.created); })
+  //   .y((d) => { return y(d.inTemp); });
 
   const svg = d3.select('body').append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -31,10 +31,10 @@ function drawGraph() {
   d3.json('/weather', (error, data) => {
     if (error) throw error;
 
-    data = data.slice(800, data.length - 1);
+    const jsonData = data.slice(800, data.length - 1);
 
       // format the data
-    data.forEach((d) => {
+    jsonData.forEach((d) => {
       const row = d;
       row.created = d3.isoParse(row.created);
     });

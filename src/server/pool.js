@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-function Pool () {
+function Pool() {
   this.pool = null;
   this.init = function () {
     this.pool = mysql.createPool({
@@ -11,8 +11,8 @@ function Pool () {
     });
   };
 
-  this.acquire = function (callback) {
-    this.pool.getConnection(function (err, connection) {
+  this.acquire = (callback) => {
+    this.pool.getConnection((err, connection) => {
       callback(err, connection);
     });
   };
