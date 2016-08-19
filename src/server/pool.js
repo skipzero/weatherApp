@@ -7,6 +7,7 @@ function Pool() {
       connectionLimit: 10,
       user: 'root',
       host: 'localhost',
+      password: 'minter73',
       port: '3306',
     });
   };

@@ -29,6 +29,7 @@ const basePath = {
   pub: 'public',
   tests: '__tests__',
 };
+
 const file = {
   jsPath: {
     src: `${basePath.src}/js/chart.js`,
@@ -68,16 +69,16 @@ gulp.task('js', ['lint'], () => {
 
   return b.bundle()
     .pipe(source('./src/js/chart.js'))
-    .pipe(buffer());
+    .pipe(buffer())
 
-  return gulp.src(file.jsPath.src)
-    .pipe(sourcemaps.init())
-    .pipe(uglify()
-      .on('error', (err) => {
-        gutil.log(err('ERR:', err));
-      }))
+  // return gulp.src(file.jsPath.src)
+  //   .pipe(sourcemaps.init())
+  //   .pipe(uglify()
+  //     .on('error', (err) => {
+  //       gutil.log(err('ERR:', err));
+  //     }))
     .pipe(concat('main.js'))
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });
 

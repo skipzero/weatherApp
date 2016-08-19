@@ -6,14 +6,14 @@ const myIp = (getDataCB, weatherDataCB) => {
   const ipHome = '10.0.0.35';
 
   pubIp.v4().then(ip => {
-    console.log(`my ip here is: ${ip}`);
+    console.log(`my public ip here is: ${ip}`);
     let path = 'http://';
     if (ip === ipAway) { // We check to see if our current IP is our home network's outside facing
       path += ipHome; // If it is, we use the local network to get pull from the station.
     } else {
       path += ipAway;
     }
-    console.log(`my current IP is: ${path}`);
+    console.log(`currently using: ${path}`);
     getDataCB(path, weatherDataCB);
   });
 };
