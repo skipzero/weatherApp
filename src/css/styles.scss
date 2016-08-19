@@ -1,46 +1,41 @@
+circle {
+  stroke: none;
+  stroke-width: 0;
+  fill:   limegreen;
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+svg .line {
+  fill: none;
+  stroke: red;
+  stroke-width: .5px;
+}
 
-  body {
-    font: 13px Helvetica, Arial;
+.axis {
+    shape-rendering: crispEdges;
+}
 
-    form {
-      background: #000;
-      padding: 3px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+.x.axis line {
+    stroke: black;
+}
 
-      input {
-        border: 0;
-        padding: 10px;
-        width: 90%;
-        margin-right: .5%;
-      }
+.y.axis line {
+    stroke: steelblue;
+}
 
-      button {
-        width: 9%;
-        background: rgb(130, 224, 255);
-        border: none;
-        padding: 10px;
-      }
-    }
-  }
+.axis text {
+    font-size: 12px;
+}
 
-  #messages {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 
-    li {
-      padding: 5px 10px;
-
-      &:nth-child(odd) {
-        background: #eee;
-      }
-    }
-  }
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}

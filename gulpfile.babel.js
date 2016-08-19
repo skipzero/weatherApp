@@ -1,5 +1,7 @@
 'use strict';
-import babel from 'gulp-babel';
+import browserify from 'browserify';
+// import babel from 'gulp-babel';
+import babelify from 'babelify';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
 import del from 'del';
@@ -13,21 +15,26 @@ import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
+import buffer from 'vinyl-buffer';
+import source from 'vinyl-source-stream';
 
       // colors for our console output
 const ok = colors.green.bold;
 // const error = colors.red.bold;
 
-      //  Our config object to hold paths, etc
+//  Our config object to hold paths, etc
 const basePath = {
   root: './',
   src: 'src',
   pub: 'public',
-  tests: 'test',
+  tests: '__tests__',
 };
+
 const file = {
   jsPath: {
-    src: `${basePath.src}/js/*.js`,
+    src: `${basePath.src}/js/chart.js`,
+    server: `${basePath.src}/server/**`,
+    models: `${basePath.src}/models/**`,
     pub: `${basePath.pub}/js`,
   },
 
@@ -50,27 +57,33 @@ gulp.task('default', () => {
 gulp.task('watch', () => {
   gulp.watch(file.cssPath.src, ['css']);
   gulp.watch([file.jsPath.src], ['js']);
-  gulp.watch([`${basePath.root}/*.js`], ['lint']);
+  gulp.watch(['./*.js', file.jsPath.server, file.jsPath.models], ['lint']);
   gulp.watch([file.htmlPath.src], ['html']);
 });
 
 gulp.task('js', ['lint'], () => {
-  return gulp.src(file.jsPath.src)
-  .pipe(sourcemaps.init())
-  .pipe(babel({
-    presets: ['es2015'],
-  }))
-  .pipe(uglify()
-    .on('error', (err) => {
-      gutil.log(err('ERR:', err));
-    }))
-  .pipe(concat('main.js'))
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest(file.jsPath.pub));
+  const b = browserify({
+    entries: './src/js/chart.js',
+    debug: true,
+  }).transform(babelify, { presets: ['es2015'] });
+
+  return b.bundle()
+    .pipe(source('./src/js/chart.js'))
+    .pipe(buffer())
+
+  // return gulp.src(file.jsPath.src)
+  //   .pipe(sourcemaps.init())
+  //   .pipe(uglify()
+  //     .on('error', (err) => {
+  //       gutil.log(err('ERR:', err));
+  //     }))
+    .pipe(concat('main.js'))
+    // .pipe(sourcemaps.write())
+    .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.jsPath.src, './gulpfile.babel.js', './api.js'])
+  return gulp.src([file.jsPath.src, file.jsPath.server, /* './gulpfile.babel.js',*/ './server.js'])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
