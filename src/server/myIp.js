@@ -1,3 +1,4 @@
+'use strict';
 const pubIp = require('public-ip');
 
   // Find out if we're local or away and use the corrosponding IP.

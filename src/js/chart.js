@@ -5,6 +5,8 @@ function drawGraph() {
   const width = 1250 - margin.left - margin.right;
   const height = 750 - margin.top - margin.bottom;
 
+  const ip = 'http://138.68.54.109';
+
   // parse the date / time
   // const parseTime = d3.timeParse('%d-%b-%y');
 
@@ -28,11 +30,12 @@ function drawGraph() {
       .attr('transform',
             `translate( ${margin.left}, ${margin.top})`);
 
-  d3.json('/weather', (error, data) => {
+  // d3.json(`${ip}:5150/weather`, (error, data) => {
+  d3.json(`/weather`, (error, data) => {
     if (error) throw error;
     const leng = data.length;
 
-    const jsonData = data.slice(leng - 145, leng - 1);
+    const jsonData = data.slice(leng - 300, leng - 1);
 
 console.log(`our array is: ${leng} long and contains ${jsonData}`)
       // format the data
