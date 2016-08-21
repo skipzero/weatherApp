@@ -33,7 +33,6 @@
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
-    "public-ip": "^2.0.1",
     "socketio": "^1.0.0"
   },
   "devDependencies": {
@@ -65,6 +64,7 @@
     "gulp-util": "^3.0.7",
     "jest-cli": "^14.1.0",
     "mocha": "^2.5.3",
+    "public-ip": "^2.0.1",
     "run-sequence": "^1.2.1",
     "shelljs": "^0.7.0",
     "vinyl-buffer": "^1.0.0",

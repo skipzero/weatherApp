@@ -30,9 +30,11 @@ function drawGraph() {
 
   d3.json('/weather', (error, data) => {
     if (error) throw error;
+    const leng = data.length;
 
-    const jsonData = data;
+    const jsonData = data.slice(leng - 145, leng - 1);
 
+console.log(`our array is: ${leng} long and contains ${jsonData}`)
       // format the data
     jsonData.forEach((d) => {
       const row = d;

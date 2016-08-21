@@ -47,11 +47,11 @@ const file = {
     src: `${basePath.src}/css/*.scss`,
     pub: `${basePath.pub}/css`,
   },
-  tests: `${basePath.tests}/*`,
+  tests: `${basePath.tests}/**/*`,
 };
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['js'], ['css'], ['html'], ['watch']);
+  runSequence(['clean'], ['html'], ['css'], ['js'], ['watch']);
 });
 
 gulp.task('watch', () => {
@@ -78,7 +78,7 @@ gulp.task('js', ['lint'], () => {
   //       gutil.log(err('ERR:', err));
   //     }))
     .pipe(concat('main.js'))
-    // .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });
 
