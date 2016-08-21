@@ -15,11 +15,11 @@ function drawGraph() {
   // define the line
   const humidity = d3.line()
     .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.inTemp); });
+    .y((d) => { return y(d.outHum); });
 
-  // const temp = d3.line()
-  //   .x((d) => { return x(d.created); })
-  //   .y((d) => { return y(d.inTemp); });
+  const temp = d3.line()
+    .x((d) => { return x(d.created); })
+    .y((d) => { return y(d.inTemp); });
 
   const svg = d3.select('body').append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -31,7 +31,7 @@ function drawGraph() {
   d3.json('/weather', (error, data) => {
     if (error) throw error;
 
-    const jsonData = data.slice(800, data.length - 1);
+    const jsonData = data;
 
       // format the data
     jsonData.forEach((d) => {
@@ -40,12 +40,11 @@ function drawGraph() {
     });
 
     // Scale the range of the data
-    x.domain(d3.extent(data, (d) => { return d.created; }));
-
-    y.domain([0, d3.max(data, (d) => { return d.inTemp; })]);
+    x.domain(d3.extent(jsonData, (d) => { return d.created; }));
+    y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
 
     svg.append('path')
-      .data([data])
+      .data([jsonData])
       .attr('class', 'line humid')
       .attr('d', humidity);
 

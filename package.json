@@ -31,8 +31,10 @@
     "gulp": "^3.9.1",
     "mocha": "^2.5.3",
     "mysql": "^2.11.1",
+    "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
-    "public-ip": "^2.0.1"
+    "public-ip": "^2.0.1",
+    "socketio": "^1.0.0"
   },
   "devDependencies": {
     "@ripter/mocha-reporter-blink1": "0.0.1",
