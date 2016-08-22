@@ -18,7 +18,7 @@
     "url": "git+https://github.com/zerosquadron/weatherApp.git"
   },
   "author": "Skip McBride",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zerosquadron/weatherApp/issues"
   },
@@ -29,7 +29,6 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "gulp": "^3.9.1",
-    "mocha": "^2.5.3",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
