@@ -30,7 +30,6 @@ function drawGraph() {
       .attr('transform',
             `translate( ${margin.left}, ${margin.top})`);
 
-  // d3.json(`${ip}:5150/weather`, (error, data) => {
   d3.json(`/weather`, (error, data) => {
     if (error) throw error;
     const leng = data.length;

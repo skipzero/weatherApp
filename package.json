@@ -1,7 +1,7 @@
 {
   "name": "weather-app",
   "config": {
-    "port": "5150"
+    "port": "51500"
   },
   "version": "0.0.1",
   "description": "'simple' data logging server for my weather station. ",
