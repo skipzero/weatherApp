@@ -5,9 +5,9 @@ function Pool() {
   this.init = function () {
     this.pool = mysql.createPool({
       connectionLimit: 10,
-      user: 'root',
+      user: 'weatheruser',
       host: 'localhost',
-      password: 'minter73',
+      password: 'weather4u',
       port: '3306',
     });
   };
