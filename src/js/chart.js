@@ -5,7 +5,7 @@ function drawGraph() {
   const width = 1250 - margin.left - margin.right;
   const height = 750 - margin.top - margin.bottom;
 
-  const ip = 'http://138.68.54.109';
+  const ip = 'http://angerbunny.net';
 
   // parse the date / time
   // const parseTime = d3.timeParse('%d-%b-%y');
@@ -30,37 +30,38 @@ function drawGraph() {
       .attr('transform',
             `translate( ${margin.left}, ${margin.top})`);
 
-  d3.json(`/weather`, (error, data) => {
-    if (error) throw error;
-    const leng = data.length;
+  d3.request(`${ip}/weather`)
+    .get((error, data) => {
+      if (error) throw error;
+      const leng = data.length;
 
-    const jsonData = data.slice(leng - 300, leng - 1);
+      const jsonData = data.slice(leng - 300, leng - 1);
 
-console.log(`our array is: ${leng} long and contains ${jsonData}`)
-      // format the data
-    jsonData.forEach((d) => {
-      const row = d;
-      row.created = d3.isoParse(row.created);
+  console.log(`our array is: ${leng} long and contains ${jsonData}`)
+        // format the data
+      jsonData.forEach((d) => {
+        const row = d;
+        row.created = d3.isoParse(row.created);
+      });
+
+      // Scale the range of the data
+      x.domain(d3.extent(jsonData, (d) => { return d.created; }));
+      y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
+
+      svg.append('path')
+        .data([jsonData])
+        .attr('class', 'line humid')
+        .attr('d', humidity);
+
+      svg.append('g')
+          .attr('transform', `translate(0, ${height} )`)
+          .call(d3.axisBottom(x)
+            .ticks(10));
+
+      svg.append('g')
+          .call(d3.axisLeft(y)
+            .ticks(10));
     });
-
-    // Scale the range of the data
-    x.domain(d3.extent(jsonData, (d) => { return d.created; }));
-    y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
-
-    svg.append('path')
-      .data([jsonData])
-      .attr('class', 'line humid')
-      .attr('d', humidity);
-
-    svg.append('g')
-        .attr('transform', `translate(0, ${height} )`)
-        .call(d3.axisBottom(x)
-          .ticks(10));
-
-    svg.append('g')
-        .call(d3.axisLeft(y)
-          .ticks(10));
-  });
 }
 
 drawGraph();
