@@ -1,7 +1,7 @@
 {
   "name": "weather-app",
   "config": {
-    "port": "5150"
+    "port": "51500"
   },
   "version": "0.0.1",
   "description": "'simple' data logging server for my weather station. ",
@@ -9,7 +9,11 @@
   "scripts": {
     "test": "jest",
     "other-test": "mocha -R @ripter/mocha-reporter-blink1",
+<<<<<<< HEAD
     "start": "node --use_strict server.js"
+=======
+    "start": "node --use-strict server.js"
+>>>>>>> master
   },
   "private": true,
   "keywords": [],
@@ -18,7 +22,7 @@
     "url": "git+https://github.com/zerosquadron/weatherApp.git"
   },
   "author": "Skip McBride",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zerosquadron/weatherApp/issues"
   },
@@ -29,11 +33,9 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "gulp": "^3.9.1",
-    "mocha": "^2.5.3",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
-    "public-ip": "^2.0.1",
     "socketio": "^1.0.0"
   },
   "devDependencies": {
@@ -65,6 +67,7 @@
     "gulp-util": "^3.0.7",
     "jest-cli": "^14.1.0",
     "mocha": "^2.5.3",
+    "public-ip": "^2.0.1",
     "run-sequence": "^1.2.1",
     "shelljs": "^0.7.0",
     "vinyl-buffer": "^1.0.0",

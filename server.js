@@ -11,7 +11,7 @@ const pool = require('./src/server/pool');
 
 const api = require('./api');
 
-const port = 5150;
+const port = 51500;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
