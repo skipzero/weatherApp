@@ -30,7 +30,7 @@ function drawGraph() {
       .attr('transform',
             `translate( ${margin.left}, ${margin.top})`);
 
-  d3.request(`${ip}/weather`)
+  d3.request(`http://angerbunny.net/weather`)
     .get((error, data) => {
       if (error) throw error;
       const leng = data.length;
