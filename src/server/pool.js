@@ -15,7 +15,10 @@ function Pool() {
 
   this.acquire = (callback) => {
     this.pool.getConnection((err, connection) => {
-      if (err) throw err;
+      if (err) {
+        console.log(`ERROR: ${err}`);
+        throw err;
+      }
       callback(err, connection);
     });
   };
