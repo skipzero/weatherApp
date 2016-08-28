@@ -18,5 +18,5 @@ build/
 public/
 db/*.json
 .env
-vars.*
+env.*
 ecosystem.*

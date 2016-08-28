@@ -1,41 +1,43 @@
-circle {
-  stroke: none;
-  stroke-width: 0;
-  fill:   limegreen;
-}
+.chart {
+  circle {
+    stroke: none;
+    stroke-width: 0;
+    fill:   limegreen;
+  }
 
-svg .line {
-  fill: none;
-  stroke: red;
-  stroke-width: .5px;
-}
+  svg .line {
+    fill: none;
+    stroke: red;
+    stroke-width: .5px;
+  }
 
-.axis {
-    shape-rendering: crispEdges;
-}
+  .axis {
+      shape-rendering: crispEdges;
+  }
 
-.x.axis line {
-    stroke: black;
-}
+  .x.axis line {
+      stroke: black;
+  }
 
-.y.axis line {
-    stroke: steelblue;
-}
+  .y.axis line {
+      stroke: steelblue;
+  }
 
-.axis text {
-    font-size: 12px;
-}
+  .axis text {
+      font-size: 12px;
+  }
+line { fill: none;}
 
-
-div.tooltip {
-    position: absolute;
-    text-align: center;
-    width: 60px;
-    height: 28px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
+  div.tooltip {
+      position: absolute;
+      text-align: center;
+      width: 60px;
+      height: 28px;
+      padding: 2px;
+      font: 12px sans-serif;
+      background: lightsteelblue;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+  }
 }
