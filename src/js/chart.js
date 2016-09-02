@@ -5,7 +5,7 @@ function drawGraph() {
   const width = 1250 - margin.left - margin.right;
   const height = 750 - margin.top - margin.bottom;
 
-  const ip = 'http://138.68.54.109';
+  const ip = 'http://angerbunny.net';
 
   // parse the date / time
   // const parseTime = d3.timeParse('%d-%b-%y');
@@ -23,14 +23,14 @@ function drawGraph() {
     .x((d) => { return x(d.created); })
     .y((d) => { return y(d.inTemp); });
 
-  const svg = d3.select('body').append('svg')
+  const svg = d3.select('.chart').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
     .append('g')
       .attr('transform',
             `translate( ${margin.left}, ${margin.top})`);
 
-  d3.json(`/weather`, (error, data) => {
+  d3.json(`${ip}/weather`, (error, data) => {
     if (error) throw error;
     const leng = data.length;
 

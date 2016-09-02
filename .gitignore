@@ -17,6 +17,5 @@ SD.js
 build/
 public/
 db/*.json
-.env
-env.js
+env.*
 ecosystem.*
