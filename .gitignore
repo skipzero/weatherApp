@@ -18,3 +18,4 @@ build/
 public/
 db/*.json
 env.*
+ecosystem.*

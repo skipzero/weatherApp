@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const hbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 
 const http = require('http');
 const server = http.Server(app);
@@ -11,15 +11,20 @@ const pool = require('./src/server/pool');
 
 const api = require('./api');
 
-const port = 5150;
+const port = 51500;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
-app.engine('hbs', hbs({ extname: 'hbs', defaultlayout: 'main', layoutsDir: `${__dirname}/views/layouts` }));
-// app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.engine('.hbs', exphbs({ extname: '.hbs' }));
+// app.set('views', 'path.join(__dirname', 'views'));
+app.set('view engine', '.hbs');
 
 app.use(express.static('public'));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next()
+})
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -29,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/temp', (req, res) => {
-  res.render('index');
+  res.render('layouts/main');
   // res.sendFile( `${__dirname}/public/index.html`);
 });
 
