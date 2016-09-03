@@ -18,6 +18,7 @@ const weatherData = (data) => {
     res.setEncoding('utf8');
     res.on('error', err => {
       console.error(`ERROR: ${err}`);
+      throw err;
     });
 
     res.on('data', (chunk) => {
@@ -27,12 +28,13 @@ const weatherData = (data) => {
     });
 
     res.on('end', () => {
-      console.log('writing done!');
+      console.log('success!');
     });
   });
 
-  post.on('error', (e) => {
-    console.log(`ERROR!! ${e.message}`);
+  post.on('error', (err) => {
+    console.log(`ERROR!! ${err.message}`);
+    throw err;
   });
 
   post.write(postData);

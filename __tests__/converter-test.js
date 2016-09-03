@@ -1,8 +1,8 @@
-jest('../converter'); // unmock to use the actual implementation of sum
+const jest = require('jest');
+jest('../src/server/converter');
 
 describe('converter', () => {
   it('converts measurement F/C', () => {
-    const server = require('../server');
-    expect(port).toBe(51500);
+    console.log('This is our testies', )
   });
 });

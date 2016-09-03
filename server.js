@@ -21,16 +21,17 @@ app.set('view engine', '.hbs');
 
 app.use(express.static('public'));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next()
-})
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  // res.render('index');
-  res.sendFile(`${__dirname}/public/index.html`);
+  res.render('index');
+  // res.sendFile(`${__dirname}/public/index.html`);
 });
 
 app.get('/temp', (req, res) => {

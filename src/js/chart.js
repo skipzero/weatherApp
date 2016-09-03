@@ -2,13 +2,10 @@ const d3 = require('d3');
 
 function drawGraph() {
   const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-  const width = 1250 - margin.left - margin.right;
-  const height = 750 - margin.top - margin.bottom;
+  const width = 450 - margin.left - margin.right;
+  const height = 250 - margin.top - margin.bottom;
 
   const ip = 'http://angerbunny.net';
-
-  // parse the date / time
-  // const parseTime = d3.timeParse('%d-%b-%y');
 
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
@@ -17,13 +14,15 @@ function drawGraph() {
   // define the line
   const humidity = d3.line()
     .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.outHum); });
+    .y((d) => { return y(d.outHum); })
+    .curve(d3.curveMonotoneX);
 
-  const temp = d3.line()
-    .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.inTemp); });
+  // const temp = d3.line()
+  //   .x((d) => { return x(d.created); })
+  //   .y((d) => { return y(d.inTemp); })
+  //   .curve(d3.curveMonotoneX);
 
-  const svg = d3.select('.chart').append('svg')
+  const svg = d3.select('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
     .append('g')
@@ -34,9 +33,8 @@ function drawGraph() {
     if (error) throw error;
     const leng = data.length;
 
-    const jsonData = data.slice(leng - 300, leng - 1);
+    const jsonData = data.slice(leng - 150, leng - 1);
 
-console.log(`our array is: ${leng} long and contains ${jsonData}`)
       // format the data
     jsonData.forEach((d) => {
       const row = d;
@@ -52,14 +50,36 @@ console.log(`our array is: ${leng} long and contains ${jsonData}`)
       .attr('class', 'line humid')
       .attr('d', humidity);
 
+    // svg.append('path')
+    //   .data([jsonData])
+    //   .attr('class', 'line temp')
+    //   .attr('d', temp);
+
+
+    svg.selectAll('dot')
+        .data(jsonData)
+      .enter()
+        .append('circle')
+        .attr('r', 2)
+        .attr('cx', (d) => { return x(d.created); })
+        .attr('cy', (d) => { return y(d.outHum); });
+
     svg.append('g')
         .attr('transform', `translate(0, ${height} )`)
         .call(d3.axisBottom(x)
-          .ticks(10));
+          .ticks(5));
 
     svg.append('g')
         .call(d3.axisLeft(y)
           .ticks(10));
+
+    svg.append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 0 - margin.left)
+      .attr('x', 0 - (height / 2))
+      .attr('dy', '0.8em')
+      .style('text-anchor', 'middle')
+      .text('Humidity');
   });
 }
 

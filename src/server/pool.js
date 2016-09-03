@@ -3,7 +3,7 @@ const env = require('../../env');
 
 function Pool() {
   this.pool = null;
-  this.init = function () {
+  this.init = () => {
     this.pool = mysql.createPool({
       connectionLimit: 10,
       user: env.user,
@@ -16,7 +16,7 @@ function Pool() {
   this.acquire = (callback) => {
     this.pool.getConnection((err, connection) => {
       if (err) {
-        console.log(`ERROR: ${err}`);
+        console.info(`ERROR: ${err}`);
         throw err;
       }
       callback(err, connection);
