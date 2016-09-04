@@ -1,4 +1,4 @@
-const convert = data => {
+const convert = (data) => {
   'use strict';
   let dataCon = JSON.parse(data);
   dataCon = dataCon.FullDataString.split(',');

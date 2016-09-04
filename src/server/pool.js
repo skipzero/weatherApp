@@ -1,3 +1,4 @@
+const debug = require('debug');
 const mysql = require('mysql');
 const env = require('../../env');
 
@@ -16,7 +17,7 @@ function Pool() {
   this.acquire = (callback) => {
     this.pool.getConnection((err, connection) => {
       if (err) {
-        console.info(`ERROR: ${err}`);
+        debug(`[${new Date()}] ERROR: ${err}`);
         throw err;
       }
       callback(err, connection);

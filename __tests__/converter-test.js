@@ -1,8 +1,6 @@
-const jest = require('jest');
-jest('../src/server/converter');
+const converter = require('../src/server/converter');
 
-describe('converter', () => {
-  it('converts measurement F/C', () => {
-    console.log('This is our testies', )
-  });
+test('converter is a really weird animal...', () => {
+  expect(1).toEqual(1);
+  console.log('REPORT', converter().dateFormatter())
 });

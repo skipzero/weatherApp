@@ -7,8 +7,13 @@
 # data
 data/
 
+# Logs
+logs/
+*.log
+
 # Node/bower
 node_modules
+.npmrc
 bower_components
 npm-debug.log
 SD.js
@@ -19,3 +24,4 @@ public/
 db/*.json
 env.*
 ecosystem.*
+coverage/
