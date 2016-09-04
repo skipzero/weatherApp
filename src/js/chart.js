@@ -1,11 +1,11 @@
 const d3 = require('d3');
-
+// const debug = ;
 function drawGraph() {
   const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-  const width = 450 - margin.left - margin.right;
+  const width = 430 - margin.left - margin.right;
   const height = 250 - margin.top - margin.bottom;
 
-  const ip = 'http://angerbunny.net';
+  const path = 'http://angerbunny.net/weather';
 
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
@@ -17,19 +17,18 @@ function drawGraph() {
     .y((d) => { return y(d.outHum); })
     .curve(d3.curveMonotoneX);
 
-  // const temp = d3.line()
-  //   .x((d) => { return x(d.created); })
-  //   .y((d) => { return y(d.inTemp); })
-  //   .curve(d3.curveMonotoneX);
+  const temp = d3.line()
+    .x((d) => { return x(d.created); })
+    .y((d) => { return y(d.inTemp); })
+    .curve(d3.curveMonotoneX);
 
   const svg = d3.select('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
     .append('g')
-      .attr('transform',
-            `translate( ${margin.left}, ${margin.top})`);
+      .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
-  d3.json(`${ip}/weather`, (error, data) => {
+  d3.json(path, (error, data) => {
     if (error) throw error;
     const leng = data.length;
 

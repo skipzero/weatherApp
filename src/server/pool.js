@@ -20,6 +20,8 @@ function Pool() {
         debug(`[${new Date()}] ERROR: ${err}`);
         throw err;
       }
+
+      debug(`[${new Date()}] Our connection: ${connection}`);
       callback(err, connection);
     });
   };

@@ -1,7 +1,11 @@
 const convert = (data) => {
   'use strict';
+  console.log('NewFreshData....', data);
+
   let dataCon = JSON.parse(data);
+  console.log('JSONParsed...', dataCon);
   dataCon = dataCon.FullDataString.split(',');
+  console.log('DataArray...', dataCon);
 
   const compare = (a, b) => {
     if (a.length > b.length) {
@@ -14,7 +18,7 @@ const convert = (data) => {
   };
 
   //  convert our date string to be year first.
-  const dateFormatter = stationDate => {
+  const dateFormatter = (stationDate) => {
     let date = stationDate;
     date = date.split(' ');
     date[0] = date[0].split('/').sort(compare);

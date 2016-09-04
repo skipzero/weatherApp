@@ -8,10 +8,11 @@ const getData = (path, callback) => {
 
     resp.on('error', (error) => {
       console.info('ERR', error);
-      return error;
+      throw error;
     });
 
     resp.on('data', (data) => {
+      console.info('getData', data)
       callback(convert(data));
     });
   });

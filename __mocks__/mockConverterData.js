@@ -1,4 +1,3 @@
-const mockData = jest.fn(() =>  [{"id":0,"created":"2016-09-03 16:58:38","outTemp":"52.30","outHum":"79.70", "inTemp":"19.30","barom":"100881.00","alt":"39.55","curWindS":"18.24","curWindG":"17.70", "curWindD":"202.50","rainTot": "0.14", "windSpeedMin":"3.84", "windSpeedMax":"18.24", "windGustMin": "2.57", "WindGustMax":"20.51", "windDirMin":"90.00", "windDirMax":"270.00", "engMetric":"0", "station":"AlphaStationX-W", "airQualSens":"0", "airQualQual":"-1"}]
-);
+const mockData = jest.fn(() => {"FullDataString": "46.80,91.90,14.90,100833.00,39.98,7.68,6.46,135.00,0.14,6.72,12.48,5.53,10.25,135.00,202.50,0,09/03/2016 20:53:31,AlphaStationX-W,0,-1", "id": "1", "name": "OurWeather", "connected": true});
 
 module.exports = mockData;

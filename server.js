@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 // const exphbs = require('express-handlebars');
 
+const debug = require('debug')('http');
 const http = require('http');
 const server = http.Server(app);
 const bodyParser = require('body-parser');
-const debug = require('debug')('http');
 
 const pollStation = require('./src/server/pollStation');
 const pool = require('./src/server/pool');
 
 const api = require('./api');
 
-const name = 'weather-app';
+const name = 'my-weatherApp';
 const port = 51500;
+
+console.log(`OurApp ${name}`);
+debug('Starting %s', name);
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -28,8 +31,6 @@ app.use((req, res, next) => {
   next();
 });
 
-debug('Starting %s', name);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -37,11 +38,6 @@ app.get('/', (req, res) => {
   debug(`Root ${req.method} ${req.url}`);
   res.render('index');
   // res.sendFile(`${__dirname}/public/index.html`);
-});
-
-app.get('/temp', (req, res) => {
-  res.render('layouts/main');
-  // res.sendFile( `${__dirname}/public/index.html`);
 });
 
 pool.init();
