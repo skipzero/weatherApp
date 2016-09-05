@@ -22,7 +22,7 @@ function drawGraph() {
     .y((d) => { return y(d.inTemp); })
     .curve(d3.curveMonotoneX);
 
-  const svg = d3.select('.chartHumid').append('svg')
+  const svg = d3.selectAll('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
     .append('g')
@@ -49,10 +49,11 @@ function drawGraph() {
       .attr('class', 'line humid')
       .attr('d', humidity);
 
-    // svg.append('path')
-    //   .data([jsonData])
-    //   .attr('class', 'line temp')
-    //   .attr('d', temp);
+      // Our temp for same graph.  we'll move it later...
+    svg.append('path')
+      .data([jsonData])
+      .attr('class', 'line temp')
+      .attr('d', temp);
 
 
     svg.selectAll('dot')
