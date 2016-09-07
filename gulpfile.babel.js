@@ -60,12 +60,12 @@ gulp.task('watch', () => {
 
 gulp.task('js', ['lint'], () => {
   const b = browserify({
-    entries: './src/js/chart.js',
+    entries: ['./src/js/chart.js', './src/js/gauge.js'],
     debug: true,
   }).transform(babelify, { presets: ['es2015'] });
 
   return b.bundle()
-    .pipe(source('./src/js/chart.js'))
+    .pipe(source('./src/js/'))
     .pipe(buffer())
 
     .pipe(sourcemaps.init())
