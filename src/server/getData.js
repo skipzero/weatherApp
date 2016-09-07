@@ -12,7 +12,7 @@ const getData = (path, callback) => {
     });
 
     resp.on('data', (data) => {
-      console.info('getData', data)
+      console.info('getData', data);
       callback(convert(data));
     });
   });

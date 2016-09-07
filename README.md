@@ -1,22 +1,12 @@
 # Weather App
-a simple node app using <DB> to store weather data from my ourWeather Station picked up from [Switch Doc Labs](https://github.com/switchdoclabs/OurWeatherWeatherPlus)
+A (VERY) rough Nodejs version of  [Switch Doc Labs's](https://github.com/switchdoclabs/OurWeatherWeatherPlus) api. essential an app to poll the station at regular intervals and log the data to a mysql database. I've never tried implementing the one from Switch Doc, so I can't really compare them, apples to apples... But I think this gets the trick done and maybe a few environmental specific changes.
 
 First, install our packages...
 
 `$ npm install`
 
-This is a simple flat file version, instead of bothering with days of wrestling with mysql for beginners. You'll need to know a little about [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) and Node's [FS Module](https://nodejs.org/api/fs.html#fs_file_system). I highly recommend brushing over the material listed. :)
-
-you'll want to create an empty file and call it `weather.json`. Put it in the db folder for the server to write to (in the root of the project).
-
 Then to start server...
 
 `$ npm start`
 
-<<<<<<< HEAD
-I've deployed the app to a cloud based server on digital ocean and have set up the mysql DB there as well. the API will now lbe used from there, ideally. working on the [mysql branch](https://github.com/zerosquadron/weatherApp/tree/with-MySQL) now. have it writing to a mysql db and reading back.
-=======
-Currently it's only logging to the console and serving a simple page. but it's coming along. working on getting db connections working.
-
 I'm also concurrently working on the [MySql branch](https://github.com/zerosquadron/weatherApp/tree/mysql) and am hoping to have a [Mongo branch](https://github.com/zerosquadron/weatherApp/tree/mongodb) started soon.
->>>>>>> 043e4c3... updated readme links to new repo names

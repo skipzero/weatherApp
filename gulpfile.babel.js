@@ -1,6 +1,4 @@
-'use strict';
 import browserify from 'browserify';
-// import babel from 'gulp-babel';
 import babelify from 'babelify';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
@@ -9,7 +7,6 @@ import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
-import notify from 'gulp-notify';
 import plumber from 'gulp-plumber';
 import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
@@ -20,7 +17,7 @@ import source from 'vinyl-source-stream';
 
       // colors for our console output
 const ok = colors.green.bold;
-// const error = colors.red.bold;
+const error = colors.red.bold;
 
 //  Our config object to hold paths, etc
 const basePath = {
@@ -71,19 +68,18 @@ gulp.task('js', ['lint'], () => {
     .pipe(source('./src/js/chart.js'))
     .pipe(buffer())
 
-  // return gulp.src(file.jsPath.src)
-  //   .pipe(sourcemaps.init())
-  //   .pipe(uglify()
-  //     .on('error', (err) => {
-  //       gutil.log(err('ERR:', err));
-  //     }))
+    .pipe(sourcemaps.init())
+    .pipe(uglify()
+      .on('error', (err) => {
+        gutil.log(err('ERR:', err));
+      }))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.jsPath.pub));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.jsPath.src, file.jsPath.server, /* './gulpfile.babel.js',*/ './server.js'])
+  return gulp.src([file.jsPath.src, file.jsPath.server, './gulpfile.babel.js', './server.js'])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
@@ -102,9 +98,9 @@ gulp.task('css', () => {
       includePaths: [
         basePath.styles,
       ],
-    }).on('error', notify.onError((err) => {
-      return `\n\n ERROR: ${err.formatted} ${err}`;
-    })))
+    }).on('error', (err) => {
+      gutil.log(error(`\n\nERROR: ${err}`));
+    }))
     // .pipe(clean())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.cssPath.pub));

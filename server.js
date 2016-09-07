@@ -19,12 +19,13 @@ console.log(`OurApp ${name}`);
 debug('Starting %s', name);
 
 //  :::SERVER RELATED CODE HERE:::
-//  static file served from...
 // app.engine('.hbs', exphbs({ extname: '.hbs' }));
 // app.set('views', 'path.join(__dirname', 'views'));
 // app.set('view engine', '.hbs');
 
+//  static file served from...
 app.use(express.static('public'));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -37,7 +38,6 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   debug(`Root ${req.method} ${req.url}`);
   res.render('index');
-  // res.sendFile(`${__dirname}/public/index.html`);
 });
 
 pool.init();

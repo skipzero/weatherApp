@@ -2,7 +2,7 @@ body {
   color: red;
 }
 
-.chartHumid {
+.weather-app {
   circle {
     stroke: none;
     stroke-width: 0;
@@ -22,16 +22,18 @@ body {
     }
 
     &.temp {
-      stroke: orange;
+      stroke: pink;
     }
   }
 
-  .axis {
-      shape-rendering: crispEdges;
-  }
+  .x {
+    .axis {
+        shape-rendering: crispEdges;
 
-  .x.axis line {
-      stroke: black;
+      line {
+        stroke: black;
+      }
+    }
   }
 
   .y.axis line {
@@ -41,7 +43,6 @@ body {
   .axis text {
       font-size: 12px;
   }
-line { fill: none;}
 
   div.tooltip {
       position: absolute;
