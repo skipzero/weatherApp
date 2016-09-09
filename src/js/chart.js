@@ -2,8 +2,8 @@ const d3 = require('d3');
 // const debug = ;
 function drawGraph() {
   const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-  const width = 430 - margin.left - margin.right;
-  const height = 250 - margin.top - margin.bottom;
+  const width = 900 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
 
   const path = 'http://angerbunny.net/weather';
 
@@ -20,7 +20,7 @@ function drawGraph() {
   const temp = d3.line()
     .x((d) => { return x(d.created); })
     .y((d) => { return y(d.inTemp); })
-    .curve(d3.curveMonotoneX);
+    .curve(d3.curveCatmullRom);
 
   const svg = d3.selectAll('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -32,7 +32,7 @@ function drawGraph() {
     if (error) throw error;
     const leng = data.length;
 
-    const jsonData = data.slice(leng - 150, leng - 1);
+    const jsonData = data.slice(leng - 400, leng - 1);
 
       // format the data
     jsonData.forEach((d) => {
@@ -67,7 +67,7 @@ function drawGraph() {
     svg.append('g')
         .attr('transform', `translate(0, ${height} )`)
         .call(d3.axisBottom(x)
-          .ticks(5));
+          .ticks(8));
 
     svg.append('g')
         .call(d3.axisLeft(y)

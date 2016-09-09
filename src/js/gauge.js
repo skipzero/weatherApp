@@ -32,8 +32,6 @@ const  x2 = offset,
 const  x3 = x1 - delta,
   y3 = cy;
 
-  console.log('gauge js - firing...')
-
 function drawScale() {
   const sr1 = r1 + 5;
   const sr2 = r2 - 5;
