@@ -36,8 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  debug(`Root ${req.method} ${req.url}`);
-  res.render('index');
+  res.sendFile(`${__dirname}/public/index.html`);
 });
 
 pool.init();
