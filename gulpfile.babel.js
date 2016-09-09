@@ -1,5 +1,8 @@
-import browserify from 'browserify';
+import autoprefixer from 'gulp-autoprefixer';
 import babelify from 'babelify';
+import browserify from 'browserify';
+import bower from 'gulp-bower';
+import clean from 'gulp-clean-css';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
 import del from 'del';
@@ -21,15 +24,17 @@ const error = colors.red.bold;
 
 //  Our config object to hold paths, etc
 const basePath = {
+  bower: 'bower_components',
+  pub: 'public',
   root: './',
   src: 'src',
-  pub: 'public',
   tests: '__tests__',
 };
 
 const file = {
+  bootstrap: `${basePath.bower}/bootstrap/scss/`,
   jsPath: {
-    src: `${basePath.src}/js/chart.js`,
+    src: `${basePath.src}/js/*`,
     server: `${basePath.src}/server/**`,
     models: `${basePath.src}/models/**`,
     pub: `${basePath.pub}/js`,
@@ -41,8 +46,9 @@ const file = {
   },
 
   cssPath: {
-    src: `${basePath.src}/css/*.scss`,
+    bower: `${basePath.bower}/`,
     pub: `${basePath.pub}/css`,
+    src: `${basePath.src}/css/main.scss`,
   },
   tests: `${basePath.tests}/**/*`,
 };
@@ -90,18 +96,22 @@ gulp.task('html', () => {
     .pipe(gulp.dest(file.htmlPath.pub));
 });
 
-gulp.task('css', () => {
+gulp.task('bower', ['clean'], () => {
+  return bower()
+    .pipe(gulp.dest(`${basePath.bower}/`))
+})
+
+gulp.task('css', ['bower'], () => {
   return gulp.src(file.cssPath.src)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       includePaths: [
-        basePath.styles,
+        file.bootstrap,
       ],
-    }).on('error', (err) => {
-      gutil.log(error(`\n\nERROR: ${err}`));
-    }))
-    // .pipe(clean())
+    }).on('error', gutil.log))
+    .pipe(autoprefixer())
+    .pipe(clean())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(file.cssPath.pub));
 });

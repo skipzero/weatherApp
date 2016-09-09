@@ -1,6 +1,5 @@
 const express = require('express');
-const app = express();
-// const exphbs = require('express-handlebars');
+const app = express();;
 
 const debug = require('debug')('http');
 const http = require('http');
@@ -19,10 +18,6 @@ console.log(`OurApp ${name}`);
 debug('Starting %s', name);
 
 //  :::SERVER RELATED CODE HERE:::
-// app.engine('.hbs', exphbs({ extname: '.hbs' }));
-// app.set('views', 'path.join(__dirname', 'views'));
-// app.set('view engine', '.hbs');
-
 //  static file served from...
 app.use(express.static('public'));
 
