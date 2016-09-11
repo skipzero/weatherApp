@@ -46,9 +46,9 @@ const file = {
   },
 
   cssPath: {
-    bower: `${basePath.bower}/`,
+    bower: `${basePath.bower}`,
     pub: `${basePath.pub}/css`,
-    src: `${basePath.src}/css/main.scss`,
+    src: `${basePath.src}/css`,
   },
   tests: `${basePath.tests}/**/*`,
 };
@@ -57,8 +57,9 @@ gulp.task('default', () => {
   runSequence(['clean'], ['html'], ['css'], ['js'], ['watch']);
 });
 
+/*  WATCHING FILES  */
 gulp.task('watch', () => {
-  gulp.watch(file.cssPath.src, ['css']);
+  gulp.watch(`${file.cssPath.src}/**/*.scss`, ['css']);
   gulp.watch([file.jsPath.src], ['js']);
   gulp.watch(['./*.js', file.jsPath.server, file.jsPath.models], ['lint']);
   gulp.watch([file.htmlPath.src], ['html']);
@@ -77,7 +78,7 @@ gulp.task('js', ['lint'], () => {
     .pipe(sourcemaps.init())
     .pipe(uglify()
       .on('error', (err) => {
-        gutil.log(err('ERR:', err));
+        gutil.log(error('ERR:', err));
       }))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
@@ -96,18 +97,21 @@ gulp.task('html', () => {
     .pipe(gulp.dest(file.htmlPath.pub));
 });
 
-gulp.task('bower', ['clean'], () => {
+//  TODO: create a BUILD task for the BS additions Make the other for local updates.
+//  compile local files in a diff task. add to BS only on build command...
+gulp.task('bower', () => {
   return bower()
-    .pipe(gulp.dest(`${basePath.bower}/`))
-})
+    .pipe(gulp.dest(`${basePath.bower}/`));
+});
 
 gulp.task('css', ['bower'], () => {
-  return gulp.src(file.cssPath.src)
+  return gulp.src(`${file.cssPath.src}/main.scss`)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       includePaths: [
         file.bootstrap,
+        file.cssPath.src,
       ],
     }).on('error', gutil.log))
     .pipe(autoprefixer())

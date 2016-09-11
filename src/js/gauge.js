@@ -9,9 +9,9 @@ const needle = document.querySelector('.needle');
 const initialValue = document.querySelector('.initialValue');
 
 const rad = Math.PI / 180;
-const NS = 'http:\/\/www.w3.org/2000/svg';
+const NS = 'http://www.w3.org/2000/svg';
 
-const W = parseInt(window.getComputedStyle(svg, null).getPropertyValue('width'));
+const W = parseInt(window.getComputedStyle(svg, null).getPropertyValue('width'), 10);
 const offset = 40;
 const cx = ~~(W / 2);
 const cy = 160;
@@ -21,7 +21,7 @@ const delta = ~~(r1 / 4);
 
 const initVal = initialValue.value;
 
-let  isDragging = false;
+let isDragging = false;
 
 const x1 = cx + r1;
 const y1 = cy;
@@ -40,11 +40,17 @@ function drawScale() {
   const srT = r1 + 20;
   const scale = document.querySelector('.scale');
 
+  function clearRect(node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+  }
+
   clearRect(scale);
 
-  let  n = 0;
+  let n = 0;
 
-  for (let  sa = -180; sa <= 0; sa += 18) {
+  for (let sa = -180; sa <= 0; sa += 18) {
     const sx1 = cx + sr1 * Math.cos(sa * rad);
     const sy1 = cy + sr1 * Math.sin(sa * rad);
     const sx2 = cx + sr2 * Math.cos(sa * rad);
@@ -58,10 +64,10 @@ function drawScale() {
       x1: sx1,
       y1: sy1,
       x2: sx2,
-      y2: sy2,
+      y2: sy2
     };
-
     setSVGAttributes(scaleLine, scaleLineObj);
+
     scale.appendChild(scaleLine);
 
     const scaleText = document.createElementNS(NS, 'text');
@@ -70,16 +76,15 @@ function drawScale() {
       x: sxT,
       y: syT,
     };
-
     setSVGAttributes(scaleText, scaleTextObj);
     scaleText.textContent = n * 10;
     scale.appendChild(scaleText);
+
     n++;
   }
 }
 
 function drawInput(cx, cy, r1, offset, delta, a) {
-
   const d1 = getD1(cx, cy, r1, offset, delta);
   const d2 = getD2(cx, cy, r1, offset, delta, a);
 
@@ -93,8 +98,7 @@ function drawInput(cx, cy, r1, offset, delta, a) {
 
 function updateInput(p, cx, cy, r1, offset, delta) {
   const x = p.x;
-  constconst y = p.y;
-
+  const y = p.y;
   const lx = cx - x;
   const ly = cy - y;
 
@@ -136,7 +140,6 @@ function getD2(cx, cy, r1, offset, delta, a) {
 }
 
 function drawNeedle(cx, cy, r1, a) {
-
   const nx1 = cx + 5 * Math.cos((a - 90) * rad);
   const ny1 = cy + 5 * Math.sin((a - 90) * rad);
 
@@ -146,29 +149,23 @@ function drawNeedle(cx, cy, r1, a) {
   const nx3 = cx + 5 * Math.cos((a + 90) * rad);
   const ny3 = cy + 5 * Math.sin((a + 90) * rad);
 
-  const points = `${nx1},${ny1} ${nx2},${ny2} ${nx3},${ny3}`;
+  const points = nx1 + ',' + ny1 + ' ' + nx2 + ',' + ny2 + ' ' + nx3 + ',' + ny3;
   needle.setAttributeNS(null, 'points', points);
 }
 
 // helpers
-// function oMousePos(elmt, evt) {
-//   const ClientRect = elmt.getBoundingClientRect();
-//   return { // obj
-//     x: Math.round(evt.clientX - ClientRect.left),
-//   const y: Math.min(Math.round(evt.clientY - ClientRect.top), cy)
-//   }
-// }
-
-function clearRect(node) {
-  while (node.firstChild) {
-    node.removeChild(node.firstChild);
+function oMousePos(elmt, evt) {
+  const ClientRect = elmt.getBoundingClientRect();
+  return { //obj
+    x: Math.round(evt.clientX - ClientRect.left),
+    y: Math.min(Math.round(evt.clientY - ClientRect.top), cy)
   }
 }
 
 function setSVGAttributes(elmt, oAtt) {
-  Object.keys(oAtt).forEach((prop) => {
+  for (const prop in oAtt) {
     elmt.setAttributeNS(null, prop, oAtt[prop]);
-  });
+  }
 }
 
 // events
@@ -190,26 +187,24 @@ initialValue.addEventListener('input', function() {
   updateInput(p, cx, cy, r1, offset, delta)
 }, false);
 
-// svg.addEventListener('mousedown', function(evt) {
-//   isDragging = true;
-//   this.classList.add('focusable');
-//   const mousePos = oMousePos(svg, evt);
-//   updateInput(mousePos, cx, cy, r1, offset, delta);
-// }, false);
-//
-// svg.addEventListener('mouseup', function(evt) {
-//   isDragging = false;
-//   this.classList.remove('focusable');
-// }, false);
-//
-// svg.addEventListener('mouseout', function(evt) {
-//   isDragging = false;
-//   this.classList.remove('focusable');
-// }, false);
-//
-// svg.addEventListener('mousemove', function(evt) {
-//   if (isDragging) {
-//     const mousePos = oMousePos(svg, evt);
-//     updateInput(mousePos, cx, cy, r1, offset, delta);
-//   }
-// }, false);
+svg.addEventListener('mousedown', function(evt) {
+  isDragging = true;
+  this.classList.add('focusable');
+  const mousePos = oMousePos(svg, evt);
+  updateInput(mousePos, cx, cy, r1, offset, delta);
+}, false);
+svg.addEventListener('mouseup', function(evt) {
+  isDragging = false;
+  this.classList.remove('focusable');
+}, false);
+svg.addEventListener('mouseout', function(evt) {
+  isDragging = false;
+  this.classList.remove('focusable');
+}, false);
+
+svg.addEventListener('mousemove', function(evt) {
+  if (isDragging) {
+    const mousePos = oMousePos(svg, evt);
+    updateInput(mousePos, cx, cy, r1, offset, delta);
+  }
+}, false);

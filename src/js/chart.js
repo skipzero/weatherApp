@@ -32,7 +32,7 @@ function drawGraph() {
     if (error) throw error;
     const leng = data.length;
 
-    const jsonData = data.slice(leng - 400, leng - 1);
+    const jsonData = data.slice(leng - 600, leng - 1);
 
       // format the data
     jsonData.forEach((d) => {
@@ -49,7 +49,7 @@ function drawGraph() {
       .attr('class', 'line humid')
       .attr('d', humidity);
 
-      // Our temp for same graph.  we'll move it later...
+      // Our temp for same graph.
     svg.append('path')
       .data([jsonData])
       .attr('class', 'line temp')
