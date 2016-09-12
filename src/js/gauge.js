@@ -84,6 +84,8 @@ function drawScale() {
   }
 }
 
+console.log('WINDOW', window.myData);
+
 function drawInput(cx, cy, r1, offset, delta, a) {
   const d1 = getD1(cx, cy, r1, offset, delta);
   const d2 = getD2(cx, cy, r1, offset, delta, a);

@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <!-- Bootstrap CSS -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.slim.js"></script>
   <link rel="stylesheet" href="/css/main.css">
 
   <!--  Socket IO code -->
@@ -18,7 +17,7 @@
   <div class="container">
     <!--  Start Row  -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 store">
 
       </div>
       <div class="col-md-4">
@@ -49,7 +48,10 @@
     <!--  End Row  -->
     <script src="/js/main.js"></script>
     <script>
-      var socket = io.connect();
+      // var socket = io.connect();
+      // socket.on('weatherData', (data) => {
+      //   console.log(`Our socket is working... ${data.data}`);
+      // })
     </script>
   </body>
   </html>
