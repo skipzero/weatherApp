@@ -1,11 +1,7 @@
 const convert = (data) => {
-  'use strict';
-  console.log('NewFreshData....', data);
-
   let dataCon = JSON.parse(data);
-  console.log('JSONParsed...', dataCon);
+  console.log(dataCon);
   dataCon = dataCon.FullDataString.split(',');
-  console.log('DataArray...', dataCon);
 
   const compare = (a, b) => {
     if (a.length > b.length) {

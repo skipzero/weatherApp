@@ -10,6 +10,7 @@ module.exports = {
     rules: {
       strict: 0,
       'arrow-body-style': [2, 'always'],
+      'no-console': 0,
     },
     globals: {
       d3: true,

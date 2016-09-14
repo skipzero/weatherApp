@@ -6,7 +6,7 @@ const fill = document.querySelector('.fill');
 const center = document.querySelector('.center');
 const needle = document.querySelector('.needle');
 
-const initialValue = document.querySelector('.initialValue');
+const initialValue = document.querySelector('.initialValue');  // localStorage.curWindS || 33;
 
 const rad = Math.PI / 180;
 const NS = 'http://www.w3.org/2000/svg';
@@ -33,6 +33,12 @@ const y2 = cy;
 
 const x3 = x1 - delta;
 const y3 = cy;
+
+function storageHandler() {
+  console.log('StorageHandler', arguments)
+}
+
+window.addEventListener('storage', storageHandler(), ['change']);
 
 function drawScale() {
   const sr1 = r1 + 5;
@@ -64,7 +70,7 @@ function drawScale() {
       x1: sx1,
       y1: sy1,
       x2: sx2,
-      y2: sy2
+      y2: sy2,
     };
     setSVGAttributes(scaleLine, scaleLineObj);
 
@@ -83,8 +89,6 @@ function drawScale() {
     n++;
   }
 }
-
-console.log('WINDOW', window.myData);
 
 function drawInput(cx, cy, r1, offset, delta, a) {
   const d1 = getD1(cx, cy, r1, offset, delta);

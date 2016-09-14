@@ -1,8 +1,7 @@
 const http = require('http');
-const port = 51500;
+const port = 3000;
 
-const weatherData = (data) => {
-  console.log('weatherData...');
+const writeData = (data) => {
   const postData = JSON.stringify(data);
   const options = {
     path: '/weather',
@@ -22,23 +21,20 @@ const weatherData = (data) => {
     });
 
     res.on('data', (chunk) => {
-      console.log(`Status: ${res.statusCode}`);
-      console.log(`Headers: ${JSON.stringify(res.headers)}`);
-      console.log(`Body ${chunk}`);
+      console.info(`Status: ${res.statusCode}`);
+      console.info(`Body ${chunk}`);
     });
-
     res.on('end', () => {
-      console.log('success!');
+      return;
     });
   });
 
   post.on('error', (err) => {
-    console.log(`ERROR!! ${err.message}`);
+    console.error(`ERROR: ${err.message}`);
     throw err;
   });
 
   post.write(postData);
   post.end();
 };
-
-module.exports = weatherData;
+module.exports = writeData;

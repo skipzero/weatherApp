@@ -1,26 +1,22 @@
 const express = require('express');
 const app = express();
+
 const http = require('http');
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
 
-const pubIp = require('public-ip');
-
-const io = require('socket.io').listen();
+const io = require('socket.io').listen(server);
 
 const pollStation = require('./src/server/pollStation');
+const converter = require('./src/server/converter');
+
 const pool = require('./src/server/pool');
-
 const api = require('./api');
-
-const port = 51500;
-
-const color = require('colors/safe');
+const port = 3000;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
 app.use(express.static('public'));
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -34,41 +30,6 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
 });
 
-// const cleanData = (data) => {
-//   console.log(`CleanData our data: ${data}`);
-// };
-
-io.sockets.on('connection', (socket) => {
-  console.log(color.blue.bold('IO Connection established...'));
-
-  // const opt = {
-  //   hostname: '73.162.245.173',
-  //   port: port,
-  //   path: '/weather',
-  //   method: 'GET',
-  // }
-
-  function ioTimer () {
-    const updateLoop = setTimeout(() => {
-      http.get('http://73.162.245.173/weather', (res) => {
-
-      });
-      ioTimer;
-    }, 2000);
-  }
-  ioTimer;
-
-  // socket.on('event', (data) => {
-  //   console.log(color.magenta.bold(`Our Socketio Data: ${data}`));
-  // });
-
-  socket.on('disconnect', (data) => {
-    console.log(color.red.bold(`IO user disconnected... ${data}`));
-    clearTimeout(updateLoop);
-  });
-});
-
-
 pool.init();
 api.configure(app);
 
@@ -77,3 +38,81 @@ server.listen(port, () => {
 });
 
 pollStation();
+
+io.on('connection', (socket) => {
+  let dataTimer;
+  function socketHandler() {
+    http.get('http://10.0.0.35/FullDataString', (res) => {
+      res.setEncoding('utf8');
+
+      res.on('error', (err) => {
+        console.error(`ERROR: ${err}`);
+        throw err;
+      });
+
+      res.on('data', (data) => {
+        const cleanData = converter(data);
+        console.log(data);
+        socket.emit('weatherData', cleanData);
+      });
+    });
+  }
+
+  function getSockData() {
+    dataTimer = setTimeout(() => {
+      socketHandler();
+      getSockData();
+    }, 10000);
+  }
+
+  console.log('Client connected to server (server)');
+  getSockData();
+
+  socket.on('weatherData', (data) => {
+    console.log('Data From server:', data);
+  });
+
+  socket.on('fromClient', (data) => {
+    console.log(`caught from client.....${data}`);
+  });
+
+  socket.on('disconnect', () => {
+    clearTimeout(dataTimer);
+  });
+});
+
+// io.sockets.on('connection', (socket) => {
+//   console.log(color.blue.bold('IO Connection established...'));
+//   let updateLoop;
+//
+//   function ioTimer() {
+//     updateLoop = setTimeout(() => {
+//       const request = http.get('http://10.0.0.35/weather', (req, res) => {
+//         res.on('data', (data) => {
+//           socket.emit('weatherData', data);
+//         });
+//
+//         res.on('end', () => {
+//           console.log('Finished get request...');
+//         });
+//       });
+//
+//       request.on('error', (err) => {
+//         console.error(`ERROR: ${err}`);
+//       });
+//
+//       ioTimer();
+//     }, 2000);
+//   }
+//   ioTimer();
+//
+//   socket.on('weatherData', (data) => {
+//     ioTimer();
+//     console.log('weatherData', data);
+//   });
+//
+//   socket.on('disconnect', (data) => {
+//     console.log(color.red.bold(`IO user disconnected... ${data}`));
+//     clearTimeout(updateLoop);
+//   });
+// });
