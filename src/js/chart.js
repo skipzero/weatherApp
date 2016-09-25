@@ -1,3 +1,5 @@
+/*eslint no-console: ['error', { allow: ['log', 'warn', 'error'] }] */
+
 const d3 = require('d3');
 // const debug = ;
 function drawGraph() {
@@ -29,7 +31,9 @@ function drawGraph() {
       .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
   d3.json(path, (error, data) => {
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
     const leng = data.length;
 
     window.myData = data;

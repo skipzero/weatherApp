@@ -1,6 +1,8 @@
+/*eslint no-console: ['error', { allow: ['info', 'error'] }] */
+
 const convert = (data) => {
   let dataCon = JSON.parse(data);
-  console.log(dataCon);
+  console.info(dataCon);
   dataCon = dataCon.FullDataString.split(',');
 
   const compare = (a, b) => {

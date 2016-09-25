@@ -1,3 +1,5 @@
+/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+
 const http = require('http');
 const port = 3000;
 

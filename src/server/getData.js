@@ -1,3 +1,5 @@
+/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+
 const convert = require('./converter');
 const http = require('http');
 const writeData = require('./writeData');
