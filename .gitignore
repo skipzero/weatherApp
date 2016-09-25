@@ -23,5 +23,6 @@ build/
 public/
 db/*.json
 env.*
+.env
 ecosystem.*
 coverage/

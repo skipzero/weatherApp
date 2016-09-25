@@ -42,7 +42,7 @@ pollStation();
 io.on('connection', (socket) => {
   let dataTimer;
   function socketHandler() {
-    http.get('http://10.0.0.35/FullDataString', (res) => {
+    http.get('http://73.162.245.173/FullDataString', (res) => {
       res.setEncoding('utf8');
 
       res.on('error', (err) => {
