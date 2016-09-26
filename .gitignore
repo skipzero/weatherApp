@@ -20,8 +20,6 @@ SD.js
 
 # Build
 build/
-public/
-db/*.json
 env.*
 .env
 ecosystem.*

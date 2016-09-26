@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Weather Dashboard v0.2.0</title>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!--  Styles  -->
+  <link rel="stylesheet" href="/css/main.css">
+
+  <!--  Socket IO code  -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var path = window.location.href;
+    var socket = io.connect(`${path}`);
+    socket.on('connect', (data) => {
+
+      socket.on('fromClient', (data) => {
+        console.log(`weatherData from Client ${data}:fromClient`);
+      });
+
+      socket.on('weatherData', (data) => {
+        dataObj = data;
+        dataArray = Object.keys(data);
+        dataArray.forEach((val) => {
+          localStorage[val] = dataObj[val];
+        })
+      });
+    });
+
+  </script>
+</head>
+<!--  edit here  -->
+<body>
+  <div class="container">
+    <!--  Start THREE Col Row  -->
+    <div class="row">
+      <div class="col-md-4 store">
+
+      </div>
+      <div class="col-md-4">
+        <div class="gauge A">
+          <svg class="typeRange" height="165" width="330" view-box="0 0 330 165">
+            <g class="scale" stroke="red"></g>
+            <path class="outline" d="" />
+            <path class="fill" d="" />
+            <polygon class="needle" points="220,10 300,210 220,250 140,210" />
+          </svg>
+          <div class="output">30</div>
+          <input type="text" class="initialValue" value="37" />
+        </div>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+    <!--  End Row  -->
+    <!--  Start Single Col Row  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="weather-app">
+          <div class="chartHumid"></div>
+        </div>
+      </div>
+    </div>
+    <!--  End Row  -->
+    <script src="/js/main.js"></script>
+    <!--  End body  -->
+  </body>
+  </html>
