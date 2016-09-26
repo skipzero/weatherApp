@@ -9,7 +9,7 @@ const myIp = (cb) => {
 
   pubIp.v4().then(ip => {
     let ipPath;
-    console.log(`my ip currently is: ${ip}`);
+    console.info(`my ip currently is: ${ip}`);
     if (ip === ipAway) { // We check to see if our current IP is our home network's outside facing
       ipPath = ipHome; // If it is, we use the local network to get pull from the station.
     }
@@ -17,7 +17,7 @@ const myIp = (cb) => {
       ipPath = ipAway;
     }
     const path = `http://${ipPath}/FullDataString/`;
-    console.log('Myip...', path);
+    console.info('Myip...', path);
     cb(path);
   });
 };

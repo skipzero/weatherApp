@@ -1,7 +1,10 @@
+#!/usr/bin/env nodejs
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 
 const express = require('express');
 const app = express();
+
+const compression = require('compression');
 
 const http = require('http');
 const server = http.createServer(app);
@@ -16,9 +19,13 @@ const pool = require('./src/server/pool');
 const api = require('./api');
 const port = 3000;
 
+console.log('ENVIRON', process.env.npm_configNODE_ENV);
+
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
 app.use(express.static('public'));
+app.use(compression());
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -54,7 +61,6 @@ io.on('connection', (socket) => {
 
       res.on('data', (data) => {
         const cleanData = converter(data);
-        console.log(data);
         socket.emit('weatherData', cleanData);
       });
     });
@@ -71,7 +77,7 @@ io.on('connection', (socket) => {
   getSockData();
 
   socket.on('weatherData', (data) => {
-    console.log('Data From server:', data);
+    console.log(`Data From server: ${data}`);
   });
 
   socket.on('fromClient', (data) => {
