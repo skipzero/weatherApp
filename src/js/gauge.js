@@ -9,7 +9,7 @@ const gauge = () => {
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
 
-  const initialValue = document.querySelector('.initialValue');  // localStorage.curWindS || 33;
+  const initialValue = localStorage.getItem('windGustMax'); // || 33;
 
   const rad = Math.PI / 180;
   const NS = 'http://www.w3.org/2000/svg';
@@ -179,39 +179,51 @@ const gauge = () => {
     updateInput(p, cx, cy, r1, offset, delta);
   }, false);
 
-  // initialValue.addEventListener('input', function() {
-  //   const val = this.value;
-  //   const newVal = (!isNaN(val) && val >= 0 && val <= 100) ? val : 18;
-  //   const pa = (newVal * 1.8) - 180;
-  //   const p = {};
-  //   p.x = cx + r1 * Math.cos(pa * rad);
-  //   p.y = cy + r1 * Math.sin(pa * rad);
-  //   updateInput(p, cx, cy, r1, offset, delta);
-  // }, false);
+  initialValue.addEventListener('input', function() {
+    const val = this.value;
 
-  // svg.addEventListener('mousedown', function(evt) {
-  //   isDragging = true;
-  //   this.classList.add('focusable');
-  //   const mousePos = oMousePos(svg, evt);
-  //   updateInput(mousePos, cx, cy, r1, offset, delta);
-  // }, false);
-  //
-  // svg.addEventListener('mouseup', function() {
-  //   isDragging = false;
-  //   this.classList.remove('focusable');
-  // }, false);
-  //
-  // svg.addEventListener('mouseout', function() {
-  //   isDragging = false;
-  //   this.classList.remove('focusable');
-  // }, false);
+    // const val = getWindSpeed();
+    console.log('updateVal', val);
+    const newVal = (!isNaN(val) && val >= 0 && val <= 100) ? val : 18;
+    const pa = (newVal * 1.8) - 180;
+    const p = {};
+    p.x = cx + r1 * Math.cos(pa * rad);
+    p.y = cy + r1 * Math.sin(pa * rad);
+    updateInput(p, cx, cy, r1, offset, delta);
+  }, false);
 
-  // svg.addEventListener('mousemove', function(evt) {
-  //   if (isDragging) {
-  //     const mousePos = oMousePos(svg, evt);
-  //     updateInput(mousePos, cx, cy, r1, offset, delta);
-  //   }
-  // }, false);
+  svg.addEventListener('mousedown', function(evt) {
+    isDragging = true;
+    this.classList.add('focusable');
+    const mousePos = oMousePos(svg, evt);
+    updateInput(mousePos, cx, cy, r1, offset, delta);
+  }, false);
+
+  svg.addEventListener('mouseup', function() {
+    isDragging = false;
+    this.classList.remove('focusable');
+  }, false);
+
+  svg.addEventListener('mouseout', function() {
+    isDragging = false;
+    this.classList.remove('focusable');
+  }, false);
+
+  svg.addEventListener('mousemove', function(evt) {
+    if (isDragging) {
+      const mousePos = oMousePos(svg, evt);
+      updateInput(mousePos, cx, cy, r1, offset, delta);
+    }
+  }, false);
+
+  function getWindSpeed () {
+    const windTimer = setTimeout(() => {
+      const windData = localStorage.getItem('windGustMax');
+      console.log('local Storage', windData);
+      getWindSpeed();
+      return windData;
+    }, 10000);
+  }
 };
 
 gauge();

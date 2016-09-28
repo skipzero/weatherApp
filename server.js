@@ -14,7 +14,7 @@ const io = require('socket.io').listen(server);
 const env = require('./env.js');
 const pollStation = require('./src/server/pollStation');
 const converter = require('./src/server/converter');
-
+const myIp = require('./src/server/myIp')
 const pool = require('./src/server/pool');
 const api = require('./api');
 const port = env.servPort;
@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === 'Production') {
 } else {
   weatherIP = 'http://10.0.0.35/FullDataString';
 }
+
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -59,7 +60,7 @@ pollStation();
 io.on('connection', (socket) => {
   let dataTimer;
   function socketHandler() {
-    http.get(serverIP, (res) => {
+    http.get(weatherIP, (res) => {
       res.setEncoding('utf8');
 
       res.on('error', (err) => {
