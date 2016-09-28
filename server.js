@@ -14,13 +14,13 @@ const io = require('socket.io').listen(server);
 
 const pollStation = require('./src/server/pollStation');
 const converter = require('./src/server/converter');
-
+const myIp = require('./src/server/myIp')
 const pool = require('./src/server/pool');
 const api = require('./api');
 const port = 3000;
 
 console.log('ENVIRON', process.env.npm_configNODE_ENV);
-
+console.log('My ip formn server is....', myIp())
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
 app.use(express.static('public'));

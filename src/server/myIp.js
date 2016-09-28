@@ -17,6 +17,8 @@ const myIp = (cb) => {
       ipPath = ipAway;
     }
     const path = `http://${ipPath}/FullDataString/`;
+    return path;
+    
     console.info('Myip...', path);
     cb(path);
   });
