@@ -1,8 +1,6 @@
 {
   "name": "weather-app",
-  "config": {
-    "port": "3000"
-  },
+  "config": {},
   "version": "0.1.0",
   "description": "'simple' data logging server for my weather station...",
   "main": "server.js",
@@ -11,7 +9,7 @@
     "start": "mkdir -p logs && DEBUG_FD=3 node --use_strict server.js 3> logs/weatherLogs.log",
     "scss": "node-sass --output-style compressed -o public/css src/css",
     "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -r public/css/*",
-    "lint": "eslint src/js"
+    "lint": "eslint src/js/*"
   },
   "private": true,
   "keywords": [],
@@ -52,6 +50,7 @@
     "del": "^2.2.0",
     "eslint": "^2.12.0",
     "eslint-config-airbnb": "^9.0.1",
+    "eslint-loader": "^1.5.0",
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.4.2",
     "eslint-plugin-react": "^5.1.1",

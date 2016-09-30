@@ -1,4 +1,4 @@
-/*eslint no-console: ['error', { allow: ['log', 'warn', 'error'] }] */
+/*eslint no-console: ['warn', { allow: ['log', 'info', 'error'] }] */
 
 const d3 = require('d3');
 // const debug = ;
@@ -34,10 +34,10 @@ function drawGraph() {
     if (error) {
       throw error;
     }
-    const leng = data.length;
+    // const leng = data.length;
 
     window.myData = data;
-    const jsonData = data.slice(leng - 600, leng - 1);
+    const jsonData = data; //.slice(leng - 600, leng - 1);
 
       // format the data
     jsonData.forEach((d) => {

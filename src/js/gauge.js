@@ -1,4 +1,4 @@
-/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }], no-shadow: ['error', { 'builtinGlobals': true,}] */
+/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }], no-shadow: [ 0, { 'builtinGlobals': true,}], no-unused-vars: 0, no-invalid-this: 0 */
 
 const gauge = () => {
   const containersRy = document.querySelector('.container');
@@ -165,8 +165,12 @@ const gauge = () => {
   }
 
   function setSVGAttributes(elmt, oAtt) {
-    for (const prop in oAtt) {
-      elmt.setAttributeNS(null, prop, oAtt[prop]);
+    console.log('oATT', oAtt);
+    
+    if (oAtt.hasOwnProp()) {
+      for (const prop in oAtt) {
+        elmt.setAttributeNS(null, prop, oAtt[prop]);
+      }
     }
   }
 

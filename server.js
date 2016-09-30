@@ -11,18 +11,19 @@ const bodyParser = require('body-parser');
 
 const io = require('socket.io').listen(server);
 
-const env = require('./env.js');
+// const env = require('./env.js');
 const pollStation = require('./src/server/pollStation');
 const converter = require('./src/server/converter');
-const myIp = require('./src/server/myIp')
+// const myIp = require('./src/server/myIp')
 const pool = require('./src/server/pool');
 const api = require('./api');
-const port = env.servPort;
+const port = 3000;
 
 let weatherIP;
 if (process.env.NODE_ENV === 'Production') {
   weatherIP = 'http://73.162.245.173/FullDataString';
-} else {
+}
+else {
   weatherIP = 'http://10.0.0.35/FullDataString';
 }
 
