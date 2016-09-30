@@ -1,5 +1,5 @@
 #!/usr/bin/env nodejs
-/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+/*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
 const express = require('express');
 const app = express();
 
@@ -11,12 +11,11 @@ const bodyParser = require('body-parser');
 
 const io = require('socket.io').listen(server);
 
-// const env = require('./env.js');
-const pollStation = require('./src/server/pollStation');
-const converter = require('./src/server/converter');
-// const myIp = require('./src/server/myIp')
-const pool = require('./src/server/pool');
-const api = require('./api');
+const pollStation = require('./server/pollStation');
+const converter = require('./server/converter');
+const myIp = require('./server/myIp')
+const pool = require('./server/pool');
+const api = require('./server/api');
 const port = 3000;
 
 let weatherIP;
@@ -57,6 +56,7 @@ server.listen(port, () => {
 //  Our server calls the weather station to get our data
 pollStation();
 
+//  SET UP OUR WEBSOCKETS
 //  Websockets via socketio
 io.on('connection', (socket) => {
   let dataTimer;
@@ -96,6 +96,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
+    console.info('Disconnected (serverside)');
     clearTimeout(dataTimer);
   });
 });

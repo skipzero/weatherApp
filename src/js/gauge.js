@@ -9,7 +9,7 @@ const gauge = () => {
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
 
-  const initialValue = localStorage.getItem('windGustMax'); // || 33;
+  const initialValue = document.querySelector('input.initialValue')//  localStorage.getItem('WindGustMax'); // || 33;
 
   const rad = Math.PI / 180;
   const NS = 'http://www.w3.org/2000/svg';
@@ -22,7 +22,7 @@ const gauge = () => {
   const r1 = cx - offset;
   const delta = ~~(r1 / 4);
 
-  const initVal = initialValue.value;
+  const initVal = localStorage.getItem('WindGustMax');  //  initialValue.value;
 
   let isDragging = false;
 
@@ -166,11 +166,8 @@ const gauge = () => {
 
   function setSVGAttributes(elmt, oAtt) {
     console.log('oATT', oAtt);
-    
-    if (oAtt.hasOwnProp()) {
-      for (const prop in oAtt) {
-        elmt.setAttributeNS(null, prop, oAtt[prop]);
-      }
+    for (const prop in oAtt) {
+      elmt.setAttributeNS(null, prop, oAtt[prop]);
     }
   }
 
@@ -181,12 +178,13 @@ const gauge = () => {
     p.x = cx + r1 * Math.cos(pa * rad);
     p.y = cy + r1 * Math.sin(pa * rad);
     updateInput(p, cx, cy, r1, offset, delta);
+    getWindSpeed();
   }, false);
 
-  initialValue.addEventListener('input', function() {
-    const val = this.value;
+  initialValue.addEventListener('change', function() {
+    // const val = this.value;
 
-    // const val = getWindSpeed();
+    const val = getWindSpeed();
     console.log('updateVal', val);
     const newVal = (!isNaN(val) && val >= 0 && val <= 100) ? val : 18;
     const pa = (newVal * 1.8) - 180;
@@ -222,11 +220,12 @@ const gauge = () => {
 
   function getWindSpeed () {
     const windTimer = setTimeout(() => {
-      const windData = localStorage.getItem('windGustMax');
+      const windData = localStorage.getItem('WindGustMax');
       console.log('local Storage', windData);
       getWindSpeed();
       return windData;
-    }, 10000);
+    }, 1000);
+    return windData;
   }
 };
 
