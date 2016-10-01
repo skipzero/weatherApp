@@ -1,4 +1,4 @@
-const weather = require('./src/models/dataModel');
+const weather = require('../models/dataModel');
 
 //  Our CRUD resources router
 module.exports = {

@@ -165,7 +165,6 @@ const gauge = () => {
   }
 
   function setSVGAttributes(elmt, oAtt) {
-    console.log('oATT', oAtt);
     for (const prop in oAtt) {
       elmt.setAttributeNS(null, prop, oAtt[prop]);
     }
@@ -181,7 +180,7 @@ const gauge = () => {
     getWindSpeed();
   }, false);
 
-  initialValue.addEventListener('change', function() {
+  initialValue.addEventListener('input', function() {
     // const val = this.value;
 
     const val = getWindSpeed();
@@ -219,13 +218,19 @@ const gauge = () => {
   }, false);
 
   function getWindSpeed () {
+    let windData;
     const windTimer = setTimeout(() => {
-      const windData = localStorage.getItem('WindGustMax');
+      windData = localStorage.getItem('WindGustMax');
       console.log('local Storage', windData);
+      const pa = (windData * 1.8) - 180;
+      const p = {};
+      p.x = cx + r1 * Math.cos(pa * rad);
+      p.y = cy + r1 * Math.sin(pa * rad);
+      updateInput(p, cx, cy, r1, offset, delta);
       getWindSpeed();
       return windData;
     }, 1000);
-    return windData;
+    // return windData;
   }
 };
 

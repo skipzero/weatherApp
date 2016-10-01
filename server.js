@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
       getSockData();
     }, 10000);
   }
-
+console.log('THIS is my this', this)
   getSockData();
 
   socket.on('weatherData', (data) => {
