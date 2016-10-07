@@ -23,7 +23,7 @@ const ok = colors.green.bold;
 const error = colors.red.bold;
 
 //  Our config object to hold paths, etc
-const basePath = {
+const base = {
   bower: 'bower_components',
   pub: 'public',
   root: './',
@@ -32,25 +32,25 @@ const basePath = {
 };
 
 const file = {
-  bootstrap: `${basePath.bower}/bootstrap/scss/`,
+  bootstrap: `${base.bower}/bootstrap/scss/`,
   jsPath: {
-    src: `${basePath.src}/js/*`,
-    server: `${basePath.src}/server/**`,
-    models: `${basePath.src}/models/**`,
-    pub: `${basePath.pub}/js`,
+    src: `${base.src}/js/*`,
+    server: `${base.src}/server/**`,
+    models: `${base.src}/models/**`,
+    pub: `${base.pub}/js`,
   },
 
   htmlPath: {
-    src: `${basePath.src}/**/*.html`,
-    pub: `${basePath.pub}/`,
+    src: `${base.src}/**/*.html`,
+    pub: `${base.pub}/`,
   },
 
   cssPath: {
-    bower: `${basePath.bower}`,
-    pub: `${basePath.pub}/css`,
-    src: `${basePath.src}/css`,
+    bower: `${base.bower}`,
+    pub: `${base.pub}/css`,
+    src: `${base.src}/css`,
   },
-  tests: `${basePath.tests}/**/*`,
+  tests: `${base.tests}/**/*`,
 };
 
 gulp.task('default', () => {
@@ -101,7 +101,7 @@ gulp.task('html', () => {
 //  compile local files in a diff task. add to BS only on build command...
 gulp.task('bower', () => {
   return bower()
-    .pipe(gulp.dest(`${basePath.bower}/`));
+    .pipe(gulp.dest(`${base.bower}/`));
 });
 
 gulp.task('css', ['bower'], () => {
@@ -121,7 +121,7 @@ gulp.task('css', ['bower'], () => {
 });
 
 gulp.task('clean', () => {
-  return del([basePath.pub]).then(paths => {
+  return del([base.pub]).then(paths => {
     gutil.log(ok(`\nRemoved the following:\n ${paths.join('\n')}`));
   });
 });

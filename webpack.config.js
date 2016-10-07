@@ -14,9 +14,9 @@ module.exports = {
     },
     devtool: 'source-map',
     module: {
-        preLoaders: [// Javascript
+        preLoaders: [ // Javascript
             {
-                test: /\.jsx?$/,
+                test: /\.jsx*?$/,
                 loader: 'eslint',
                 exclude: /node_modules/
             }

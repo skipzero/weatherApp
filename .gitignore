@@ -22,5 +22,4 @@ SD.js
 build/
 env.*
 .env
-ecosystem.*
 coverage/

@@ -1,9 +1,10 @@
 #!/usr/bin/env nodejs
-/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+/*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
 const express = require('express');
 const app = express();
 
 const compression = require('compression');
+const pubIp = require('public-ip');
 
 const http = require('http');
 const server = http.createServer(app);
@@ -11,22 +12,16 @@ const bodyParser = require('body-parser');
 
 const io = require('socket.io').listen(server);
 
-// const env = require('./env.js');
-const pollStation = require('./src/server/pollStation');
-const converter = require('./src/server/converter');
-// const myIp = require('./src/server/myIp')
-const pool = require('./src/server/pool');
-const api = require('./api');
+const pollStation = require('./server/pollStation');
+const converter = require('./server/converter');
+// const myIp = require('./server/myIp');
+const pool = require('./server/pool');
+const api = require('./server/api');
 const port = 3000;
 
-let weatherIP;
-if (process.env.NODE_ENV === 'Production') {
-  weatherIP = 'http://73.162.245.173/FullDataString';
-}
-else {
-  weatherIP = 'http://10.0.0.35/FullDataString';
-}
+const urlSuffix = '/FullDataString';
 
+let weatherIP;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -57,11 +52,13 @@ server.listen(port, () => {
 //  Our server calls the weather station to get our data
 pollStation();
 
+//  SET UP OUR WEBSOCKETS
 //  Websockets via socketio
 io.on('connection', (socket) => {
   let dataTimer;
-  function socketHandler() {
-    http.get(weatherIP, (res) => {
+  function socketHandler(ip) {
+    console.log('SockHand', ip)
+    http.get(ip, (res) => {
       res.setEncoding('utf8');
 
       res.on('error', (err) => {
@@ -77,15 +74,29 @@ io.on('connection', (socket) => {
   }
 
   //  set our timeout function to 10sec
-  function getSockData() {
+  function getSockData(ip) {
     console.log('Client connected to server (server)');
     dataTimer = setTimeout(() => {
-      socketHandler();
+      socketHandler(ip);
       getSockData();
     }, 10000);
   }
-
+<<<<<<< Updated upstream
   getSockData();
+=======
+
+  pubIp.v4().then(ip => {
+    let ipPath;
+    if (ip === '73.162.245.173') {
+      ipPath = '10.0.0.35';
+    }
+    else {
+      ipPath = '73.162.245.173';
+    }
+    ipPath = `http://${ipPath}${urlSuffix}`;
+    getSockData(ipPath);
+  })
+>>>>>>> Stashed changes
 
   socket.on('weatherData', (data) => {
     console.log(`Data From server: ${data}`);
@@ -96,42 +107,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
+    console.info('Disconnected (serverside)');
     clearTimeout(dataTimer);
   });
 });
-
-// io.sockets.on('connection', (socket) => {
-//   console.log(color.blue.bold('IO Connection established...'));
-//   let updateLoop;
-//
-//   function ioTimer() {
-//     updateLoop = setTimeout(() => {
-//       const request = http.get('http://10.0.0.35/weather', (req, res) => {
-//         res.on('data', (data) => {
-//           socket.emit('weatherData', data);
-//         });
-//
-//         res.on('end', () => {
-//           console.log('Finished get request...');
-//         });
-//       });
-//
-//       request.on('error', (err) => {
-//         console.error(`ERROR: ${err}`);
-//       });
-//
-//       ioTimer();
-//     }, 2000);
-//   }
-//   ioTimer();
-//
-//   socket.on('weatherData', (data) => {
-//     ioTimer();
-//     console.log('weatherData', data);
-//   });
-//
-//   socket.on('disconnect', (data) => {
-//     console.log(color.red.bold(`IO user disconnected... ${data}`));
-//     clearTimeout(updateLoop);
-//   });
-// });

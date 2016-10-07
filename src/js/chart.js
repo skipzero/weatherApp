@@ -34,16 +34,26 @@ function drawGraph() {
     if (error) {
       throw error;
     }
-    // const leng = data.length;
+    const leng = data.length;
 
     window.myData = data;
-    const jsonData = data; //.slice(leng - 600, leng - 1);
+    const jsonData = data.slice(leng - 600, leng - 1);
 
-      // format the data
+    // weatherData.engMetric = 1;
+    //  Convert the temp to Imperial from metric...
+    const imperialTemp = n => {
+      return (n * 1.8 + 32).toFixed(2);
+    };
+
+    // format the data & do our converstions if needed...
     jsonData.forEach((d) => {
       const row = d;
+
+      row.inTemp = imperialTemp(row.inTemp);
+      row.outTemp = imperialTemp(row.outTemp);
       row.created = d3.isoParse(row.created);
     });
+
 
     // Scale the range of the data
     x.domain(d3.extent(jsonData, (d) => { return d.created; }));
