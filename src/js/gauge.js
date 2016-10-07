@@ -9,7 +9,11 @@ const gauge = () => {
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
 
+<<<<<<< Updated upstream
   const initialValue = document.querySelector('input.initialValue');  //  localStorage.getItem('WindGustMax'); // || 33;
+=======
+  const initialValue = document.querySelector('input.initialValue'); //  localStorage.getItem('WindGustMax'); // || 33;
+>>>>>>> Stashed changes
 
   const rad = Math.PI / 180;
   const NS = 'http://www.w3.org/2000/svg';

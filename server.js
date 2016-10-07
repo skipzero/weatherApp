@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 const compression = require('compression');
+const pubIp = require('public-ip');
 
 const http = require('http');
 const server = http.createServer(app);
@@ -18,14 +19,9 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
 
-let weatherIP;
-if (process.env.NODE_ENV === 'Production') {
-  weatherIP = 'http://73.162.245.173/FullDataString';
-}
-else {
-  weatherIP = 'http://10.0.0.35/FullDataString';
-}
+const urlSuffix = '/FullDataString';
 
+let weatherIP;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -60,8 +56,9 @@ pollStation();
 //  Websockets via socketio
 io.on('connection', (socket) => {
   let dataTimer;
-  function socketHandler() {
-    http.get(weatherIP, (res) => {
+  function socketHandler(ip) {
+    console.log('SockHand', ip)
+    http.get(ip, (res) => {
       res.setEncoding('utf8');
 
       res.on('error', (err) => {
@@ -77,14 +74,29 @@ io.on('connection', (socket) => {
   }
 
   //  set our timeout function to 10sec
-  function getSockData() {
+  function getSockData(ip) {
     console.log('Client connected to server (server)');
     dataTimer = setTimeout(() => {
-      socketHandler();
+      socketHandler(ip);
       getSockData();
     }, 10000);
   }
+<<<<<<< Updated upstream
   getSockData();
+=======
+
+  pubIp.v4().then(ip => {
+    let ipPath;
+    if (ip === '73.162.245.173') {
+      ipPath = '10.0.0.35';
+    }
+    else {
+      ipPath = '73.162.245.173';
+    }
+    ipPath = `http://${ipPath}${urlSuffix}`;
+    getSockData(ipPath);
+  })
+>>>>>>> Stashed changes
 
   socket.on('weatherData', (data) => {
     console.log(`Data From server: ${data}`);
