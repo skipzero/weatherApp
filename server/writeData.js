@@ -23,8 +23,7 @@ const writeData = (data) => {
     });
 
     res.on('data', (chunk) => {
-      console.info(`Status: ${res.statusCode}`);
-      console.info(`Body ${chunk}`);
+      console.info(`[${new Date()}] Status: ${res.statusCode}`);
     });
     res.on('end', () => {
       return;

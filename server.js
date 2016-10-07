@@ -13,7 +13,7 @@ const io = require('socket.io').listen(server);
 
 const pollStation = require('./server/pollStation');
 const converter = require('./server/converter');
-const myIp = require('./server/myIp')
+// const myIp = require('./server/myIp');
 const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
@@ -84,7 +84,6 @@ io.on('connection', (socket) => {
       getSockData();
     }, 10000);
   }
-console.log('THIS is my this', this)
   getSockData();
 
   socket.on('weatherData', (data) => {
@@ -100,39 +99,3 @@ console.log('THIS is my this', this)
     clearTimeout(dataTimer);
   });
 });
-
-// io.sockets.on('connection', (socket) => {
-//   console.log(color.blue.bold('IO Connection established...'));
-//   let updateLoop;
-//
-//   function ioTimer() {
-//     updateLoop = setTimeout(() => {
-//       const request = http.get('http://10.0.0.35/weather', (req, res) => {
-//         res.on('data', (data) => {
-//           socket.emit('weatherData', data);
-//         });
-//
-//         res.on('end', () => {
-//           console.log('Finished get request...');
-//         });
-//       });
-//
-//       request.on('error', (err) => {
-//         console.error(`ERROR: ${err}`);
-//       });
-//
-//       ioTimer();
-//     }, 2000);
-//   }
-//   ioTimer();
-//
-//   socket.on('weatherData', (data) => {
-//     ioTimer();
-//     console.log('weatherData', data);
-//   });
-//
-//   socket.on('disconnect', (data) => {
-//     console.log(color.red.bold(`IO user disconnected... ${data}`));
-//     clearTimeout(updateLoop);
-//   });
-// });

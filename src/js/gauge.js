@@ -9,7 +9,7 @@ const gauge = () => {
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
 
-  const initialValue = document.querySelector('input.initialValue')//  localStorage.getItem('WindGustMax'); // || 33;
+  const initialValue = document.querySelector('input.initialValue');  //  localStorage.getItem('WindGustMax'); // || 33;
 
   const rad = Math.PI / 180;
   const NS = 'http://www.w3.org/2000/svg';
@@ -228,11 +228,27 @@ const gauge = () => {
       p.y = cy + r1 * Math.sin(pa * rad);
       updateInput(p, cx, cy, r1, offset, delta);
       getWindSpeed();
+
+      // realTimeGauge(windData);
+
       return windData;
     }, 1000);
     // return windData;
   }
 };
+
+//  EPOCH gauge stuff
+// function realTimeGauge(data) {
+//   $('#gaugeChart').epoch({
+//     type: 'time.gauge',
+//     value: 0.25,
+//     options: {
+//       domain: [0,120],
+//       ticks: 6,
+//       tickSize: 1,
+//     },
+//   });
+// }
 
 gauge();
 module.exports = gauge;

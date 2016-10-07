@@ -2,7 +2,6 @@
 
 const convert = (data) => {
   let dataCon = JSON.parse(data);
-  console.info(dataCon);
   dataCon = dataCon.FullDataString.split(',');
 
   const compare = (a, b) => {
@@ -22,6 +21,7 @@ const convert = (data) => {
     date[0] = date[0].split('/').sort(compare);
     date[0] = date[0].join('-');
     date = date.join(' ');
+    console.info(`[${date}] convert`)
     return date;
   };
 
