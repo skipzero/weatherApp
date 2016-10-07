@@ -19,7 +19,8 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
 
-const urlSuffix = '/FullDataString';
+const home = 'http://10.0.0.35/FullDataString';
+const away = 'http://73.162.245.173/FullDataString';
 
 let weatherIP;
 
@@ -81,22 +82,20 @@ io.on('connection', (socket) => {
       getSockData();
     }, 10000);
   }
-<<<<<<< Updated upstream
-  getSockData();
-=======
 
-  pubIp.v4().then(ip => {
-    let ipPath;
-    if (ip === '73.162.245.173') {
-      ipPath = '10.0.0.35';
-    }
-    else {
-      ipPath = '73.162.245.173';
-    }
-    ipPath = `http://${ipPath}${urlSuffix}`;
-    getSockData(ipPath);
-  })
->>>>>>> Stashed changes
+  getSockData(away);
+
+  // pubIp.v4().then(ip => {
+  //   let ipPath;
+  //   if (ip === '73.162.245.173') {
+  //     ipPath = '10.0.0.35';
+  //   }
+  //   else {
+  //     ipPath = '73.162.245.173';
+  //   }
+  //   ipPath = `http://${ipPath}${urlSuffix}`;
+  //   getSockData(ipPath);
+  // });
 
   socket.on('weatherData', (data) => {
     console.log(`Data From server: ${data}`);
