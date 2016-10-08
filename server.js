@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
     console.log('Client connected to server (server)');
     dataTimer = setTimeout(() => {
       socketHandler(ip);
-      getSockData();
+      getSockData(ip);
     }, 10000);
   }
 
