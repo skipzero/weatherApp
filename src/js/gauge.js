@@ -8,7 +8,7 @@ const gauge = () => {
   const fill = document.querySelector('.fill');
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
-  
+
   const initialValue = document.querySelector('input.initialValue');  //  localStorage.getItem('WindGustMax'); // || 33;
 
   const rad = Math.PI / 180;
@@ -155,18 +155,20 @@ const gauge = () => {
   }
 
   // helpers
-  function oMousePos(elmt, evt) {
-    const ClientRect = elmt.getBoundingClientRect();
-
-    return {
-      x: Math.round(evt.clientX - ClientRect.left),
-      y: Math.min(Math.round(evt.clientY - ClientRect.top), cy),
-    };
-  }
+  // function oMousePos(elmt, evt) {
+  //   const ClientRect = elmt.getBoundingClientRect();
+  //
+  //   return {
+  //     x: Math.round(evt.clientX - ClientRect.left),
+  //     y: Math.min(Math.round(evt.clientY - ClientRect.top), cy),
+  //   };
+  // }
 
   function setSVGAttributes(elmt, oAtt) {
     for (const prop in oAtt) {
-      elmt.setAttributeNS(null, prop, oAtt[prop]);
+      if (oAtt.hasOwnProperty(prop)) {
+        elmt.setAttributeNS(null, prop, oAtt[prop]);
+      }
     }
   }
 
@@ -193,29 +195,29 @@ const gauge = () => {
     updateInput(p, cx, cy, r1, offset, delta);
   }, false);
 
-  svg.addEventListener('mousedown', function(evt) {
-    isDragging = true;
-    this.classList.add('focusable');
-    const mousePos = oMousePos(svg, evt);
-    updateInput(mousePos, cx, cy, r1, offset, delta);
-  }, false);
+  // svg.addEventListener('mousedown', function(evt) {
+  //   isDragging = true;
+  //   this.classList.add('focusable');
+  //   const mousePos = oMousePos(svg, evt);
+  //   updateInput(mousePos, cx, cy, r1, offset, delta);
+  // }, false);
 
-  svg.addEventListener('mouseup', function() {
-    isDragging = false;
-    this.classList.remove('focusable');
-  }, false);
+  // svg.addEventListener('mouseup', function() {
+  //   isDragging = false;
+  //   this.classList.remove('focusable');
+  // }, false);
 
-  svg.addEventListener('mouseout', function() {
-    isDragging = false;
-    this.classList.remove('focusable');
-  }, false);
-
-  svg.addEventListener('mousemove', function(evt) {
-    if (isDragging) {
-      const mousePos = oMousePos(svg, evt);
-      updateInput(mousePos, cx, cy, r1, offset, delta);
-    }
-  }, false);
+  // svg.addEventListener('mouseout', function() {
+  //   isDragging = false;
+  //   this.classList.remove('focusable');
+  // }, false);
+  //
+  // svg.addEventListener('mousemove', function(evt) {
+  //   if (isDragging) {
+  //     const mousePos = oMousePos(svg, evt);
+  //     updateInput(mousePos, cx, cy, r1, offset, delta);
+  //   }
+  // }, false);
 
   function getWindSpeed () {
     let windData;

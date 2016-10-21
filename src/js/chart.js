@@ -1,7 +1,6 @@
 /*eslint no-console: ['warn', { allow: ['log', 'info', 'error'] }] */
-
 const d3 = require('d3');
-// const debug = ;
+
 function drawGraph() {
   const margin = { top: 20, right: 20, bottom: 30, left: 50 };
   const width = 900 - margin.left - margin.right;
@@ -24,6 +23,10 @@ function drawGraph() {
     .y((d) => { return y(d.inTemp); })
     .curve(d3.curveCatmullRom);
 
+  // const tooltip = d3.select('div.weather-app')
+  //   .append('div')
+  //     .attr('tip')
+
   const svg = d3.selectAll('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
@@ -35,6 +38,7 @@ function drawGraph() {
       throw error;
     }
     const leng = data.length;
+    tooltip('tip');
 
     window.myData = data;
     const jsonData = data.slice(leng - 600, leng - 1);
@@ -54,7 +58,6 @@ function drawGraph() {
       row.created = d3.isoParse(row.created);
     });
 
-
     // Scale the range of the data
     x.domain(d3.extent(jsonData, (d) => { return d.created; }));
     y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
@@ -70,14 +73,16 @@ function drawGraph() {
       .attr('class', 'line temp')
       .attr('d', temp);
 
-
     svg.selectAll('dot')
         .data(jsonData)
       .enter()
         .append('circle')
         .attr('r', 2)
         .attr('cx', (d) => { return x(d.created); })
-        .attr('cy', (d) => { return y(d.outHum); });
+        .attr('cy', (d) => { return y(d.outHum); })
+        .on('mouseover', (d) => {
+
+        });
 
     svg.append('g')
         .attr('transform', `translate(0, ${height} )`)

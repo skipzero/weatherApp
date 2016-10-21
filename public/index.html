@@ -29,8 +29,8 @@
       socket.on('weatherData', (data) => {
         dataObj = data;
         dataArray = Object.keys(data);
-        dataArray.forEach((val) => {
-          localStorage[val] = dataObj[val];
+        dataArray.forEach((key) => {
+          localStorage[key] = dataObj[key];
         })
       });
     });
@@ -48,7 +48,7 @@
 </head>
 <!--  edit here  -->
 <body>
-  <div class="container">
+  <div class="container dashboard">
     <!--  Start THREE Col Row  -->
     <div class="row">
       <div class="col-md-4 store">
@@ -67,7 +67,7 @@
             <polygon class="needle" points="220,10 300,210 220,250 140,210" />
           </svg>
           <div class="output">30</div>
-          <input type="text" class="initialValue" value="37" />
+          <input type="text" class="initialValue" value="6" />
         </div>
       </div>
       <div class="col-md-4">

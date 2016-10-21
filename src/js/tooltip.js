@@ -1,12 +1,13 @@
-function toolTipD3 (tltpName) {
-  var s = {};
-  s.name = tltpName ? tltpName : 'tooltipd3';
+function tooltip (tltpName) {
+  const s = {};
+  s.name = tltpName ? tltpName : 'tooltip';
   s.w = 0;	// width tooltip
   s.h = 0;	// height tooltip
 
-  s.t = d3.select('body').append('div') // tooltip html node
+  s.t = d3.select('div.weather-app')
+    .append('div') // tooltip html node
     .attr('class', s.name)
-    .style('opacity', 1e-6)
+    .style('opacity', 0.5)
     .style('position', 'absolute');
 
   s.t.on('click', s.mouseout);
@@ -20,9 +21,9 @@ function toolTipD3 (tltpName) {
   };
 
   s.mousemove = function(){
-    var l = d3.event.pageX - s.w/2;
-    l = l < 0 ? 0 : l;
-    s.t.style('left', l + 'px')
+    let tipX = d3.event.pageX - s.w/2;
+    tipX = tipX < 0 ? 0 : tipX;
+    s.t.style('left', tipX + 'px')
       .style('top', (d3.event.pageY - s.h - 10) + 'px')
       .style('opacity', 1);
   };
@@ -30,7 +31,7 @@ function toolTipD3 (tltpName) {
   s.mouseout = function() {
     s.t.transition()
       .duration(300)
-      .style('opacity', 1e-6)
+      .style('opacity', 0.5)
       .each('end', function(){
         s.t.html('');
       });
@@ -44,4 +45,4 @@ function toolTipD3 (tltpName) {
   return s;
 }
 
-module.exports = toolTipD3;
+module.exports = tooltip;

@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 
 const compression = require('compression');
-const pubIp = require('public-ip');
+// const pubIp = require('public-ip');
 
 const http = require('http');
 const server = http.createServer(app);
@@ -19,10 +19,10 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
 
-const home = 'http://10.0.0.35/FullDataString';
-const away = 'http://73.162.245.173/FullDataString';
+const stationIp = 'http://10.0.0.35/FullDataString';
+// const stationIp = 'http://73.162.245.173/FullDataString';
 
-let weatherIP;
+// let weatherIP;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -51,39 +51,38 @@ server.listen(port, () => {
 });
 
 //  Our server calls the weather station to get our data
-pollStation();
-
-//  SET UP OUR WEBSOCKETS
-//  Websockets via socketio
-io.on('connection', (socket) => {
-  let dataTimer;
-  function socketHandler(ip) {
-    console.log('SockHand', ip)
-    http.get(ip, (res) => {
-      res.setEncoding('utf8');
-
-      res.on('error', (err) => {
-        console.error(`ERROR: ${err}`);
-        throw err;
-      });
-
-      res.on('data', (data) => {
-        const cleanData = converter(data);
-        socket.emit('weatherData', cleanData);
-      });
-    });
-  }
-
-  //  set our timeout function to 10sec
-  function getSockData(ip) {
-    console.log('Client connected to server (server)');
-    dataTimer = setTimeout(() => {
-      socketHandler(ip);
-      getSockData(ip);
-    }, 10000);
-  }
-
-  getSockData(away);
+// pollStation();
+//
+// //  SET UP OUR WEBSOCKETS
+// //  Websockets via socketio
+// io.on('connection', (socket) => {
+//   let dataTimer;
+//   function socketHandler(ip) {
+//     http.get(ip, (res) => {
+//       res.setEncoding('utf8');
+//
+//       res.on('error', (err) => {
+//         console.error(`ERROR: ${err}`);
+//         throw err;
+//       });
+//
+//       res.on('data', (data) => {
+//         const cleanData = converter(data);
+//         socket.emit('weatherData', cleanData);
+//       });
+//     });
+//   }
+//
+//   //  set our timeout function to 10sec
+//   function getSockData(ip) {
+//     console.log('Client connected to server (server)');
+//     dataTimer = setTimeout(() => {
+//       socketHandler(ip);
+//       getSockData(ip);
+//     }, 10000);
+//   }
+//
+//   getSockData(stationIp);
 
   // pubIp.v4().then(ip => {
   //   let ipPath;
