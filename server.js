@@ -96,16 +96,16 @@ server.listen(port, () => {
   //   getSockData(ipPath);
   // });
 
-  socket.on('weatherData', (data) => {
-    console.log(`Data From server: ${data}`);
-  });
-
-  socket.on('fromClient', (data) => {
-    console.log(`caught from client.....${data}`);
-  });
-
-  socket.on('disconnect', () => {
-    console.info('Disconnected (serverside)');
-    clearTimeout(dataTimer);
-  });
-});
+//   socket.on('weatherData', (data) => {
+//     console.log(`Data From server: ${data}`);
+//   });
+//
+//   socket.on('fromClient', (data) => {
+//     console.log(`caught from client.....${data}`);
+//   });
+//
+//   socket.on('disconnect', () => {
+//     console.info('Disconnected (serverside)');
+//     clearTimeout(dataTimer);
+//   });
+// });
