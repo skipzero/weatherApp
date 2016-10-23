@@ -19,7 +19,7 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
 
-const stationIp = 'http://10.0.0.35/FullDataString';
+const stationIp = 'http://10.0.0.138/FullDataString';
 // const stationIp = 'http://73.162.245.173/FullDataString';
 
 // let weatherIP;

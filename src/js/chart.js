@@ -38,10 +38,10 @@ function drawGraph() {
       throw error;
     }
     const leng = data.length;
-    tooltip('tip');
+    // tooltip('tip');
 
     window.myData = data;
-    const jsonData = data.slice(leng - 600, leng - 1);
+    const jsonData = data.slice(leng - 200, leng - 1);
 
     // weatherData.engMetric = 1;
     //  Convert the temp to Imperial from metric...
