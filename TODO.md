@@ -7,4 +7,10 @@
 
 4) better error handling.
 
-5) move software to Rasp Pi.
+5) move software to Rasp Pi. - in progress
+
+6) adjust colours on charts/site.
+
+7) checkboxes for diff measurements
+
+8) checkboxes for ºF/ºC
