@@ -21,7 +21,6 @@ const convert = (data) => {
     date[0] = date[0].split('/').sort(compare);
     date[0] = date[0].join('-');
     date = date.join(' ');
-    console.info(`[${date}] convert`)
     return date;
   };
 
