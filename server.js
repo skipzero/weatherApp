@@ -18,8 +18,9 @@ const converter = require('./server/converter');
 const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
+let myIp = '10.0.0.70';
 
-const stationIp = 'http://10.0.0.138/FullDataString';
+const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
 
 // let weatherIP;
@@ -51,38 +52,38 @@ server.listen(port, () => {
 });
 
 //  Our server calls the weather station to get our data
-// pollStation();
-//
+pollStation(myIp);
+
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio
-// io.on('connection', (socket) => {
-//   let dataTimer;
-//   function socketHandler(ip) {
-//     http.get(ip, (res) => {
-//       res.setEncoding('utf8');
-//
-//       res.on('error', (err) => {
-//         console.error(`ERROR: ${err}`);
-//         throw err;
-//       });
-//
-//       res.on('data', (data) => {
-//         const cleanData = converter(data);
-//         socket.emit('weatherData', cleanData);
-//       });
-//     });
-//   }
-//
+io.on('connection', (socket) => {
+  let dataTimer;
+  function socketHandler(ip) {
+    http.get(ip, (res) => {
+      res.setEncoding('utf8');
+
+      res.on('error', (err) => {
+        console.error(`ERROR: ${err}`);
+        throw err;
+      });
+
+      res.on('data', (data) => {
+        const cleanData = converter(data);
+        socket.emit('weatherData', cleanData);
+      });
+    });
+  }
+
 //   //  set our timeout function to 10sec
-//   function getSockData(ip) {
-//     console.log('Client connected to server (server)');
-//     dataTimer = setTimeout(() => {
-//       socketHandler(ip);
-//       getSockData(ip);
-//     }, 10000);
-//   }
-//
-//   getSockData(stationIp);
+  function getSockData(ip) {
+    console.log('Client connected to server (server)');
+    dataTimer = setTimeout(() => {
+      socketHandler(ip);
+      getSockData(ip);
+    }, 10000);
+  }
+
+  getSockData(stationIp);
 
   // pubIp.v4().then(ip => {
   //   let ipPath;
@@ -96,16 +97,16 @@ server.listen(port, () => {
   //   getSockData(ipPath);
   // });
 
-//   socket.on('weatherData', (data) => {
-//     console.log(`Data From server: ${data}`);
-//   });
-//
-//   socket.on('fromClient', (data) => {
-//     console.log(`caught from client.....${data}`);
-//   });
-//
-//   socket.on('disconnect', () => {
-//     console.info('Disconnected (serverside)');
-//     clearTimeout(dataTimer);
-//   });
-// });
+  socket.on('weatherData', (data) => {
+    console.log(`Data From server: ${data}`);
+  });
+
+  socket.on('fromClient', (data) => {
+    console.log(`caught from client.....${data}`);
+  });
+
+  socket.on('disconnect', () => {
+    console.info('Disconnected (serverside)');
+    clearTimeout(dataTimer);
+  });
+});
