@@ -6,14 +6,14 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.OUT)
 
-arg = sys.arv[1]
+arg = sys.argv[1]
 
 if arg == 'on':
-    cmd = True
+  cmd = True
+  GPIO.output(23, True)
+  print(cmd)
 
 if arg == 'off':
-    cmd = False
-
-while true:
-    # GPIO.output(23, True)
-    print 'Working for it....' + cmd
+  cmd = False
+  GPIO.output(23, False)
+  print(cmd)
