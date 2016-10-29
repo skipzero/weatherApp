@@ -49,13 +49,16 @@ function drawGraph() {
       return (n * 1.8 + 32).toFixed(2);
     };
 
+    // TODO: create obj with imperial/metric flag and add the weather json 
+    let imperial = true;
     // format the data & do our converstions if needed...
     jsonData.forEach((d) => {
       const row = d;
-
-      row.inTemp = imperialTemp(row.inTemp);
-      row.outTemp = imperialTemp(row.outTemp);
-      row.created = d3.isoParse(row.created);
+      if (imperial) {
+        row.inTemp = imperialTemp(row.inTemp);
+        row.outTemp = imperialTemp(row.outTemp);
+        row.created = d3.isoParse(row.created);
+      }
     });
 
     // Scale the range of the data
