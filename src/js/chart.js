@@ -6,9 +6,17 @@ function drawGraph() {
   const width = 900 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
+  const chartMargin = { top: 10, right: 40, bottom: 20, left: 10 };
+  const chartWidth = 200 - margin.left - margin.right;
+  const chartHeight = 200 - margin.top - margin.bottom;
+
   const path = 'http://angerbunny.net/weather';
 
   // set the ranges
+
+  const chartX = d3.scaleBand().range([0, width]);
+  const chartY = d3.scaleLinear().range([height, 0]);
+
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
 
@@ -26,6 +34,12 @@ function drawGraph() {
   // const tooltip = d3.select('div.weather-app')
   //   .append('div')
   //     .attr('tip')
+
+  const chartSvg = d3.select('.bars').append('svg')
+      .attr('width', chartWidth + chartMargin.left + chartMargin.right)
+      .attr('height', chartHeight + chartMargin.top + chartMargin.bottom)
+    .append('g')
+      .attr('transform', `translate( ${chartMargin.left}, ${chartMargin.top})`);
 
   const svg = d3.selectAll('.chartHumid').append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -49,7 +63,7 @@ function drawGraph() {
       return (n * 1.8 + 32).toFixed(2);
     };
 
-    // TODO: create obj with imperial/metric flag and add the weather json 
+    // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
     // format the data & do our converstions if needed...
     jsonData.forEach((d) => {
@@ -58,12 +72,28 @@ function drawGraph() {
         row.inTemp = imperialTemp(row.inTemp);
         row.outTemp = imperialTemp(row.outTemp);
         row.created = d3.isoParse(row.created);
+        row.rainTot = +row.rainTot;
       }
     });
 
     // Scale the range of the data
+    chartX.domain(data.map(d => {
+      return d.rainTot;
+    }));
+
+    chartY.domain([0, d3.max(data, d => { return d.rainTot; })]);
+
     x.domain(d3.extent(jsonData, (d) => { return d.created; }));
     y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
+
+    chartSvg.selectAll('.rain')
+        .data(jsonData)
+      .enter().append('rect')
+        .attr('class', 'rain')
+        .attr('x', d => { return chartX(d.rainTot); })
+        .attr('width', chartX.bandwidth())
+        .attr('y', d => { return chartY(d.rainTot); })
+        .attr('height', d => { return height - chartY(d.rainTot); });
 
     svg.append('path')
       .data([jsonData])
@@ -84,7 +114,7 @@ function drawGraph() {
         .attr('cx', (d) => { return x(d.created); })
         .attr('cy', (d) => { return y(d.outHum); })
         .on('mouseover', (d) => {
-
+          console.log('Da', d);
         });
 
     svg.append('g')
