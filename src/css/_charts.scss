@@ -17,6 +17,17 @@ html {
   text-align: center;
 }
 
+.dashboard {
+  .rain {
+    stroke-width: .5px;
+    fill: steelblue;
+  }
+
+  .tick {
+    stroke: #399988;
+  }
+}
+
 .weather-app {
   circle {
     stroke: none;
