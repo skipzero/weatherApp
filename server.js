@@ -18,8 +18,8 @@ const converter = require('./server/converter');
 const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
-// let myIp = '10.0.0.70';
-let myIp = '73.162.245.173';
+let myIp = '10.0.0.70';
+// let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';

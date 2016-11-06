@@ -19,8 +19,12 @@ html {
 
 .dashboard {
   .rain {
-    stroke-width: .5px;
+    stroke-width: 0;
     fill: steelblue;
+  }
+
+  .bar g {
+    // clip-path: url(#clipper)
   }
 
   .tick {
