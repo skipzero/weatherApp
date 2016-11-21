@@ -8,7 +8,7 @@ $enable-flex: true;
 
 // Reset and dependencies
 @import "normalize";
-@import "print";
+// @import "print";
 
 // Core CSS
 @import "reboot";
@@ -16,12 +16,12 @@ $enable-flex: true;
 @import "images";
 @import "code";
 @import "grid";
-@import "tables";
+// @import "tables";
 @import "forms";
 @import "buttons";
 
 // Components
-@import "animation";
+// @import "animation";
 @import "dropdown";
 @import "button-group";
 @import "input-group";
@@ -41,7 +41,7 @@ $enable-flex: true;
 @import "close";
 
 // Components w/ JavaScript
-// @import "modal";
+@import "modal";
 // @import "tooltip";
 // @import "popover";
 

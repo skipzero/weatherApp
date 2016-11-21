@@ -18,7 +18,7 @@ const converter = require('./server/converter');
 const pool = require('./server/pool');
 const api = require('./server/api');
 const port = 3000;
-let myIp = '10.0.0.70';
+let myIp = '10.0.0.35';
 // let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
@@ -98,14 +98,14 @@ io.on('connection', (socket) => {
   //   getSockData(ipPath);
   // });
 
-  socket.on('weatherData', (data) => {
-    console.log(`Data From server: ${data}`);
-  });
-
-  socket.on('fromClient', (data) => {
-    console.log(`caught from client.....${data}`);
-  });
-
+  // socket.on('weatherData', (data) => {
+  //   console.log(`Data From server: ${data}`);
+  // });
+  //
+  // socket.on('fromClient', (data) => {
+  //   console.log(`caught from client.....${data}`);
+  // });
+  //
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
     clearTimeout(dataTimer);

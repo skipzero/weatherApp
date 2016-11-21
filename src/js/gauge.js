@@ -223,7 +223,7 @@ const gauge = () => {
     let windData;
     const windTimer = setTimeout(() => {
       windData = localStorage.getItem('WindGustMax');
-      console.log('local Storage', windData);
+      // console.log('local Storage', windData);
       const pa = (windData * 1.8) - 180;
       const p = {};
       p.x = cx + r1 * Math.cos(pa * rad);

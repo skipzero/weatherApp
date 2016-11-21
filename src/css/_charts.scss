@@ -19,7 +19,8 @@ html {
 
 .dashboard {
   .rain {
-    stroke-width: 0;
+    stroke-width: 1px;
+    stroke: #0080FF;
     fill: steelblue;
   }
 
@@ -33,6 +34,10 @@ html {
 }
 
 .weather-app {
+  .chart1 {
+    // position: absolute;
+  }
+
   circle {
     stroke: none;
     stroke-width: 0;

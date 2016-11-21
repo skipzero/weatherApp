@@ -19,7 +19,9 @@ npm-debug.log
 SD.js
 
 # Build
+public/**/*
 build/
 env.*
 .env
+
 coverage/
