@@ -17,6 +17,9 @@ const converter = require('./server/converter');
 // const myIp = require('./server/myIp');
 const pool = require('./server/pool');
 const api = require('./server/api');
+
+const pinger = require('mineping');
+
 const port = 3000;
 let myIp = '10.0.0.35';
 // let myIp = '73.162.245.173';
@@ -50,6 +53,10 @@ api.configure(app);
 
 server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
+});
+
+pinger(2, 'angerbunny.net', 25565, (err, res) => {
+  console.log('PINGING...', res, err)
 });
 
 //  Our server calls the weather station to get our data

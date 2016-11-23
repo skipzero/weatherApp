@@ -29,6 +29,7 @@
     "d3": "^4.1.1",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
+    "mineping": "0.0.4",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
