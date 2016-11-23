@@ -8,20 +8,35 @@ html {
   width: 100%;
   height: 100%;
   margin: 0px auto;
-  background-color: #0a1a17;
+  background-color: $site-primary;
   font-family: Roboto, Verdana, sans-serif;
   font-size: 12px;
-  color: #ccc;
+  color: $silver-gray;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
 
 .dashboard {
+
+  div.tip {
+    color: $silver-gray;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: $site-accent;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
   .rain {
     stroke-width: 1px;
-    stroke: #0080FF;
-    fill: steelblue;
+    stroke: $blue-base;
+    fill: $blue-darkgray;
   }
 
   .bar g {
@@ -29,23 +44,23 @@ html {
   }
 
   .tick {
-    stroke: #399988;
+    stroke: $site-accent;
   }
 }
 
 .weather-app {
   .chart1 {
-    // position: absolute;
+    position: relative;
   }
 
   circle {
     stroke: none;
     stroke-width: 0;
-    fill: #4ac4ac;
+    fill: $site-highlight;
   }
 
   .area {
-    fill: lightgray;
+    fill: $light-gray;
   }
 
   svg .line {
@@ -53,11 +68,11 @@ html {
     stroke-width: .5px;
 
     &.humid {
-      stroke: red;
+      stroke: $red;
     }
 
     &.temp {
-      stroke: pink;
+      stroke: $pink;
     }
   }
 
@@ -65,43 +80,30 @@ html {
     shape-rendering: crispEdges;
 
     line {
-      stroke: #ccc;
+      stroke: $silver-gray;
     }
   }
 
   .axis text {
     font-size: 12px;
-    fill: #ccc;
+    fill: $silver-gray;
   }
 
   path.domain {
-    stroke: #399988;
+    stroke: $site-accent;
   }
 
   .tick {
     line {
-      stroke: #399988;
+      stroke: $site-accent;
     }
 
     text {
-      fill: #ccc;
+      fill: $silver-gray;
     }
   }
 
   text {
-    fill: #ccc;
-  }
-
-  div.tip {
-    position: absolute;
-    text-align: center;
-    width: 60px;
-    height: 28px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
+    fill: $silver-gray;
   }
 }

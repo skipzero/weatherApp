@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/main.css" />
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script> -->
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/epoch/0.8.4/js/epoch.js"></script> -->
 
   <!--  Socket IO code  -->
@@ -49,6 +49,18 @@
 <!--  edit here  -->
 <body>
   <div class="container dashboard">
+    <nav class="navbar navbar-fixed-top">
+      <div class="container nav-container">
+        <a class="navbar-brand" href="#"><img class="lg-logo" src="images/log-civmap.png" ></a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://angel.co/civil-maps/jobs" target="_blank" class="nav-a--civmap">About</a></li><span class="glyphicon about glyphicon-home"></span>
+          <li><a href="mailto:info@civilmaps.com"  class="nav-a--civmap">Sign Up</a></li>
+          <li><a href="mailto:info@civilmaps.com"  class="nav-a--civmap">Log In</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
     <!--  Start THREE Col Row  -->
     <div class="row">
       <div class="col-md-4 store">
@@ -86,7 +98,9 @@
       </div>
     </div>
     <!--  End Row  -->
+  </div>
     <script src="/js/main.js"></script>
+
     <!--  End body  -->
   </body>
   </html>

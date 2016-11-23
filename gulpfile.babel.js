@@ -23,34 +23,22 @@ const ok = colors.green.bold;
 const error = colors.red.bold;
 
 //  Our config object to hold paths, etc
-const base = {
-  bower: 'bower_components',
-  pub: 'public',
-  root: './',
-  src: 'src',
-  tests: '__tests__',
-};
-
-const file = {
-  bootstrap: `${base.bower}/bootstrap/scss/`,
-  jsPath: {
-    src: `${base.src}/js/*`,
-    server: `${base.src}/server/**`,
-    models: `${base.src}/models/**`,
-    pub: `${base.pub}/js`,
+const config = {
+  server: './server',
+  models: './models',
+  bower: {
+    bootstrap: './bower_components/bootstrap',
   },
-
-  htmlPath: {
-    src: `${base.src}/**/*.html`,
-    pub: `${base.pub}/`,
+  src: {
+    css: './src/css',
+    js: './src/js',
+    html: './src/**/*.html',
   },
-
-  cssPath: {
-    bower: `${base.bower}`,
-    pub: `${base.pub}/css`,
-    src: `${base.src}/css`,
+  dest: {
+    css: './public/css',
+    js: './public/js',
+    html: './public'
   },
-  tests: `${base.tests}/**/*`,
 };
 
 gulp.task('default', () => {
@@ -59,20 +47,20 @@ gulp.task('default', () => {
 
 /*  WATCHING FILES  */
 gulp.task('watch', () => {
-  gulp.watch(`${file.cssPath.src}/**/*.scss`, ['css']);
-  gulp.watch([file.jsPath.src], ['js']);
-  gulp.watch(['./*.js', file.jsPath.server, file.jsPath.models], ['lint']);
-  gulp.watch([file.htmlPath.src], ['html']);
+  gulp.watch(`${config.src.css}/**`, ['css']);
+  gulp.watch([`${config.src.js}/**`], ['js']);
+  gulp.watch([`${config.src.js}/**`, `${config.server}/*`, `${config.models}/*`], ['lint']);
+  gulp.watch([config.src.html], ['html']);
 });
 
 gulp.task('js', ['lint'], () => {
   const b = browserify({
-    entries: ['./src/js/chart.js', './src/js/gauge.js'],
+    entries: [`${config.src.js}/chart.js`, `${config.src.js}/gauge.js`],
     debug: true,
   }).transform(babelify, { presets: ['es2015'] });
 
   return b.bundle()
-    .pipe(source('./src/js/'))
+    .pipe(source(config.src.js))
     .pipe(buffer())
 
     .pipe(sourcemaps.init())
@@ -82,54 +70,54 @@ gulp.task('js', ['lint'], () => {
       }))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(file.jsPath.pub));
+    .pipe(gulp.dest(config.dest.js));
 });
 
 gulp.task('lint', () => {
-  return gulp.src([file.jsPath.src, file.jsPath.server, './gulpfile.babel.js', './server.js'])
+  return gulp.src([`${config.src.js}/**/*`, `${config.server}/*`, './server.js'])
   .pipe(eslint())
   .pipe(eslint.format());
   // .pipe(eslint.failAfterError())
 });
 
 gulp.task('html', () => {
-  return gulp.src(file.htmlPath.src)
-    .pipe(gulp.dest(file.htmlPath.pub));
+  return gulp.src(config.src.html)
+    .pipe(gulp.dest(config.dest.html));
 });
 
 //  TODO: create a BUILD task for the BS additions Make the other for local updates.
 //  compile local files in a diff task. add to BS only on build command...
 gulp.task('bower', () => {
   return bower()
-    .pipe(gulp.dest(`${base.bower}/`));
+    .pipe(gulp.dest(`${config.bower}/`));
 });
 
 gulp.task('css', ['bower'], () => {
-  return gulp.src(`${file.cssPath.src}/main.scss`)
+  return gulp.src(`${config.src.css}/main.scss`)
     .pipe(sourcemaps.init())
     .pipe(sass({
       style: 'compressed',
       includePaths: [
-        file.bootstrap,
-        file.cssPath.src,
+        `${config.bower.bootstrap}/scss`,
+        config.src.css,
       ],
     }).on('error', gutil.log))
     .pipe(autoprefixer())
     .pipe(clean())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(file.cssPath.pub));
+    .pipe(gulp.dest(config.dest.css));
 });
 
 gulp.task('clean', () => {
-  return del([base.pub]).then(paths => {
+  return del(['./public/**']).then(paths => {
     gutil.log(ok(`\nRemoved the following:\n ${paths.join('\n')}`));
   });
 });
 
-gulp.task('test', () => {
-  return gulp.src(file.tests, { read: false })
-    .pipe(plumber())
-    .pipe(mocha({
-      report: '@ripter/mocha-reporter-blink1',
-    }));
-});
+// gulp.task('test', () => {
+//   return gulp.src(config.tests, { read: false })
+//     .pipe(plumber())
+//     .pipe(mocha({
+//       report: '@ripter/mocha-reporter-blink1',
+//     }));
+// });
