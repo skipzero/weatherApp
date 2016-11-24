@@ -27,7 +27,7 @@ function getRain() {
     return rainData;
   });
 
-  y.domain([0, d3.max(rainData, (d) => { return 25; })]); // set to 25" as that's the average annual rainfall in Oakland Ca.
+  y.domain([0, d3.max(rainData, () => { return 25; })]); // set to 25" as that's the average annual rainfall in Oakland Ca.
 
   svg.selectAll('.rain')
       .data(rainData)
@@ -85,10 +85,11 @@ function drawGraph() {
 
   d3.json(path, (error, data) => {
     if (error) {
-      console.error(`[ERROR]: ${error}`)
+      console.error(`[ERROR]: ${error}`);
       throw error;
-    }
-    const formatter = d3.timeFormat('%d.%m.%y %H:%M:%S')
+    };
+    
+    const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S')
     const leng = data.length;
     const jsonData = data.slice(leng - 200, leng - 1);
 
