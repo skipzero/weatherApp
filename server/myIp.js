@@ -16,7 +16,7 @@ const myIp = (cb) => {
     else {
       ipPath = ipAway;
     }
-    console.info('IP INFO', ipPath)
+    console.info('IP INFO', ipPath);
     const path = `http://${ipPath}/FullDataString/`;
     cb(path);
     return path;

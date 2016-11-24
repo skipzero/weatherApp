@@ -26,9 +26,8 @@ const error = colors.red.bold;
 const config = {
   server: './server',
   models: './models',
-  bower: {
-    bootstrap: './bower_components/bootstrap',
-  },
+  bower: './bower_components',
+  bootstrap: './bower_components/bootstrap',
   src: {
     css: './src/css',
     js: './src/js',
@@ -98,7 +97,7 @@ gulp.task('css', ['bower'], () => {
     .pipe(sass({
       style: 'compressed',
       includePaths: [
-        `${config.bower.bootstrap}/scss`,
+        `${config.bootstrap}/scss`,
         config.src.css,
       ],
     }).on('error', gutil.log))
@@ -109,7 +108,7 @@ gulp.task('css', ['bower'], () => {
 });
 
 gulp.task('clean', () => {
-  return del(['./public/**']).then(paths => {
+  return del(['./public/**', config.bower]).then(paths => {
     gutil.log(ok(`\nRemoved the following:\n ${paths.join('\n')}`));
   });
 });

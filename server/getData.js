@@ -6,7 +6,7 @@ const writeData = require('./writeData');
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = (ip) => {
-  console.log('Get data', ip)
+  console.log('Get data', ip);
   http.get(`http://${ip}/FullDataString`, (resp) => {
     resp.setEncoding('utf8');
 

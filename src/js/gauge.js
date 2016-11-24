@@ -230,9 +230,7 @@ const gauge = () => {
       p.y = cy + r1 * Math.sin(pa * rad);
       updateInput(p, cx, cy, r1, offset, delta);
       getWindSpeed();
-
       // realTimeGauge(windData);
-
       return windData;
     }, 1000);
     // return windData;

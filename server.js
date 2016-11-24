@@ -21,8 +21,8 @@ const api = require('./server/api');
 const pinger = require('mineping');
 
 const port = 3000;
-let myIp = '10.0.0.35';
-// let myIp = '73.162.245.173';
+// let myIp = '10.0.0.35';
+let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
@@ -56,7 +56,7 @@ server.listen(port, () => {
 });
 
 pinger(2, 'angerbunny.net', 25565, (err, res) => {
-  console.log('PINGING...', res, err)
+  console.log('PINGING...', res, err);
 });
 
 //  Our server calls the weather station to get our data

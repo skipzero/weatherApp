@@ -22,7 +22,7 @@ const writeData = (data) => {
       throw err;
     });
 
-    res.on('data', (chunk) => {
+    res.on('data', () => {
       console.info(`[${new Date()}] Status: ${res.statusCode}`);
     });
     res.on('end', () => {
