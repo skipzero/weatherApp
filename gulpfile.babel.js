@@ -2,6 +2,7 @@ import autoprefixer from 'gulp-autoprefixer';
 import babelify from 'babelify';
 import browserify from 'browserify';
 import bower from 'gulp-bower';
+import buffer from 'vinyl-buffer';
 import clean from 'gulp-clean-css';
 import colors from 'colors/safe';
 import concat from 'gulp-concat';
@@ -9,14 +10,16 @@ import del from 'del';
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
+import livereload from 'gulp-livereload';
+import merge from 'merge';
 import mocha from 'gulp-mocha';
 import plumber from 'gulp-plumber';
+import rename from 'gulp-rename';
 import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
-import buffer from 'vinyl-buffer';
-import source from 'vinyl-source-stream';
+import watchify from 'watchify';
 
       // colors for our console output
 const ok = colors.green.bold;
