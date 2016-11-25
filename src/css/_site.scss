@@ -5,3 +5,14 @@
 /* this is the best way to organise.
 /* - Skip McBride, 11.21.16
 /**********************************************/
+
+#dashboard {
+  margin-top: 70px;
+
+  .main-nav {
+    background: #213330;
+    border-bottom: 1px solid $site-highlight;
+    box-shadow: 0 4px 12px mix(white, $site-primary, 40%);
+  }
+
+}

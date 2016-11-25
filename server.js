@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
 
 //   //  set our timeout function to 10sec
   function getSockData(ip) {
-    console.log('Client connected to server (server)');
+    // console.log('Client connected to server (server)');
     dataTimer = setTimeout(() => {
       socketHandler(ip);
       getSockData(ip);

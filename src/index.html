@@ -48,16 +48,13 @@
 </head>
 <!--  edit here  -->
 <body>
-  <div class="container dashboard">
-    <nav class="navbar navbar-fixed-top">
-      <div class="container nav-container">
-        <a class="navbar-brand" href="#"><img class="lg-logo" src="images/log-civmap.png" ></a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="container" id="dashboard">
+    <nav class="navbar navbar-fixed-top main-nav">
+      <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/about" target="_blank" class="nav-a">About</a></li><span class="glyphicon about glyphicon-home"></span>
-          <li><a href="mailto:info@civilmaps.com"  class="nav-a--civmap">Sign Up</a></li>
-          <li><a href="mailto:info@civilmaps.com"  class="nav-a--civmap">Log In</a></li>
+          <li>About</li>
+          <li><a href="mailto:info@civilmaps.com" class="nav-a">Sign Up</a></li>
+          <li>Server Status</li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>
@@ -72,7 +69,7 @@
       </div>
       <div class="col-md-4">
         <div class="gauge A">
-          <svg class="typeRange" height="165" width="330" view-box="0 0 330 165">
+          <svg class="typeRange" height="165" width="330" >
             <g class="scale" stroke="red"></g>
             <path class="outline" d="" />
             <path class="fill" d="" />
