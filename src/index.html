@@ -20,19 +20,21 @@
   <script>
     var path = window.location.href;
     var socket = io.connect(`${path}`);
-    socket.on('connect', (data) => {
 
-      socket.on('fromClient', (data) => {
-        console.log(`weatherData from Client ${data}:fromClient`);
-      });
+    socket.on('connect', (data) => {
 
       socket.on('weatherData', (data) => {
         dataObj = data;
+        console.log('weatherData');
         dataArray = Object.keys(data);
         dataArray.forEach((key) => {
           localStorage[key] = dataObj[key];
-        })
+        });
       });
+
+      socket.on('mcData', (data) => {
+        console.log(data);
+      })
     });
 
   </script>
@@ -52,23 +54,24 @@
     <nav class="navbar navbar-fixed-top main-nav">
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li>About</li>
-          <li><a href="mailto:info@civilmaps.com" class="nav-a">Sign Up</a></li>
-          <li>Server Status</li>
+          <li>
+            <a href="/about" class="about">About</a>
+          </li>
+          <li class="server">Server Status</li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>
+
     <!--  Start THREE Col Row  -->
     <div class="row">
-      <div class="col-md-4 store">
-
+      <div class="col-md-4">
         <!--  our epoch gauge
         <div id="gaugeChart" class="epoch gauge-small"></div>
         -->
-
       </div>
+
       <div class="col-md-4">
-        <div class="gauge A">
+        <div class="gauge">
           <svg class="typeRange" height="165" width="330" >
             <g class="scale" stroke="red"></g>
             <path class="outline" d="" />

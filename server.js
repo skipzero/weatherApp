@@ -19,15 +19,18 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 
 const pinger = require('mineping');
+const color = require('colors/safe');
 
+const mcErr = color.red.bold;
 const port = 3000;
+const sec = 1000; // set weather to every second
+const mins = sec * 900; // use the sec to do the minutes
+
 // let myIp = '10.0.0.35';
 let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
-
-// let weatherIP;
 
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
@@ -55,18 +58,31 @@ server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
 });
 
-pinger(2, 'angerbunny.net', 25565, (err, res) => {
-  console.log('PINGING...', res, err);
-});
-
 //  Our server calls the weather station to get our data
 pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio
 io.on('connection', (socket) => {
-  let dataTimer;
-  function socketHandler(ip) {
+  let weatherTimer;
+  let mineCraftTimer;
+  //  set our timeout function to 10sec
+  function socketWeather(ip) {
+    // console.log('Client connected to server (server)');
+    weatherTimer = setTimeout(() => {
+      socketSendWeather(ip);
+      socketWeather(ip);
+    }, sec);
+  }
+
+  function socketMineCraft(ip) {
+    mineCraftTimer = setTimeout(() => {
+      socketSendMineCraft(ip);
+      socketMineCraft(ip);
+    }, )
+  }
+
+  function socketSendWeather(ip) {
     http.get(ip, (res) => {
       res.setEncoding('utf8');
 
@@ -82,37 +98,24 @@ io.on('connection', (socket) => {
     });
   }
 
-//   //  set our timeout function to 10sec
-  function getSockData(ip) {
-    // console.log('Client connected to server (server)');
-    dataTimer = setTimeout(() => {
-      socketHandler(ip);
-      getSockData(ip);
-    }, 10000);
+  function socketSendMineCraft(ip) {
+    function socketMC() {
+      pinger(2, 'angerbunny.com', 25565, (err, res) => {
+        if (err) {
+          console.error(mcErr(`Mine Craft Server Error: ${err}`));
+          socket.emit('mcDate', err);
+          return err;
+        }
+
+        console.log('PINGING...', res, err);
+        socket.emit('mcData', res)
+        return res;
+      });
+    }
   }
 
-  getSockData(stationIp);
+  socketWeather(stationIp);
 
-  // pubIp.v4().then(ip => {
-  //   let ipPath;
-  //   if (ip === '73.162.245.173') {
-  //     ipPath = '10.0.0.35';
-  //   }
-  //   else {
-  //     ipPath = '73.162.245.173';
-  //   }
-  //   ipPath = `http://${ipPath}${urlSuffix}`;
-  //   getSockData(ipPath);
-  // });
-
-  // socket.on('weatherData', (data) => {
-  //   console.log(`Data From server: ${data}`);
-  // });
-  //
-  // socket.on('fromClient', (data) => {
-  //   console.log(`caught from client.....${data}`);
-  // });
-  //
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
     clearTimeout(dataTimer);

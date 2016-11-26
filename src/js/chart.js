@@ -138,7 +138,7 @@ function drawGraph() {
         .on('mouseover', (d) => {
           div.transition(200)
               .style('opacity', 1);
-
+console.log('THIS...', d)
           div.html(`${d.display} \n ${d.outHum}`)
               .style('left', `${d3.event.screenX - 30}px`)
               .style('top', `${d3.event.screenY - 120}px`);

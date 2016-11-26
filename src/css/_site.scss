@@ -5,6 +5,10 @@
 /* this is the best way to organise.
 /* - Skip McBride, 11.21.16
 /**********************************************/
+html, body {
+  padding: o;
+  mrgin: 0;
+}
 
 #dashboard {
   margin-top: 70px;
@@ -12,7 +16,28 @@
   .main-nav {
     background: #213330;
     border-bottom: 1px solid $site-highlight;
-    box-shadow: 0 4px 12px mix(white, $site-primary, 40%);
+    box-shadow: 0 4px 12px mix(white, $site-shadow, 40%);
+
+    font: 24px bold;
+
+    li {
+      color: $light-gray;
+      text-decoration: none;
+      float: right;
+      font-size: 2em;
+      font-weight: bold;
+      margin-left: 15px;
+
+      a {
+        color: $light-gray;
+      }
+
+      a:active, a:hover,
+      a:visited, a:focus {
+        color: $hit-gray;
+        text-decoration: none;
+      }
+    }
   }
 
 }

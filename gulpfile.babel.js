@@ -19,6 +19,7 @@ import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglify from 'gulp-uglify';
+import source from 'vinyl-source-stream';
 import watchify from 'watchify';
 
       // colors for our console output

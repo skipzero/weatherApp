@@ -12,10 +12,13 @@
     width: 330px;
 
     .output {
+
+      display: none;
+
       line-height: 35px;
       width: 60px;
       height: 30px;
-      background-color: $site-primary;
+      background-color: $site-shadow;
       border-radius: 60px 60px 0 0;
       position: absolute;
       top: 135px;
@@ -24,6 +27,9 @@
     }
 
     .initialValue {
+
+      display: none;
+
       border: none;
       color: $site-highlight;
       display: block;
@@ -40,7 +46,7 @@
       margin: 0px;
       padding: 0;
       cursor: pointer;
-      border: 1px solid $site-primary;
+      border: 1px solid $site-shadow;
     }
 
     svg.focusable {
