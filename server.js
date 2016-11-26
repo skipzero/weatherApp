@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
     mineCraftTimer = setTimeout(() => {
       socketSendMineCraft(ip);
       socketMineCraft(ip);
-    }, )
+    }, mins)
   }
 
   function socketSendWeather(ip) {
