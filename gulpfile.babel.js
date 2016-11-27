@@ -22,7 +22,7 @@ import uglify from 'gulp-uglify';
 import source from 'vinyl-source-stream';
 import watchify from 'watchify';
 
-      // colors for our console output
+// colors for our console output
 const ok = colors.green.bold;
 const error = colors.red.bold;
 
