@@ -27,8 +27,8 @@ const port = 3000;
 const sec = 1000; // set weather to every second
 const mins = sec * 900; // use the sec to do the minutes
 
-let myIp = '10.0.0.35';
-// let myIp = '73.162.245.173';
+// let myIp = '10.0.0.35';
+let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
