@@ -4,81 +4,78 @@
 #0f4534,
 #0a1a17;*/
 
-#dashboard {
-  .gauge {
-    position: relative;
-    margin: 100px auto 50px auto;
-    height: 165px;
-    width: 330px;
+.gauge {
+  position: relative;
+  margin: 20px auto 10px auto;
+  height: 165px;
+  width: 330px;
 
-    .output {
+  .output {
 
-      display: none;
+    display: block;
 
-      line-height: 35px;
-      width: 60px;
-      height: 30px;
-      background-color: $site-shadow;
-      border-radius: 60px 60px 0 0;
-      position: absolute;
-      top: 135px;
-      left: 135px;
-      text-align: center;
-    }
+    line-height: 35px;
+    width: 60px;
+    height: 30px;
+    background-color: $site;
+    border-radius: 60px 60px 0 0;
+    position: absolute;
+    top: 135px;
+    left: 135px;
+    text-align: center;
+  }
 
-    .initialValue {
+  .initialValue {
 
-      display: none;
+    display: none;
 
-      border: none;
-      color: $site-highlight;
-      display: block;
-      width: 3em;
-      background-color: transparent;
-      margin: 1em auto;
-      outline: none;
-      font-size: 16px;
-      text-align: center;
-    }
+    border: none;
+    color: $site-highlight;
+    width: 3em;
+    background-color: transparent;
+    margin: 1em auto;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+  }
 
-    /*SVG*/
-    svg {
-      margin: 0px;
-      padding: 0;
-      cursor: pointer;
-      border: 1px solid $site-shadow;
-    }
+  /*SVG*/
+  svg {
+    margin: 0px;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid $site-shadow;
+  }
 
-    svg.focusable {
-      border: 1px solid $site;
-    }
+  svg.focusable {
+    border: 1px solid $site;
+  }
 
-    .outline, .fill, .center,
-    .needle, .scale, .output {
-      pointer-events: none;
-    }
+  .outline, .fill, .center,
+  .needle, .scale, .output {
+    pointer-events: none;
+  }
 
-    .outline {
-      fill: #0f4534;
-    }
+  .outline {
+    fill: #0f4534;
+  }
 
-    .fill {
-      fill: #399988;
-    }
+  .fill {
+    fill: #399988;
+  }
 
-    .needle {
-      fill: #aa0000;
-    }
+  .needle {
+    fill: #aa0000;
+  }
 
-    .scale {
-      stroke: #aaa;
-    }
+  .scale {
+    stroke: #aaa;
+  }
 
-    text {
-      text-anchor: middle;
-      dominant-baseline: alphabetic;
-      font: 12px roboto, verdana, sans-serif;
-      fill: #aaa;
-    }
+  text {
+    text-anchor: middle;
+    dominant-baseline: alphabetic;
+    font: 12px roboto, verdana, sans-serif;
+    fill: #aaa;
   }
 }

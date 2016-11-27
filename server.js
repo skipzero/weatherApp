@@ -23,11 +23,12 @@ const color = require('colors/safe');
 
 const mcErr = color.red.bold;
 const port = 3000;
+
 const sec = 1000; // set weather to every second
 const mins = sec * 900; // use the sec to do the minutes
 
-// let myIp = '10.0.0.35';
-let myIp = '73.162.245.173';
+let myIp = '10.0.0.35';
+// let myIp = '73.162.245.173';
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
@@ -42,12 +43,17 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //  Routs
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/public/index.html`);
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(`${__dirname}/public/about.html`);
 });
 
 //  Create our connection pool
@@ -79,7 +85,7 @@ io.on('connection', (socket) => {
     mineCraftTimer = setTimeout(() => {
       socketSendMineCraft(ip);
       socketMineCraft(ip);
-    }, mins)
+    }, mins);
   }
 
   function socketSendWeather(ip) {
@@ -99,25 +105,25 @@ io.on('connection', (socket) => {
   }
 
   function socketSendMineCraft(ip) {
-    function socketMC() {
-      pinger(2, 'angerbunny.com', 25565, (err, res) => {
-        if (err) {
-          console.error(mcErr(`Mine Craft Server Error: ${err}`));
-          socket.emit('mcDate', err);
-          return err;
-        }
+    pinger(2, 'angerbunny.com', 25565, (err, res) => {
+      if (err) {
+        console.error(mcErr(`Mine Craft Server Error: ${err}`));
+        socket.emit('mcDate', err);
+        return err;
+      }
 
-        console.log('PINGING...', res, err);
-        socket.emit('mcData', res)
-        return res;
-      });
-    }
+      console.log('PINGING...', res, err);
+      socket.emit('mcData', res)
+      return res;
+    });
   }
 
   socketWeather(stationIp);
+  socketMineCraft(stationIp);
 
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
-    clearTimeout(dataTimer);
+    clearTimeout(weatherTimer);
+    clearTimeout(mineCraftTimer);
   });
 });

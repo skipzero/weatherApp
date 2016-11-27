@@ -5,39 +5,47 @@
 /* this is the best way to organise.
 /* - Skip McBride, 11.21.16
 /**********************************************/
-html, body {
-  padding: o;
-  mrgin: 0;
-}
+.main-nav {
+  background: #213330;
+  border-bottom: 1px solid $site-highlight;
+  box-shadow: 0 4px 12px mix(white, $site-shadow, 40%);
 
-#dashboard {
-  margin-top: 70px;
+  font: 24px bold;
 
-  .main-nav {
-    background: #213330;
-    border-bottom: 1px solid $site-highlight;
-    box-shadow: 0 4px 12px mix(white, $site-shadow, 40%);
+  ul {
 
-    font: 24px bold;
+    &.navbar-left {
+      float: left;
+    }
 
-    li {
-      color: $light-gray;
-      text-decoration: none;
+    &.navbar-right {
       float: right;
-      font-size: 2em;
-      font-weight: bold;
-      margin-left: 15px;
-
-      a {
-        color: $light-gray;
-      }
-
-      a:active, a:hover,
-      a:visited, a:focus {
-        color: $hit-gray;
-        text-decoration: none;
-      }
     }
   }
 
+  li {
+    color: $light-gray;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 15px;
+
+    a {
+      color: $light-gray;
+    }
+
+    a:active, a:hover,
+    a:visited, a:focus {
+      color: $hit-gray;
+      text-decoration: none;
+    }
+
+    span {
+      background: #0e0;
+      border-radius: 50%;
+      display: inline-block;
+      height: 15px;
+      width: 15px;
+    }
+  }
 }
