@@ -3,6 +3,7 @@
 
 # git
 .git
+.gitignore
 
 # data
 data/
