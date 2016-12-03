@@ -1,4 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+'use strict';
 
 // const myIp = require('./myIp');
 const getData = require('./getData');

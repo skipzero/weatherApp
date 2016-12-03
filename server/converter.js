@@ -1,5 +1,7 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
 
+'use strict';
+
 const convert = (data) => {
   let dataCon = JSON.parse(data);
   dataCon = dataCon.FullDataString.split(',');

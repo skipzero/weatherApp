@@ -1,4 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+'use strict';
 
 const pubIp = require('public-ip');
 

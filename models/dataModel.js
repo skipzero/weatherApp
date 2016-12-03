@@ -1,4 +1,5 @@
-const pool = require('../server/pool')
+'use strict';
+const pool = require('../server/pool');
 
 function Weather() {
   this.get = function(res) {
