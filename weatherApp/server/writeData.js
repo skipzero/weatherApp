@@ -1,5 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 const http = require('http');
 const port = 3000;
 
@@ -19,7 +19,7 @@ const writeData = (data) => {
     res.setEncoding('utf8');
     res.on('error', err => {
       console.error(`ERROR: ${err}`);
-      return err;
+      throw err;
     });
 
     res.on('data', () => {
@@ -32,7 +32,7 @@ const writeData = (data) => {
 
   post.on('error', (err) => {
     console.error(`ERROR: ${err.message}`);
-    return err;
+    throw err;
   });
 
   post.write(postData);

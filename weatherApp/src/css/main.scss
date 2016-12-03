@@ -67,12 +67,7 @@ html {
 
 #dashboard,
 .container {
-  padding-top: 80px;
-
-  @import 'charts';
-  @import 'gauge';
-
-  @import "site";
+  padding-top: 70px;
 
   div.tip {
     color: $white;
@@ -90,4 +85,9 @@ html {
       display: block;
     }
   }
+
+  @import 'charts';
+  @import 'gauge';
+
+  @import "site";
 }

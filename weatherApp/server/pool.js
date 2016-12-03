@@ -1,5 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 const mysql = require('mysql');
 const env = require('../env');
 

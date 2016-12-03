@@ -142,7 +142,7 @@ function drawGraph() {
 
           div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
-                    ${d.outHum}%`)
+                    ${d.outHum}`)
               .style('left', `${d3.event.screenX - 30}px`)
               .style('top', `${d3.event.screenY - 120}px`);
         })

@@ -1,0 +1,67 @@
+.bar {
+
+  .rain {
+    stroke-width: 1px;
+    stroke: $blue-base;
+    fill: $blue-darkgray;
+  }
+}
+  .chart1 {
+    position: relative;
+  }
+
+  circle {
+    stroke: none;
+    stroke-width: 0;
+    fill: $site-highlight;
+  }
+
+  .area {
+    fill: $light-gray;
+  }
+
+  svg {
+    .line {
+      fill: none;
+      stroke-width: .5px;
+
+      &.humid {
+        stroke: $red;
+      }
+
+      &.temp {
+        stroke: $pink;
+      }
+
+      .x.axis {
+        shape-rendering: crispEdges;
+
+        line {
+          stroke: $silver-gray;
+        }
+      }
+
+    .axis text {
+      font-size: 12px;
+      fill: $silver-gray;
+    }
+
+    text {
+      fill: $silver-gray;
+    }
+  }
+
+  path.domain {
+    stroke: $site-accent;
+  }
+
+  .tick {
+    line {
+      stroke: $site-accent;
+    }
+
+    text {
+      fill: $silver-gray;
+    }
+  }
+}

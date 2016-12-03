@@ -1,5 +1,3 @@
-'use strict';
-
 const weather = require('../models/dataModel');
 
 //  Our CRUD resources router

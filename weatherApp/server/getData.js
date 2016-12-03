@@ -1,5 +1,4 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
 
 const convert = require('./converter');
 const http = require('http');
