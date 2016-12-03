@@ -30,33 +30,46 @@
     font-weight: bold;
     margin-left: 15px;
 
-    a {
-      color: $light-gray;
-    }
-
-    a:active, a:hover,
-    a:visited, a:focus {
-      color: $hit-gray;
-      text-decoration: none;
-    }
-
-    span {
-      display: block;
-      margin: 0 5px;
-      width: 20px;
-      height: 20px;
-      background-color: #ABFF00;
+    div {
       border-radius: 50%;
-      box-shadow: $status-alpha 0 -1px 7px 1px, inset $status-shadow 0 -1px 9px, $status-primary 0 2px 12px;
+      height: 20px;
+      float: right;
+      margin: 5px 5px 0;
+      width: 20px;
+    }
+
+    .led-green {
+      background-color: $green-light;
+      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $green-shadow 0 -1px 9px, $green-primary 0 2px 12px;
     }
 
     .led-blue {
-      margin: 0 auto;
-      width: 24px;
-      height: 24px;
-      background-color: #24E0FF;
-      border-radius: 50%;
-      box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
+      background-color: $blue-light;
+      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $blue-shadow 0 -1px 9px, $blue-primary 0 2px 14px;
+    }
+
+    .led-red {
+      background-color: $red-light;
+      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $red-shadow 0 -1px 9px, $red-alpha 0 2px 12px;
+      animation: blinkRed 0.5s infinite;
+    }
+
+    @keyframes blinkRed {
+      from { background-color: $red-light; }
+      50% { background-color: $red-primary; box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $red-shadow 0 -1px 9px, $red-alpha 0 2px 0; }
+      to { background-color: $red-light; }
+    }
+
+    .led-yellow {
+      background-color: $yellow-primary;
+      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $yellow-shadow 0 -1px 9px, $yellow-primary 0 2px 12px;
+      animation: blinkYellow 1s infinite;
+    }
+
+    @keyframes blinkYellow {
+      from { background-color: $yellow-primary; }
+      50% { background-color: $yellow-dark; box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $yellow-shadow 0 -1px 9px, $yellow-primary 0 2px 0; }
+      to { background-color: $yellow-primary; }
     }
   }
 }
