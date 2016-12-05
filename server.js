@@ -22,6 +22,7 @@ const api = require('./server/api');
 
 const pinger = require('mineping');
 const color = require('colors/safe');
+const env = require('./env');
 
 const mcErr = color.red.bold;
 const port = 3000;
@@ -29,8 +30,10 @@ const port = 3000;
 const sec = 1000; // set weather to every second
 const mins = sec * 900; // use the sec to do the minutes
 
-// let myIp = '10.0.0.35';
-let myIp = '73.162.245.173';
+let myIp = '10.0.0.35';
+if (env.env === 'Prod') {
+  myIp = '73.162.245.173';
+}
 
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
@@ -38,6 +41,8 @@ const stationIp = `http://${myIp}/FullDataString`;
 //  :::SERVER RELATED CODE HERE:::
 //  static file served from...
 //  Setup the express server to use the following...
+app.set('view engine', 'ejs');
+
 app.use(express.static('public'));
 app.use(compression());
 app.use((req, res, next) => {
@@ -83,12 +88,12 @@ io.on('connection', (socket) => {
     }, sec);
   }
 
-  // function socketMineCraft(ip) {
-  //   mineCraftTimer = setTimeout(() => {
-  //     socketSendMineCraft(ip);
-  //     socketMineCraft(ip);
-  //   }, mins);
-  // }
+  function socketMineCraft(ip) {
+    mineCraftTimer = setTimeout(() => {
+      socketSendMineCraft(ip);
+      socketMineCraft(ip);
+    }, mins);
+  }
 
   function socketSendWeather(ip) {
     http.get(ip, (res) => {
@@ -96,7 +101,7 @@ io.on('connection', (socket) => {
 
       res.on('error', (err) => {
         console.error(`ERROR: ${err}`);
-        throw err;
+        return err;
       });
 
       res.on('data', (data) => {

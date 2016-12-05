@@ -3,7 +3,7 @@
 'use strict';
 
 const convert = (data) => {
-  let dataCon = JSON.parse(data);
+  let dataCon = JSON.parse(data) || [];
   dataCon = dataCon.FullDataString.split(',');
 
   const compare = (a, b) => {
