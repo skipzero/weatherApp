@@ -21,9 +21,6 @@
     var path = window.location.href;
     var socket = io.connect(`${path}`);
 
-    var indicatorLight = document.querySelector('.led');
-    console.log('Selector', indicatorLight);
-
     socket.on('connect', (data) => {
 
       socket.on('weatherData', (data) => {
@@ -35,9 +32,17 @@
       });
 
       socket.on('mcData', (data) => {
-        console.log(data);  //  TODO: we'll append the light to the dom once we have the data and can use the server ping info to set the colour.
-      })
+        console.log(data.motd);  //  TODO: we'll append the light to the dom once we have the data and can use the server ping info to set the colour.
+        if (typeof data.currentPlayers === 'number') {
+          changeLight();
+          console.log(`Theres ${data.currentPlayers} currently online`);
+        }
+      });
     });
+
+    function changeLight () {
+      var led = document.querySelector('.led');
+    }
 
   </script>
   <script>

@@ -30,6 +30,10 @@
     font-weight: bold;
     margin-left: 15px;
 
+    a {
+      color: $light-gray;
+    }
+
     div.led {
       border-radius: 50%;
       height: 20px;

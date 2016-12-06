@@ -12,7 +12,7 @@ const http = require('http');
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
 
-const io = require('socket.io').listen(server);
+const io = require('socket.io')(server);
 
 const pollStation = require('./server/pollStation');
 const converter = require('./server/converter');
@@ -21,6 +21,7 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 
 const pinger = require('mineping');
+const mcIP = 'angerbunny.net'
 const color = require('colors/safe');
 const env = require('./env');
 
@@ -28,7 +29,7 @@ const mcErr = color.red.bold;
 const port = 3000;
 
 const sec = 1000; // set weather to every second
-const mins = sec * 900; // use the sec to do the minutes
+const mins = sec * 1; // use the sec to do the minutes
 
 let myIp = '10.0.0.35';
 if (env.env === 'Prod') {
@@ -111,26 +112,26 @@ io.on('connection', (socket) => {
     });
   }
 
-  // function socketSendMineCraft(ip) {
-  //   pinger(2, 'angerbunny.net', 25565, (err, res) => {
-  //     if (err) {
-  //       console.error(mcErr(`Mine Craft Server Error: ${err}`));
-  //       socket.emit('mcDate', err);
-  //       return err;
-  //     }
-  //
-  //     console.log('PINGING...', res, err);
-  //     socket.emit('mcData', res)
-  //     return res;
-  //   });
-  // }
+  function socketSendMineCraft(ip) {
+    pinger(2, mcIP, 25565, (err, res) => {
+      if (err) {
+        console.error(mcErr(`Mine Craft Server Error: ${err}`));
+        socket.emit('mcData', err);
+        return err;
+      }
+
+      console.log('PINGING...', res, err);
+      socket.emit('mcData', res)
+      return res;
+    });
+  }
 
   socketWeather(stationIp);
-  // socketMineCraft(myIp);
+  socketMineCraft(mcIP);
 
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
     clearTimeout(weatherTimer);
-    // clearTimeout(mineCraftTimer);
+    clearTimeout(mineCraftTimer);
   });
 });
