@@ -41,12 +41,6 @@
       margin: 10px 10px 0;
       width: 20px;
     }
-
-    .led-green {
-      background-color: $green-light;
-      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $green-shadow 0 -1px 9px, $green-primary 0 2px 12px;
-    }
-
     .led-blue {
       background-color: $blue-light;
       box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $blue-shadow 0 -1px 9px, $blue-primary 0 2px 14px;
@@ -58,22 +52,27 @@
       animation: blinkRed 0.5s infinite;
     }
 
-    @keyframes blinkRed {
-      from { background-color: $red-light; }
-      50% { background-color: $red-primary; box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $red-shadow 0 -1px 9px, $red-alpha 0 2px 0; }
-      to { background-color: $red-light; }
-    }
-
     .led-yellow {
       background-color: $yellow-primary;
       box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $yellow-shadow 0 -1px 9px, $yellow-primary 0 2px 12px;
       animation: blinkYellow 1s infinite;
     }
 
+    .led-green {
+      background-color: $green-light;
+      box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $green-shadow 0 -1px 9px, $green-primary 0 2px 12px;
+    }
+
     @keyframes blinkYellow {
       from { background-color: $yellow-primary; }
       50% { background-color: $yellow-dark; box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $yellow-shadow 0 -1px 9px, $yellow-primary 0 2px 0; }
       to { background-color: $yellow-primary; }
+    }
+
+    @keyframes blinkRed {
+      from { background-color: $red-light; }
+      50% { background-color: $red-primary; box-shadow: $shadow-alpha 0 -1px 7px 1px, inset $red-shadow 0 -1px 9px, $red-alpha 0 2px 0; }
+      to { background-color: $red-light; }
     }
   }
 }
