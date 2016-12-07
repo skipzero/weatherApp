@@ -32,19 +32,14 @@
       });
 
       socket.on('mcData', (data) => {
-        console.log(data.motd);  //  TODO: we'll append the light to the dom once we have the data and can use the server ping info to set the colour.
+        var led = document.querySelector('.led');
         if (typeof data.currentPlayers === 'number') {
-          changeLight();
-          console.log(`Theres ${data.currentPlayers} currently online`);
+          console.log(`Players Online: ${data.currentPlayers}`);
+          return led.className = 'led led-green';
         }
+        return led.className = 'led led-red';
       });
     });
-
-    function changeLight () {
-      var led = document.querySelector('.led');
-      led.classList.toggle('led-green');
-      led.classList.toggle('led-yellow');
-    }
 
   </script>
   <script>
@@ -63,7 +58,7 @@
     <nav class="navbar navbar-fixed-top main-nav">
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="server">Server Status <div class="led led-yellow"> </div></li>
+          <li class="server">Server Status <div class="led led-red"> </div></li>
         </ul>
         <ul class="nav navbar-nav navbar-left">
           <li>
