@@ -1,11 +1,5 @@
 {
-  /**
-   * Application configuration section
-   * http://pm2.keymetrics.io/docs/usage/application-declaration/
-   */
   apps : [
-
-    // First application
     {
       name      : "weather",
       script    : "server.js",
@@ -18,10 +12,6 @@
     }
   ],
 
-  /**
-   * Deployment section
-   * http://pm2.keymetrics.io/docs/usage/deployment/
-   */
   deploy : {
     production : {
       user : "weatheruser",
