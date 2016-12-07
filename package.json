@@ -73,6 +73,7 @@
     "gulp-util": "^3.0.7",
     "merge": "^1.2.0",
     "mocha": "^2.5.3",
+    "node-pre-gyp": "^0.6.32",
     "node-sass": "^3.13.0",
     "public-ip": "^2.0.1",
     "rimraf": "^2.5.4",
