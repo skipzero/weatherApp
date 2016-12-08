@@ -35,7 +35,7 @@ let myIp = '10.0.0.35';
 if (env.env === 'Prod') {
   myIp = '73.162.245.173';
 }
-
+const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
 
