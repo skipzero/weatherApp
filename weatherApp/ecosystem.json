@@ -1,0 +1,36 @@
+{
+  apps : [
+    {
+      name      : "weather",
+      script    : "server.js",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+  ],
+
+  deploy : {
+    production : {
+      user : "weatheruser",
+      host : "138.68.54.109",
+      ref  : "origin/prod",
+      repo : "git@github.com:zerosquadron/weatherApp.git",
+      path : "/var/www/weatherApp",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    dev : {
+      user : "weatheruser",
+      host : "138.68.54.109",
+      ref  : "origin/master",
+      repo : "git@github.com:zerosquadron/weatherApp.git",
+      path : "~/Javascript/weatherApp",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    }
+  }
+}

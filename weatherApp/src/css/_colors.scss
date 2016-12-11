@@ -1,0 +1,48 @@
+/**********************************************/
+/* Custom color variables are here to keep them
+/* seperate from the BS files as those are.
+/* regenerated every time gulp is run from start.
+/*
+/* - Skip McBride, 11.21.16
+/**********************************************/
+
+//  Our primary colors will go here...
+$site: #0f4534;
+$site-shadow: #0a1a17;
+$site-accent: #399988;
+$site-highlight: #4ac4ac;
+
+// secondaries
+$black: #000000;
+$white: #FFFFFF;
+$light-gray: #D3D3D3;
+$silver-gray: #cccccc;
+$hit-gray: #A1ADB5;
+$blue-base: #0080FF;
+$blue-darkgray: #4682B4;
+$red: #FF0000;
+$pink: mix($white, $red, 75%);
+
+// Server status lights
+$shadow-alpha: rgba(0, 0, 0, 0.2);
+
+// Greens
+$green-shadow: #2a3e02;
+$green-primary: rgba(137, 255, 0, 0.41);
+$green-light: #ABFF00;
+
+// Blues
+$blue-shadow: #006;
+$blue-primary: #3F8CFF;
+$blue-light: #24E0FF;
+
+// Reds
+$red-alpha: rgba(255, 0, 0, 0.5);
+$red-shadow: #441313;
+$red-primary: #A00;
+$red-light: #FF0000;
+
+// Yellows
+$yellow-shadow: #808002;
+$yellow-primary: #FF0;
+$yellow-dark: #AAAA00;
