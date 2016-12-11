@@ -23,5 +23,5 @@ SD.js
 build/
 env.*
 .env
-
+*.map
 coverage/
