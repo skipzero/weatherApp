@@ -3,7 +3,7 @@
 'use strict';
 
 const convert = (data) => {
-  let dataCon = JSON.parse(data) || [];
+  let dataCon = JSON.parse(data) || {};
   dataCon = dataCon.FullDataString.split(',');
 
   const compare = (a, b) => {
@@ -18,6 +18,9 @@ const convert = (data) => {
 
   //  convert our date string to be year first.
   const dateFormatter = (stationDate) => {
+    if (stationDate === undefined) {
+      return stationDate;
+    }
     let date = stationDate;
     date = date.split(' ');
     date[0] = date[0].split('/').sort(compare);
