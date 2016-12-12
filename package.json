@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "mkdir -p logs && DEBUG_FD=3 node --use_strict server.js 2> logs/weatherLogs.log",
+    "start": "mkdir -p logs && DEBUG_FD=3 node --use_strict server.js >> logs/weatherLogs.log",
     "scss": "node-sass --output-style compressed -o public/css src/css",
     "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -r public/css/*",
     "lint": "eslint src/js/*"

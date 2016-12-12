@@ -21,7 +21,7 @@ const pool = require('./server/pool');
 const api = require('./server/api');
 
 const pinger = require('mineping');
-const mcIP = 'angerbunny.net'
+const mcIP = 'angerbunny.net';
 const color = require('colors/safe');
 const env = require('./env');
 
@@ -35,7 +35,7 @@ let myIp = '10.0.0.35';
 if (env.env === 'Prod') {
   myIp = '73.162.245.173';
 }
-const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
+// const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
 
@@ -112,7 +112,7 @@ io.on('connection', (socket) => {
     });
   }
 
-  function socketSendMineCraft(ip) {
+  function socketSendMineCraft() {
     pinger(2, mcIP, 25565, (err, res) => {
       if (err) {
         console.error(mcErr(`Mine Craft Server Error: ${err}`));
@@ -121,7 +121,7 @@ io.on('connection', (socket) => {
       }
 
       console.log('PINGING...', res, err);
-      socket.emit('mcData', res)
+      socket.emit('mcData', res);
       return res;
     });
   }

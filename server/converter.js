@@ -18,7 +18,7 @@ const convert = (data) => {
 
   //  convert our date string to be year first.
   const dateFormatter = (stationDate) => {
-    if (stationDate === undefined) {
+    if (!stationDate) {
       return stationDate;
     }
     let date = stationDate;
