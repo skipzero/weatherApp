@@ -1,73 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Weather Dashboard v0.2.0</title>
-  <!-- Required meta tags always come first -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-  <!--  Styles  -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/epoch/0.8.4/css/epoch.min.css"  /> -->
-  <link rel="stylesheet" href="/css/main.css" />
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.js"></script> -->
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/epoch/0.8.4/js/epoch.js"></script> -->
-
-  <!--  Socket IO code  -->
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var path = window.location.href;
-    var socket = io.connect(`${path}`);
-
-    socket.on('connect', (data) => {
-
-      socket.on('weatherData', (data) => {
-        dataObj = data;
-        dataArray = Object.keys(data);
-        dataArray.forEach((key) => {
-          localStorage[key] = dataObj[key];
-        });
-      });
-
-      socket.on('mcData', (data) => {
-        var led = document.querySelector('.led');
-        if (typeof data.currentPlayers === 'number') {
-          console.log(`Players Online: ${data.currentPlayers}`);
-          return led.className = 'led led-green';
-        }
-        return led.className = 'led led-red';
-      });
-    });
-
-  </script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-25377227-2', 'auto');
-    ga('send', 'pageview');
-  </script>
+  <% include ../partials/head %>
 </head>
 <!--  edit here  -->
 <body>
   <div class="container" id="dashboard">
-    <nav class="navbar navbar-fixed-top main-nav">
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="server">Server Status <div class="led led-red"> </div></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-left">
-          <li>
-            <a href="/about" class="about">About</a>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-
+    <header>
+      <% include ../partials/header %>
+    </header>
     <!--  Start THREE Col Row  -->
     <div class="row">
       <div class="col-md-4">

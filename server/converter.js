@@ -17,6 +17,7 @@ const convert = (data) => {
   };
 
   //  convert our date string to be year first.
+  // IN: 12/16/2016 02:02:00   =>  2016-12-16 02:03:45:OUT
   const dateFormatter = (stationDate) => {
     let date = stationDate;
     date = date.split(' ');

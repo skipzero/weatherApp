@@ -11,6 +11,7 @@ const compression = require('compression');
 const http = require('http');
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 const io = require('socket.io')(server);
 
@@ -19,6 +20,7 @@ const converter = require('./server/converter');
 // const myIp = require('./server/myIp');
 const pool = require('./server/pool');
 const api = require('./server/api');
+const path = require('path');
 
 const pinger = require('mineping');
 const mcIP = 'angerbunny.net'
@@ -38,30 +40,29 @@ if (env.env === 'Prod') {
 const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
-
-//  :::SERVER RELATED CODE HERE:::
-//  static file served from...
-//  Setup the express server to use the following...
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
 
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(compression());
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 //  Routs
 app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/public/index.html`);
+  res.render('pages/index');
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile(`${__dirname}/public/about.html`);
+  res.render('pages/about');
 });
 
 //  Create our connection pool
@@ -121,13 +122,13 @@ io.on('connection', (socket) => {
       }
 
       console.log('PINGING...', res, err);
-      socket.emit('mcData', res)
+      socket.emit('mcData', res);
       return res;
     });
   }
 
-  socketWeather(stationIp);
-  socketMineCraft(mcIP);
+  // socketWeather(stationIp);
+  // socketMineCraft(mcIP);
 
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
