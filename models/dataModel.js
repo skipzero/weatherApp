@@ -14,9 +14,11 @@ function Weather() {
     });
   };
 
-  this.getRange = (res, num) => {
+  this.getRange = (num, res) => {
+    console.log('data...', num)
     pool.acquire((err, con) => {
-      con.query('select * from `weather`.`data.table` order by `id` desc limit ?', [data.num], (err, result) => {
+      con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
+        console.log('ERR', err)
         con.release();
         if (err) {
           res.send({ status: 1, message: 'error retreiving records.'})
@@ -44,9 +46,8 @@ function Weather() {
         con.release();
         if (err) {
           res.send({ status: 1, message: 'updating record failed' });
-        } else {
-          res.send({ status: 0, message: 'record updated successfully!', data });
         }
+        res.send({ status: 0, message: 'record updated successfully!', data });
       });
     });
   };
@@ -57,9 +58,8 @@ function Weather() {
         con.release();
         if (err) {
           res.send({status: 1, message: 'Record failed to delete'});
-        } else {
-          res.send({status: 0, message: 'Record deleted successfully'});
         }
+        res.send({status: 0, message: 'Record deleted successfully'});
       });
     });
   };
