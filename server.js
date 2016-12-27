@@ -5,27 +5,26 @@
 const express = require('express');
 const app = express();
 
-const compression = require('compression');
-// const pubIp = require('public-ip');
-
 const http = require('http');
 const server = http.createServer(app);
+const config = require('dotenv');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+config.load();
 
 const io = require('socket.io')(server);
 
 const pollStation = require('./server/pollStation');
 const converter = require('./server/converter');
-// const myIp = require('./server/myIp');
 const pool = require('./server/pool');
-const api = require('./server/api');
+const api = require('./routes/apiRoutes');
 const path = require('path');
+const pages = require('./routes');
 
 const pinger = require('mineping');
 const mcIP = 'angerbunny.net'
 const color = require('colors/safe');
-const env = require('./env');
 
 const mcErr = color.red.bold;
 const port = 3000;
@@ -34,7 +33,7 @@ const sec = 1000; // set weather to every second
 const mins = sec * 300; // use the sec to do the minutes
 
 let myIp = '10.0.0.35';
-if (env.env === 'Prod') {
+if (process.env.NODE_ENV === 'production') {
   myIp = '73.162.245.173';
 }
 const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
@@ -49,6 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(compression());
+app.use('/', pages);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -57,13 +57,13 @@ app.use((req, res, next) => {
 });
 
 //  Routs
-app.get('/', (req, res) => {
-  res.render('pages/index');
-});
-
-app.get('/about', (req, res) => {
-  res.render('pages/about');
-});
+// app.get('/', (req, res) => {
+//   res.render('pages/index');
+// });
+//
+// app.get('/about', (req, res) => {
+//   res.render('pages/about');
+// });
 
 //  Create our connection pool
 pool.init();

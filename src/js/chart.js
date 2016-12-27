@@ -40,6 +40,27 @@ function getRain() {
     .call(d3.axisRight(y));
 }
 
+function getParams (data) {
+  let urlParams = window.location.search.substring(1);
+  console.log('params...',urlParams);
+
+  urlParams = urlParams.split('&');
+  if (urlParams.length > 1) {
+    urlParams = urlParams.map((param) => {
+      param = param.split('=');
+      return param[1];
+    });
+  }
+  if (urlParams[0] === 'start') {
+    return urlParams[0] = 0;
+  }
+  if (urlParams[1] === 'last') {
+    return urlParams[1] = data.length - 1;
+  }
+  console.log('params..', urlParams);
+  return urlParams;
+}
+
 function drawGraph() {
   const margin = { top: 20, right: 20, bottom: 30, left: 50 };
   const width = 900 - margin.left - margin.right;
@@ -47,6 +68,7 @@ function drawGraph() {
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
   const path = 'http://angerbunny.net/weather';
+  getParams();
 
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
@@ -83,7 +105,7 @@ function drawGraph() {
     }
 
     const leng = data.length;
-    const jsonData = data.slice(leng - 400, leng - 1);
+    const jsonData = data.slice(leng - 145, leng - 1);
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {

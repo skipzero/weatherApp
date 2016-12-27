@@ -4,11 +4,11 @@ const router = require('express').Router();
 
 //  Routs
 router.get('/', (req, res) => {
-  res.render(`../views/index.ejs`);
+  res.render('pages/index');
 });
 
 router.get('/about', (req, res) => {
-  res.res(`../views/about.ejs`);
+  res.res('pages/about');
 });
 
 module.exports = router;

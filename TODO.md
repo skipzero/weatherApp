@@ -1,5 +1,5 @@
-1)  **TESTS**
-    use mocha. check compatibility. - stil wip
+1)  **TESTS :** :octocat:
+  * mocha. check compatibility.
 
 2) break out all duplicated functionality for charts/gauges.
 
@@ -14,3 +14,5 @@
 7) checkboxes for diff measurements
 
 8) checkboxes for ºF/ºC
+
+:rocket:
