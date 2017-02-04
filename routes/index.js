@@ -1,11 +1,28 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 'use strict';
 const router = require('express').Router();
+const api = require('./api');
 
-//  Routs
-router.get('/', (req, res) => {
-  res.render('pages/index');
+api.configure(router);
+
+//  Routes
+router.get(['/', '/:num'], (req, res) => {
+  let getRange = 1;
+  console.log('numbers...', getRange);
+  if (req.params.num) {
+    getRange = req.params.num;
+  }
+  res.render('pages/index', { getRange: getRange });
 });
+
+// router.get('/:num', (req, res) => {
+//   let getRange = 1;
+//   console.log('numbers...', getRange);
+//   if (req.params.num) {
+//     getRange = req.params.num;
+//   }
+//   res.render('pages/index', { getRange });
+// });
 
 router.get('/about', (req, res) => {
   res.res('pages/about');

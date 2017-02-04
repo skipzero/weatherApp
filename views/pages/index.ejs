@@ -12,6 +12,7 @@
     <!--  Start THREE Col Row  -->
     <div class="row">
       <div class="col-md-4">
+        <h1><%= getRange %></h1>
         <!--  our epoch gauge
         <div id="gaugeChart" class="epoch gauge-small"></div>
         -->
@@ -19,7 +20,7 @@
 
       <div class="col-md-4">
         <div class="gauge">
-          <svg class="typeRange" height="165" width="330" >
+          <svg class="typeRange wind" height="165" width="330" >
             <g class="scale" stroke="red"></g>
             <path class="outline" d="" />
             <path class="fill" d="" />
@@ -46,7 +47,7 @@
     </div>
     <!--  End Row  -->
   </div>
-    <script src="/js/main.js"></script>
+  <% include ../partials/footer %>
 
     <!--  End body  -->
   </body>

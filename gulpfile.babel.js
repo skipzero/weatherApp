@@ -36,16 +36,18 @@ const config = {
     css: './src/css',
     js: './src/js',
     html: './src/**/*.html',
+    img: './src/images',
   },
   dest: {
     css: './public/css',
     js: './public/js',
-    html: './public'
+    html: './public',
+    img: './public/images',
   },
 };
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['css'], ['js'], ['watch']);
+  runSequence(['clean'], ['css'], ['img'], ['js'], ['watch']);
 });
 
 /*  WATCHING FILES  */
@@ -66,13 +68,18 @@ gulp.task('js', ['lint'], () => {
     .pipe(buffer())
 
     .pipe(sourcemaps.init())
-    .pipe(uglify()
-      .on('error', (err) => {
-        gutil.log(error('ERR:', err));
-      }))
+    // .pipe(uglify()
+    //   .on('error', (err) => {
+    //     gutil.log(error('ERR:', err));
+    //   }))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.dest.js));
+});
+
+gulp.task('img', () => {
+  return gulp.src(`${config.src.img}/**/*`)
+  .pipe(gulp.dest('./public/images'))
 });
 
 gulp.task('lint', () => {

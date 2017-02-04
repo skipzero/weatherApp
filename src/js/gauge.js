@@ -14,7 +14,8 @@ const gauge = () => {
   const rad = Math.PI / 180;
   const NS = 'http://www.w3.org/2000/svg';
 
-  const W = parseInt(window.getComputedStyle(svg, null).getPropertyValue('width'), 10);
+  const chart2 = document.querySelector('svg.wind');
+  const W = parseInt(window.getComputedStyle(chart2, null).getPropertyValue('width'), 10);
   const offset = 40;
   const cx = ~~(W / 2);
   const cy = 160;

@@ -8,7 +8,7 @@ module.exports = {
     });
 
     app.get('/weather/:number', (req, res) => {
-      weather.getRange(req.params.number, res);
+      weather.getDesc(req.params.number, res);
     });
 
     app.post('/weather', (req, res) => {

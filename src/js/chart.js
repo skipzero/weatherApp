@@ -2,10 +2,7 @@
 const d3 = require('d3');
 
 function getRain() {
-
-  // localStorage.setItem('rainTot', 12);
-
-  const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+  const margin = { top: 0, right: 0, bottom: 20, left: 20 };
   const width = 150 - margin.left - margin.right;
   const height = 200 - margin.top - margin.bottom;
 
@@ -18,7 +15,7 @@ function getRain() {
     .append('g')
       .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
-  let rainData = localStorage.getItem('rainTot') || [0];
+  let rainData = localStorage.getItem('rainTot') || 0.00;
   console.log('our rain total:', rainData);
 
   x.domain(() => {
@@ -40,36 +37,25 @@ function getRain() {
     .call(d3.axisRight(y));
 }
 
-function getParams (data) {
-  let urlParams = window.location.search.substring(1);
-  console.log('params...',urlParams);
+function getParams () {
+  let path = 'http://angerbunny.net/weather/';
+  let urlParam = window.location.pathname.substring(1);
 
-  urlParams = urlParams.split('&');
-  if (urlParams.length > 1) {
-    urlParams = urlParams.map((param) => {
-      param = param.split('=');
-      return param[1];
-    });
+  if (urlParam.length >= 1 && typeof urlParam === 'string') {
+    path = path + urlParam;
+    return path;
   }
-  if (urlParams[0] === 'start') {
-    return urlParams[0] = 0;
-  }
-  if (urlParams[1] === 'last') {
-    return urlParams[1] = data.length - 1;
-  }
-  console.log('params..', urlParams);
-  return urlParams;
+  return path;
 }
 
 function drawGraph() {
-  const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+  const margin = { top: 0, right: 0, bottom: 20, left: 20 };
   const width = 900 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
-  const path = 'http://angerbunny.net/weather';
-  getParams();
-
+  let path = getParams();
+  console.log('PATH', path);
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
@@ -78,14 +64,14 @@ function drawGraph() {
   const humidity = d3.line()
     .x((d) => { return x(d.created); })
     .y((d) => { return y(d.outHum); })
-    .curve(d3.curveMonotoneX);
+    .curve(d3.curveBasis);
 
   const temp = d3.line()
     .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.inTemp); })
+    .y((d) => { return y(d.outTemp); })
     .curve(d3.curveBasis);
 
-  const div = d3.select('#dashboard')
+  const div = d3.select('.chart1')
     .append('div')
       .attr('class','tip')
       .style('opacity', 0)
@@ -105,13 +91,15 @@ function drawGraph() {
     }
 
     const leng = data.length;
-    const jsonData = data.slice(leng - 145, leng - 1);
+    const jsonData = data; //.slice(leng - 800, leng - 1);
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
     };
 
+    // let
+console.log('json Data///', jsonData.outTemp)
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
@@ -121,14 +109,14 @@ function drawGraph() {
       if (imperial) {
         row.inTemp = imperialTemp(row.inTemp);
         row.outTemp = imperialTemp(row.outTemp);
-        row.display = timeFormatter(new Date(row.created)).split(' ');
-        row.created = d3.isoParse(row.created);
       }
+      row.display = timeFormatter(new Date(row.created)).split(' ');
+      row.created = d3.isoParse(row.created);
     });
 
     // Scale the range of the data
     x.domain(d3.extent(jsonData, (d) => { return d.created; }));
-    y.domain([0, d3.max(jsonData, (d) => { return d.outHum; })]);
+    y.domain([0, 100]);
 
     svg.append('path')
       .data([jsonData])
@@ -141,10 +129,34 @@ function drawGraph() {
         .attr('class', 'line temp')
         .attr('d', temp);
 
-    svg.selectAll('dot')
+    svg.selectAll('tempdot')  // Temp dots and tool tips
       .data(jsonData)
       .enter()
         .append('circle')
+        .attr('class', 'tempdot')
+        .attr('r', 2)
+        .attr('cx', (d) => { return x(d.created); })
+        .attr('cy', (d) => { return y(d.outTemp); })
+        .on('mouseover', (d) => {
+          div.transition(200)
+              .style('opacity', 1);
+
+          div.html(`<span>${d.display[0]}</span>
+                    <span>${d.display[1]}</span>
+                      ${parseInt(d.outTemp, 10)}°`)
+              .style('left', `${d3.event.screenX - 80}px`)
+              .style('top', `${d3.event.screenY - 405}px`);
+        })
+        // .on('mouseout', () => {
+        //   div.transition(500)
+        //       .style('opacity', 0);
+        // });
+
+    svg.selectAll('dot')  // Humidity dots and tool tips
+      .data(jsonData)
+      .enter()
+        .append('circle')
+        .attr('class', 'humdot')
         .attr('r', 2)
         .attr('cx', (d) => { return x(d.created); })
         .attr('cy', (d) => { return y(d.outHum); })
@@ -154,9 +166,9 @@ function drawGraph() {
 
           div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
-                    ${d.outHum}%`)
-              .style('left', `${d3.event.screenX - 30}px`)
-              .style('top', `${d3.event.screenY - 120}px`);
+                      ${parseInt(d.outHum, 10)}%`)
+              .style('left', `${d3.event.screenX - 80}px`)
+              .style('top', `${d3.event.screenY - 405}px`);
         })
         .on('mouseout', () => {
           div.transition(500)

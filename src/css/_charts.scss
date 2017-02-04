@@ -10,10 +10,17 @@
     position: relative;
   }
 
-  circle {
+  .humdot {
     stroke: none;
     stroke-width: 0;
     fill: $site-highlight;
+  }
+
+  .tempdot {
+    opacity: 0;
+    stroke: none;
+    stroke-width: 0;
+    fill: $white;
   }
 
   .area {
