@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/head %>
+</head>
+<!--  edit here  -->
+<body>
+  <div class="container" id="dashboard">
+    <header>
+      <% include ../partials/header %>
+    </header>
+    <!--  Start THREE Col Row  -->
+    <div class="row">
+      <div class="col-md-4">
+        <h1><%= getRange %></h1>
+        <!--  our epoch gauge
+        <div id="gaugeChart" class="epoch gauge-small"></div>
+        -->
+      </div>
+
+      <div class="col-md-4">
+        <div class="gauge">
+          <svg class="typeRange wind" height="165" width="330" >
+            <g class="scale" stroke="red"></g>
+            <path class="outline" d="" />
+            <path class="fill" d="" />
+            <polygon class="needle" points="220,10 300,210 220,250 140,210" />
+          </svg>
+          <div class="output">30</div>
+          <input type="text" class="initialValue" value="6" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bar">
+
+        </div>
+      </div>
+    </div>
+    <!--  End Row  -->
+    <!--  Start Single Col Row  -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="weather-app">
+          <div class="chart1"></div>
+        </div>
+      </div>
+    </div>
+    <!--  End Row  -->
+  </div>
+  <% include ../partials/footer %>
+
+    <!--  End body  -->
+  </body>
+  </html>

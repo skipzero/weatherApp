@@ -1,12 +1,12 @@
 {
   "name": "weather-app",
-  "config": {},
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "'simple' data logging server for my weather station...",
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "mkdir -p logs && DEBUG_FD=3 node --use_strict server.js >> logs/weatherLogs.log",
+    "log": "mkdir -p logs && DEBUG_FD=3 node --use_strict server.js >> logs/weatherLogs.log",
+    "start": "nodemon --use_strict server.js",
     "scss": "node-sass --output-style compressed -o public/css src/css",
     "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -r public/css/*",
     "lint": "eslint src/js/*"
@@ -15,24 +15,26 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerosquadron/weatherApp.git"
+    "url": "git+https://github.com/skipzero/weatherApp.git"
   },
   "author": "Skip McBride",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zerosquadron/weatherApp/issues"
+    "url": "https://github.com/skipzero/weatherApp/issues"
   },
-  "homepage": "https://github.com/zerosquadron/weatherApp#readme",
+  "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "d3": "^4.1.1",
-    "ejs": "^2.5.3",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
     "mineping": "0.0.4",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
+    "serve-favicon": "^2.3.2",
     "socket.io": "^1.4.8"
   },
   "devDependencies": {
@@ -71,7 +73,9 @@
     "gulp-util": "^3.0.7",
     "merge": "^1.2.0",
     "mocha": "^2.5.3",
+    "morgan": "^1.7.0",
     "node-sass": "^3.13.0",
+    "nodemon": "^1.11.0",
     "public-ip": "^2.0.1",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.1",

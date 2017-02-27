@@ -5,25 +5,27 @@
 const express = require('express');
 const app = express();
 
-const compression = require('compression');
-// const pubIp = require('public-ip');
-
 const http = require('http');
 const server = http.createServer(app);
+const dotenv = require('dotenv');
+const compression = require('compression');
 const bodyParser = require('body-parser');
+const logger = require('morgan');
+const favicon = require('serve-favicon');
+dotenv.load();
 
 const io = require('socket.io')(server);
 
 const pollStation = require('./server/pollStation');
 const converter = require('./server/converter');
-// const myIp = require('./server/myIp');
 const pool = require('./server/pool');
-const api = require('./server/api');
+const api = require('./routes/api');
+const path = require('path');
+const pages = require('./routes');
 
 const pinger = require('mineping');
 const mcIP = 'angerbunny.net';
 const color = require('colors/safe');
-const env = require('./env');
 
 const mcErr = color.red.bold;
 const port = 3000;
@@ -31,42 +33,37 @@ const port = 3000;
 const sec = 1000; // set weather to every second
 const mins = sec * 300; // use the sec to do the minutes
 
-let myIp = '10.0.0.35';
-if (env.env === 'Prod') {
+// let myIp = '10.0.0.35';
+let myIp = '73.162.245.175';
+if (process.env.NODE_ENV === 'Production') {
   myIp = '73.162.245.173';
 }
+
 // const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
+
 const stationIp = `http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
-
-//  :::SERVER RELATED CODE HERE:::
-//  static file served from...
-//  Setup the express server to use the following...
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`))
+app.use(logger('dev'));
 
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(compression());
+app.use('/', pages);
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-//  Routs
-app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/public/index.html`);
-});
-
-app.get('/about', (req, res) => {
-  res.sendFile(`${__dirname}/public/about.html`);
-});
-
 //  Create our connection pool
 pool.init();
-api.configure(app);
+// api.configure(app);
 
 server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
@@ -126,8 +123,8 @@ io.on('connection', (socket) => {
     });
   }
 
-  socketWeather(stationIp);
-  socketMineCraft(mcIP);
+  // socketWeather(stationIp);
+  // socketMineCraft(mcIP);
 
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');

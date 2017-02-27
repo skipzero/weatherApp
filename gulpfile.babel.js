@@ -36,16 +36,22 @@ const config = {
     css: './src/css',
     js: './src/js',
     html: './src/**/*.html',
+    img: './src/images',
   },
   dest: {
     css: './public/css',
     js: './public/js',
-    html: './public'
+    html: './public',
+    img: './public/images',
   },
 };
 
 gulp.task('default', () => {
-  runSequence(['clean'], ['html'], ['css'], ['js'], ['watch']);
+  runSequence(['clean'], ['css'], ['img'], ['js'], ['watch']);
+});
+
+gulp.task('prod', () => {
+  runSequence(['clean'], ['css'], ['img'], ['js'],);
 });
 
 /*  WATCHING FILES  */
@@ -53,7 +59,6 @@ gulp.task('watch', () => {
   gulp.watch(`${config.src.css}/**`, ['css']);
   gulp.watch([`${config.src.js}/**`], ['js']);
   gulp.watch([`${config.src.js}/**`, `${config.server}/*`, `${config.models}/*`], ['lint']);
-  gulp.watch([config.src.html], ['html']);
 });
 
 gulp.task('js', ['lint'], () => {
@@ -67,13 +72,18 @@ gulp.task('js', ['lint'], () => {
     .pipe(buffer())
 
     .pipe(sourcemaps.init())
-    .pipe(uglify()
-      .on('error', (err) => {
-        gutil.log(error('ERR:', err));
-      }))
+    // .pipe(uglify()
+    //   .on('error', (err) => {
+    //     gutil.log(error('ERR:', err));
+    //   }))
     .pipe(concat('main.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.dest.js));
+});
+
+gulp.task('img', () => {
+  return gulp.src(`${config.src.img}/**/*`)
+  .pipe(gulp.dest('./public/images'))
 });
 
 gulp.task('lint', () => {
@@ -83,10 +93,10 @@ gulp.task('lint', () => {
   // .pipe(eslint.failAfterError())
 });
 
-gulp.task('html', () => {
-  return gulp.src(config.src.html)
-    .pipe(gulp.dest(config.dest.html));
-});
+// gulp.task('html', () => {
+//   return gulp.src(config.src.html)
+//     .pipe(gulp.dest(config.dest.html));
+// });
 
 //  TODO: create a BUILD task for the BS additions Make the other for local updates.
 //  compile local files in a diff task. add to BS only on build command...

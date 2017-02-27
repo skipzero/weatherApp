@@ -3,7 +3,6 @@
 
 # git
 .git
-.gitignore
 
 # data
 data/
@@ -17,11 +16,10 @@ node_modules
 .npmrc
 bower_components
 npm-debug.log
-SD.js
 
 # Build
+public/
 build/
-env.*
 .env
 *.map
 coverage/
