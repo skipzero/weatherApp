@@ -16,7 +16,7 @@ const convert = (data) => {
     // date[0] = date[0].split('/').sort(compare);
     // date[0] = date[0].join('-');
     // date = date.join(' ');
-    let date = new Date(stationDate);
+    let date = new Date();
     date = date.toISOString().substring(0, 19).split('T').join(' ');
     return date;
   };
