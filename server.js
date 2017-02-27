@@ -7,12 +7,12 @@ const app = express();
 
 const http = require('http');
 const server = http.createServer(app);
-const config = require('dotenv');
+const dotenv = require('dotenv');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
-config.load();
+dotenv.load();
 
 const io = require('socket.io')(server);
 
@@ -35,7 +35,7 @@ const mins = sec * 300; // use the sec to do the minutes
 
 // let myIp = '10.0.0.35';
 let myIp = '73.162.245.175';
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'Production') {
   myIp = '73.162.245.173';
 }
 
@@ -45,7 +45,7 @@ const stationIp = `http://${myIp}/FullDataString`;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(`${__dirname}/public/images/favicon.ico`))
+app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`))
 app.use(logger('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));

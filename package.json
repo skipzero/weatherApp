@@ -1,6 +1,5 @@
 {
   "name": "weather-app",
-  "config": {},
   "version": "0.2.0",
   "description": "'simple' data logging server for my weather station...",
   "main": "server.js",
@@ -15,14 +14,14 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerosquadron/weatherApp.git"
+    "url": "git+https://github.com/skipzero/weatherApp.git"
   },
   "author": "Skip McBride",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zerosquadron/weatherApp/issues"
+    "url": "https://github.com/skipzero/weatherApp/issues"
   },
-  "homepage": "https://github.com/zerosquadron/weatherApp#readme",
+  "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
