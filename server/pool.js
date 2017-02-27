@@ -8,7 +8,7 @@ function Pool() {
   this.init = () => {
     this.pool = mysql.createPool({
       connectionLimit: 10,
-      user: 'root',
+      user: process.env.USER,
       host: process.env.HOST,
       password: process.env.PASSWORD,
       port: process.env.PORT,
