@@ -1,4 +1,4 @@
-/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+/*eslint no-console: ['error', { allow: [info', 'error'] }] */
 'use strict';
 const mysql = require('mysql');
 
@@ -17,7 +17,7 @@ function Pool() {
   this.acquire = (callback) => {
     this.pool.getConnection((err, connection) => {
       if (err) {
-        console.log(`[${new Date()}] ERROR: ${err}`);
+        console.error(`[${new Date()}] ERROR: ${err}`);
         throw err;
       }
       callback(err, connection);

@@ -1,4 +1,4 @@
-/*eslint no-console: ['warn', { allow: ['log', 'info', 'error'] }] */
+/*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
 const d3 = require('d3');
 
 function getRain() {
