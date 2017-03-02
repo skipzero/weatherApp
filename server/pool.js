@@ -1,17 +1,16 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 'use strict';
 const mysql = require('mysql');
-const dotenv = require('dotenv');
 
 function Pool() {
   this.pool = null;
   this.init = () => {
     this.pool = mysql.createPool({
       connectionLimit: 10,
-      user: process.env.USER,
+      user: process.env.DB_USER,
       host: process.env.HOST,
-      password: process.env.PASSWORD,
-      port: process.env.PORT,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT,
     });
   };
 

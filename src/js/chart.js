@@ -91,7 +91,7 @@ function drawGraph() {
     }
 
     const leng = data.length;
-    const jsonData = data; //.slice(leng - 800, leng - 1);
+    const jsonData = data.slice(leng - 800, leng - 1);
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
@@ -99,7 +99,7 @@ function drawGraph() {
     };
 
     // let
-console.log('json Data///', jsonData.outTemp)
+    console.log('json Data///', jsonData.outTemp);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
@@ -146,7 +146,7 @@ console.log('json Data///', jsonData.outTemp)
                       ${parseInt(d.outTemp, 10)}°`)
               .style('left', `${d3.event.screenX - 80}px`)
               .style('top', `${d3.event.screenY - 405}px`);
-        })
+        });
         // .on('mouseout', () => {
         //   div.transition(500)
         //       .style('opacity', 0);
