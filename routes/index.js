@@ -25,7 +25,7 @@ router.get(['/', '/:num'], (req, res) => {
 // });
 
 router.get('/about', (req, res) => {
-  res.res('pages/about');
+  res.render('pages/about');
 });
 
 module.exports = router;
