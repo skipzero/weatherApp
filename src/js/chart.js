@@ -22,7 +22,9 @@ function getRain() {
     return rainData;
   });
 
-  y.domain([0, d3.max(rainData, () => { return 25; })]); // set to 25" as that's the average annual rainfall in Oakland Ca.
+  y.domain([0, d3.max(rainData, () => {
+    return 25;  // set to 25" as that's the average annual rainfall in Oakland Ca.
+  })]);
 
   svg.selectAll('.rain')
       .data(rainData)
@@ -40,7 +42,7 @@ function getRain() {
 function getParams () {
   let path = 'http://angerbunny.net/weather/';
   let urlParam = window.location.pathname.substring(1);
-
+  console.log(urlParam);
   if (urlParam.length >= 1 && typeof urlParam === 'string') {
     path = path + urlParam;
     return path;
@@ -55,7 +57,7 @@ function drawGraph() {
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
   let path = getParams();
-  console.log('PATH', path);
+  // console.log('PATH', path);
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
@@ -90,16 +92,16 @@ function drawGraph() {
       throw error;
     }
 
-    const leng = data.length;
-    const jsonData = data.slice(leng - 800, leng - 1);
+    const leng = data.result.length;
+    const jsonData = data.result.slice(leng - 500, leng);
+    const pop = jsonData.pop();
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
     };
 
-    // let
-    console.log('json Data///', jsonData.outTemp);
+    console.log('json Data///', pop);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
