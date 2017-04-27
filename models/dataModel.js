@@ -9,30 +9,29 @@ function Weather() {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);
-          res.send({ status: 1, message: 'Error retreiving records...'})
+          res.send({ status: 1, message: 'Error retreiving records...'});
         }
         res.send({ status: 0, message: 'records retreived successfully!', result });
-      })
+      });
     });
   };
 
   this.getDesc = (num, res) => {
-    console.log('data...', num)
     pool.acquire((err, con) => {
       con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);
-          res.send({ status: 1, message: 'error retreiving records.'})
+          res.send({ status: 1, message: 'error retreiving records.'});
         }
-        res.send({ status: 0, message: 'records found successfully!', result})
+        res.send({ status: 0, message: 'records found successfully!', result});
       });
     });
   };
 
   this.create = (data, res) => {
     pool.acquire((err, con) => {
-      con.query('insert into `weather`.`data_table` set ?', data, (err, result) => {
+      con.query('insert into `weather`.`data_table` set ?', data, () => {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);
@@ -46,7 +45,7 @@ function Weather() {
   this.update = (data, res) => {
     pool.acquire((err, con) => {
       console.error(`[ERROR] ${err}`);
-      con.query('update `weather`.`data_table` set ? where id = ?', [data, data.id], (err, result) => {
+      con.query('update `weather`.`data_table` set ? where id = ?', [data, data.id], () => {
         con.release();
         if (err) {
           res.send({ status: 1, message: 'updating record failed' });
@@ -58,7 +57,7 @@ function Weather() {
 
   this.delete = (id, res) => {
     pool.acquire((err, con) => {
-      con.query('delete from `weather`.`data_table` where id = ?', [id], (err, result) => {
+      con.query('delete from `weather`.`data_table` where id = ?', [id], () => {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);
@@ -68,6 +67,6 @@ function Weather() {
       });
     });
   };
-};
+}
 
 module.exports = new Weather();
