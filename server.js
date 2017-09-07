@@ -23,17 +23,16 @@ const pool = require('./server/pool');
 const path = require('path');
 const pages = require('./routes');
 
-const pinger = require('mineping');
-const mcIP = 'angerbunny.net';
-const color = require('colors/safe');
+// const pinger = require('mineping');
+// const mcIP = 'angerbunny.net';
+// const color = require('colors/safe');
 
-const mcErr = color.red.bold;
+// const mcErr = color.red.bold;
 const port = 3000;
 
-const sec = 1000; // set weather to every second
-const mins = sec * 300; // use the sec to do the minutes
+// const mins = sec * 300; // use the sec to do the minutes
 
-let myIp = '10.0.0.35';
+let myIp = '10.0.0.243';
 // let myIp = '73.162.245.175';
 if (process.env.NODE_ENV === 'Production') {
   myIp = '73.162.245.173';
@@ -91,15 +90,15 @@ io.on('connection', (socket) => {
     weatherTimer = setTimeout(() => {
       socketSendWeather(ip);
       socketWeather(ip);
-    }, sec);
+    }, 1000);
   }
 
-  function socketMineCraft(ip) {
-    mineCraftTimer = setTimeout(() => {
-      socketSendMineCraft(ip);
-      socketMineCraft(ip);
-    }, mins);
-  }
+  // function socketMineCraft(ip) {
+  //   mineCraftTimer = setTimeout(() => {
+  //     socketSendMineCraft(ip);
+  //     socketMineCraft(ip);
+  //   }, mins);
+  // }
 
   function socketSendWeather(ip) {
     http.get(ip, (res) => {
@@ -117,19 +116,19 @@ io.on('connection', (socket) => {
     });
   }
 
-  function socketSendMineCraft() {
-    pinger(2, mcIP, 25565, (err, res) => {
-      if (err) {
-        console.error(mcErr(`Mine Craft Server Error: ${err}`));
-        socket.emit('mcData', err);
-        return err;
-      }
-
-      console.log('PINGING...', res, err);
-      socket.emit('mcData', res);
-      return res;
-    });
-  }
+  // function socketSendMineCraft() {
+  //   pinger(2, mcIP, 25565, (err, res) => {
+  //     if (err) {
+  //       console.error(mcErr(`Mine Craft Server Error: ${err}`));
+  //       socket.emit('mcData', err);
+  //       return err;
+  //     }
+  //
+  //     console.log('PINGING...', res, err);
+  //     socket.emit('mcData', res);
+  //     return res;
+  //   });
+  // }
 
   // socketWeather(stationIp);
   // socketMineCraft(mcIP);

@@ -10,21 +10,13 @@ import del from 'del';
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 import gutil from 'gulp-util';
-import livereload from 'gulp-livereload';
-import merge from 'merge';
-import mocha from 'gulp-mocha';
-import plumber from 'gulp-plumber';
-import rename from 'gulp-rename';
 import runSequence from 'run-sequence';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
 import source from 'vinyl-source-stream';
-import watchify from 'watchify';
 
 // colors for our console output
 const ok = colors.green.bold;
-const error = colors.red.bold;
 
 //  Our config object to hold paths, etc
 const config = {
@@ -83,7 +75,7 @@ gulp.task('js', ['lint'], () => {
 
 gulp.task('img', () => {
   return gulp.src(`${config.src.img}/**/*`)
-  .pipe(gulp.dest('./public/images'))
+  .pipe(gulp.dest('./public/images'));
 });
 
 gulp.task('lint', () => {

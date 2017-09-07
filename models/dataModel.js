@@ -5,7 +5,7 @@ const pool = require('../server/pool');
 function Weather() {
   this.get = (res) => {
     pool.acquire((err, con) => {
-      con.query('select * from `weather`.`data_table`', (err, result) => {
+      con.query('select * from `weather`.`data_table`', (result) => {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);
@@ -18,7 +18,7 @@ function Weather() {
 
   this.getDesc = (num, res) => {
     pool.acquire((err, con) => {
-      con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
+      con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (result) => {
         con.release();
         if (err) {
           console.error(`[ERROR] ${err}`);

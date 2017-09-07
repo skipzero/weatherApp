@@ -16,7 +16,7 @@ function getRain() {
       .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
   let rainData = localStorage.getItem('rainTot') || 0.00;
-  console.log('our rain total:', rainData);
+  // console.log('our rain total:', rainData);
 
   x.domain(() => {
     return rainData;
@@ -32,7 +32,7 @@ function getRain() {
       .attr('class', 'rain')
       .attr('x', () => { return x(rainData); })
       .attr('width', x.bandwidth())
-      .attr('y', () => { console.log('data', y(rainData)); return y(rainData); })
+      .attr('y', () => { return y(rainData); })
       .attr('height', () => { return height - y(rainData); });
 
   svg.append('g')
@@ -42,7 +42,7 @@ function getRain() {
 function getParams () {
   let path = 'http://angerbunny.net/weather/';
   let urlParam = window.location.pathname.substring(1);
-  console.log(urlParam);
+  // console.log(urlParam);
   if (urlParam.length >= 1 && typeof urlParam === 'string') {
     path = path + urlParam;
     return path;
@@ -94,14 +94,13 @@ function drawGraph() {
 
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 500, leng);
-    const pop = jsonData.pop();
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
     };
 
-    console.log('json Data///', pop);
+    // console.log('json Data///', pop);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
