@@ -83,7 +83,7 @@ pollStation(myIp);
 // //  Websockets via socketio
 io.on('connection', (socket) => {
   let weatherTimer;
-  let mineCraftTimer;
+  // let mineCraftTimer;
   //  set our timeout function to 10sec
   function socketWeather(ip) {
     // console.log('Client connected to server (server)');
@@ -130,12 +130,12 @@ io.on('connection', (socket) => {
   //   });
   // }
 
-  // socketWeather(stationIp);
+  socketWeather(stationIp);
   // socketMineCraft(mcIP);
 
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
     clearTimeout(weatherTimer);
-    clearTimeout(mineCraftTimer);
+    // clearTimeout(mineCraftTimer);
   });
 });
