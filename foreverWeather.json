@@ -1,7 +1,0 @@
-{
-  "uid": "weatherApp",
-  "append": true,
-  "watch": true,
-  "script": "server.js",
-  "sourceDir": "/home/bunny/weatherApp"
-}
