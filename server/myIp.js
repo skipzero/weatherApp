@@ -18,7 +18,7 @@ const myIp = (cb) => {
       ipPath = ipAway;
     }
     console.info('IP INFO', ipPath);
-    const path = `http://${ipPath}/FullDataString/`;
+    const path = 'https://api.darksky.net/forecast/1ab99e681f44158ccbb9cc5ed752cc0b/37.814264,-122.243132';
     cb(path);
     return path;
   });

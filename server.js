@@ -7,12 +7,12 @@ const app = express();
 
 const http = require('http');
 const server = http.createServer(app);
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
-dotenv.load();
+// dotenv.load();
 
 const io = require('socket.io')(server);
 
