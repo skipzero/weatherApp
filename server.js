@@ -68,14 +68,14 @@ server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
 });
 
-//  Our server calls the weather station to get our data
-pollStation(myIp);
+ // Our server calls the weather station to get our data
+// pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio
 io.on('connection', (socket) => {
   let weatherTimer;
-  let mineCraftTimer;
+  // let mineCraftTimer;
   //  set our timeout function to 10sec
   function socketWeather(ip) {
     // console.log('Client connected to server (server)');
@@ -85,12 +85,12 @@ io.on('connection', (socket) => {
     }, sec);
   }
 
-  function socketMineCraft(ip) {
-    mineCraftTimer = setTimeout(() => {
-      socketSendMineCraft(ip);
-      socketMineCraft(ip);
-    }, mins);
-  }
+  // function socketMineCraft(ip) {
+  //   mineCraftTimer = setTimeout(() => {
+  //     socketSendMineCraft(ip);
+  //     socketMineCraft(ip);
+  //   }, mins);
+  // }
 
   function socketSendWeather(ip) {
     http.get(ip, (res) => {
@@ -108,19 +108,19 @@ io.on('connection', (socket) => {
     });
   }
 
-  function socketSendMineCraft(ip) {
-    pinger(2, mcIP, 25565, (err, res) => {
-      if (err) {
-        console.error(mcErr(`Mine Craft Server Error: ${err}`));
-        socket.emit('mcData', err);
-        return err;
-      }
-
-      console.log('PINGING...', res, err);
-      socket.emit('mcData', res);
-      return res;
-    });
-  }
+  // function socketSendMineCraft(ip) {
+  //   pinger(2, mcIP, 25565, (err, res) => {
+  //     if (err) {
+  //       console.error(mcErr(`Mine Craft Server Error: ${err}`));
+  //       socket.emit('mcData', err);
+  //       return err;
+  //     }
+  //
+  //     console.log('PINGING...', res, err);
+  //     socket.emit('mcData', res);
+  //     return res;
+  //   });
+  // }
 
   // socketWeather(stationIp);
   // socketMineCraft(mcIP);
@@ -128,6 +128,6 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.info('Disconnected (serverside)');
     clearTimeout(weatherTimer);
-    clearTimeout(mineCraftTimer);
+    // clearTimeout(mineCraftTimer);
   });
 });
