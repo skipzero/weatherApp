@@ -8,9 +8,9 @@ function Pool() {
     this.pool = mysql.createPool({
       connectionLimit: 10,
       user: 'root',
-      host: process.env.HOST,
-      password: process.env.PASSWORD,
-      port: process.env.PORT,
+      host: 'localhost',
+      password: 'weatherMinter73',
+      port: 3006,
     });
   };
 

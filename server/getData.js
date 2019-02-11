@@ -2,24 +2,64 @@
 'use strict';
 
 const convert = require('./converter');
-const http = require('http');
+const https = require('https');
 const writeData = require('./writeData');
+const apiKey = process.env.API_KEY;
+const location = '37.814264,-122.243132';
+const extWeatherApi = `https://api.darksky.net/forecast/${apiKey}/${location}`;
+
+const ForecastIo = require('forecastio');
+
+const forecast = new ForecastIo(apiKey);
 
 //  Grabs data from the weather station and passes it to converter module.
-const getData = (ip) => {
-  console.log('Get data', ip);
-  http.get(`http://${ip}/FullDataString`, (resp) => {
-    resp.setEncoding('utf8');
+const getData = (extWeatherApi) => {
 
-    resp.on('error', (err) => {
-      console.error(`ERROR: ${err}\n [getData-module]`);
-      throw err;
-    });
 
-    resp.on('data', (data) => {
-      writeData(convert(data));
-    });
-  });
+
+  forecast.forecast('37.8', '-122').then(data => console.log(data.currently))
+
+  // let rawData;
+  // https.get(extWeatherApi, (resp) => {
+  //   resp.setEncoding('utf8');
+  //   resp.on('data', (data) => {
+  //     rawData += data;
+  //   })
+  //   resp.on('end', () => {
+  //     // const newData = JSON.parse(rawData);
+  //     console.log('rawData', typeof rawData);
+  //     convert(rawData)
+  //   })
+  // });
+  //
+  // function convert (data) {
+  //   const newData = JSON.parse(data);
+  //   console.log('Convert', newData['latitude'])
+  // }
+
+  // console.log('Get data', ip);
+  // https.get(extWeatherApi, (resp) => {
+  //   resp.setEncoding('utf8');
+  //   let rawData;
+  //
+  //   resp.on('data', (data) => {
+  //     rawData += data;
+  //     console.log('zeroData: ', data)
+  //     debugger;
+  //     // writeData(convert(data.currently));
+  //     return rawData;
+  //   }).on('error', (err) => {
+  //     console.error(`ERROR: ${err}\n [getData-module]`);
+  //     throw err;
+  //   }).on('end', (data) => {
+  //     try {
+  //       const parsedData = JSON.parse(rawData);
+  //       console.log(parsedData);
+  //     } catch (e) {
+  //       console.log('ERROR:', e);
+  //     }
+  //   });
+  // })
 };
 
 module.exports = getData;

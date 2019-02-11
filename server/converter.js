@@ -2,9 +2,10 @@
 'use strict';
 
 const convert = (data) => {
-  let dataCon = JSON.parse(data);
+  debugger;
+  let dataCon = data; //JSON.parse(data);
   dataCon = dataCon.FullDataString.split(',');
-
+  console.log('weather data:', dataCon)
   //  convert our date string to be year first.
   // IN: 12/16/2016 02:02:00   =>  OUT: 2016-12-16 02:03:45
   const dateFormatter = (stationDate) => {
