@@ -74,8 +74,8 @@ server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
 });
 
-//  Our server calls the weather station to get our data
-pollStation(myIp);
+ // Our server calls the weather station to get our data
+// pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio
