@@ -8,16 +8,13 @@ const apiKey = process.env.API_KEY;
 const location = '37.814264,-122.243132';
 const extWeatherApi = `https://api.darksky.net/forecast/${apiKey}/${location}`;
 
-const ForecastIo = require('forecastio');
-
-const forecast = new ForecastIo(apiKey);
-
 //  Grabs data from the weather station and passes it to converter module.
-const getData = (extWeatherApi) => {
+const getData = () => {
+  const ForecastIo = require('forecastio');
+  const forecast = new ForecastIo(apiKey);
 
+  forecast.forecast('37.8', '-122').then(data => convert(data.currently)).then(data => writeData(data));
 
-
-  forecast.forecast('37.8', '-122').then(data => console.log(data.currently))
 
   // let rawData;
   // https.get(extWeatherApi, (resp) => {

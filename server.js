@@ -32,13 +32,6 @@ const port = 3000;
 const sec = 1000; // set weather to every second
 const mins = sec * 300; // use the sec to do the minutes
 
-// process.env.DB_USER='root';
-// process.env.HOST='localhost';
-// process.env.DB_PASSWORD='weatherMinter73';
-// process.env.DB_PORT=3306;
-
-
-
 // let myIp = '10.0.0.35';
 // let myIp = '73.162.245.175';
 // if (process.env.NODE_ENV === 'Production') {
@@ -75,7 +68,7 @@ server.listen(port, () => {
 });
 
  // Our server calls the weather station to get our data
-// pollStation(myIp);
+pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio

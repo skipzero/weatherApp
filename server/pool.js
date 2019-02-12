@@ -9,7 +9,7 @@ function Pool() {
       connectionLimit: 10,
       user: 'root',
       host: 'localhost',
-      password: 'weatherMinter73',
+      password: process.env.DB_PASSWORD,
       port: 3006,
     });
   };
