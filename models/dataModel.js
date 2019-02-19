@@ -17,7 +17,6 @@ function Weather() {
   };
 
   this.getDesc = (num, res) => {
-    console.log('data...', num)
     pool.acquire((err, con) => {
       con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
         con.release();

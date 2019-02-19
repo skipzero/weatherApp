@@ -30,7 +30,9 @@ const mcErr = color.red.bold;
 const port = 3000;
 
 const sec = 1000; // set weather to every second
-const mins = sec * 300; // use the sec to do the minutes
+
+// set to once an hour for darksky API
+const mins = sec * 3600; // use the sec to do the minutes
 
 // let myIp = '10.0.0.35';
 // let myIp = '73.162.245.175';
