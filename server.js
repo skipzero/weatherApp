@@ -5,8 +5,8 @@
 const express = require('express');
 const app = express();
 
-const https = require('https');
-const server = https.createServer(app);
+const http = require('http');
+const server = http.createServer(app);
 let dotenv = require('dotenv').load();
 const compression = require('compression');
 const bodyParser = require('body-parser');
@@ -72,61 +72,61 @@ pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
 // //  Websockets via socketio
-io.on('connection', (socket) => {
-  let weatherTimer;
-  // let mineCraftTimer;
-  //  set our timeout function to 10sec
-  function socketWeather(ip) {
-    // console.log('Client connected to server (server)');
-    weatherTimer = setTimeout(() => {
-      socketSendWeather(ip);
-      socketWeather(ip);
-    }, sec);
-  }
-
-  // function socketMineCraft(ip) {
-  //   mineCraftTimer = setTimeout(() => {
-  //     socketSendMineCraft(ip);
-  //     socketMineCraft(ip);
-  //   }, mins);
-  // }
-
-  function socketSendWeather(ip) {
-    http.get(ip, (res) => {
-      res.setEncoding('utf8');
-
-      res.on('error', (err) => {
-        console.error(`ERROR: ${err}`);
-        return err;
-      });
-
-      res.on('data', (data) => {
-        const cleanData = converter(data);
-        socket.emit('weatherData', cleanData);
-      });
-    });
-  }
-
-  // function socketSendMineCraft(ip) {
-  //   pinger(2, mcIP, 25565, (err, res) => {
-  //     if (err) {
-  //       console.error(mcErr(`Mine Craft Server Error: ${err}`));
-  //       socket.emit('mcData', err);
-  //       return err;
-  //     }
-  //
-  //     console.log('PINGING...', res, err);
-  //     socket.emit('mcData', res);
-  //     return res;
-  //   });
-  // }
-
-  // socketWeather(stationIp);
-  // socketMineCraft(mcIP);
-
-  socket.on('disconnect', () => {
-    console.info('Disconnected (serverside)');
-    clearTimeout(weatherTimer);
-    // clearTimeout(mineCraftTimer);
-  });
-});
+// io.on('connection', (socket) => {
+//   let weatherTimer;
+//   // let mineCraftTimer;
+//   //  set our timeout function to 10sec
+//   function socketWeather(ip) {
+//     // console.log('Client connected to server (server)');
+//     weatherTimer = setTimeout(() => {
+//       socketSendWeather(ip);
+//       socketWeather(ip);
+//     }, sec);
+//   }
+//
+//   // function socketMineCraft(ip) {
+//   //   mineCraftTimer = setTimeout(() => {
+//   //     socketSendMineCraft(ip);
+//   //     socketMineCraft(ip);
+//   //   }, mins);
+//   // }
+//
+//   function socketSendWeather(ip) {
+//     http.get(ip, (res) => {
+//       res.setEncoding('utf8');
+//
+//       res.on('error', (err) => {
+//         console.error(`ERROR: ${err}`);
+//         return err;
+//       });
+//
+//       res.on('data', (data) => {
+//         const cleanData = converter(data);
+//         socket.emit('weatherData', cleanData);
+//       });
+//     });
+//   }
+//
+//   // function socketSendMineCraft(ip) {
+//   //   pinger(2, mcIP, 25565, (err, res) => {
+//   //     if (err) {
+//   //       console.error(mcErr(`Mine Craft Server Error: ${err}`));
+//   //       socket.emit('mcData', err);
+//   //       return err;
+//   //     }
+//   //
+//   //     console.log('PINGING...', res, err);
+//   //     socket.emit('mcData', res);
+//   //     return res;
+//   //   });
+//   // }
+//
+//   // socketWeather(stationIp);
+//   // socketMineCraft(mcIP);
+//
+//   socket.on('disconnect', () => {
+//     console.info('Disconnected (serverside)');
+//     clearTimeout(weatherTimer);
+//     // clearTimeout(mineCraftTimer);
+//   });
+// });

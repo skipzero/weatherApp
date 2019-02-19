@@ -6,6 +6,14 @@ const convert = (data) => {
   let dataCon = data; //JSON.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
   console.log('weather data:', dataCon)
+
+  const created = () => {
+    let workDate = new Date();
+    workDate = workDate.toISOString();
+    let workArray = workDate.split('.');
+    console.log(`==========================  ${typeof workDate}`)
+    return workArray[0];
+  }
   //  convert our date string to be year first.
   // IN: 12/16/2016 02:02:00   =>  OUT: 2016-12-16 02:03:45
   // const dateFormatter = (stationDate) => {
@@ -20,6 +28,7 @@ const convert = (data) => {
 
   const weatherData = {
     id: 0,
+    created: created(),
     outTemp: dataCon[dataKeys[7]],
     outHum: dataCon[dataKeys[10]],
     inTemp: dataCon[dataKeys[8]],
@@ -28,6 +37,7 @@ const convert = (data) => {
     curWindS: dataCon[dataKeys[12]],
     curWindG: dataCon[dataKeys[13]],
     curWindD: dataCon[dataKeys[14]],
+    rainTot: 444,
     windSpeedMin: dataCon[dataKeys[12]],
     windSpeedMax: dataCon[dataKeys[12]],
     windGustMin: dataCon[dataKeys[13]],
@@ -35,7 +45,6 @@ const convert = (data) => {
     windDirMin: dataCon[dataKeys[14]],
     windDirMax: dataCon[dataKeys[14]],
     engMetric: 1,
-    created: new Date(),
     station: 'WeatherAlpha-138',
     airQualSens: dataCon[dataKeys[18]],
     airQualQual: dataCon[dataKeys[15]],
