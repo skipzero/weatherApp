@@ -2,11 +2,11 @@
 'use strict';
 
 const convert = require('./converter');
-const https = require('https');
+const http = require('http');
 const writeData = require('./writeData');
 const apiKey = process.env.API_KEY;
 const location = '37.814264,-122.243132';
-const extWeatherApi = `https://api.darksky.net/forecast/${apiKey}/${location}`;
+const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {
@@ -17,7 +17,7 @@ const getData = () => {
 
 
   // let rawData;
-  // https.get(extWeatherApi, (resp) => {
+  // http.get(extWeatherApi, (resp) => {
   //   resp.setEncoding('utf8');
   //   resp.on('data', (data) => {
   //     rawData += data;
@@ -35,7 +35,7 @@ const getData = () => {
   // }
 
   // console.log('Get data', ip);
-  // https.get(extWeatherApi, (resp) => {
+  // http.get(extWeatherApi, (resp) => {
   //   resp.setEncoding('utf8');
   //   let rawData;
   //

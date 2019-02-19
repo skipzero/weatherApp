@@ -5,8 +5,8 @@
 const express = require('express');
 const app = express();
 
-const https = require('https');
-const server = https.createServer(app);
+const http = require('http');
+const server = http.createServer(app);
 let dotenv = require('dotenv').load();
 const compression = require('compression');
 const bodyParser = require('body-parser');

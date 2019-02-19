@@ -10,7 +10,7 @@ function Pool() {
       user: 'root',
       host: 'localhost',
       password: process.env.DB_PASSWORD,
-      port: 3006,
+      port: 3306,
     });
   };
 
