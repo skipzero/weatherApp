@@ -1,5 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 const router = require('express').Router();
 const api = require('./api');
 

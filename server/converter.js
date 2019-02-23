@@ -1,8 +1,7 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
-'use strict';
+
 
 const convert = (data) => {
-  debugger;
   let dataCon = data; //JSON.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
 
@@ -11,7 +10,7 @@ const convert = (data) => {
     workDate = workDate.toISOString();
     let workArray = workDate.split('.');
     return workArray[0];
-  }
+  };
   //  convert our date string to be year first.
   // IN: 12/16/2016 02:02:00   =>  OUT: 2016-12-16 02:03:45
   // const dateFormatter = (stationDate) => {
@@ -45,7 +44,7 @@ const convert = (data) => {
     airQualSens: dataCon[dataKeys[18]],
     airQualQual: dataCon[dataKeys[15]],
 
-  }
+  };
 
   //  The values in the FullDataString are all in metric.
   // const weatherData = {

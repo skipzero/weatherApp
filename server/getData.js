@@ -1,12 +1,12 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 
 const convert = require('./converter');
-const http = require('http');
+// const http = require('http');
 const writeData = require('./writeData');
 const apiKey = process.env.API_KEY;
-const location = '37.814264,-122.243132';
-const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
+// const location = '37.814264,-122.243132';
+// const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {

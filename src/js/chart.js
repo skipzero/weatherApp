@@ -16,7 +16,7 @@ function getRain() {
       .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
   let rainData = localStorage.getItem('rainTot') || 0.00;
-  console.log('our rain total:', rainData);
+  console.log('our rain total:', svg);
 
   x.domain(() => {
     return rainData;
@@ -90,7 +90,7 @@ function drawGraph() {
       throw error;
     }
 
-    const leng = data.length;
+    // const leng = data.length;
     const jsonData = data; //.slice(leng - 800, leng - 1);
 
     //  Convert the temp to Imperial from metric...
@@ -99,7 +99,7 @@ function drawGraph() {
     };
 
     // let
-console.log('json Data///', jsonData.outTemp)
+    console.log('json Data///', jsonData.outTemp);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
@@ -146,7 +146,7 @@ console.log('json Data///', jsonData.outTemp)
                       ${parseInt(d.outTemp, 10)}°`)
               .style('left', `${d3.event.screenX - 80}px`)
               .style('top', `${d3.event.screenY - 405}px`);
-        })
+        });
         // .on('mouseout', () => {
         //   div.transition(500)
         //       .style('opacity', 0);

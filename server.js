@@ -1,38 +1,37 @@
 #!/usr/bin/env nodejs
 /*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
-'use strict';
+
 
 const express = require('express');
 const app = express();
 
 const http = require('http');
 const server = http.createServer(app);
-let dotenv = require('dotenv').load();
-const compression = require('compression');
+// const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
 
-const io = require('socket.io')(server);
+// const io = require('socket.io')(server);
 
 const pollStation = require('./server/pollStation');
-const converter = require('./server/converter');
+// const converter = require('./server/converter');
 const pool = require('./server/pool');
-const api = require('./routes/api');
+// const api = require('./routes/api');
 const path = require('path');
 const pages = require('./routes');
 
 // const pinger = require('mineping');
-const mcIP = 'angerbunny.net';
-const color = require('colors/safe');
+// const mcIP = 'angerbunny.net';
+// const color = require('colors/safe');
 
-const mcErr = color.red.bold;
+// const mcErr = color.red.bold;
 const port = 3000;
 
-const sec = 1000; // set weather to every second
+// const sec = 1000; // set weather to every second
 
 // set to once an hour for darksky API
-const mins = sec * 3600; // use the sec to do the minutes
+// const mins = sec * 3600; // use the sec to do the minutes
 
 // let myIp = '10.0.0.35';
 // let myIp = '73.162.245.175';
@@ -46,13 +45,13 @@ const myIp = 'https://api.darksky.net/forecast/1ab99e681f44158ccbb9cc5ed752cc0b/
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`))
+app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`));
 app.use(logger('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(compression());
+// app.use(compression());
 app.use('/', pages);
 
 app.use((req, res, next) => {
