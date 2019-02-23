@@ -38,7 +38,7 @@ function getRain() {
 }
 
 function getParams () {
-  let path = 'http://angerbunny.net/weather/';
+  let path = 'https://angerbunny.com/weather/';
   let urlParam = window.location.pathname.substring(1);
 
   if (urlParam.length >= 1 && typeof urlParam === 'string') {
