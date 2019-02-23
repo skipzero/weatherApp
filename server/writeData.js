@@ -1,6 +1,6 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 
-const https = require('https');
+const http = require('http');
 const port = 3000;
 
 const writeData = (data) => {
@@ -15,7 +15,7 @@ const writeData = (data) => {
     },
   };
 
-  const post = https.request(options, (res) => {
+  const post = http.request(options, (res) => {
     res.setEncoding('utf8');
     res.on('error', err => {
       console.error(`ERROR: ${err}`);
