@@ -1,5 +1,6 @@
 /*eslint no-console: ['warn', { allow: ['log', 'info', 'error'] }] */
 const d3 = require('d3');
+localStorage.setItem('rainTot', 13);
 
 function getRain() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
@@ -86,7 +87,7 @@ function drawGraph() {
 
   d3.json(path, (error, data) => {
     if (error) {
-      console.error(`[ERROR]: ${error}`);
+      console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
 
