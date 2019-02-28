@@ -50,6 +50,10 @@ gulp.task('default', () => {
   runSequence(['clean'], ['css'], ['img'], ['js'], ['watch']);
 });
 
+gulp.task('build', () => {
+  runSequence(['clean'], ['css'], ['img'], ['js']);
+});
+
 /*  WATCHING FILES  */
 gulp.task('watch', () => {
   gulp.watch(`${config.src.css}/**`, ['css']);
