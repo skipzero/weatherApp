@@ -29,7 +29,11 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+<<<<<<< HEAD
     "forecastio": "2.0.0",
+=======
+    "forecastio": "^2.0.0",
+>>>>>>> 352abb4e341af95e8b487d93a11080f9dfaeb9e4
     "mineping": "0.0.4",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
