@@ -13,7 +13,7 @@ const getData = () => {
   const ForecastIo = require('forecastio');
   const forecastIo = new ForecastIo(apiKey);
 
-  forecastIo.forecast('37.8', '-122').then(data => convert(data.currently)).then(data => writeData(data));
+  forecastIo.forecast('37.8', '-122').then(data => convert(data.currently)).then(data => writeData(data)).catch(error => console.error('Error:', error));
 
 
   // let rawData;
