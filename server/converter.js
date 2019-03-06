@@ -21,6 +21,7 @@ const convert = (data) => {
   // };
   const dataKeys = Object.keys(dataCon);
 
+  console.log('Obj/Keys', dataKeys);
 
   const weatherData = {
     id: 0,
@@ -33,7 +34,7 @@ const convert = (data) => {
     curWindS: dataCon[dataKeys[12]],
     curWindG: dataCon[dataKeys[13]],
     curWindD: dataCon[dataKeys[14]],
-    rainTot: 444,
+    rainTot: dataCon[dataKeys[16]],
     windSpeedMin: dataCon[dataKeys[12]],
     windSpeedMax: dataCon[dataKeys[12]],
     windGustMin: dataCon[dataKeys[13]],
