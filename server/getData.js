@@ -7,7 +7,7 @@ const writeData = require('./writeData');
 const apiKey = process.env.API_KEY;
 // const location = '37.814264,-122.243132';
 // const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
-
+console.log('API:::', apiKey)
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {
   const ForecastIo = require('forecastio');
