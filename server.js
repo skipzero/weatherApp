@@ -13,7 +13,7 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 
 // const io = require('socket.io')(server);
-require('dotenv').config()
+require('dotenv').config();
 
 const pollStation = require('./server/pollStation');
 // const converter = require('./server/converter');

@@ -9,7 +9,6 @@ const convert = (data) => {
     let workDate = new Date();
     workDate = workDate.toISOString();
     let workArray = workDate.split('.');
-    console.log(workDate);
     return workArray[0];
   };
   //  convert our date string to be year first.
