@@ -13,7 +13,7 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 
 // const io = require('socket.io')(server);
-require('dotenv').config()
+require('dotenv').config();
 
 const pollStation = require('./server/pollStation');
 // const converter = require('./server/converter');
@@ -21,6 +21,8 @@ const pool = require('./server/pool');
 // const api = require('./routes/api');
 const path = require('path');
 const pages = require('./routes');
+
+require('dotenv').config();
 
 // const pinger = require('mineping');
 // const mcIP = 'angerbunny.net';

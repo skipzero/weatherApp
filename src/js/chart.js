@@ -93,7 +93,6 @@ function drawGraph() {
 
     // const leng = data.length;
     const jsonData = data.result; //.slice(leng - 800, leng - 1);
-    console.log('JSON:',jsonData);
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
