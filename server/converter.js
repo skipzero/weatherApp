@@ -2,7 +2,7 @@
 
 
 const convert = (data) => {
-  let dataCon = data; //JSON.parse(data);
+  let dataCon = data.result; //JSON.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
 
   const created = () => {
@@ -32,7 +32,7 @@ const convert = (data) => {
     curWindS: dataCon[dataKeys[12]],
     curWindG: dataCon[dataKeys[13]],
     curWindD: dataCon[dataKeys[14]],
-    rainTot: 444,
+    rainTot: dataCon[dataKeys[16]],,
     windSpeedMin: dataCon[dataKeys[12]],
     windSpeedMax: dataCon[dataKeys[12]],
     windGustMin: dataCon[dataKeys[13]],
@@ -45,6 +45,8 @@ const convert = (data) => {
     airQualQual: dataCon[dataKeys[15]],
 
   };
+
+  console.log('Weather Data', weatherData);
 
   //  The values in the FullDataString are all in metric.
   // const weatherData = {

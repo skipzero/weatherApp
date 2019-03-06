@@ -5,7 +5,7 @@
 const getData = require('./getData');
 
 //  Set minutes for polling weather station...
-const minutes = 45;
+const minutes = 3;
 
 const pollStation = (ip) => {
   const delay = minutes * 60000;  //  Convert our milliseconds to minutes...
