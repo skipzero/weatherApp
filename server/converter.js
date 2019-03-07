@@ -2,7 +2,7 @@
 
 
 const convert = (data) => {
-  let dataCon = data.result; //JSON.parse(data);
+  let dataCon = data.result.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
 debugger;
   const created = () => {
