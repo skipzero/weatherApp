@@ -21,6 +21,9 @@ const pool = require('./server/pool');
 const path = require('path');
 const pages = require('./routes');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 // const pinger = require('mineping');
 // const mcIP = 'angerbunny.net';
 // const color = require('colors/safe');
@@ -59,7 +62,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-
+console.log('DOTENV====', process.env)
 //  Create our connection pool
 pool.init();
 // api.configure(app);
@@ -68,7 +71,7 @@ server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
 });
 
- // Our server calls the weather station to get our data
+// Our server calls the weather station to get our data
 pollStation(myIp);
 
 // //  SET UP OUR WEBSOCKETS
