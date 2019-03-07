@@ -15,17 +15,17 @@
   deploy : {
     production : {
       user : "weatheruser",
-      host : "138.68.54.109",
+      host : "45.79.82.63",
       ref  : "origin/prod",
-      repo : "git@github.com:zerosquadron/weatherApp.git",
+      repo : "git@github.com:skipzero/weatherApp.git",
       path : "/var/www/weatherApp",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
     },
     dev : {
       user : "weatheruser",
-      host : "138.68.54.109",
+      host : "45.79.82.63",
       ref  : "origin/master",
-      repo : "git@github.com:zerosquadron/weatherApp.git",
+      repo : "git@github.com:skipzero/weatherApp.git",
       path : "~/Javascript/weatherApp",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env dev",
       env  : {
