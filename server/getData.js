@@ -10,10 +10,11 @@ const location = '37.814264,-122.243132';
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {
-  // const ForecastIo = require('forecastio');
-  // const forecast = new ForecastIo(apiKey);
-  //
-  // forecast.forecast('37.8', '-122').then(data => convert(data.currently)).then(data => writeData(data));
+
+  const ForecastIo = require('forecastio');
+  const forecastIo = new ForecastIo(apiKey);
+
+  forecastIo.forecast('37.8', '-122').then(data => convert(data.currently)).then(data => writeData(data)).catch(error => console.error('Error:', error));
 
   const weatherAddress = `https://api.forecast.io/forecast/${process.env.API_KEY}/${location}`;
   console.log('Get Data:::', weatherAddress)
