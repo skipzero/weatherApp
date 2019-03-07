@@ -4,11 +4,12 @@
 const convert = (data) => {
   let dataCon = data.result; //JSON.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
-
+debugger;
   const created = () => {
     let workDate = new Date();
     workDate = workDate.toISOString();
     let workArray = workDate.split('.');
+    console.log('*****', workArray[0])
     return workArray[0];
   };
   //  convert our date string to be year first.
@@ -21,8 +22,6 @@ const convert = (data) => {
   // };
   const dataKeys = Object.keys(dataCon);
 
-  console.log('Obj/Keys', dataKeys);
-
   const weatherData = {
     id: 0,
     created: created(),
@@ -34,7 +33,7 @@ const convert = (data) => {
     curWindS: dataCon[dataKeys[12]],
     curWindG: dataCon[dataKeys[13]],
     curWindD: dataCon[dataKeys[14]],
-    rainTot: dataCon[dataKeys[16]],
+    rainTot: dataCon[dataKeys[4]],
     windSpeedMin: dataCon[dataKeys[12]],
     windSpeedMax: dataCon[dataKeys[12]],
     windGustMin: dataCon[dataKeys[13]],
@@ -47,8 +46,6 @@ const convert = (data) => {
     airQualQual: dataCon[dataKeys[15]],
 
   };
-
-  console.log('Weather Data', weatherData);
 
   //  The values in the FullDataString are all in metric.
   // const weatherData = {
