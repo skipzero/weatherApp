@@ -8,7 +8,7 @@ debugger;
   const created = () => {
     let workDate = new Date();
     workDate = workDate.toISOString();
-    let workArray = workDate.split('.');
+    let workArray = workDate.result.split('.');
     console.log('*****', workArray[0])
     return workArray[0];
   };

@@ -62,7 +62,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-console.log('DOTENV====', process.env)
 //  Create our connection pool
 pool.init();
 // api.configure(app);
