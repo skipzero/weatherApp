@@ -61,6 +61,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-bower": "0.0.14",
     "gulp-clean-css": "^2.0.12",
+    "gulp-cli": "^2.0.1",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^2.0.0",
     "gulp-livereload": "^3.8.1",
