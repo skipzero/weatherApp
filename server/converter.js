@@ -4,7 +4,7 @@
 const convert = (data) => {
   let dataCon = data.result; //JSON.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
-debugger;
+  debugger;
   const created = () => {
     let workDate = new Date();
     workDate = workDate.toISOString();
@@ -12,14 +12,7 @@ debugger;
     console.log('*****', workArray[0])
     return workArray[0];
   };
-  //  convert our date string to be year first.
-  // IN: 12/16/2016 02:02:00   =>  OUT: 2016-12-16 02:03:45
-  // const dateFormatter = (stationDate) => {
-  //   let date = new Date();
-  //   console.log(date)
-  //   date = date.toISOString().substring(0, 19).split('T').join(' ');
-  //   return date;
-  // };
+
   const dataKeys = Object.keys(dataCon);
 
   const weatherData = {

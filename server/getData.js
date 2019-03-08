@@ -29,7 +29,6 @@ const getData = () => {
       rawData = rawData.slice(9)
       rawData = JSON.parse(rawData);
       rawData = rawData.currently;
-      console.log('-----------', Object.keys(rawData))
       convert(rawData)
     });
   });
@@ -38,30 +37,6 @@ const getData = () => {
     const newData = JSON.parse(data);
     console.log('Convert', newData['latitude'])[0]
   }
-
-  // console.log('Get data', ip);
-  // http.get(extWeatherApi, (resp) => {
-  //   resp.setEncoding('utf8');
-  //   let rawData;
-  //
-  //   resp.on('data', (data) => {
-  //     rawData += data;
-  //     console.log('zeroData: ', data)
-  //     debugger;
-  //     // writeData(convert(data.currently));
-  //     return rawData;
-  //   }).on('error', (err) => {
-  //     console.error(`ERROR: ${err}\n [getData-module]`);
-  //     throw err;
-  //   }).on('end', (data) => {
-  //     try {
-  //       const parsedData = JSON.parse(rawData);
-  //       console.log(parsedData);
-  //     } catch (e) {
-  //       console.log('ERROR:', e);
-  //     }
-  //   });
-  // })
 };
 
 module.exports = getData;
