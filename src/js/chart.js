@@ -1,4 +1,4 @@
-/*eslint no-console: ['warn', { allow: ['log', 'info', 'error'] }] */
+/*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
 const d3 = require('d3');
 localStorage.setItem('rainTot', 1);
 
@@ -22,25 +22,27 @@ function getRain() {
     return rainData;
   });
 
-  y.domain([0, d3.max(rainData, () => { return 25; })]); // set to 25" as that's the average annual rainfall in Oakland Ca.
+  y.domain([0, d3.max(rainData, () => {
+    return 25;  // set to 25" as that's the average annual rainfall in Oakland Ca.
+  })]);
 
   svg.selectAll('.rain')
-    .data(rainData)
-    .enter().append('rect')
-    .attr('class', 'rain')
-    .attr('x', () => { return x(rainData); })
-    .attr('width', x.bandwidth())
-    .attr('y', () => { console.log('data', y(rainData)); return y(rainData); })
-    .attr('height', () => { return height - y(rainData); });
+      .data(rainData)
+      .enter().append('rect')
+      .attr('class', 'rain')
+      .attr('x', () => { return x(rainData); })
+      .attr('width', x.bandwidth())
+      .attr('y', () => { return y(rainData); })
+      .attr('height', () => { return height - y(rainData); });
 
   svg.append('g')
     .call(d3.axisRight(y));
 }
 
-function getParams() {
-  let path = 'https://angerbunny.com/weather/';
+function getParams () {
+  let path = 'weather/';
   let urlParam = window.location.pathname.substring(1);
-
+  // console.log(urlParam);
   if (urlParam.length >= 1 && typeof urlParam === 'string') {
     path = path + urlParam;
     return path;
@@ -55,7 +57,7 @@ function drawGraph() {
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
   let path = getParams();
-  console.log('PATH', path);
+  // console.log('PATH', path);
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
@@ -90,16 +92,15 @@ function drawGraph() {
       throw error;
     }
 
-    const leng = data.length;
-    const jsonData = data.result.slice(leng - 800, leng - 1);
+    const leng = data.result.length;
+    const jsonData = data.result.slice(leng - 500, leng);
 
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
     };
 
-    // let
-    console.log('json Data///', jsonData.outTemp);
+    // console.log('json Data///', pop);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
@@ -144,13 +145,13 @@ function drawGraph() {
         div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
                       ${parseInt(d.outTemp, 10)}°`)
-          .style('left', `${d3.event.screenX - 80}px`)
-          .style('top', `${d3.event.screenY - 405}px`);
-      });
-    // .on('mouseout', () => {
-    //   div.transition(500)
-    //       .style('opacity', 0);
-    // });
+              .style('left', `${d3.event.screenX - 80}px`)
+              .style('top', `${d3.event.screenY - 405}px`);
+        });
+        // .on('mouseout', () => {
+        //   div.transition(500)
+        //       .style('opacity', 0);
+        // });
 
     svg.selectAll('dot')  // Humidity dots and tool tips
       .data(jsonData)

@@ -2,13 +2,13 @@
 
 
 const convert = (data) => {
-  let dataCon = data.result; //JSON.parse(data);
+  let dataCon = data.result.parse(data);
   // dataCon = dataCon.FullDataString.split(',');
   debugger;
   const created = () => {
     let workDate = new Date();
     workDate = workDate.toISOString();
-    let workArray = workDate.split('.');
+    let workArray = workDate.result.split('.');
     console.log('*****', workArray[0])
     return workArray[0];
   };
