@@ -2,15 +2,14 @@
 
 
 const convert = (data) => {
-  let dataCon = data.result.parse(data);
+  let dataCon = data;
   // dataCon = dataCon.FullDataString.split(',');
   debugger;
   const created = () => {
-    let workDate = new Date();
-    workDate = workDate.toISOString();
-    let workArray = workDate.result.split('.');
-    console.log('*****', workArray[0])
-    return workArray[0];
+    let newDate = data.currently.time * 1000;
+    newDate = new Date(newDate);
+    console.log('data!!!!', newDate)
+    return newDate;
   };
 
   const dataKeys = Object.keys(dataCon);

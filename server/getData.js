@@ -15,7 +15,10 @@ const getData = () => {
   const forecastIo = new ForecastIo(apiKey);
 console.log('APIkey', apiKey);
 
-  forecastIo.forecast('37.8', '-122').then(data => convert(data)).then(data => writeData(data)).catch(error => console.error('Error:', error));
+  forecastIo.forecast('37.8', '-122').then(data => {
+    console.log(data, '\n\n ==============', typeof data)
+    converter(data)
+  }).then(data => writeData(data)).catch(error => console.error('Error:', error));
 
   //const weatherAddress = `https://api.forecast.io/forecast/${process.env.API_KEY}/${location}`;
 
@@ -36,7 +39,6 @@ console.log('APIkey', apiKey);
 //  });
 
   function convert(data) {
-    console.log(JSON.stringify(data));
 //    const newData = JSON.parse(data);
     console.log('Convert', data['latitude'])
   }
