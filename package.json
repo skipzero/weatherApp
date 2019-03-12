@@ -76,14 +76,17 @@
     "merge": "^1.2.1",
     "mocha": "^2.5.3",
     "morgan": "^1.9.1",
-    "node-sass": "^3.13.0",
+    "node-sass": "^3.13.1",
     "nodemon": "^1.11.0",
     "public-ip": "^2.0.1",
     "rimraf": "^2.5.4",
     "run-sequence": "^1.2.1",
+    "sass-loader": "^7.1.0",
     "source": "0.0.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.11.1"
+    "watchify": "^3.11.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
