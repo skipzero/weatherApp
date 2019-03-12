@@ -1,19 +1,22 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
 
 
-const convert = (data) => {
-  let dataCon = data;
+const converter = (data) => {
+  let dataCon = data.currently;
   // dataCon = dataCon.FullDataString.split(',');
   debugger;
   const created = () => {
     let newDate = data.currently.time * 1000;
     newDate = new Date(newDate);
-    console.log('data!!!!', newDate)
+    newDate = JSON.stringify(newDate)
+    const newDateArray = newDate.split('T');
+    newDateArray[1] = newDateArray[1].split('.')[0]
+    newDate = newDateArray.join(',').slice(1);
+    newDate = `${newDate.slice(0, 10)} ${newDate.slice(11)}`;
     return newDate;
   };
 
-  const dataKeys = Object.keys(dataCon);
-
+  const dataKeys = Object.keys(data.currently);
   const weatherData = {
     id: 0,
     created: created(),
@@ -66,4 +69,4 @@ const convert = (data) => {
   return weatherData;
 };
 
-module.exports = convert;
+module.exports = converter;

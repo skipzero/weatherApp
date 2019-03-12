@@ -8,7 +8,8 @@
     "start": "nodemon server.js",
     "scss": "node-sass --output-style compressed -o public/css src/css",
     "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -r public/css/*",
-    "lint": "eslint src/js/*"
+    "lint": "eslint src/js/*",
+    "debug": "node inspect server.js"
   },
   "private": true,
   "keywords": [],
