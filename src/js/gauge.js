@@ -174,7 +174,7 @@ const gauge = () => {
   }
 
   // events
-  window.addEventListener('load', function () {
+  window.addEventListener('load', function() {
     const pa = (initVal * 1.8) - 180;
     const p = {};
     p.x = cx + r1 * Math.cos(pa * rad);
@@ -187,7 +187,6 @@ const gauge = () => {
     // const val = this.value;
 
     const val = getWindSpeed();
-    console.log('updateVal', val);
     const newVal = (!isNaN(val) && val >= 0 && val <= 100) ? val : 18;
     const pa = (newVal * 1.8) - 180;
     const p = {};
@@ -220,11 +219,10 @@ const gauge = () => {
   //   }
   // }, false);
 
-  function getWindSpeed () {
+  function getWindSpeed() {
     let windData;
     const windTimer = setTimeout(() => {
       windData = localStorage.getItem('WindGustMax');
-      // console.log('local Storage', windData);
       const pa = (windData * 1.8) - 180;
       const p = {};
       p.x = cx + r1 * Math.cos(pa * rad);

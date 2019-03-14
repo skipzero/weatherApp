@@ -27,22 +27,21 @@ function getRain() {
   })]);
 
   svg.selectAll('.rain')
-      .data(rainData)
-      .enter().append('rect')
-      .attr('class', 'rain')
-      .attr('x', () => { return x(rainData); })
-      .attr('width', x.bandwidth())
-      .attr('y', () => { return y(rainData); })
-      .attr('height', () => { return height - y(rainData); });
+    .data(rainData)
+    .enter().append('rect')
+    .attr('class', 'rain')
+    .attr('x', () => { return x(rainData); })
+    .attr('width', x.bandwidth())
+    .attr('y', () => { return y(rainData); })
+    .attr('height', () => { return height - y(rainData); });
 
   svg.append('g')
     .call(d3.axisRight(y));
 }
 
-function getParams () {
+function getParams() {
   let path = 'weather/';
   let urlParam = window.location.pathname.substring(1);
-  // console.log(urlParam);
   if (urlParam.length >= 1 && typeof urlParam === 'string') {
     path = path + urlParam;
     return path;
@@ -57,7 +56,6 @@ function drawGraph() {
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
   let path = getParams();
-  // console.log('PATH', path);
   // set the ranges
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
@@ -100,7 +98,6 @@ function drawGraph() {
       return (n * 1.8 + 32).toFixed(2);
     };
 
-    // console.log('json Data///', pop);
     // TODO: create obj with imperial/metric flag and add the weather json
     let imperial = true;
 
@@ -145,13 +142,13 @@ function drawGraph() {
         div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
                       ${parseInt(d.outTemp, 10)}°`)
-              .style('left', `${d3.event.screenX - 80}px`)
-              .style('top', `${d3.event.screenY - 405}px`);
-        });
-        // .on('mouseout', () => {
-        //   div.transition(500)
-        //       .style('opacity', 0);
-        // });
+          .style('left', `${d3.event.screenX - 80}px`)
+          .style('top', `${d3.event.screenY - 405}px`);
+      });
+    // .on('mouseout', () => {
+    //   div.transition(500)
+    //       .style('opacity', 0);
+    // });
 
     svg.selectAll('dot')  // Humidity dots and tool tips
       .data(jsonData)

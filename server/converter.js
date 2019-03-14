@@ -1,27 +1,22 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
 
 
-const convert = (data) => {
-  let dataCon = data.result.parse(data);
+const converter = (data) => {
+  let dataCon = data.currently;
   // dataCon = dataCon.FullDataString.split(',');
-debugger;
+  debugger;
   const created = () => {
-    let workDate = new Date();
-    workDate = workDate.toISOString();
-    let workArray = workDate.split('.');
-    console.log('*****', workArray[0])
-    return workArray[0];
+    let newDate = data.currently.time * 1000;
+    newDate = new Date(newDate);
+    newDate = JSON.stringify(newDate)
+    const newDateArray = newDate.split('T');
+    newDateArray[1] = newDateArray[1].split('.')[0]
+    newDate = newDateArray.join(',').slice(1);
+    newDate = `${newDate.slice(0, 10)} ${newDate.slice(11)}`;
+    return newDate;
   };
-  //  convert our date string to be year first.
-  // IN: 12/16/2016 02:02:00   =>  OUT: 2016-12-16 02:03:45
-  // const dateFormatter = (stationDate) => {
-  //   let date = new Date();
-  //   console.log(date)
-  //   date = date.toISOString().substring(0, 19).split('T').join(' ');
-  //   return date;
-  // };
-  const dataKeys = Object.keys(dataCon);
 
+  const dataKeys = Object.keys(data.currently);
   const weatherData = {
     id: 0,
     created: created(),
@@ -74,4 +69,4 @@ debugger;
   return weatherData;
 };
 
-module.exports = convert;
+module.exports = converter;
