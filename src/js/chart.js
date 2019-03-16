@@ -86,9 +86,11 @@ function drawGraph() {
 
   d3.json(path, (error, data) => {
     if (error) {
+      console.dir('D3-JSON-ERROR', error)
       console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
+    console.dir('D3-JSON', data)
 
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 500, leng);

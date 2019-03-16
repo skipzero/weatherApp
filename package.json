@@ -25,22 +25,26 @@
   "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bootstrap": "^4.3.1",
     "compression": "^1.6.2",
     "d3": "^4.1.1",
     "dotenv": "^2.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "forecastio": "^2.0.0",
+    "jquery": "^3.3.1",
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
+    "popper": "^1.0.1",
     "serve-favicon": "^2.3.2",
-    "socket.io": "^1.4.8",
-    "webpack": "^4.29.6"
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
+    "autoprefixer": "^9.5.0",
     "buffer": "^5.0.1",
     "colors": "^1.1.2",
+    "css-loader": "^2.1.1",
     "del": "^2.2.0",
     "eslint": "^2.12.0",
     "eslint-config-airbnb": "^9.0.1",
@@ -49,15 +53,21 @@
     "eslint-plugin-jsx-a11y": "^1.4.2",
     "eslint-plugin-react": "^5.1.1",
     "expect.js": "^0.3.1",
+    "file-loader": "^3.0.1",
     "merge": "^1.2.1",
     "mocha": "^2.5.3",
     "morgan": "^1.9.1",
-    "node-sass": "^3.13.1",
+    "node-sass": "^4.0.0",
     "nodemon": "^1.11.0",
+    "popper.js": "^1.14.7",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
     "public-ip": "^2.0.1",
     "sass-loader": "^7.1.0",
     "source": "0.0.3",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.0"
   }
 }

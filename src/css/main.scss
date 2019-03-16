@@ -1,56 +1,102 @@
-// enable Flexbox
-$enable-flex: true;
+@import "./scss/functions";
+@import "./scss/variables";
+@import "./scss/mixins";
+@import "./scss/root";
+@import "./scss/reboot";
+@import "./scss/type";
+@import "./scss/images";
+@import "./scss/code";
+// @import "./scss/grid";
+// @import "./scss/tables";
+@import "./scss/forms";
+@import "./scss/buttons";
+@import "./scss/transitions";
+@import "./scss/dropdown";
+@import "./scss/button-group";
+@import "./scss/input-group";
+@import "./scss/custom-forms";
+@import "./scss/nav";
+@import "./scss/navbar";
+@import "./scss/card";
+// @import "./scss/breadcrumb";
+@import "./scss/pagination";
+// @import "./scss/badge";
+// @import "./scss/jumbotron";
+@import "./scss/alert";
+@import "./scss/progress";
+// @import "./scss/media";
+// @import "./scss/list-group";
+@import "./scss/close";
+// @import "./scss/toasts";
+// @import "./scss/modal";
+@import "./scss/tooltip";
+@import "./scss/popover";
+// @import "./scss/carousel";
+@import "./scss/spinners";
+@import "./scss/utilities";
+// @import "./scss/print";
 
-// Core variables and mixins
-@import "custom";
-@import "variables";
-@import "mixins";
+@import "./site";
+@import "./charts";
 
-// Reset and dependencies
-@import "normalize";
-// @import "print";
 
-// Core CSS
-@import "reboot";
-@import "type";
-@import "images";
-@import "code";
-@import "grid";
-// @import "tables";
-@import "forms";
-@import "buttons";
 
-// Components
-// @import "animation";
-@import "dropdown";
-@import "button-group";
-@import "input-group";
-@import "custom-forms";
-@import "nav";
-@import "navbar";
-// @import "card";
-// @import "breadcrumb";
-// @import "pagination";
-// @import "tags";
-// @import "jumbotron";
-// @import "alert";
-@import "progress";
-// @import "media";
-// @import "list-group";
-@import "responsive-embed";
-@import "close";
 
-// Components w/ JavaScript
-@import "modal";
-// @import "tooltip";
-// @import "popover";
 
-// Utility classes
-@import "utilities";
-
-// @import 'bootstrap';
-@import "colors";
-
+// // enable Flexbox
+// $enable-flex: true;
+// // @import "./scss/bootstrap/scss/bootstrap";
+//
+// // Core variables and mixins
+// @import "./scss/custom";
+// @import "./scss/variables";
+// @import "./scss/mixins";
+//
+// // Reset and dependencies
+// @import "./scss/normalize";
+// // @import "./scss/print";
+//
+// // Core CSS
+// @import "./scss/reboot";
+// @import "./scss/type";
+// @import "./scss/images";
+// @import "./scss/code";
+// @import "./scss/grid";
+// // @import "./scss/tables";
+// @import "./scss/forms";
+// @import "./scss/buttons";
+//
+// // Components
+// // @import "./scss/animation";
+// @import "./scss/dropdown";
+// @import "./scss/button-group";
+// @import "./scss/input-group";
+// @import "./scss/custom-forms";
+// @import "./scss/nav";
+// @import "./scss/navbar";
+// // @import "./scss/card";
+// // @import "./scss/breadcrumb";
+// // @import "./scss/pagination";
+// // @import "./scss/tags";
+// // @import "./scss/jumbotron";
+// // @import "./scss/alert";
+// @import "./scss/progress";
+// // @import "./scss/media";
+// // @import "./scss/list-group";
+// @import "./scss/responsive-embed";
+// @import "./scss/close";
+//
+// // Components w/ JavaScript
+// @import "./scss/modal";
+// @import "./scss/tooltip";
+// // @import "./scss/popover";
+//
+// // Utility classes
+// @import "./scss/utilities";
+//
+// // @import 'bootstrap';
+@import "./colors";
+//
 body,
 html {
   width: 100%;
