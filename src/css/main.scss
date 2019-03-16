@@ -1,56 +1,42 @@
-// enable Flexbox
-$enable-flex: true;
+@import "./scss/functions";
+@import "./scss/variables";
+@import "./scss/mixins";
+@import "./scss/root";
+@import "./scss/reboot";
+@import "./scss/type";
+@import "./scss/images";
+@import "./scss/code";
 
-// Core variables and mixins
-@import "custom";
-@import "variables";
-@import "mixins";
+@import "./scss/forms";
+@import "./scss/buttons";
+@import "./scss/transitions";
+@import "./scss/dropdown";
+@import "./scss/button-group";
+@import "./scss/input-group";
+@import "./scss/custom-forms";
+@import "./scss/nav";
+@import "./scss/navbar";
+@import "./scss/card";
 
-// Reset and dependencies
-@import "normalize";
-// @import "print";
+@import "./scss/pagination";
 
-// Core CSS
-@import "reboot";
-@import "type";
-@import "images";
-@import "code";
-@import "grid";
-// @import "tables";
-@import "forms";
-@import "buttons";
 
-// Components
-// @import "animation";
-@import "dropdown";
-@import "button-group";
-@import "input-group";
-@import "custom-forms";
-@import "nav";
-@import "navbar";
-// @import "card";
-// @import "breadcrumb";
-// @import "pagination";
-// @import "tags";
-// @import "jumbotron";
-// @import "alert";
-@import "progress";
-// @import "media";
-// @import "list-group";
-@import "responsive-embed";
-@import "close";
+@import "./scss/alert";
+@import "./scss/progress";
 
-// Components w/ JavaScript
-@import "modal";
-// @import "tooltip";
-// @import "popover";
+@import "./scss/close";
 
-// Utility classes
-@import "utilities";
+@import "./scss/tooltip";
+@import "./scss/popover";
 
-// @import 'bootstrap';
-@import "colors";
+@import "./scss/spinners";
+@import "./scss/utilities";
 
+@import "./site";
+@import "./charts";
+@import "./colors";
+
+//
 body,
 html {
   width: 100%;
@@ -81,12 +67,11 @@ html {
     color: $white;
     position: absolute;
     text-align: center;
-    // height: 28px;
+
     padding: 2px 5px;
     font: 12px sans-serif;
     background: $site-accent;
-    // background: linear-gradient(to bottom, $site-accent 0%, $site 100%);
-    // border: 0px;
+
     border-radius: 4px;
     pointer-events: none;
 
@@ -95,10 +80,6 @@ html {
     }
   }
 
-  // .arrow {
-  // 	position: relative;
-  // 	background: #88b7d5;
-  // }
   .tip:after, .tip:before {
   	right: 100%;
   	top: 50%;
