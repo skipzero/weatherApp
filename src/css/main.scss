@@ -6,8 +6,7 @@
 @import "./scss/type";
 @import "./scss/images";
 @import "./scss/code";
-// @import "./scss/grid";
-// @import "./scss/tables";
+
 @import "./scss/forms";
 @import "./scss/buttons";
 @import "./scss/transitions";
@@ -18,84 +17,25 @@
 @import "./scss/nav";
 @import "./scss/navbar";
 @import "./scss/card";
-// @import "./scss/breadcrumb";
+
 @import "./scss/pagination";
-// @import "./scss/badge";
-// @import "./scss/jumbotron";
+
+
 @import "./scss/alert";
 @import "./scss/progress";
-// @import "./scss/media";
-// @import "./scss/list-group";
+
 @import "./scss/close";
-// @import "./scss/toasts";
-// @import "./scss/modal";
+
 @import "./scss/tooltip";
 @import "./scss/popover";
-// @import "./scss/carousel";
+
 @import "./scss/spinners";
 @import "./scss/utilities";
-// @import "./scss/print";
 
 @import "./site";
 @import "./charts";
-
-
-
-
-
-// // enable Flexbox
-// $enable-flex: true;
-// // @import "./scss/bootstrap/scss/bootstrap";
-//
-// // Core variables and mixins
-// @import "./scss/custom";
-// @import "./scss/variables";
-// @import "./scss/mixins";
-//
-// // Reset and dependencies
-// @import "./scss/normalize";
-// // @import "./scss/print";
-//
-// // Core CSS
-// @import "./scss/reboot";
-// @import "./scss/type";
-// @import "./scss/images";
-// @import "./scss/code";
-// @import "./scss/grid";
-// // @import "./scss/tables";
-// @import "./scss/forms";
-// @import "./scss/buttons";
-//
-// // Components
-// // @import "./scss/animation";
-// @import "./scss/dropdown";
-// @import "./scss/button-group";
-// @import "./scss/input-group";
-// @import "./scss/custom-forms";
-// @import "./scss/nav";
-// @import "./scss/navbar";
-// // @import "./scss/card";
-// // @import "./scss/breadcrumb";
-// // @import "./scss/pagination";
-// // @import "./scss/tags";
-// // @import "./scss/jumbotron";
-// // @import "./scss/alert";
-// @import "./scss/progress";
-// // @import "./scss/media";
-// // @import "./scss/list-group";
-// @import "./scss/responsive-embed";
-// @import "./scss/close";
-//
-// // Components w/ JavaScript
-// @import "./scss/modal";
-// @import "./scss/tooltip";
-// // @import "./scss/popover";
-//
-// // Utility classes
-// @import "./scss/utilities";
-//
-// // @import 'bootstrap';
 @import "./colors";
+
 //
 body,
 html {
@@ -127,12 +67,11 @@ html {
     color: $white;
     position: absolute;
     text-align: center;
-    // height: 28px;
+
     padding: 2px 5px;
     font: 12px sans-serif;
     background: $site-accent;
-    // background: linear-gradient(to bottom, $site-accent 0%, $site 100%);
-    // border: 0px;
+
     border-radius: 4px;
     pointer-events: none;
 
@@ -141,10 +80,6 @@ html {
     }
   }
 
-  // .arrow {
-  // 	position: relative;
-  // 	background: #88b7d5;
-  // }
   .tip:after, .tip:before {
   	right: 100%;
   	top: 50%;
