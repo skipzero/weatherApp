@@ -25,6 +25,7 @@
   "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bootstrap": "^4.3.1",
     "compression": "^1.6.2",
     "d3": "^4.1.1",
     "dotenv": "^2.0.0",
@@ -37,7 +38,9 @@
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
     "popper.js": "^1.14.7",
-    "serve-favicon": "^2.3.2"
+    "serve-favicon": "^2.3.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.5.0",
