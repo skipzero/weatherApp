@@ -13,9 +13,8 @@ module.exports = {
     'bootstrap-loader',
   ],
   output: {
-    path: path.join(__dirname, 'public', 'assets'),
+    path: path.join(__dirname, 'public'),
     filename: 'main.js',
-    publicPath: '/assets/',
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
