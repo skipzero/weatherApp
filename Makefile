@@ -6,6 +6,9 @@ all: build lint server
 build: node_modules/
 	npx webpack && cp -R src/images public/
 
+clean:
+	rm -rf public/*
+
 deploy: test build
 
 dev-server: build
@@ -14,7 +17,7 @@ dev-server: build
 server: build
 	npx http-server --open
 
-node_modules/: package.json
+node_modules: clean
 	npm install
 	-touch node_modules/
 
