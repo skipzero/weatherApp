@@ -1,6 +1,10 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var DashboardPlugin = require("webpack-dashboard/plugin");
+
 const path = require('path');
 
 module.exports = {
+  devtool: 'source-map',
   mode: 'development',
   entry: './src/index.js',
   output: {
@@ -11,23 +15,25 @@ module.exports = {
     rules: [
       {
         test: /\.(scss)$/,
-        use: [{
+        use: ExtractTextPlugin.extract({
           loader: 'style-loader', // inject CSS to page
         }, {
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        }, {
-          loader: 'postcss-loader', // Run post css actions
-          options: {
-            plugins: function() { // post css plugins, can be exported to postcss.config.js
-              return [
-                require('precss'),
-                require('autoprefixer')
-              ];
+            loader: 'css-loader', // translates CSS into CommonJS modules
+          }, {
+            loader: 'postcss-loader', // Run post css actions
+            options: {
+              plugins: function() { // post css plugins, can be exported to postcss.config.js
+                return [
+                  require('precss'),
+                  require('autoprefixer'),
+                  new DashboardPlugin({ port: 3001 }),
+                ];
+              }
             }
+          }, {
+            loader: 'sass-loader' // compiles Sass to CSS
           }
-        }, {
-          loader: 'sass-loader' // compiles Sass to CSS
-        }]
+        ),
       },
       {
         test: /\.(gif|png|jpg)$/,
@@ -47,4 +53,7 @@ module.exports = {
       },
     ]
   },
+  plugins: [
+    new ExtractTextPlugin("styles.css"),
+  ]
 };

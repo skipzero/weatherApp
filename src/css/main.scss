@@ -6,7 +6,8 @@
 @import "./scss/type";
 @import "./scss/images";
 @import "./scss/code";
-
+@import "./scss/grid";
+@import "./scss/tables";
 @import "./scss/forms";
 @import "./scss/buttons";
 @import "./scss/transitions";
@@ -18,7 +19,7 @@
 @import "./scss/navbar";
 @import "./scss/card";
 
-@import "./scss/pagination";
+`@import "`./scss/pagination";
 
 
 @import "./scss/alert";
