@@ -1,5 +1,5 @@
 /*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
-import d3 from 'd3';
+import * as d3 from 'd3';
 localStorage.setItem('rainTot', 10);
 
 function getRain() {
