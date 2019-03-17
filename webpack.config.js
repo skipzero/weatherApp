@@ -4,6 +4,7 @@
 // https://github.com/shakacode/react-webpack-rails-tutorial/blob/master/client%2Fwebpack.client.base.config.js
 const webpack = require('webpack');
 const path = require('path');
+const postcssPresetEnv = require('postcss-preset-env');
 
 module.exports = {
   mode: 'development',
@@ -46,7 +47,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => {
+                postcssPresetEnv(
+                  {
+                    stage: 3,
+                    browsers: 'last 2 versions'
+                  }
+                )
+              }
+            }
+          }, 'sass-loader'],
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
