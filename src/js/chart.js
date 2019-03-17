@@ -1,6 +1,6 @@
 /*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
-const d3 = require('d3');
-localStorage.setItem('rainTot', 1);
+import d3 from 'd3';
+localStorage.setItem('rainTot', 10);
 
 function getRain() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };

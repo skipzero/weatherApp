@@ -1,8 +1,8 @@
-require('bootstrap');
+import 'bootstrap';
 /* Browser side JS */
-require('./js/chart.js');
-require('./js/gauge.js');
+import './js/chart.js';
+import './js/gauge.js';
 
 
 /* SASS/CSS */
-require('./css/main.scss');
+import './css/main.scss';

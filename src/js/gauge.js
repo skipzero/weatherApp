@@ -68,7 +68,7 @@ const gauge = () => {
         x1: sx1,
         y1: sy1,
         x2: sx2,
-        y2: sy2,
+        y2: sy2
       };
       setSVGAttributes(scaleLine, scaleLineObj);
 
@@ -78,7 +78,7 @@ const gauge = () => {
       const scaleTextObj = {
         class: 'scale',
         x: sxT,
-        y: syT,
+        y: syT
       };
       setSVGAttributes(scaleText, scaleTextObj);
       scaleText.textContent = n * 10;
@@ -250,4 +250,4 @@ const gauge = () => {
 // }
 
 gauge();
-module.exports = gauge;
+export default gauge;
