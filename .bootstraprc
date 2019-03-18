@@ -52,7 +52,7 @@ styles:
   mixins: true
 
   # Reset and dependencies
-  print: true
+  print: false
 
   # Core CSS
   buttons: true
@@ -61,7 +61,7 @@ styles:
   grid: true
   images: true
   reboot: true
-  tables: true
+  tables: false
   type: true
 
   # Components
@@ -69,12 +69,12 @@ styles:
   badge: true
   breadcrumb: true
   button-group: true
-  card: true
+  card: false
   close: true
   custom-forms: true
   dropdown: true
   input-group: true
-  jumbotron: true
+  jumbotron: false
   list-group: true
   media: true
   nav: true
@@ -84,7 +84,7 @@ styles:
   transitions: true
 
   # Components w/ JavaScript
-  carousel: true
+  carousel: false
   modal: true
   popover: true
   tooltip: true
@@ -96,8 +96,8 @@ styles:
 scripts:
   alert: true
   button: true
-  carousel: true
-  collapse: true
+  carousel: false
+  collapse: false
   dropdown: true
   modal: true
   popover: true
