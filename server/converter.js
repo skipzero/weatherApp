@@ -1,12 +1,44 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
 
-
+let windSpeedArray = [];
+let rainTot = [];
 const converter = (data) => {
-  let dataCon = data.currently;
-  // dataCon = dataCon.FullDataString.split(',');
-  debugger;
+  const rain = data.rain;
+  const rainKey = Object.keys(rain);
+
+  const main = data.main;
+  const wind = data.wind;
+  const {
+    temp,
+    pressure,
+    humidity,
+    temp_min,
+    temp_max,
+  } = main;
+
+  const {
+    speed,
+    deg,
+  } = wind;
+
+  let rainTemp;
+  let currRain;
+  if (typeof rain[rainKey] === 'number') {
+    if (rainTot[rainTot.length - 1] !== rain[rainKey] && rainTot.length <= 20) {
+      rainTot.push(rain[rainKey]);
+    } else {
+      rainTot.shift()
+      rainTot.push(rain[rainKey]);
+    }
+    rainTemp = rainTot.sort((a, b) => a - b);
+    currRain = rainTemp[rainTemp.length - 1]
+    console.info('RAIN', rainTot, rainTemp)
+  } else {
+    currRain = 0;
+  }
+
   const created = () => {
-    let newDate = data.currently.time * 1000;
+    let newDate = data.dt * 1000;
     newDate = new Date(newDate);
     newDate = JSON.stringify(newDate)
     const newDateArray = newDate.split('T');
@@ -16,56 +48,42 @@ const converter = (data) => {
     return newDate;
   };
 
-  const dataKeys = Object.keys(data.currently);
+  if (windSpeedArray.length >= 12) {
+    windSpeedArray.shift();
+  }
+
+  console.log('Wind Array::', windSpeedArray)
+  windSpeedArray.push(speed);
+
+  const minMaxArray = windSpeedArray.slice(0);
+
+  minMaxArray.sort((a, b) => a - b);
+  console.dir(':::Array', rainTemp, rainTot);
+
   const weatherData = {
     id: 0,
     created: created(),
-    outTemp: dataCon[dataKeys[7]],
-    outHum: dataCon[dataKeys[10]],
-    inTemp: dataCon[dataKeys[8]],
-    barom: 0,
+    outTemp: temp,
+    outHum: humidity,
+    inTemp: temp_min,
+    barom: pressure,
     alt: 40,
-    curWindS: dataCon[dataKeys[12]],
-    curWindG: dataCon[dataKeys[13]],
-    curWindD: dataCon[dataKeys[14]],
-    rainTot: dataCon[dataKeys[4]],
-    windSpeedMin: dataCon[dataKeys[12]],
-    windSpeedMax: dataCon[dataKeys[12]],
-    windGustMin: dataCon[dataKeys[13]],
-    windGustMax: dataCon[dataKeys[13]],
-    windDirMin: dataCon[dataKeys[14]],
-    windDirMax: dataCon[dataKeys[14]],
+    curWindS: speed,
+    curWindG: speed,
+    curWindD: deg,
+    rainTot: currRain,
+    windSpeedMin: minMaxArray[minMaxArray.length - 1],
+    windSpeedMax: minMaxArray[0],
+    windGustMin: speed,
+    windGustMax: speed,
+    windDirMin: deg,
+    windDirMax: deg,
     engMetric: 1,
     station: 'WeatherAlpha-138',
-    airQualSens: dataCon[dataKeys[18]],
-    airQualQual: dataCon[dataKeys[15]],
-
+    airQualSens: 0,
+    airQualQual: 0,
   };
 
-  //  The values in the FullDataString are all in metric.
-  // const weatherData = {
-  //   id: 0,
-  //   outTemp: dataCon[0],
-  //   outHum: dataCon[1],
-  //   inTemp: dataCon[2],
-  //   barom: dataCon[3],
-  //   alt: dataCon[4],
-  //   curWindS: dataCon[5],
-  //   curWindG: dataCon[6],
-  //   curWindD: dataCon[7],
-  //   rainTot: dataCon[8],
-  //   windSpeedMin: dataCon[9],
-  //   windSpeedMax: dataCon[10],
-  //   windGustMin: dataCon[11],
-  //   WindGustMax: dataCon[12],
-  //   windDirMin: dataCon[13],
-  //   windDirMax: dataCon[14],
-  //   engMetric: dataCon[15],
-  //   created: dateFormatter(dataCon[16]),
-  //   station: dataCon[17],
-  //   airQualSens: dataCon[18],
-  //   airQualQual: dataCon[19],
-  // };
   return weatherData;
 };
 

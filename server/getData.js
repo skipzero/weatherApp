@@ -2,41 +2,59 @@
 
 
 const converter = require('./converter');
-const https = require('https');
+const http = require('http');
 const writeData = require('./writeData');
-const apiKey = process.env.API_KEY2;
-const location = '37.814264,-122.243132';
+const apiKey = process.env.API_KEY;
+const location = 'lat=37.82&lon=-122.27';
 // const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {
 
-  const ForecastIo = require('forecastio');
-  const forecastIo = new ForecastIo(apiKey);
+  // const ForecastIo = require('forecastio');
+  // const forecastIo = new ForecastIo(apiKey);
 
-  forecastIo.forecast('37.8', '-122').then(data => {
-    writeData(converter(data))
-  }).catch(error => console.error('Error:', error));
+  // forecastIo.forecast('37.8', '-122').then(data => {
+  //   writeData(converter(data))
+  // }).catch(error => console.error('Error:', error));
+  const weatherAddress = `http://api.openweathermap.org/data/2.5/weather?${location}&units=imperial&appid=${apiKey}`;
+  let rawData;
+  http.get(weatherAddress, (res) => {
+    const { statusCode } = res;
+    const contentType = res.headers['content-type'];
 
-  //const weatherAddress = `https://api.forecast.io/forecast/${process.env.API_KEY}/${location}`;
+    let error;
+    if (statusCode !== 200) {
+      error = new Error('Request Failed.\n' +
+        `Status Code: ${statusCode}`);
+    }
 
-  //  let rawData;
-  //  https.get(weatherAddress, (resp) => {
-  //    resp.setEncoding('utf8');
-  //    resp.on('data', (data) => {
-  //      rawData += data;
-  //    })
-  //    resp.on('end', () => {
-  // const newData = JSON.parse(rawData);
-  //     rawData = rawData.slice(9)
-  //     rawData = JSON.parse(rawData);
-  //      convert(rawData)
-  //    });
-  //  });
+    else if (!/^application\/json/.test(contentType)) {
+      error = new Error('Invalid content-type.\n' +
+        `Expected application/json but received ${contentType}`);
+    }
 
-  function convert(data) {
-    //    const newData = JSON.parse(data);
-  }
+    if (error) {
+      console.error(error.message);
+      // Consume response data to free up memory
+      res.resume();
+      return;
+    }
+
+    res.setEncoding('utf8');
+    let rawData = '';
+    res.on('data', (chunk) => { rawData += chunk; });
+    res.on('end', () => {
+      try {
+        const parsedData = JSON.parse(rawData);
+        writeData(converter(parsedData));
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+  }).on('error', (e) => {
+    console.error(`Got error: ${e.message}`);
+  });
 };
 
 module.exports = getData;
