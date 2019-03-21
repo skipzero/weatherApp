@@ -4,7 +4,6 @@ let windSpeedArray = [];
 let rainTot = [];
 const converter = (data) => {
   const rain = data.rain;
-  const rainKey = Object.keys(rain);
 
   const main = data.main;
   const wind = data.wind;
@@ -23,7 +22,9 @@ const converter = (data) => {
 
   let rainTemp;
   let currRain;
-  if (typeof rain[rainKey] === 'number') {
+  if (rain) {
+      const rainKey = Object.keys(rain);
+
     if (rainTot[rainTot.length - 1] !== rain[rainKey] && rainTot.length <= 20) {
       rainTot.push(rain[rainKey]);
     } else {
