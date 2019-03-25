@@ -27,8 +27,6 @@ function getRain() {
     return rainData;
   });
 
-
-
   y.domain([0, d3.max(rainData, () => {
     return 25;  // set to 25" as that's the average annual rainfall in Oakland Ca.
   })]);
