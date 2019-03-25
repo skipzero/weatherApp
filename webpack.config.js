@@ -5,6 +5,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const postcssPresetEnv = require('postcss-preset-env');
+const DashboardPlugin = require("webpack-dashboard/plugin");
 
 module.exports = {
   mode: 'development',
@@ -19,6 +20,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',

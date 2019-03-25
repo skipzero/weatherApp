@@ -22,8 +22,6 @@ const pool = require('./server/pool');
 const path = require('path');
 const pages = require('./routes');
 
-require('dotenv').config();
-
 // const pinger = require('mineping');
 // const mcIP = 'angerbunny.net';
 // const color = require('colors/safe');

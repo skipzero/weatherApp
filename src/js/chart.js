@@ -91,15 +91,14 @@ function drawGraph() {
 
   d3.json(path, (error, data) => {
     if (error) {
-      console.dir('D3-JSON-ERROR', error)
       console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
-    console.dir('D3-JSON', data)
+    console.log('D3-JSON', data)
 
     const leng = data.result.length;
-    const jsonData = data.result.slice(leng - 500, leng);
-    console.log('length', leng)
+    const jsonData = data.result.slice(leng - 750, leng);
+    console.log('length', leng, jsonData.length, jsonData)
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
