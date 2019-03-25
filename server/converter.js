@@ -4,8 +4,6 @@ let windSpeedArray = [];
 let rainTot = [];
 const converter = (data) => {
   const rain = data.rain;
-  const rainKey = Object.keys(rain);
-
   const main = data.main;
   const wind = data.wind;
   const {
@@ -23,7 +21,9 @@ const converter = (data) => {
 
   let rainTemp;
   let currRain;
-  if (typeof rain[rainKey] === 'number') {
+
+  if (rain) {
+    const rainKey = Object.keys(rain);
     if (rainTot[rainTot.length - 1] !== rain[rainKey] && rainTot.length <= 20) {
       rainTot.push(rain[rainKey]);
     } else {
@@ -58,7 +58,6 @@ const converter = (data) => {
   const minMaxArray = windSpeedArray.slice(0);
 
   minMaxArray.sort((a, b) => a - b);
-  console.dir(':::Array', rainTemp, rainTot);
 
   const weatherData = {
     id: 0,

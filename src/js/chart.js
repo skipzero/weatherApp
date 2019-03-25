@@ -1,6 +1,5 @@
 /*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
 import * as d3 from 'd3';
-localStorage.setItem('rainTot', 10);
 
 function getRain() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
@@ -16,11 +15,19 @@ function getRain() {
     .append('g')
     .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
-  let rainData = localStorage.getItem('rainTot') || 0.00;
+  let rainData = localStorage.getItem('rainTot');
+
+  if (!rainData) {
+    rainData = 2;
+  }
+
+  console.log('rain check', rainData);
 
   x.domain(() => {
     return rainData;
   });
+
+
 
   y.domain([0, d3.max(rainData, () => {
     return 25;  // set to 25" as that's the average annual rainfall in Oakland Ca.
@@ -94,7 +101,7 @@ function drawGraph() {
 
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 500, leng);
-
+    console.log('length', leng)
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);

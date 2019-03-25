@@ -49,7 +49,7 @@ const getData = () => {
         const parsedData = JSON.parse(rawData);
         writeData(converter(parsedData));
       } catch (e) {
-        console.error(e.message);
+        console.error(e);
       }
     });
   }).on('error', (e) => {
