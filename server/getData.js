@@ -18,8 +18,6 @@ const getData = () => {
   //   writeData(converter(data))
   // }).catch(error => console.error('Error:', error));
 
-  // http://api.openweathermap.org/data/2.5/weather?lat=37.82&lon=-122.27&units=imperial&appid=a97047c811e72abe2db04011800f24ee
-
   const weatherAddress = `http://api.openweathermap.org/data/2.5/weather?${location}&units=imperial&appid=${apiKey}`;
   let rawData;
   http.get(weatherAddress, (res) => {

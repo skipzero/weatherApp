@@ -15,7 +15,7 @@
   "deploy" : {
     "production" : {
       "user" : "weatheruser",
-      "host" : "45.79.82.63",
+      "host" : "165.227.22.152",
       "ref"  : "origin/prod",
       "repo" : "git@github.com:skipzero/weatherApp.git",
       "path" : "/var/www/weatherApp",
@@ -23,7 +23,7 @@
     },
     "development" : {
       "user" : "weatheruser",
-      "host" : "45.79.82.63",
+      "host" : "165.227.22.152",
       "ref"  : "origin/master",
       "repo" : "git@github.com:skipzero/weatherApp.git",
       "path" : "~/Javascript/weatherApp",
