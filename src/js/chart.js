@@ -105,7 +105,7 @@ function drawGraph() {
     };
 
     // TODO: create obj with imperial/metric flag and add the weather json
-    let imperial = true;
+    let imperial = false;
 
     // format the data & do our converstions if needed...
     jsonData.forEach((d) => {
@@ -116,6 +116,7 @@ function drawGraph() {
       }
       row.display = timeFormatter(new Date(row.created)).split(' ');
       row.created = d3.isoParse(row.created);
+    localStorage.setItem('rainTot', row.rainTot);
     });
 
     // Scale the range of the data

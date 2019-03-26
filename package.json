@@ -37,7 +37,7 @@
     "mysql": "^2.11.1",
     "node-http-proxy": "^0.2.3",
     "node-rest-client": "^2.0.1",
-    "popper.js": "^1.14.7",
+    "popper.js": "^1.14.7"
   },
   "devDependencies": {
     "@types/autoprefixer": "^9.4.0",
