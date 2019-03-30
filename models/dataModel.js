@@ -9,7 +9,7 @@ function Weather() {
         con.release();
         if (err) {
           console.error(`[ERROR-get] ${err}`);
-          res.send({ status: 1, message: 'Error retreiving records...'})
+          res.send({ status: 1, message: 'Error retreiving records...' })
         }
         res.send({ status: 0, message: 'records retreived successfully!', result });
       })
@@ -22,9 +22,9 @@ function Weather() {
         con.release();
         if (err) {
           console.error(`[ERROR-getDesc] ${err}`);
-          res.send({ status: 1, message: 'error retreiving records.'})
+          res.send({ status: 1, message: 'error retreiving records.' })
         }
-        res.send({ status: 0, message: 'records found successfully!', result})
+        res.send({ status: 0, message: 'records found successfully!', result })
       });
     });
   };
@@ -61,9 +61,9 @@ function Weather() {
         con.release();
         if (err) {
           console.error(`[ERROR-delete] ${err}`);
-          res.send({status: 1, message: 'Record failed to delete'});
+          res.send({ status: 1, message: 'Record failed to delete' });
         }
-        res.send({status: 0, message: 'Record deleted successfully'});
+        res.send({ status: 0, message: 'Record deleted successfully' });
       });
     });
   };
