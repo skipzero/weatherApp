@@ -1,6 +1,5 @@
 /*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
 import * as d3 from 'd3';
-localStorage.setItem('rainTot', 10);
 
 function getRain() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
@@ -16,8 +15,19 @@ function getRain() {
     .append('g')
     .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
+<<<<<<< HEAD
   let rainData = localStorage.getItem('rainTot') || 0.00;
   rainData = rainData * 0.039370;
+=======
+  let rainData = localStorage.getItem('rainTot');
+
+  if (!rainData) {
+    rainData = 2;
+  }
+
+  console.log('rain check', rainData);
+
+>>>>>>> 4821f7dd859dec50f763bffbb1abf21b8e0c3002
   x.domain(() => {
     return rainData;
   });
@@ -86,22 +96,21 @@ function drawGraph() {
 
   d3.json(path, (error, data) => {
     if (error) {
-      console.dir('D3-JSON-ERROR', error)
       console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
-    console.dir('D3-JSON', data)
+    console.log('D3-JSON', data)
 
     const leng = data.result.length;
-    const jsonData = data.result.slice(leng - 500, leng);
-
+    const jsonData = data.result.slice(leng - 750, leng);
+    console.log('length', leng, jsonData.length, jsonData)
     //  Convert the temp to Imperial from metric...
     const imperialTemp = n => {
       return (n * 1.8 + 32).toFixed(2);
     };
 
     // TODO: create obj with imperial/metric flag and add the weather json
-    let imperial = true;
+    let imperial = false;
 
     // format the data & do our converstions if needed...
     jsonData.forEach((d) => {
@@ -112,6 +121,7 @@ function drawGraph() {
       }
       row.display = timeFormatter(new Date(row.created)).split(' ');
       row.created = d3.isoParse(row.created);
+    localStorage.setItem('rainTot', row.rainTot);
     });
 
     // Scale the range of the data

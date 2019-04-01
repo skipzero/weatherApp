@@ -4,7 +4,6 @@ let windSpeedArray = [];
 let rainTot = [];
 const converter = (data) => {
   const rain = data.rain;
-
   const main = data.main;
   const wind = data.wind;
   const {
@@ -22,13 +21,13 @@ const converter = (data) => {
 
   let rainTemp;
   let currRain;
-  if (rain) {
-      const rainKey = Object.keys(rain);
 
+  if (rain) {
+    const rainKey = Object.keys(rain);
     if (rainTot[rainTot.length - 1] !== rain[rainKey] && rainTot.length <= 20) {
       rainTot.push(rain[rainKey]);
     } else {
-      rainTot.shift()
+      rainTot.shift();
       rainTot.push(rain[rainKey]);
     }
     rainTemp = rainTot.sort((a, b) => a - b);
@@ -53,13 +52,13 @@ const converter = (data) => {
     windSpeedArray.shift();
   }
 
-  console.log('Wind Array::', windSpeedArray)
   windSpeedArray.push(speed);
 
   const minMaxArray = windSpeedArray.slice(0);
 
   minMaxArray.sort((a, b) => a - b);
-  console.dir(':::Array', rainTemp, rainTot);
+
+  console.log('Wind Array::', windSpeedArray, minMaxArray)
 
   const weatherData = {
     id: 0,
@@ -69,16 +68,16 @@ const converter = (data) => {
     inTemp: temp_min,
     barom: pressure,
     alt: 40,
-    curWindS: speed,
-    curWindG: speed,
-    curWindD: deg,
+    curWindS: speed || 0,
+    curWindG: speed || 0,
+    curWindD: deg || 0,
     rainTot: currRain,
     windSpeedMin: minMaxArray[minMaxArray.length - 1],
     windSpeedMax: minMaxArray[0],
-    windGustMin: speed,
-    windGustMax: speed,
-    windDirMin: deg,
-    windDirMax: deg,
+    windGustMin: speed || 0,
+    windGustMax: speed || 0,
+    windDirMin: deg || 0,
+    windDirMax: deg || 0,
     engMetric: 1,
     station: 'WeatherAlpha-138',
     airQualSens: 0,

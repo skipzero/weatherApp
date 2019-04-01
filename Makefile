@@ -1,5 +1,5 @@
 .PHONY: all build deploy dev-server server plop lint test test.only
-NPM_BIN=./node_modules/.bin
+NPM_BIN=.nvm/versions/node/$(node -v)/bin/node
 
 all: build lint server
 
@@ -25,7 +25,7 @@ lint: node_modules/
 	npx eslint src/ test/
 
 debug:
-	$(NPM_BIN)/mocha --opts mocha.opts --inspect-brk
+	node --inspect server.js
 
 test: lint
 	npx mocha --opts mocha.opts
@@ -38,7 +38,7 @@ test.blink:
 	mocha -R @ripter/mocha-reporter-blink1
 
 watch:
-	$(NPM_BIN)/webpack --env.dev --progress --colors -d --watch
+	webpack --env.dev --progress --colors -d --watch
 
 cover:
-	$(NPM_BIN)/istanbul cover $(NPM_BIN)/_mocha test/*.js -- --require babel-register
+	istanbul cover mocha test/*.js -- --require babel-register

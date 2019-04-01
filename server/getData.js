@@ -17,6 +17,7 @@ const getData = () => {
   // forecastIo.forecast('37.8', '-122').then(data => {
   //   writeData(converter(data))
   // }).catch(error => console.error('Error:', error));
+
   const weatherAddress = `http://api.openweathermap.org/data/2.5/weather?${location}&units=imperial&appid=${apiKey}`;
   let rawData;
   http.get(weatherAddress, (res) => {
@@ -49,7 +50,7 @@ const getData = () => {
         const parsedData = JSON.parse(rawData);
         writeData(converter(parsedData));
       } catch (e) {
-        console.error(e.message);
+        console.error(e);
       }
     });
   }).on('error', (e) => {

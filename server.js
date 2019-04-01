@@ -1,13 +1,11 @@
 #!/usr/bin/env nodejs
 /*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
-
-
 const express = require('express');
 const app = express();
 
 const http = require('http');
 const server = http.createServer(app);
-// const compression = require('compression');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
@@ -22,28 +20,17 @@ const pool = require('./server/pool');
 const path = require('path');
 const pages = require('./routes');
 
-require('dotenv').config();
-
-// const pinger = require('mineping');
-// const mcIP = 'angerbunny.net';
-// const color = require('colors/safe');
-
-// const mcErr = color.red.bold;
 const port = 3000;
-
-// const sec = 1000; // set weather to every second
-
-// set to once an hour for darksky API
-// const mins = sec * 3600; // use the sec to do the minutes
 
 // let myIp = '10.0.0.35';
 // let myIp = '73.162.245.175';
 // if (process.env.NODE_ENV === 'Production') {
 //   myIp = '73.162.245.173';
 // }
-//
+
+
 // const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
-const myIp = 'https://api.darksky.net/forecast/1ab99e681f44158ccbb9cc5ed752cc0b/37.814264,-122.243132';//`http://${myIp}/FullDataString`;
+//`http://${myIp}/FullDataString`;
 // const stationIp = 'http://73.162.245.173/FullDataString';
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -54,7 +41,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.use(compression());
+app.use(compression());
 app.use('/', pages);
 
 app.use((req, res, next) => {
@@ -71,4 +58,4 @@ server.listen(port, () => {
 });
 
 // Our server calls the weather station to get our data
-pollStation(myIp);
+pollStation();
