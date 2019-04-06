@@ -39,12 +39,4 @@ function getRain() {
     .call(d3.axisRight(y));
 }
 
-function getParams() {
-  let path = 'weather/';
-  let urlParam = window.location.pathname.substring(1);
-  if (urlParam.length >= 1 && typeof urlParam === 'string') {
-    path = path + urlParam;
-    return path;
-  }
-  return path;
-}
+getRain();
