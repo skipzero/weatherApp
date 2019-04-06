@@ -27,7 +27,8 @@ const getData = () => {
     let error;
     if (statusCode !== 200) {
       error = new Error('Request Failed.\n' +
-        `Status Code: ${statusCode}`);
+        `Status Code: ${statusCode} :`);
+        console.dir(res)
     }
 
     else if (!/^application\/json/.test(contentType)) {
