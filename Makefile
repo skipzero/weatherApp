@@ -4,7 +4,7 @@ NPM_BIN=.nvm/versions/node/$(node -v)/bin/node
 all: build lint server
 
 build: node_modules/
-	npx webpack && cp -R src/images public/
+	webpack && cp -R src/images public/
 
 clean:
 	rm -rf public/*
@@ -12,26 +12,26 @@ clean:
 deploy: test build
 
 dev-server: build
-	npx webpack-dev-server --open
+	webpack-dev-server --open
 
 server: build
-	npx http-server --open
+	http-server --open
 
 node_modules: clean
 	npm install
 	-touch node_modules/
 
 lint: node_modules/
-	npx eslint src/ test/
+	eslint src/ test/
 
 debug:
 	node --inspect server.js
 
 test: lint
-	npx mocha --opts mocha.opts
+	mocha --opts mocha.opts
 
 test.only:
-	npx mocha --opts mocha.opts
+	mocha --opts mocha.opts
 
 test.blink:
 	# npx mocha --opts mocha.ops --require babel-register

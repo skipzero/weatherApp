@@ -96,8 +96,8 @@ function drawGraph() {
         div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
                       ${parseInt(d.outTemp, 10)}°`)
-          .style('left', `${d3.event.screenX - 80}px`)
-          .style('top', `${d3.event.screenY - 405}px`);
+          .style('left', `${d3.event.screenX - 60}px`)
+          .style('top', `${d3.event.screenY - 390}px`);
       });
     // .on('mouseout', () => {
     //   div.transition(500)

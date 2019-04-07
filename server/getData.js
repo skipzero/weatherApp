@@ -49,7 +49,7 @@ const getData = () => {
     res.on('end', () => {
       try {
         const parsedData = JSON.parse(rawData);
-        writeData(converter(parsedData));
+        // writeData(converter(parsedData));
       } catch (e) {
         console.error(e);
       }
