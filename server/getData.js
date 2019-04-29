@@ -1,25 +1,66 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-
+const WeatherAPI = require('ambient-weather-api');
 
 const converter = require('./converter');
+const https = require('https');
 const http = require('http');
 const writeData = require('./writeData');
 const apiKey = process.env.API_KEY;
-const location = 'lat=37.82&lon=-122.27';
-// const extWeatherApi = `http://api.darksky.net/forecast/${apiKey}/${location}`;
+const applicationKey = process.env.APP_KEY
+
+const apiKey2 = process.env.API_KEY2;
+
+// const api = new WeatherAPI({
+//   apiKey,
+//   applicationKey,
+// });
+https.get(`https://api.ambientweather.net/v1/devices?applicationKey=${applicationKey}&apiKey=${apiKey}`, (res) => {
+  const { statusCode } = res;
+  const contentType = res.headers['content-type'];
+
+  let error;
+  if (statusCode !== 200) {
+    error = new Error('Request Failed.\n' +
+      `Status Code: ${statusCode} :`);
+    // console.dir(res)
+  }
+
+  else if (!/^application\/json/.test(contentType)) {
+    error = new Error('Invalid content-type.\n' +
+      `Expected application/json but received ${contentType}`);
+  }
+
+  if (error) {
+    console.error(error.message);
+    // Consume response data to free up memory
+    res.resume();
+    return;
+  }
+
+  res.setEncoding('utf8');
+  let rawData = '';
+  res.on('data', (chunk) => { rawData += chunk; });
+  res.on('end', () => {
+    try {
+      const testData = rawData;
+      const parsedData = JSON.parse(rawData);
+      // writeData(converter(parsedData));
+      console.table(parsedData[0].lastData)
+    } catch (e) {
+      console.error(e);
+    }
+  });
+}).on('error', (e) => {
+  console.error(`Got error: ${e.message}`);
+});
+
+
+
 
 //  Grabs data from the weather station and passes it to converter module.
 const getData = () => {
-
-  // const ForecastIo = require('forecastio');
-  // const forecastIo = new ForecastIo(apiKey);
-
-  // forecastIo.forecast('37.8', '-122').then(data => {
-  //   writeData(converter(data))
-  // }).catch(error => console.error('Error:', error));
-
-  const weatherAddress = `http://api.openweathermap.org/data/2.5/weather?${location}&units=imperial&appid=${apiKey}`;
-  let rawData;
+  const location = '33.87, -122.24'
+  const weatherAddress = `http://api.openweathermap.org/data/2.5/weather?${location}&units=imperial&appid=${apiKey2}`;
   http.get(weatherAddress, (res) => {
     const { statusCode } = res;
     const contentType = res.headers['content-type'];
@@ -28,7 +69,7 @@ const getData = () => {
     if (statusCode !== 200) {
       error = new Error('Request Failed.\n' +
         `Status Code: ${statusCode} :`);
-        console.dir(res)
+      // console.dir(res)
     }
 
     else if (!/^application\/json/.test(contentType)) {
@@ -49,7 +90,7 @@ const getData = () => {
     res.on('end', () => {
       try {
         const parsedData = JSON.parse(rawData);
-        // writeData(converter(parsedData));
+        writeData(converter(parsedData));
       } catch (e) {
         console.error(e);
       }
