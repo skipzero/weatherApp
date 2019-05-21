@@ -1,20 +1,22 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-
 const mysql = require('mysql');
 
-function Pool() {
-  this.pool = null;
-  this.init = () => {
+class Pool {
+  constructor() {
+    this.pool = null;
+  }
+
+  init() {
     this.pool = mysql.createPool({
       connectionLimit: 10,
-      user: 'root',
-      host: 'localhost',
+      user: process.env.DB_USER,
+      host: process.env.HOST,
       password: process.env.DB_PASSWORD,
-      port: 3306,
+      port: process.env.DB_PORT,
     });
   };
 
-  this.acquire = (callback) => {
+  acquire(callback) {
     this.pool.getConnection((err, connection) => {
       if (err) {
         console.error(`[${new Date()}] ERROR: ${err}`);

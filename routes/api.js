@@ -3,7 +3,7 @@ const weather = require('../models/dataModel');
 //  Our CRUD resources router
 module.exports = {
   configure: (app) => {
-    app.get('/weather', (req, res) => {
+    app.get('/weather', (_req, res) => {
       weather.get(res);
     });
 
