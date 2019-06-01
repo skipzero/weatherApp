@@ -4,7 +4,7 @@ NPM_BIN=.nvm/versions/node/$(node -v)/bin/node
 all: build lint server
 
 build: node_modules/
-	webpack && cp -R src/images public/
+	cp -R src/images public/ && webpack && node server.js
 
 clean:
 	rm -rf public/*
