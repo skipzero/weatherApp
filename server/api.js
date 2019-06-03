@@ -10,6 +10,11 @@ module.exports = {
       weather.get(res);
     });
 
+    app.get('/weather/:id', (req, res) => {
+      console.log('::::', id)
+      weather.get(res);
+    });
+
     app.post('/weather', (req, res) => {
       console.log('api post...')
       weather.create(req.body, res);

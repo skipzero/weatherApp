@@ -13,15 +13,11 @@ const converter = (data) => {
     }
     let newDate = data;
     newDate = newDate.split('T');
-    console.log('DAT::::', newDate)
     newDate[1] = newDate[1].split('.');
     newDate = [newDate[0], newDate[1][0]];
     newDate = newDate.join(' ')
-    console.log('DATA!!!!!', newDate);
     return newDate;
   }
-  console.log('+++++++', date(data));
-  console.log('converter', data)
 
   const dbData = {
     tempinf: data.tempinf,
