@@ -5,7 +5,7 @@ const pool = require('../server/pool');
 function Weather() {
   this.get = (res) => {
     pool.acquire((err, con) => {
-      con.query('select * from `weather`.`data_table`', (err, result) => {
+      con.query('select * from `ambi_weather`.`ambient_weather`', (err, result) => {
         con.release();
         if (err) {
           console.error(`[ERROR-get] ${err}`);
@@ -18,7 +18,7 @@ function Weather() {
 
   this.getDesc = (num, res) => {
     pool.acquire((err, con) => {
-      con.query(`SELECT * FROM weather.data_table ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
+      con.query(`SELECT * FROM ambi_weather.ambient_weather ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
         con.release();
         if (err) {
           console.error(`[ERROR-getDesc] ${err}`);
@@ -31,7 +31,7 @@ function Weather() {
 
   this.create = (data, res) => {
     pool.acquire((err, con) => {
-      con.query('insert into `weather`.`data_table` set ?', data, (err, result) => {
+      con.query('insert into `ambi_weather`.`ambient_weather` set ?', data, (err, result) => {
         con.release();
         if (err) {
           console.error(`[ERROR-create] ${err}`);
@@ -45,7 +45,7 @@ function Weather() {
   this.update = (data, res) => {
     pool.acquire((err, con) => {
       console.error(`[ERROR-update] ${err}`);
-      con.query('update `weather`.`data_table` set ? where id = ?', [data, data.id], (err, result) => {
+      con.query('update `ambi_weather`.`ambient_weather` set ? where id = ?', [data, data.id], (err, result) => {
         con.release();
         if (err) {
           res.send({ status: 1, message: 'updating record failed' });
@@ -57,7 +57,7 @@ function Weather() {
 
   this.delete = (id, res) => {
     pool.acquire((err, con) => {
-      con.query('delete from `weather`.`data_table` where id = ?', [id], (err, result) => {
+      con.query('delete from `ambi_weather`.`ambient_weather` where id = ?', [id], (err, result) => {
         con.release();
         if (err) {
           console.error(`[ERROR-delete] ${err}`);

@@ -11,7 +11,7 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 
 // const io = require('socket.io')(server);
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 const pollStation = require('./server/pollStation');
 // const converter = require('./server/converter');
@@ -21,7 +21,7 @@ const path = require('path');
 const pages = require('./routes');
 
 const port = 3000;
-
+dotenv.config()
 // let myIp = '10.0.0.35';
 // let myIp = '73.162.245.175';
 // if (process.env.NODE_ENV === 'Production') {
