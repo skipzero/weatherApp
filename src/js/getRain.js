@@ -16,8 +16,9 @@ function getRain() {
     .append('g')
     .attr('transform', `translate( ${margin.left}, ${margin.top})`);
 
-  let rainData = localStorage.getItem('rainTot') || 0.00;
-  rainData = rainData * 0.039370;
+  let rainTotal = localStorage.getItem('rain');
+  rainTotal = JSON.parse(rainTotal).totalrainin;
+  // rainData = rainData * 0.039370;
   x.domain(() => {
     return rainData;
   });

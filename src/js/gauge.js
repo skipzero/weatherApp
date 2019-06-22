@@ -1,4 +1,10 @@
-/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }], no-shadow: [ 0, { 'builtinGlobals': true,}], no-unused-vars: 0, no-invalid-this: 0 */
+/*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+
+/* Server Side Events */
+/* Storage listener */
+window.addEventListener('storage', () => {
+  localStorage.getItem('wind');
+}, false)
 
 const gauge = () => {
   const containersRy = document.querySelector('.container');
@@ -8,7 +14,6 @@ const gauge = () => {
   const fill = document.querySelector('.fill');
   const center = document.querySelector('.center');
   const needle = document.querySelector('.needle');
-
   const initialValue = document.querySelector('input.initialValue');  //  localStorage.getItem('WindGustMax'); // || 33;
 
   const rad = Math.PI / 180;
@@ -155,6 +160,7 @@ const gauge = () => {
     needle.setAttributeNS(null, 'points', points);
   }
 
+
   // helpers
   // function oMousePos(elmt, evt) {
   //   const ClientRect = elmt.getBoundingClientRect();
@@ -195,29 +201,29 @@ const gauge = () => {
     updateInput(p, cx, cy, r1, offset, delta);
   }, false);
 
-  // svg.addEventListener('mousedown', function(evt) {
-  //   isDragging = true;
-  //   this.classList.add('focusable');
-  //   const mousePos = oMousePos(svg, evt);
-  //   updateInput(mousePos, cx, cy, r1, offset, delta);
-  // }, false);
+  svg.addEventListener('mousedown', function(evt) {
+    isDragging = true;
+    this.classList.add('focusable');
+    const mousePos = oMousePos(svg, evt);
+    updateInput(mousePos, cx, cy, r1, offset, delta);
+  }, false);
 
-  // svg.addEventListener('mouseup', function() {
-  //   isDragging = false;
-  //   this.classList.remove('focusable');
-  // }, false);
+  svg.addEventListener('mouseup', function() {
+    isDragging = false;
+    this.classList.remove('focusable');
+  }, false);
 
-  // svg.addEventListener('mouseout', function() {
-  //   isDragging = false;
-  //   this.classList.remove('focusable');
-  // }, false);
-  //
-  // svg.addEventListener('mousemove', function(evt) {
-  //   if (isDragging) {
-  //     const mousePos = oMousePos(svg, evt);
-  //     updateInput(mousePos, cx, cy, r1, offset, delta);
-  //   }
-  // }, false);
+  svg.addEventListener('mouseout', function() {
+    isDragging = false;
+    this.classList.remove('focusable');
+  }, false);
+
+  svg.addEventListener('mousemove', function(evt) {
+    if (isDragging) {
+      const mousePos = oMousePos(svg, evt);
+      updateInput(mousePos, cx, cy, r1, offset, delta);
+    }
+  }, false);
 
   function getWindSpeed() {
     let windData;

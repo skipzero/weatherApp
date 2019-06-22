@@ -6,21 +6,30 @@ const webpack = require('webpack');
 const path = require('path');
 const postcssPresetEnv = require('postcss-preset-env');
 const DashboardPlugin = require("webpack-dashboard/plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   devtool: 'source-map',
   mode: 'development',
+  watch: true,
   entry: [
     './src/index.js',
     // 'font-awesome-loader',
     'bootstrap-loader',
   ],
+  target: 'node',
+  externals: ['nodeExternals'],
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'main.js',
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'main.css',
+      chunkFileName: 'chunkId.'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
     new webpack.ProvidePlugin({
@@ -38,6 +47,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
@@ -49,12 +63,7 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: () => {
-                postcssPresetEnv(
-                  {
-                    stage: 3,
-                    browsers: 'last 2 versions'
-                  }
-                )
+                
               }
             }
           }, 'sass-loader'],

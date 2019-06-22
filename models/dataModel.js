@@ -16,6 +16,19 @@ function Weather() {
     });
   };
 
+  this.getLast = (res) => {
+    pool.acquire((err, con) => {
+      con.query(`SELECT windspeedmph FROM ambi_weather.ambient_weather ORDER by id DESC LIMIT 1;`, (err, result) => {
+        con.release();
+        if (err) {
+          console.error(`[ERROR-getDesc] ${err}`);
+          res.send({ status: 1, message: 'error retreiving records.' })
+        }
+        res.send({ status: 0, message: 'records found successfully!', result })
+      });
+    });
+  };
+
   this.getDesc = (num, res) => {
     pool.acquire((err, con) => {
       con.query(`SELECT * FROM ambi_weather.ambient_weather ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {

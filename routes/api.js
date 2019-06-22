@@ -7,6 +7,10 @@ module.exports = {
       weather.get(res);
     });
 
+    app.get('/last', (_req, res) => {
+      weather.getLast(res);
+    });
+
     app.get('/weather/:number', (req, res) => {
       weather.getDesc(req.params.number, res);
     });

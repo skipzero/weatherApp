@@ -1,5 +1,3 @@
-
-
 const weather = require('../models/dataModel');
 
 //  Our CRUD resources router
@@ -8,6 +6,11 @@ module.exports = {
     app.get('/weather', (req, res) => {
       console.log('api get...')
       weather.get(res);
+    });
+
+    app.get('/last', (req, res) => {
+      console.log('api get last...')
+      weather.getLast(res);
     });
 
     app.get('/weather/:id', (req, res) => {

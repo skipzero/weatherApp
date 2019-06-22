@@ -1,6 +1,16 @@
 /*eslint no-console: ['warn', { allow: ['info', 'error'] }] */
 import * as d3 from 'd3';
 
+const extractRain = (row) => {
+  const rainKeys = Object.keys(row);
+  return rainKeys.reduce((acc, key) => {
+    if (key.includes('rain')) {
+      acc[key] = row[key];
+    }
+    return acc;
+  }, {});
+}
+
 function drawGraph() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
   const width = 900 - margin.left - margin.right;
@@ -14,13 +24,13 @@ function drawGraph() {
 
   // define the line
   const humidity = d3.line()
-    .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.outHum); })
+    .x((d) => { return x(d.date); })
+    .y((d) => { return y(d.humidity); })
     .curve(d3.curveBasis);
 
   const temp = d3.line()
-    .x((d) => { return x(d.created); })
-    .y((d) => { return y(d.outTemp); })
+    .x((d) => { return x(d.date); })
+    .y((d) => { return y(d.tempf); })
     .curve(d3.curveBasis);
 
   const div = d3.select('.chart1')
@@ -41,6 +51,7 @@ function drawGraph() {
       console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
+    
     console.log('D3-JSON', data)
 
     const leng = data.result.length;
@@ -58,16 +69,17 @@ function drawGraph() {
     jsonData.forEach((d) => {
       const row = d;
       if (imperial) {
-        row.inTemp = imperialTemp(row.inTemp);
-        row.outTemp = imperialTemp(row.outTemp);
+        console.log('CHARTS::', row);
+        row.tempinf = imperialTemp(row.tempinf);
+        row.tempf = imperialTemp(row.tempf);
       }
-      row.display = timeFormatter(new Date(row.created)).split(' ');
-      row.created = d3.isoParse(row.created);
-    localStorage.setItem('rainTot', row.rainTot);
+      row.display = timeFormatter(new Date(row.date)).split(' ');
+      row.date = d3.isoParse(row.date);
+      localStorage.setItem('rain', JSON.stringify(extractRain(row)));
     });
 
     // Scale the range of the data
-    x.domain(d3.extent(jsonData, (d) => { return d.created; }));
+    x.domain(d3.extent(jsonData, (d) => { return d.date; }));
     y.domain([0, 100]);
 
     svg.append('path')
@@ -87,15 +99,15 @@ function drawGraph() {
       .append('circle')
       .attr('class', 'tempdot')
       .attr('r', 2)
-      .attr('cx', (d) => { return x(d.created); })
-      .attr('cy', (d) => { return y(d.outTemp); })
+      .attr('cx', (d) => { return x(d.date); })
+      .attr('cy', (d) => { return y(d.tempf); })
       .on('mouseover', (d) => {
         div.transition(200)
           .style('opacity', 1);
 
         div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
-                      ${parseInt(d.outTemp, 10)}°`)
+                      ${parseInt(d.tempf, 10)}°`)
           .style('left', `${d3.event.screenX - 60}px`)
           .style('top', `${d3.event.screenY - 390}px`);
       });
@@ -110,15 +122,15 @@ function drawGraph() {
       .append('circle')
       .attr('class', 'humdot')
       .attr('r', 2)
-      .attr('cx', (d) => { return x(d.created); })
-      .attr('cy', (d) => { return y(d.outHum); })
+      .attr('cx', (d) => { return x(d.date); })
+      .attr('cy', (d) => { return y(d.humidity); })
       .on('mouseover', (d) => {
         div.transition(200)
           .style('opacity', 1);
 
         div.html(`<span>${d.display[0]}</span>
                     <span>${d.display[1]}</span>
-                      ${parseInt(d.outHum, 10)}%`)
+                      ${parseInt(d.humidity, 10)}%`)
           .style('left', `${d3.event.screenX - 80}px`)
           .style('top', `${d3.event.screenY - 405}px`);
       })

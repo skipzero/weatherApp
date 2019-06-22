@@ -10,28 +10,24 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
 
-// const io = require('socket.io')(server);
 const dotenv = require('dotenv');
+dotenv.config()
 
-const pollStation = require('./server/pollStation');
-// const converter = require('./server/converter');
+// const getData = require('./server/getData');
+const WeatherAPI = require('ambient-weather-api');
+
+const converter = require('./server/converter');
+const writeData = require('./server/writeData');
+
 const pool = require('./server/pool');
 // const api = require('./routes/api');
 const path = require('path');
 const pages = require('./routes');
 
-const port = 3000;
-dotenv.config()
-// let myIp = '10.0.0.35';
-// let myIp = '73.162.245.175';
-// if (process.env.NODE_ENV === 'Production') {
-//   myIp = '73.162.245.173';
-// }
+const port = 3000 || process.env.PORT;
+const apiKey = process.env.API_KEY;
+const appKey = process.env.APP_KEY;
 
-
-// const iss = 'http://api.open-notify.org/iss-now.json'; // The international space station API.
-//`http://${myIp}/FullDataString`;
-// const stationIp = 'http://73.162.245.173/FullDataString';
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,4 +54,39 @@ server.listen(port, () => {
 });
 
 // Our server calls the weather station to get our data
-pollStation();
+const getData = (apiKey, appKey) => {
+  let data;
+
+  const api = new WeatherAPI({
+    apiKey: apiKey,
+    applicationKey: appKey,
+  });
+
+  function getName(device) {
+    return device.info.name
+  }
+
+  api.connect();
+  api.on('connect', () => console.log('Connected to Ambient Weather Realtime API!'));
+
+  api.on('subscribed', data => {
+    console.log(`Subscribed to ${data.devices.length} device(s):
+    ${data.devices.map(getName).join(', ')}`)
+  });
+
+  api.on('data', data => {
+    const convertedData = converter(data);
+    console.log('CONVERTED:::\n', convertedData);
+    returnOurData(convertedData);
+  });
+
+  api.subscribe(apiKey);
+
+  const returnOurData = (data) => {
+    console.log('returnOurData', data);
+    return writeData(data);
+  }
+  console.log('GET DATA////\n', typeof data);
+}
+
+console.log('***************\n', getData(apiKey, appKey));

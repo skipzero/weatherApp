@@ -1,7 +1,7 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 
 const http = require('http');
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const writeData = (data) => {
   const postData = JSON.stringify(data);

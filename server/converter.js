@@ -1,7 +1,14 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
+
 const converter = (data) => {
-  // console.log('DATA CONVERTER', data[0].lastData)
+  const weather = require('../models/dataModel');
+  console.log('DATA CONVERTER', data.device.lastData);
   // newData = data[0].lastData;
+
+  console.log('HHHHHHHHH',data);
+
+  const currWind = data.windspeedmph;
+  const prevWind = data.device.windspeedmph;
 
   const pollDate = data.date;
   const rainDate = data.lastRain;
@@ -42,7 +49,7 @@ const converter = (data) => {
     feelsLike: data.feelsLike,
     dewPoint: data.dewPoint,
     date: date(pollDate),
-    lastRain: date(pollDate),
+    lastRain: date(rainDate),
     macAddress: data.macAddress, // '80:7D:3A:7C:21:3E',
   };
 
