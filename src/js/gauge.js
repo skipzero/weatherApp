@@ -242,18 +242,6 @@ const gauge = () => {
   }
 };
 
-//  EPOCH gauge stuff
-// function realTimeGauge(data) {
-//   $('#gaugeChart').epoch({
-//     type: 'time.gauge',
-//     value: 0.25,
-//     options: {
-//       domain: [0,120],
-//       ticks: 6,
-//       tickSize: 1,
-//     },
-//   });
-// }
-
 gauge();
+
 export default gauge;

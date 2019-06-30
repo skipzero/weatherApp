@@ -5,8 +5,6 @@ const converter = (data) => {
   console.log('DATA CONVERTER', data.device.lastData);
   // newData = data[0].lastData;
 
-  console.log('HHHHHHHHH',data);
-
   const currWind = data.windspeedmph;
   const prevWind = data.device.windspeedmph;
 
@@ -14,7 +12,6 @@ const converter = (data) => {
   const rainDate = data.lastRain;
 
   const date = (data) => {
-    debugger;
     if (typeof data === 'object') {
       return data;
     }
@@ -53,9 +50,25 @@ const converter = (data) => {
     macAddress: data.macAddress, // '80:7D:3A:7C:21:3E',
   };
 
-  const device = data.device;
+  const rain = {
+    hourlyrainin,
+    eventrainin,
+    dailyrainin,
+    weeklyrainin,
+    monthlyrainin,
+    totalrainin,
+  } = dbData;
 
-  console.log('======', dbData.date);
+  const device = data.device;
+  const compareWind = device.lastData.windspeedmph;
+  const parentObj = {};
+
+  if (dbData.windspeedmph !== compareWind) {
+    const newWind = dbData.windspeedmph;
+    parentObj.dbData = dbData;
+    parentObj.newWind = newWind;
+  }
+
   return dbData;
 };
 

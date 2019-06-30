@@ -15,6 +15,10 @@ module.exports = {
       weather.getDesc(req.params.number, res);
     });
 
+    app.post('/rain', (req, res) => {
+      weather.createRain(req.body, res);
+    });
+
     app.post('/weather', (req, res) => {
       weather.create(req.body, res);
     });

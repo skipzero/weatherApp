@@ -13,7 +13,7 @@ const favicon = require('serve-favicon');
 const dotenv = require('dotenv');
 dotenv.config()
 
-// const getData = require('./server/getData');
+const getData = require('./server/getData');
 const WeatherAPI = require('ambient-weather-api');
 
 const converter = require('./server/converter');
@@ -54,39 +54,5 @@ server.listen(port, () => {
 });
 
 // Our server calls the weather station to get our data
-const getData = (apiKey, appKey) => {
-  let data;
-
-  const api = new WeatherAPI({
-    apiKey: apiKey,
-    applicationKey: appKey,
-  });
-
-  function getName(device) {
-    return device.info.name
-  }
-
-  api.connect();
-  api.on('connect', () => console.log('Connected to Ambient Weather Realtime API!'));
-
-  api.on('subscribed', data => {
-    console.log(`Subscribed to ${data.devices.length} device(s):
-    ${data.devices.map(getName).join(', ')}`)
-  });
-
-  api.on('data', data => {
-    const convertedData = converter(data);
-    console.log('CONVERTED:::\n', convertedData);
-    returnOurData(convertedData);
-  });
-
-  api.subscribe(apiKey);
-
-  const returnOurData = (data) => {
-    console.log('returnOurData', data);
-    return writeData(data);
-  }
-  console.log('GET DATA////\n', typeof data);
-}
-
-console.log('***************\n', getData(apiKey, appKey));
+const serverData = getData(apiKey, appKey);
+console.log('serverdata=============================', serverData);

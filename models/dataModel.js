@@ -2,8 +2,8 @@
 
 const pool = require('../server/pool');
 
-function Weather() {
-  this.get = (res) => {
+class Weather {
+  get(res) {
     pool.acquire((err, con) => {
       con.query('select * from `ambi_weather`.`ambient_weather`', (err, result) => {
         con.release();
@@ -16,7 +16,7 @@ function Weather() {
     });
   };
 
-  this.getLast = (res) => {
+  getLast (res) {
     pool.acquire((err, con) => {
       con.query(`SELECT windspeedmph FROM ambi_weather.ambient_weather ORDER by id DESC LIMIT 1;`, (err, result) => {
         con.release();
@@ -29,7 +29,7 @@ function Weather() {
     });
   };
 
-  this.getDesc = (num, res) => {
+  getDesc (num, res) {
     pool.acquire((err, con) => {
       con.query(`SELECT * FROM ambi_weather.ambient_weather ORDER by id DESC LIMIT 0, ${num};`, (err, result) => {
         con.release();
@@ -42,7 +42,7 @@ function Weather() {
     });
   };
 
-  this.create = (data, res) => {
+  create (data, res) {
     pool.acquire((err, con) => {
       con.query('insert into `ambi_weather`.`ambient_weather` set ?', data, (err, result) => {
         con.release();
@@ -55,7 +55,20 @@ function Weather() {
     });
   };
 
-  this.update = (data, res) => {
+  createRain (data, res) {
+    pool.acquire((err, con) => {
+      con.query('insert into `ambi_weather`.`ambient_rain` set ?', data, (err, result) => {
+        con.release();
+        if (err) {
+          console.error(`[ERROR-create] ${err}`);
+          res.send({ status: 1, message: 'record creation failed' });
+        }
+        res.send({ status: 0, message: 'record created successfully!', data });
+      });
+    });
+  };
+
+  update (data, res) {
     pool.acquire((err, con) => {
       console.error(`[ERROR-update] ${err}`);
       con.query('update `ambi_weather`.`ambient_weather` set ? where id = ?', [data, data.id], (err, result) => {
@@ -68,7 +81,7 @@ function Weather() {
     });
   };
 
-  this.delete = (id, res) => {
+  delete (id, res) {
     pool.acquire((err, con) => {
       con.query('delete from `ambi_weather`.`ambient_weather` where id = ?', [id], (err, result) => {
         con.release();

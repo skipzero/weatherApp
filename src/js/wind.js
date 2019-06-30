@@ -1,1 +1,9 @@
-// import sse from 'sse';
+
+
+const windGauge = (windData) => {
+  const newWind = { windspeedmph } = windData;
+
+
+}
+
+module.exports = windGauge;

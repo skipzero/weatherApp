@@ -51,8 +51,8 @@ function drawGraph() {
       console.error(`[ERROR-path]: ${error}`);
       throw error;
     }
-    
-    console.log('D3-JSON', data)
+
+    console.log('D3-JSON', data);
 
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 750, leng);
@@ -66,7 +66,10 @@ function drawGraph() {
     let imperial = false;
 
     // format the data & do our converstions if needed...
-    jsonData.forEach((d) => {
+    jsonData.forEach((d, index) => {
+      if (!index % 5 === 0 || !index % 3 === 0) {
+        return row;
+      }
       const row = d;
       if (imperial) {
         console.log('CHARTS::', row);
@@ -77,6 +80,8 @@ function drawGraph() {
       row.date = d3.isoParse(row.date);
       localStorage.setItem('rain', JSON.stringify(extractRain(row)));
     });
+    const currWind = jsonData[0].windspeedmph;
+
 
     // Scale the range of the data
     x.domain(d3.extent(jsonData, (d) => { return d.date; }));
