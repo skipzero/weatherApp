@@ -36,15 +36,18 @@ app.use(logger('dev'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(compression());
-app.use('/', pages);
 
-app.use((req, res, next) => {
+app.use('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
+
+app.use('/', pages);
+
 //  Create our connection pool
 pool.init();
 // api.configure(app);
@@ -55,4 +58,3 @@ server.listen(port, () => {
 
 // Our server calls the weather station to get our data
 const serverData = getData(apiKey, appKey);
-console.log('serverdata=============================', serverData);

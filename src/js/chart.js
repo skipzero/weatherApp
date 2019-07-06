@@ -56,26 +56,10 @@ function drawGraph() {
 
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 750, leng);
-    console.log('length', leng, jsonData.length, jsonData)
-    //  Convert the temp to Imperial from metric...
-    const imperialTemp = n => {
-      return (n * 1.8 + 32).toFixed(2);
-    };
-
-    // TODO: create obj with imperial/metric flag and add the weather json
-    let imperial = false;
 
     // format the data & do our converstions if needed...
     jsonData.forEach((d, index) => {
-      if (!index % 5 === 0 || !index % 3 === 0) {
-        return row;
-      }
       const row = d;
-      if (imperial) {
-        console.log('CHARTS::', row);
-        row.tempinf = imperialTemp(row.tempinf);
-        row.tempf = imperialTemp(row.tempf);
-      }
       row.display = timeFormatter(new Date(row.date)).split(' ');
       row.date = d3.isoParse(row.date);
       localStorage.setItem('rain', JSON.stringify(extractRain(row)));
