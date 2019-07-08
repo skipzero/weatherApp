@@ -52,8 +52,6 @@ function drawGraph() {
       throw error;
     }
 
-    console.log('D3-JSON', data);
-
     const leng = data.result.length;
     const jsonData = data.result.slice(leng - 750, leng);
 

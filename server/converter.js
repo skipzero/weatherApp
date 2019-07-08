@@ -2,8 +2,6 @@
 
 const converter = (data) => {
   const weather = require('../models/dataModel');
-  console.log('DATA CONVERTER', data.device.lastData);
-  // newData = data[0].lastData;
 
   const currWind = data.windspeedmph;
   const prevWind = data.device.windspeedmph;

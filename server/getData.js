@@ -26,7 +26,6 @@ const getData = (apiKey, appKey) => {
 
   api.on('data', data => {
     const convertedData = converter(data);
-    console.log('ON DATA::', convertedData);
     writeData(convertedData);
   });
 
