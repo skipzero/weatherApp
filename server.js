@@ -14,10 +14,10 @@ const dotenv = require('dotenv');
 dotenv.config()
 
 const getData = require('./server/getData');
-const WeatherAPI = require('ambient-weather-api');
-
-const converter = require('./server/converter');
-const writeData = require('./server/writeData');
+// const WeatherAPI = require('ambient-weather-api');
+//
+// const converter = require('./server/converter');
+// const writeData = require('./server/writeData');
 
 const pool = require('./server/pool');
 // const api = require('./routes/api');
