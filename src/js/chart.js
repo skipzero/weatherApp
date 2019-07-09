@@ -78,7 +78,7 @@ function drawGraph() {
     svg.append('path')
       .data([jsonData])
       .attr('class', 'line temp')
-      .attr('d', tempf);
+      .attr('d', temp);
 
     svg.selectAll('tempdot')  // Temp dots and tool tips
       .data(jsonData)
