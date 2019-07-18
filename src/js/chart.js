@@ -14,7 +14,7 @@ const extractRain = (row) => {
 function drawGraph() {
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
   const width = 900 - margin.left - margin.right;
-  const height = 400 - margin.top - margin.bottom;
+  const height = 450 - margin.top - margin.bottom;
   const timeFormatter = d3.timeFormat('%d.%m.%y %H:%M:%S');
 
   let path = getParams();
@@ -33,6 +33,7 @@ function drawGraph() {
     .y((d) => { return y(d.tempf); })
     .curve(d3.curveBasis);
 
+  // Tooltips
   const div = d3.select('.chart1')
     .append('div')
     .attr('class', 'tip')
@@ -53,21 +54,51 @@ function drawGraph() {
     }
 
     const leng = data.result.length;
-    const jsonData = data.result.slice(leng - 750, leng);
+    const jsonData = data.result.reduce((acc, curr) => {
+      if (curr.id % 10 === 0) {
+        console.log(curr);
+        acc.push(curr);
+      }
+      console.log('ACC::', acc)
+      return acc;
+    }, []);
 
     // format the data & do our converstions if needed...
-    jsonData.forEach((d, index) => {
+    jsonData.forEach((d) => {
       const row = d;
       row.display = timeFormatter(new Date(row.date)).split(' ');
       row.date = d3.isoParse(row.date);
       localStorage.setItem('rain', JSON.stringify(extractRain(row)));
     });
+
     const currWind = jsonData[0].windspeedmph;
 
-
     // Scale the range of the data
-    x.domain(d3.extent(jsonData, (d) => { return d.date; }));
-    y.domain([0, 100]);
+    // x.domain(d3.extent(jsonData, (d) => { return d.date; }));
+    // y.domain([0, 100]);
+
+    // const clip = d3.append('defs')
+    //   .append('svg:clipPath')
+    //   .attr('id', 'clip')
+    //   .append('svg:rect')
+    //   .attr('width', width)
+    //   .attr('height', height)
+    //   .attr('x', 0)
+    //   .attr('y', 0);
+    //
+    // const brush = d3.brush()
+    //   .extent([[0,0], [width, height]])
+    //   .on('end', updateChart);
+
+    const scatter = svg.append('g')
+      .attr('clip-path', 'url(#clip)');
+
+    const x = d3.scaleLinear()
+        .domain([0, 200])
+        .range([0, width]);
+    const y = d3.scaleLinear()
+        .domain([0, 200])
+        .range([height, 0]);
 
     svg.append('path')
       .data([jsonData])
@@ -80,30 +111,36 @@ function drawGraph() {
       .attr('class', 'line temp')
       .attr('d', temp);
 
-    svg.selectAll('tempdot')  // Temp dots and tool tips
-      .data(jsonData)
-      .enter()
-      .append('circle')
-      .attr('class', 'tempdot')
-      .attr('r', 2)
-      .attr('cx', (d) => { return x(d.date); })
-      .attr('cy', (d) => { return y(d.tempf); })
-      .on('mouseover', (d) => {
-        div.transition(200)
-          .style('opacity', 1);
+    scatter
+      .selectAll('tempdot')  // Temp dots and tool tips
+        .data(jsonData)
+        .enter()
+        .append('circle')
+          .attr('class', 'tempdot')
+          .attr('r', 2)
+          .attr('cx', (d) => { return x(d.date); })
+          .attr('cy', (d) => { return y(d.tempf); })
+          .on('mouseover', (d) => {
+            div.transition(200)
+              .style('opacity', 1);
 
-        div.html(`<span>${d.display[0]}</span>
-                    <span>${d.display[1]}</span>
-                      ${parseInt(d.tempf, 10)}°`)
-          .style('left', `${d3.event.screenX - 60}px`)
-          .style('top', `${d3.event.screenY - 390}px`);
-      });
+            div.html(`<span>${d.display[0]}</span>
+                        <span>${d.display[1]}</span>
+                          ${parseInt(d.tempf, 10)}°`)
+              .style('left', `${d3.event.screenX - 60}px`)
+              .style('top', `${d3.event.screenY - 390}px`);
+          });
     // .on('mouseout', () => {
     //   div.transition(500)
     //       .style('opacity', 0);
     // });
-
-    svg.selectAll('dot')  // Humidity dots and tool tips
+/****
+*
+* Humidity dots and tool tips
+*
+****/
+  scatter
+    .selectAll('dot')
       .data(jsonData)
       .enter()
       .append('circle')
@@ -126,14 +163,17 @@ function drawGraph() {
           .style('opacity', 0);
       });
 
-    svg.append('g')
+      // scatter.append('g')
+      //   .attr('class', 'brush')
+      //   .call(brush);
+
+    scatter
+      .append('g')
       .attr('transform', `translate(0, ${height} )`)
-      .call(d3.axisBottom(x)
-        .ticks(8));
+      .call(d3.axisBottom(x));
 
     svg.append('g')
-      .call(d3.axisLeft(y)
-        .ticks(10));
+      .call(d3.axisLeft(y));
 
     svg.append('text')
       .attr('transform', 'rotate(-90)')

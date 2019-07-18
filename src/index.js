@@ -9,3 +9,4 @@ import './css/main.scss';
 import './js/chart.js';
 import './js/gauge.js';
 import './js/wind.js';
+// import './js/zoom.js';

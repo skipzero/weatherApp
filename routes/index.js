@@ -6,12 +6,16 @@ const api = require('./api');
 api.configure(router);
 
 //  Routes
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   res.render('pages/index');
 });
 
-router.get('/about', (req, res) => {
+router.get('/about', (_req, res) => {
   res.render('pages/about');
+});
+
+router.get('/zoom', (_req, res) => {
+  res.render('pages/zoom');
 });
 
 module.exports = router;

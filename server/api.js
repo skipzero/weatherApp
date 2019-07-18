@@ -3,17 +3,22 @@ const weather = require('../models/dataModel');
 //  Our CRUD resources router
 module.exports = {
   configure: (app) => {
-    app.get('/weather', (req, res) => {
+    app.get('/weather', (_req, res) => {
       console.log('api get...')
       weather.get(res);
     });
 
-    app.get('/last', (req, res) => {
+    app.get('/zoom', (_req, res) => {
+      console.log('api zoom get...')
+      weather.get(res);
+    });
+
+    app.get('/last', (_req, res) => {
       console.log('api get last...')
       weather.getLast(res);
     });
 
-    app.get('/weather/:id', (req, res) => {
+    app.get('/weather/:id', (_req, res) => {
       console.log('::::', id)
       weather.get(res);
     });
