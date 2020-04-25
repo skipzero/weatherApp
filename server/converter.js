@@ -48,25 +48,6 @@ const converter = (data) => {
     macAddress: data.macAddress, // '80:7D:3A:7C:21:3E',
   };
 
-  const rain = {
-    hourlyrainin,
-    eventrainin,
-    dailyrainin,
-    weeklyrainin,
-    monthlyrainin,
-    totalrainin,
-  } = dbData;
-
-  const device = data.device;
-  const compareWind = device.lastData.windspeedmph;
-  const parentObj = {};
-
-  if (dbData.windspeedmph !== compareWind) {
-    const newWind = dbData.windspeedmph;
-    parentObj.dbData = dbData;
-    parentObj.newWind = newWind;
-  }
-
   return dbData;
 };
 

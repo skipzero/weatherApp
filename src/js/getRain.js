@@ -2,7 +2,26 @@
 //**  getRain  **//
 import * as d3 from 'd3';
 
-function getRain() {
+function getRain(rainObj) {
+  const rain = {
+    hourlyrainin,
+    eventrainin,
+    dailyrainin,
+    weeklyrainin,
+    monthlyrainin,
+    totalrainin,
+  } = rainObj;
+
+  const device = data.device;
+  const compareWind = device.lastData.windspeedmph;
+  const parentObj = {};
+
+  if (dbData.windspeedmph !== compareWind) {
+    const newWind = dbData.windspeedmph;
+    parentObj.dbData = dbData;
+    parentObj.newWind = newWind;
+  }
+
   const margin = { top: 0, right: 0, bottom: 20, left: 20 };
   const width = 150 - margin.left - margin.right;
   const height = 200 - margin.top - margin.bottom;

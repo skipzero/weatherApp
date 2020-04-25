@@ -26,9 +26,12 @@ const getData = (apiKey, appKey) => {
 
   api.on('data', data => {
     const convertedData = converter(data);
+    api.newData = convertedData;
     writeData(convertedData);
+    return convertedData;
   });
 
   api.subscribe(apiKey);
+  return api;
 }
 module.exports = getData;

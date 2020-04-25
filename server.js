@@ -13,14 +13,14 @@ const favicon = require('serve-favicon');
 const dotenv = require('dotenv');
 dotenv.config()
 
-const getData = require('./server/getData');
-// const WeatherAPI = require('ambient-weather-api');
-//
-// const converter = require('./server/converter');
-// const writeData = require('./server/writeData');
+// const getData = require('./server/getData');
+
+const WeatherAPI = require('ambient-weather-api');
+
+const converter = require('./server/converter');
+const writeData = require('./server/writeData');
 
 const pool = require('./server/pool');
-// const api = require('./routes/api');
 const path = require('path');
 const pages = require('./routes');
 
@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
 
-app.use('*', (req, res, next) => {
+app.use('*', (_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -50,11 +50,41 @@ app.use('/', pages);
 
 //  Create our connection pool
 pool.init();
-// api.configure(app);
 
 server.listen(port, () => {
   console.log(`Server is listening on port: ${port}`);
+  const serverData = getData(apiKey, appKey); // Our server calls the weather station to subscribe and get our data
 });
 
-// Our server calls the weather station to get our data
-const serverData = getData(apiKey, appKey);
+
+const getData = (apiKey, appKey) => {
+  let data;
+
+  const api = new WeatherAPI({
+    apiKey: apiKey,
+    applicationKey: appKey,
+  });
+
+  function getName(device) {
+    console.log('DEVICE:::', device.info);
+    return device.info;
+  }
+
+  api.connect();
+  api.on('connect', () => console.log('Connected to Ambient Weather Realtime API!'));
+
+  api.on('subscribed', data => {
+    console.log(`Subscribed to ${data.devices.length} device(s): \n\n
+    ${getName(data.devices)}`);
+  });
+
+  api.on('data', data => {
+    const convertedData = converter(data);
+    api.newData = convertedData;
+    writeData(convertedData);
+    return convertedData;
+  });
+
+  api.subscribe(apiKey);
+  return api;
+}
