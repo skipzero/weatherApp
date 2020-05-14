@@ -162,14 +162,14 @@ const gauge = () => {
 
 
   // helpers
-  // function oMousePos(elmt, evt) {
-  //   const ClientRect = elmt.getBoundingClientRect();
-  //
-  //   return {
-  //     x: Math.round(evt.clientX - ClientRect.left),
-  //     y: Math.min(Math.round(evt.clientY - ClientRect.top), cy),
-  //   };
-  // }
+  function oMousePos(elmt, evt) {
+    const ClientRect = elmt.getBoundingClientRect();
+
+    return {
+      x: Math.round(evt.clientX - ClientRect.left),
+      y: Math.min(Math.round(evt.clientY - ClientRect.top), cy),
+    };
+  }
 
   function setSVGAttributes(elmt, oAtt) {
     for (const prop in oAtt) {

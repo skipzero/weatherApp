@@ -59,7 +59,7 @@ function drawGraph() {
         console.log(curr);
         acc.push(curr);
       }
-      console.log('ACC::', acc)
+      // console.log('ACC::', acc)
       return acc;
     }, []);
 
@@ -94,11 +94,11 @@ function drawGraph() {
       .attr('clip-path', 'url(#clip)');
 
     const x = d3.scaleLinear()
-        .domain([0, 200])
-        .range([0, width]);
+      .domain([0, 200])
+      .range([0, width]);
     const y = d3.scaleLinear()
-        .domain([0, 200])
-        .range([height, 0]);
+      .domain([0, 200])
+      .range([height, 0]);
 
     svg.append('path')
       .data([jsonData])
@@ -113,34 +113,34 @@ function drawGraph() {
 
     scatter
       .selectAll('tempdot')  // Temp dots and tool tips
-        .data(jsonData)
-        .enter()
-        .append('circle')
-          .attr('class', 'tempdot')
-          .attr('r', 2)
-          .attr('cx', (d) => { return x(d.date); })
-          .attr('cy', (d) => { return y(d.tempf); })
-          .on('mouseover', (d) => {
-            div.transition(200)
-              .style('opacity', 1);
+      .data(jsonData)
+      .enter()
+      .append('circle')
+      .attr('class', 'tempdot')
+      .attr('r', 2)
+      .attr('cx', (d) => { return x(d.date); })
+      .attr('cy', (d) => { return y(d.tempf); })
+      .on('mouseover', (d) => {
+        div.transition(200)
+          .style('opacity', 1);
 
-            div.html(`<span>${d.display[0]}</span>
+        div.html(`<span>${d.display[0]}</span>
                         <span>${d.display[1]}</span>
                           ${parseInt(d.tempf, 10)}°`)
-              .style('left', `${d3.event.screenX - 60}px`)
-              .style('top', `${d3.event.screenY - 390}px`);
-          });
+          .style('left', `${d3.event.screenX - 60}px`)
+          .style('top', `${d3.event.screenY - 390}px`);
+      });
     // .on('mouseout', () => {
     //   div.transition(500)
     //       .style('opacity', 0);
     // });
-/****
-*
-* Humidity dots and tool tips
-*
-****/
-  scatter
-    .selectAll('dot')
+    /****
+    *
+    * Humidity dots and tool tips
+    *
+    ****/
+    scatter
+      .selectAll('dot')
       .data(jsonData)
       .enter()
       .append('circle')
@@ -163,9 +163,9 @@ function drawGraph() {
           .style('opacity', 0);
       });
 
-      // scatter.append('g')
-      //   .attr('class', 'brush')
-      //   .call(brush);
+    // scatter.append('g')
+    //   .attr('class', 'brush')
+    //   .call(brush);
 
     scatter
       .append('g')

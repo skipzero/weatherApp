@@ -6,4 +6,8 @@ const scema = buildSchema(
     weatherEntry(id: Int!): WeatherEntry
     weatherEntries: [WeatherEntry]
   }
+
+  type Mutation {
+    createWeatherEntry()
+  }
 )
