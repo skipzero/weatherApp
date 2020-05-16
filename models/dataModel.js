@@ -18,9 +18,9 @@ class Weather {
         res.send({ status: 0, message: 'records retreived successfully!', result });
       })
     });
-  };
+  }
 
-  getLast (res) {
+  getLast(res) {
     pool.acquire((err, con) => {
       if (err) {
         console.error(`:::-ERROR-:::\n ${err}`);
@@ -34,9 +34,9 @@ class Weather {
         res.send({ status: 0, message: 'records found successfully!', result })
       });
     });
-  };
+  }
 
-  getDesc (num, res) {
+  getDesc(num, res) {
     pool.acquire((err, con) => {
       if (err) {
         console.error(`:::AERRORA:::\n ${err}`);
@@ -50,24 +50,24 @@ class Weather {
         res.send({ status: 0, message: 'records found successfully!', result })
       });
     });
-  };
+  }
 
-  create (data, res) {
+  create(data, res) {
     pool.acquire((err, con) => {
       if (err) {
         console.error(`[ERROR-create] ${err}`);
         res.send({ status: 1, message: 'record creation failed' });
       }
-      con.query(`insert into ${weatherDB}.ambient_weather set ?;`, data, (_err, _result) => {
+      con.query(`insert into ${weatherDB}.ambient_weather set ?;`, data, (err, res) => {
         con.release();
         res.send({ status: 0, message: 'record created successfully!', data });
       });
     });
-  };
+  }
 
-  createRain (data, res) {
-    pool.acquire((_err, con) => {
-      con.query(`insert into ${weatherDB}.ambient_rain set ?;`, data, (err, _result) => {
+  createRain(data, res) {
+    pool.acquire((err, con) => {
+      con.query(`insert into ${weatherDB}.ambient_rain set ?;`, data, (err, res) => {
         con.release();
         if (err) {
           console.error(`[ERROR-create] ${err}`);
@@ -76,12 +76,12 @@ class Weather {
         res.send({ status: 0, message: 'record created successfully!', data });
       });
     });
-  };
+  }
 
-  update (data, res) {
+  update(data, res) {
     pool.acquire((err, con) => {
       console.error(`[ERROR-update] ${err}`);
-      con.query(`update ${weatherDB}.ambient_weather set ? where id = ?;`, [data, data.id], (err, _result) => {
+      con.query(`update ${weatherDB}.ambient_weather set ? where id = ?;`, [data, data.id], (err, res) => {
         con.release();
         if (err) {
           res.send({ status: 1, message: 'updating record failed' });
@@ -89,11 +89,11 @@ class Weather {
         res.send({ status: 0, message: 'record updated successfully!', data });
       });
     });
-  };
+  }
 
-  delete (id, res) {
+  delete(id, res) {
     pool.acquire((_err, con) => {
-      con.query(`delete from ${weatherDB}.ambient_weather where id = ?;`, [id], (err, _result) => {
+      con.query(`delete from ${weatherDB}.ambient_weather where id = ?;`, [id], (err, res) => {
         con.release();
         if (err) {
           console.error(`[ERROR-delete] ${err}`);
@@ -102,7 +102,7 @@ class Weather {
         res.send({ status: 0, message: 'Record deleted successfully' });
       });
     });
-  };
-};
+  }
+}
 
 module.exports = new Weather();

@@ -18,6 +18,10 @@ module.exports = {
       weather.getLast(res);
     });
 
+    app.get('nivo', (_req, res) => {
+      weather.get(s)
+    }
+
     app.get('/weather/:id', (_req, res) => {
       console.log('::::', id)
       weather.get(res);

@@ -4,11 +4,11 @@
 // https://github.com/shakacode/react-webpack-rails-tutorial/blob/master/client%2Fwebpack.client.base.config.js
 const webpack = require('webpack');
 const path = require('path');
-const postcssPresetEnv = require('postcss-preset-env');
+// const postcssPresetEnv = require('postcss-preset-env');
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
+// const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   devtool: 'source-map',
@@ -63,7 +63,7 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: () => {
-                
+
               }
             }
           }, 'sass-loader'],

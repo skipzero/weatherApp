@@ -17,9 +17,9 @@
   }
 
   .tempdot {
-    opacity: 0;
-    stroke: none;
-    stroke-width: 0;
+    // opacity: 0;
+    stroke: $site-highlight;
+    stroke-width: 1px;
     fill: $white;
   }
 

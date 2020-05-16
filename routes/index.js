@@ -14,6 +14,10 @@ router.get('/about', (_req, res) => {
   res.render('pages/about');
 });
 
+router.get('nivo', (_req, res) => {
+  res.render('pages/nivo');
+});
+
 router.get('/zoom', (_req, res) => {
   res.render('pages/zoom');
 });

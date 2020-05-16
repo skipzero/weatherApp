@@ -7,6 +7,7 @@ const extractRain = (row) => {
     if (key.includes('rain')) {
       acc[key] = row[key];
     }
+    console.log('Reduce', acc)
     return acc;
   }, {});
 }
@@ -24,7 +25,10 @@ function drawGraph() {
 
   // define the line
   const humidity = d3.line()
-    .x((d) => { return x(d.date); })
+    .x((d) => {
+      console.log('data::', d)
+      return x(d.date);
+    })
     .y((d) => { return y(d.humidity); })
     .curve(d3.curveBasis);
 
