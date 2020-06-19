@@ -1,3 +1,5 @@
+/* eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
+
 const weather = require('../models/dataModel');
 
 //  Our CRUD resources router
@@ -18,14 +20,10 @@ module.exports = {
       weather.getLast(res);
     });
 
-    app.get('nivo', (_req, res) => {
-      weather.get(s)
-    }
-
     app.get('/weather/:id', (_req, res) => {
       console.log('::::', id)
       weather.get(res);
-    });
+    })
 
     app.post('/weather', (req, res) => {
       console.log('api post...')

@@ -14,7 +14,7 @@ router.get('/about', (_req, res) => {
   res.render('pages/about');
 });
 
-router.get('nivo', (_req, res) => {
+router.get('/nivo', (_req, res) => {
   res.render('pages/nivo');
 });
 
