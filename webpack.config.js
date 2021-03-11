@@ -1,14 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// Very similar to webpack.prod.config.js. Common parts could be extracted to a base config.
-// See example at:
-// https://github.com/shakacode/react-webpack-rails-tutorial/blob/master/client%2Fwebpack.client.base.config.js
 const webpack = require('webpack');
 const path = require('path');
-// const postcssPresetEnv = require('postcss-preset-env');
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-// const nodeExternals = require('webpack-node-externals');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
@@ -16,7 +11,6 @@ module.exports = {
   watch: true,
   entry: [
     './src/index.js',
-    // 'font-awesome-loader',
     'bootstrap-loader',
   ],
   target: 'node',
@@ -28,7 +22,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'main.css',
-      chunkFileName: 'chunkId.'
+      chunkFileName: 'chunkId.',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin(),
@@ -47,9 +41,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html - loader',
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -62,10 +66,13 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: () => {
-
-              }
-            }
+              plugins: [
+                new HtmlWebPackPlugin({
+                  template: './src/index.html',
+                  filename: 'index.html',
+                }),
+              ],
+            },
           }, 'sass-loader'],
       },
     ],
