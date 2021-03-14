@@ -1,8 +1,11 @@
+import converter from './converter';
+import writeData from './writeData';
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-const WeatherAPI = require('ambient-weather-api');
+// const WeatherAPI = require('ambient-weather-api');
+import WeatherAPI from 'ambient-weather-api';
 
-const converter = require('./converter');
-const writeData = require('./writeData');
+// const converter = require('./converter');
+// const writeData = require('./writeData');
 
 const getData = (apiKey, appKey) => {
   let data;

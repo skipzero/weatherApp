@@ -1,7 +1,7 @@
-const weather = require('../models/dataModel');
+import weather from '../models/dataModel';
 
 //  Our CRUD resources router
-module.exports = {
+const API = {
   configure: (app) => {
     app.get('/weather', (req, res) => {
       console.log('api get...')
@@ -34,3 +34,5 @@ module.exports = {
     });
   },
 };
+
+export default API;

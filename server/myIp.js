@@ -1,9 +1,9 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
 
 
-const pubIp = require('public-ip');
+import pubIp from 'public-ip';
 const apiKey = process.env.API_KEY;
-  // Find out if we're local or away and use the corrosponding IP.
+// Find out if we're local or away and use the corrosponding IP.
 const myIp = (cb) => {
   const ipAway = '73.162.245.173';
   const ipHome = '10.0.0.35';
@@ -23,4 +23,4 @@ const myIp = (cb) => {
   //   return path;
   // });
 };
-module.exports = myIp;
+export default myIp;

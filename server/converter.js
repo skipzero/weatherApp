@@ -1,11 +1,12 @@
 /*eslint no-console: ['error', { allow: ['info', 'error'] }] */
+import weather from '../models/dataModel';
 
 const converter = (data) => {
-  const weather = require('../models/dataModel');
+  // const weather = require('../models/dataModel');
   console.log('DATA CONVERTER', data.device.lastData);
   // newData = data[0].lastData;
 
-  console.log('HHHHHHHHH',data);
+  console.log('HHHHHHHHH', data);
 
   const currWind = data.windspeedmph;
   const prevWind = data.device.windspeedmph;
@@ -59,4 +60,4 @@ const converter = (data) => {
   return dbData;
 };
 
-module.exports = converter;
+export default converter;

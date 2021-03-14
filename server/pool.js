@@ -1,5 +1,5 @@
 /*eslint no-console: ['error', { allow: ['log', 'info', 'error'] }] */
-const mysql = require('mysql');
+import mysql from 'mysql';
 
 class Pool {
   constructor() {
@@ -24,7 +24,7 @@ class Pool {
       }
       callback(err, connection);
     });
-  };
+  }
 }
 
-module.exports = new Pool();
+export default new Pool();

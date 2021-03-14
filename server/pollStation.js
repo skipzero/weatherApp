@@ -2,7 +2,7 @@
 
 
 // const myIp = require('./myIp');
-const getData = require('./getData');
+import getData from './getData';
 
 //  Set minutes for polling weather station...
 const minutes = 5;
@@ -15,4 +15,4 @@ const minutes = 5;
 //   }, delay);
 // };
 
-module.exports = pollStation;
+export default pollStation;
