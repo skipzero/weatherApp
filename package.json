@@ -2,10 +2,8 @@
   "name": "weather-app",
   "version": "0.2.0",
   "description": "'simple' data logging server for my weather station...",
-  "main": "webpack.config.js",
   "scripts": {
-    "tsc": "tsc",
-    "start" : "npm run tsc && node ./dist/app.js",
+    "start": "npm run tsc && node ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass --output-style compressed -o public/css src/css",
     "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers 'last 2 versions' -r public/css/*",
@@ -14,7 +12,7 @@
     "build": "webpack --mode production"
   },
   "private": true,
-  "keywords": [],
+  "keywords": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/skipzero/weatherApp.git"
@@ -32,12 +30,9 @@
   ],
   "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   },
-  "devDependencies": {
-  "@types/express": "^4.17.2",
-  "source-map-support": "^0.5.16",
-  "tslint": "^6.0.0",
-  "typescript": "^3.7.5"
-  }
+  "devDependencies": {}
 }

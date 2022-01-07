@@ -1,2 +1,2 @@
 # weatherApp
-Nodejs app for retrieving weather data from the ourWeather station available from Switch Doc Labs
+Nodejs app for retrieving weather data from the Ambeint weather station in my backyard
