@@ -74,3 +74,5 @@ User.updateById = (id, user, result) => {
       console.log(`Updated user: ${{ id: id, ...user }}`);
     }
 }
+
+module.exports = User;

@@ -1,12 +1,12 @@
 import mysql from 'mysql';
-import dbConfig from '../configs/db.config.js';
+import db from '../configs/db.config.js';
 
 // Create a connection to the database
 export const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PW,
-  database: dbConfig.DB
+  host: db.HOST,
+  user: db.USER,
+  password: db.PW,
+  database: db.DB
 });
 
 // open the MySQL connection

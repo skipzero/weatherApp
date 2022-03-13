@@ -2,6 +2,7 @@
   "name": "weather-app",
   "version": "0.2.0",
   "description": "'simple' data logging server for my weather station...",
+  "type": "module",
   "scripts": {
     "start": "npm run tsc && node ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -31,8 +32,8 @@
   "homepage": "https://github.com/skipzero/weatherApp#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
-  },
-  "devDependencies": {}
+  }
 }
