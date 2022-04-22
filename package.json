@@ -51,7 +51,7 @@
     "glob-parent": "^5.1.2",
     "jquery": "^3.5.1",
     "lodash": "^4.17.21",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "node-http-proxy": "^0.2.4",
