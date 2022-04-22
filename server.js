@@ -2,9 +2,11 @@
 /*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
 // import express from 'express';
 // import cors from 'cors';
-
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+
+console.log('DOT ENV', process.env)
 
 const app = express();
 
