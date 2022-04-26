@@ -1,5 +1,6 @@
-#!/usr/bin/env nodejs
+#!/usr/bin / env nodejs
 /*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
+
 const express = require('express');
 const app = express();
 
@@ -8,7 +9,7 @@ const server = http.createServer(app);
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon');
 
 const dotenv = require('dotenv');
 dotenv.config()
@@ -33,7 +34,7 @@ const appKey = process.env.APP_KEY;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`));
+// app.use(favicon(`${__dirname}/public/images/fav/favicon.ico`));
 app.use(logger('dev'));
 
 // app.use('./controllers/graphqlController')
