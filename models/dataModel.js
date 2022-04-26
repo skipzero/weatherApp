@@ -18,7 +18,7 @@ class Weather {
         res.send({ status: 0, message: 'records retreived successfully!', result });
       })
     });
-  };
+  }
 
   getLast(res) {
     pool.acquire((err, con) => {
