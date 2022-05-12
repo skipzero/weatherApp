@@ -2,11 +2,15 @@
 /*eslint no-console: [1, { allow: ['log', 'info', 'error'] }] */
 // import express from 'express';
 // import cors from 'cors';
-import 'dotenv/config';
-import express from 'express';
-import cors from 'cors';
+const cors = require('cors')
+require('dotenv').config();
+const express = require('express');
 
-console.log('DOT ENV', process.env)
+// import 'dotenv/config';
+// import express from 'express';
+// import cors from 'cors';
+
+// console.log('DOT ENV', process.env)
 
 const app = express();
 
@@ -19,9 +23,19 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'welcome to app III' });
+app.get('/weather', (req, res) => {
+  console.log('hello get', req)
 });
+app.post('/weather', (req, res) => {
+  console.log('hello post', req)
+});
+app.put('/weather', (req, res) => {
+  console.log('hello put', req)
+});
+
+// app.get('/', (req, res) => {
+//   res.json({ message: 'welcome to app III' });
+// });
 
 // require('./app/routes/routes.js')(app);
 

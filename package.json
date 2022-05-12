@@ -2,7 +2,6 @@
   "name": "weather-app",
   "version": "0.2.0",
   "description": "'simple' data logging server for my weather station...",
-  "type": "module",
   "scripts": {
     "start": "npm run tsc && node ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
