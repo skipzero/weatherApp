@@ -100,7 +100,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
     "precss": "^4.0.0",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
