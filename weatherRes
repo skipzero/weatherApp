@@ -1,0 +1,54 @@
+[
+  {
+    "macAddress": "80:7D:3A:7C:21:3E",
+    "lastData": {
+      "dateutc": 1652975100000,
+      "tempinf": 74.8,
+      "humidityin": 49,
+      "baromrelin": 30.027,
+      "baromabsin": 29.859,
+      "tempf": 67.5,
+      "humidity": 68,
+      "winddir": 127,
+      "windspeedmph": 0.2,
+      "windgustmph": 1.1,
+      "maxdailygust": 5.8,
+      "hourlyrainin": 0,
+      "eventrainin": 0,
+      "dailyrainin": 0,
+      "weeklyrainin": 0,
+      "monthlyrainin": 0,
+      "totalrainin": 49.567,
+      "solarradiation": 320.15,
+      "uv": 3,
+      "batt_co2": 1,
+      "feelsLike": 67.5,
+      "dewPoint": 56.56,
+      "feelsLikein": 74.3,
+      "dewPointin": 54.3,
+      "lastRain": "2022-04-22T14:53:00.000Z",
+      "tz": "America/Los_Angeles",
+      "date": "2022-05-19T15:45:00.000Z"
+    },
+    "info": {
+      "coords": {
+        "coords": {
+          "lon": -122.24307670000002,
+          "lat": 37.81425369999999
+        },
+        "address": "888 Warfield Ave, Oakland, CA 94610, USA",
+        "location": "Oakland",
+        "elevation": 39.79539108276367,
+        "geo": {
+          "type": "Point",
+          "coordinates": [
+            -122.24307670000002,
+            37.81425369999999
+          ]
+        }
+      },
+      "name": "WarfieldStation",
+      "location": "Apartment"
+    }
+  }
+]
