@@ -77,7 +77,7 @@
     "babel-loader": "^8.1.0",
     "bl": "^4.1.0",
     "bootstrap": "^4.3.1",
-    "bootstrap-loader": "^3.0.4",
+    "bootstrap-loader": "^4.0.4",
     "colors": "^1.1.2",
     "copy-webpack-plugin": "^6.2.0",
     "cryptiles": "^4.1.3",
