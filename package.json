@@ -47,7 +47,7 @@
     "d3-transition": "^3.0.1",
     "dotenv": "^7.0.0",
     "ejs": "^2.5.5",
-    "express": "^4.17.3",
+    "express": "^4.17.1",
     "glob-parent": "^5.1.2",
     "jquery": "^3.5.1",
     "lodash": "^4.17.21",
